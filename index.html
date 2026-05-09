@@ -7,14 +7,13 @@
 <style>
   * { box-sizing:border-box; margin:0; padding:0; }
   body {
-    font-family: "Times New Roman", Times, serif, bold;
+    font-family: "Times New Roman", Times, serif;
     background: #ffffff;
     color: #003380;
     font-size: 15px;
     line-height: 1.65;
   }
 
-  /* ── NAV ── */
   #topbar {
     position: fixed; top:0; left:0; right:0; z-index:100;
     background: #003380;
@@ -35,11 +34,9 @@
   .tb-badge { font-size:11px; padding:3px 9px; border-radius:2px; border:1px solid rgba(255,255,255,.5); color:#ffe; display:none; }
   .tb-badge.show { display:inline; }
 
-  /* ── VIEWS ── */
   .view { display:none; padding-top:48px; min-height:100vh; }
   .view.active { display:block; }
 
-  /* ── PAGE STRUCTURE ── */
   .page-wrap { max-width:1100px; margin:0 auto; padding:28px 24px; }
   h1 { font-size:22px; color:#003380; margin-bottom:4px; }
   h2 { font-size:17px; color:#003380; margin:20px 0 8px; border-bottom:1px solid #003380; padding-bottom:4px; }
@@ -48,12 +45,10 @@
   .eyebrow { font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:#6680aa; margin-bottom:6px; }
   .page-sub { font-size:13px; color:#6680aa; margin-bottom:20px; }
 
-  /* ── LANDING ── */
   .landing-header { text-align:center; padding:32px 24px 24px; border-bottom:2px solid #003380; margin-bottom:28px; }
   .landing-header h1 { font-size:26px; }
   .landing-meta { font-size:11px; color:#6680aa; margin-top:6px; text-transform:uppercase; letter-spacing:.06em; }
 
-  /* AC TYPE SELECTOR */
   .ac-selector-label { font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:#003380;
     margin-bottom:12px; font-weight:bold; text-align:center; }
   .ac-selector { display:flex; gap:20px; justify-content:center; margin-bottom:28px; flex-wrap:wrap; }
@@ -64,9 +59,6 @@
   }
   .ac-card:hover { background:#f0f4ff; }
   .ac-photo { width:100%; height:130px; object-fit:cover; display:block; border-bottom:1px solid #003380; }
-  .ac-photo-ph { width:100%; height:130px; background:#e8eeff;
-    display:flex; align-items:center; justify-content:center;
-    border-bottom:1px solid #003380; font-size:38px; }
   .ac-body { padding:12px 14px; }
   .ac-type { font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:#6680aa; margin-bottom:4px; }
   .ac-name { font-size:16px; font-weight:bold; color:#003380; margin-bottom:4px; }
@@ -74,7 +66,6 @@
   .ac-specs { display:flex; gap:14px; font-size:11px; color:#6680aa; }
   .ac-specs b { display:block; font-size:13px; color:#003380; }
 
-  /* TILES */
   .tiles-label { font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:#6680aa;
     margin-bottom:10px; text-align:center; }
   .tiles { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:800px; margin:0 auto 28px; }
@@ -87,7 +78,6 @@
   .tile-title { font-size:14px; font-weight:bold; color:#003380; margin-bottom:4px; }
   .tile-desc { font-size:12px; color:#444; }
 
-  /* STATS STRIP */
   .strip {
     display:flex; gap:0; border:1px solid #003380; margin-bottom:20px;
     overflow-x:auto;
@@ -100,7 +90,6 @@
   .strip-val { font-size:15px; font-weight:bold; color:#003380; }
   .strip-lbl { font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:#6680aa; }
 
-  /* ── SECTION HEADER ── */
   .sec-top {
     display:flex; align-items:flex-start; justify-content:space-between;
     padding:24px 24px 16px; border-bottom:2px solid #003380; flex-wrap:wrap; gap:10px;
@@ -112,7 +101,6 @@
   }
   .back-btn:hover { background:#003380; color:#fff; }
 
-  /* ── AIRCRAFT DETAIL ── */
   .ac-detail { padding:20px 24px; }
   .ac-photo-full { width:100%; max-width:800px; display:block; margin:0 auto 14px; border:1px solid #ccc; border-radius:3px; }
   .ac-stat-row { display:flex; gap:24px; flex-wrap:wrap; margin-bottom:14px; justify-content:center; }
@@ -120,7 +108,6 @@
   .ac-stat-val { font-size:16px; font-weight:bold; color:#003380; }
   .ac-stat-lbl { font-size:10px; text-transform:uppercase; color:#6680aa; letter-spacing:.06em; }
 
-  /* ATA CHIPS */
   .chips-section { padding:0 24px 16px; }
   .chips-label { font-size:12px; color:#6680aa; text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px; }
   .chips { display:flex; flex-wrap:wrap; gap:6px; }
@@ -131,7 +118,6 @@
   }
   .chip:hover, .chip.active { background:#003380; color:#fff; }
 
-  /* ── FILTERS ── */
   .filter-bar {
     padding:10px 24px; border-bottom:1px solid #ccccdd;
     display:flex; gap:6px; flex-wrap:wrap; align-items:center;
@@ -146,7 +132,6 @@
   .filter-btn.on { background:#003380; color:#fff; }
   .filter-sep { width:1px; height:18px; background:#ccccdd; margin:0 4px; }
 
-  /* ── COMPANY CARDS ── */
   .cards-wrap { padding:20px 24px; }
   .two-col { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
   .co-card {
@@ -180,13 +165,11 @@
   }
   .gap-lbl { font-size:11px; font-weight:bold; color:#884400; margin-bottom:3px; }
 
-  /* ── MAP SECTION ── */
   .airframe-wrap { display:grid; grid-template-columns:340px 1fr; gap:0; }
   .map-panel { border-right:1px solid #ccccdd; padding:20px; }
   .cards-panel { padding:20px; overflow-y:auto; }
   #my-map { width:100%; }
 
-  /* ── ECO GRID ── */
   .eco-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; padding:20px 24px; }
   .eco-card {
     border:1px solid #99aabb; border-radius:3px; padding:14px;
@@ -199,7 +182,6 @@
   .eco-progs { display:flex; flex-wrap:wrap; gap:4px; margin-top:7px; }
   .eco-prog { font-size:11px; border:1px solid #ccccdd; padding:2px 7px; color:#444; }
 
-  /* ── AIRPORTS ── */
   .apt-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; padding:20px 24px; }
   .apt-card { border:1px solid #99aabb; border-radius:3px; padding:14px; }
   .apt-card:hover { border-color:#003380; background:#f8faff; }
@@ -210,7 +192,6 @@
   .on  { background:#006644; }
   .off { background:#cccccc; }
 
-  /* ── ATA SECTIONS ── */
   .ata-section { margin-bottom:16px; }
   .ata-hdr {
     display:flex; align-items:center; gap:8px; padding-bottom:5px;
@@ -220,14 +201,12 @@
   .ata-name { font-size:14px; color:#003380; }
   .ata-cnt  { margin-left:auto; font-size:11px; color:#6680aa; text-transform:uppercase; letter-spacing:.06em; }
 
-  /* ── FOOTER ── */
   .page-footer {
     border-top:2px solid #003380; padding:10px 24px;
     display:flex; align-items:center; justify-content:space-between;
     font-size:11px; color:#6680aa; text-transform:uppercase; letter-spacing:.05em;
   }
 
-  /* RESPONSIVE */
   @media(max-width:768px) {
     .airframe-wrap, .two-col { grid-template-columns:1fr; }
     .map-panel { border-right:none; border-bottom:1px solid #ccccdd; }
@@ -244,7 +223,6 @@
 </head>
 <body>
 
-<!-- TOPBAR -->
 <div id="topbar">
   <span class="tb-logo">Malaysia Aerospace Bluebook</span>
   <span class="tb-div">|</span>
@@ -260,12 +238,12 @@
   </nav>
 </div>
 
-<!-- ══════ LANDING ══════ -->
+<!-- LANDING -->
 <div id="view-landing" class="view active">
   <div class="page-wrap">
     <div class="landing-header">
       <div class="eyebrow">Malaysia Aerospace Industry Blueprint 2030</div>
-      <h1>SUPPLY CHAIN BLUEBOOK</h1>
+      <h1>Supply Chain Bluebook</h1>
       <p style="font-size:14px;color:#444;max-width:600px;margin:8px auto 0">
         Interactive directory of Malaysia's aerospace MRO, manufacturing, and ecosystem capabilities.
         Proof of Concept — A320 CEO &amp; B737 NG edition.
@@ -285,7 +263,8 @@
     <div class="ac-selector-label">Step 1 — Select Aircraft Type</div>
     <div class="ac-selector">
       <div class="ac-card" onclick="selectAC('a320')">
-        <img class="ac-photo" src="images/AirbusA320-200.jpg" alt="Airbus A320 CEO"><div class="ac-body">
+        <img class="ac-photo" src="images/AirbusA320-200.jpg" alt="Airbus A320 CEO">
+        <div class="ac-body">
           <div class="ac-type">Airbus · Narrowbody</div>
           <div class="ac-name">A320 CEO</div>
           <div class="ac-desc">CFM56-5B / IAE V2500-A5 · Workhorse of AirAsia fleet</div>
@@ -300,7 +279,6 @@
 
       <div class="ac-card" onclick="selectAC('b737')">
         <img class="ac-photo" src="images/737NG.jpeg" alt="Boeing 737-800 NG">
-        <div class="ac-photo-ph" style="display:none">✈</div>
         <div class="ac-body">
           <div class="ac-type">Boeing · Narrowbody</div>
           <div class="ac-name">B737 NG</div>
@@ -355,7 +333,7 @@
   </div>
 </div>
 
-<!-- ══════ AIRCRAFT ══════ -->
+<!-- AIRCRAFT -->
 <div id="view-aircraft" class="view">
   <div class="sec-top">
     <div>
@@ -369,7 +347,8 @@
   <div class="ac-detail">
     <!-- A320 -->
     <div id="acv-a320">
-      <img <img class="ac-photo" src="images/AirbusA320-200.jpg" alt="Airbus A320 CEO">
+      <img class="ac-photo" src="images/AirbusA320-200.jpg" alt="Airbus A320 CEO">
+      <div class="ac-stat-row">
         <div class="ac-stat"><div class="ac-stat-val">37.57 m</div><div class="ac-stat-lbl">Length</div></div>
         <div class="ac-stat"><div class="ac-stat-val">33.91 m</div><div class="ac-stat-lbl">Wingspan</div></div>
         <div class="ac-stat"><div class="ac-stat-val">150–180</div><div class="ac-stat-lbl">Seats</div></div>
@@ -386,6 +365,7 @@
     <!-- B737 -->
     <div id="acv-b737" style="display:none">
       <img class="ac-photo" src="images/737NG.jpeg" alt="Boeing 737-800 NG">
+      <div class="ac-stat-row">
         <div class="ac-stat"><div class="ac-stat-val">42.1 m</div><div class="ac-stat-lbl">Length (738)</div></div>
         <div class="ac-stat"><div class="ac-stat-val">35.8 m</div><div class="ac-stat-lbl">Wingspan</div></div>
         <div class="ac-stat"><div class="ac-stat-val">128–215</div><div class="ac-stat-lbl">Seats</div></div>
@@ -401,7 +381,6 @@
     </div>
   </div>
 
-  <!-- ATA CHAPTER SELECTOR — independent from photo -->
   <div class="chips-section">
     <div class="chips-label">ATA Chapter — Click to explore who can service this system in Malaysia</div>
     <div class="chips">
@@ -423,7 +402,7 @@
   </div>
 </div>
 
-<!-- ══════ AIRFRAME MRO ══════ -->
+<!-- AIRFRAME MRO -->
 <div id="view-airframe" class="view">
   <div class="sec-top">
     <div>
@@ -461,19 +440,14 @@
         <text x="150" y="271" font-family="Times New Roman" font-size="8" fill="#6680aa">SIN</text>
         <text x="128" y="174" font-family="Times New Roman" font-size="8" fill="#003380">SELANGOR</text>
         <text x="142" y="222" font-family="Times New Roman" font-size="8" fill="#003380">SEPANG</text>
-        <!-- SUBANG -->
         <circle cx="133" cy="182" r="6" fill="#003380" stroke="#003380" stroke-width="1.5"/>
         <text x="141" y="178" font-family="Times New Roman" font-size="9" fill="#003380">SZB · Subang</text>
-        <!-- SHAH ALAM -->
         <circle cx="124" cy="176" r="4" fill="#0055aa" stroke="#003380" stroke-width="1"/>
         <text x="105" y="171" font-family="Times New Roman" font-size="8" fill="#003380">Shah Alam</text>
-        <!-- KLIA -->
         <circle cx="143" cy="218" r="6" fill="#884400" stroke="#884400" stroke-width="1.5"/>
         <text x="151" y="222" font-family="Times New Roman" font-size="9" fill="#884400">KUL · KLIA</text>
-        <!-- Penang -->
         <circle cx="112" cy="78" r="4" fill="#6680aa" stroke="#003380" stroke-width="1"/>
         <text x="118" y="82" font-family="Times New Roman" font-size="8" fill="#6680aa">PEN</text>
-        <!-- Legend -->
         <rect x="8" y="296" width="180" height="38" rx="2" fill="white" stroke="#99aabb" stroke-width="1"/>
         <circle cx="19" cy="308" r="4" fill="#003380"/>
         <text x="27" y="312" font-family="Times New Roman" font-size="8" fill="#003380">Airframe MRO (A320 + B737)</text>
@@ -493,11 +467,7 @@
           <div class="badges"><span class="badge b-mro">Line + Base</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div>
         </div>
         <div class="co-loc">Sepang, Selangor — WMKK (KLIA)</div>
-        <div class="caps">
-          <span class="cap">A320ceo CFM56 &amp; IAE</span><span class="cap">A320neo LEAP-1A</span>
-          <span class="cap">A321neo</span><span class="cap">A-Check → E-Check</span>
-          <span class="cap">Painting (eco bay)</span><span class="cap">Cabin refurbishment</span>
-        </div>
+        <div class="caps"><span class="cap">A320ceo CFM56 &amp; IAE</span><span class="cap">A320neo LEAP-1A</span><span class="cap">A321neo</span><span class="cap">A-Check → E-Check</span><span class="cap">Painting (eco bay)</span><span class="cap">Cabin refurbishment</span></div>
         <div class="co-note">Airbus Customer Services network partner. JV with SIAEC (SIA Engineering). 17+ authority certifications. Closed-door eco-paint bay at KLIA.</div>
       </div>
 
@@ -507,11 +477,7 @@
           <div class="badges"><span class="badge b-mro">Line + Base</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div>
         </div>
         <div class="co-loc">Subang, Selangor — WMSA · AMO/2016/29</div>
-        <div class="caps">
-          <span class="cap">A319/A320/A321 CFM56 &amp; IAE</span><span class="cap">B737-300/400/500 Classic</span>
-          <span class="cap">B737-600/700/800/900 NG</span><span class="cap">ATR 42/72</span>
-          <span class="cap">NDT (5 methods)</span><span class="cap">Painting (500+ projects)</span>
-        </div>
+        <div class="caps"><span class="cap">A319/A320/A321 CFM56 &amp; IAE</span><span class="cap">B737-300/400/500 Classic</span><span class="cap">B737-600/700/800/900 NG</span><span class="cap">ATR 42/72</span><span class="cap">NDT (5 methods)</span><span class="cap">Painting (500+ projects)</span></div>
         <div class="co-note">Frost &amp; Sullivan "Asia Pacific Customised MRO Centre of the Year". Center Wing Box replacement capability for B737 NG.</div>
       </div>
 
@@ -521,11 +487,7 @@
           <div class="badges"><span class="badge b-mro">Line + Base</span><span class="badge b-caam">CAAM</span></div>
         </div>
         <div class="co-loc">Subang, Selangor — Subsidiary of MARA Corporation</div>
-        <div class="caps">
-          <span class="cap">A319/A320/A321 CFM56</span><span class="cap">B737 Classic + NG</span>
-          <span class="cap">B777-200/300 RR Trent 800</span><span class="cap">ATR 42/72</span>
-          <span class="cap">NDT · Structural repairs</span>
-        </div>
+        <div class="caps"><span class="cap">A319/A320/A321 CFM56</span><span class="cap">B737 Classic + NG</span><span class="cap">B777-200/300 RR Trent 800</span><span class="cap">ATR 42/72</span><span class="cap">NDT · Structural repairs</span></div>
         <div class="co-note">CAAM Part 145 approved. Subsidiary of MARA Corporation Sdn Bhd. Covers both A320 family and B737 NG in one Subang facility.</div>
       </div>
 
@@ -535,10 +497,7 @@
           <div class="badges"><span class="badge b-mro">Line + Base</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div>
         </div>
         <div class="co-loc">Sepang, Selangor — WMKK · AMO/2020/01</div>
-        <div class="caps">
-          <span class="cap">A320-200 CFM56-5B</span><span class="cap">A320-200 IAE V2500</span>
-          <span class="cap">A320neo LEAP-1A</span><span class="cap">A321neo</span><span class="cap">A330-300 RR Trent 700</span>
-        </div>
+        <div class="caps"><span class="cap">A320-200 CFM56-5B</span><span class="cap">A320-200 IAE V2500</span><span class="cap">A320neo LEAP-1A</span><span class="cap">A321neo</span><span class="cap">A330-300 RR Trent 700</span></div>
         <div class="co-note">AirAsia-linked facility at KLIA. CEO and NEO A320 family variants. Component approvals: C5 Electrical, C14 Landing Gear, C15 Oxygen.</div>
       </div>
 
@@ -548,17 +507,14 @@
           <div class="badges"><span class="badge b-mro">Line</span><span class="badge b-caam">CAAM</span></div>
         </div>
         <div class="co-loc">Subang, Selangor — WMSA</div>
-        <div class="caps">
-          <span class="cap">B737-300/400/500 Classic</span><span class="cap">B737-600/700/800 NG</span>
-          <span class="cap">Line Maintenance</span>
-        </div>
+        <div class="caps"><span class="cap">B737-300/400/500 Classic</span><span class="cap">B737-600/700/800 NG</span><span class="cap">Line Maintenance</span></div>
         <div class="co-note">Listed in CAAM AMO registry for B737 Classic and NG line maintenance at Subang.</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══════ ATA COMPONENTS ══════ -->
+<!-- ATA COMPONENTS -->
 <div id="view-ata" class="view">
   <div class="sec-top">
     <div>
@@ -759,7 +715,7 @@
   </div>
 </div>
 
-<!-- ══════ ECOSYSTEM ══════ -->
+<!-- ECOSYSTEM -->
 <div id="view-eco" class="view">
   <div class="sec-top">
     <div>
@@ -830,7 +786,7 @@
   </div>
 </div>
 
-<!-- ══════ AIRPORTS ══════ -->
+<!-- AIRPORTS -->
 <div id="view-airports" class="view">
   <div class="sec-top">
     <div>
@@ -912,7 +868,6 @@
   </div>
 </div>
 
-<!-- ══════ JS ══════ -->
 <script>
 var currentAC = "a320";
 
