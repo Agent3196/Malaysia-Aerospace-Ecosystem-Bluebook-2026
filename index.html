@@ -5,228 +5,217 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>MALAYSIA AEROSPACE ECOSYSTEM BLUEBOOK 2026</title>
 <style>
-  * { box-sizing:border-box; margin:0; padding:0; }
-  body {
-    font-family: "Times New Roman", Times, serif;
-    background: #ffffff;
-    color: #003380;
-    font-size: 15px;
-    line-height: 1.65;
-  }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:"Times New Roman",Times,serif; background:#fff; color:#003380; font-size:15px; line-height:1.65; }
 
-  #topbar {
-    position: fixed; top:0; left:0; right:0; z-index:100;
-    background: #003380;
-    padding: 0 24px;
-    display: flex; align-items: center; gap: 10px;
-    height: 48px;
-    border-bottom: 2px solid #001f66;
-  }
-  .tb-logo { color:#fff; font-size:14px; font-weight:bold; letter-spacing:.04em; white-space:nowrap; }
-  .tb-div  { color:rgba(255,255,255,.4); }
-  .tb-sub  { color:rgba(255,255,255,.7); font-size:12px; }
-  .tb-nav  { margin-left:auto; display:flex; gap:4px; flex-wrap:wrap; }
-  .tb-btn  { background:none; border:1px solid rgba(255,255,255,.3); color:rgba(255,255,255,.8);
-              padding:4px 12px; font-family:"Times New Roman",serif; font-size:12px;
-              cursor:pointer; border-radius:2px; }
-  .tb-btn:hover { background:rgba(255,255,255,.15); color:#fff; }
-  .tb-btn.active { background:#fff; color:#003380; font-weight:bold; }
-  .tb-badge { font-size:11px; padding:3px 9px; border-radius:2px; border:1px solid rgba(255,255,255,.5); color:#ffe; display:none; }
-  .tb-badge.show { display:inline; }
+/* ── TOPBAR ── */
+#topbar { position:fixed;top:0;left:0;right:0;z-index:100;background:#003380;padding:0 20px;display:flex;align-items:center;gap:10px;height:48px;border-bottom:2px solid #001f66; }
+.tb-logo { color:#fff;font-size:13px;font-weight:bold;letter-spacing:.04em;white-space:nowrap; }
+.tb-div  { color:rgba(255,255,255,.4); }
+.tb-sub  { color:rgba(255,255,255,.65);font-size:11px; }
+.tb-nav  { margin-left:auto;display:flex;gap:3px;flex-wrap:wrap; }
+.tb-btn  { background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.8);padding:4px 10px;font-family:"Times New Roman",serif;font-size:11px;cursor:pointer;border-radius:2px; }
+.tb-btn:hover { background:rgba(255,255,255,.15);color:#fff; }
+.tb-btn.active { background:#fff;color:#003380;font-weight:bold; }
+.tb-badge { font-size:10px;padding:2px 8px;border-radius:2px;border:1px solid rgba(255,255,255,.5);color:#ffe;display:none; }
+.tb-badge.show { display:inline; }
 
-  .view { display:none; padding-top:48px; min-height:100vh; }
-  .view.active { display:block; }
+/* ── VIEWS ── */
+.view { display:none;padding-top:48px;min-height:100vh; }
+.view.active { display:block; }
 
-  .page-wrap { max-width:1100px; margin:0 auto; padding:28px 24px; }
-  h1 { font-size:22px; color:#003380; margin-bottom:4px; }
-  h2 { font-size:17px; color:#003380; margin:20px 0 8px; border-bottom:1px solid #003380; padding-bottom:4px; }
-  h3 { font-size:15px; color:#003380; margin:14px 0 6px; }
-  p  { margin-bottom:8px; color:#222; }
-  .eyebrow { font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:#6680aa; margin-bottom:6px; }
-  .page-sub { font-size:13px; color:#6680aa; margin-bottom:20px; }
+/* ── TYPOGRAPHY ── */
+h1 { font-size:22px;color:#003380;margin-bottom:4px; }
+h2 { font-size:16px;color:#003380;margin:18px 0 8px;border-bottom:1px solid #003380;padding-bottom:4px; }
+h3 { font-size:14px;color:#003380;margin:12px 0 5px; }
+p  { margin-bottom:8px;color:#333; }
+.eyebrow { font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#6680aa;margin-bottom:5px; }
+.page-sub { font-size:13px;color:#6680aa;margin-bottom:16px; }
 
-  .landing-header { text-align:center; padding:32px 24px 24px; border-bottom:2px solid #003380; margin-bottom:28px; }
-  .landing-header h1 { font-size:26px; }
-  .landing-meta { font-size:11px; color:#6680aa; margin-top:6px; text-transform:uppercase; letter-spacing:.06em; }
+/* ── BREADCRUMB ── */
+.breadcrumb { padding:8px 24px;font-size:12px;color:#6680aa;border-bottom:1px solid #dde4ee;background:#f8faff; }
+.breadcrumb span { color:#003380;font-weight:bold; }
+.breadcrumb a { color:#6680aa;cursor:pointer;text-decoration:underline; }
+.breadcrumb a:hover { color:#003380; }
 
-  .ac-selector-label { font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:#003380;
-    margin-bottom:12px; font-weight:bold; text-align:center; }
-  .ac-selector { display:flex; gap:20px; justify-content:center; margin-bottom:28px; flex-wrap:wrap; }
-  .ac-card {
-    border: 2px solid #003380; border-radius:4px; width:280px;
-    cursor:pointer; transition: background .15s;
-    overflow:hidden;
-  }
-  .ac-card:hover { background:#f0f4ff; }
-  .ac-photo { width:100%; height:130px; object-fit:cover; display:block; border-bottom:1px solid #003380; }
-  .ac-body { padding:12px 14px; }
-  .ac-type { font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:#6680aa; margin-bottom:4px; }
-  .ac-name { font-size:16px; font-weight:bold; color:#003380; margin-bottom:4px; }
-  .ac-desc { font-size:12px; color:#444; margin-bottom:8px; }
-  .ac-specs { display:flex; gap:14px; font-size:11px; color:#6680aa; }
-  .ac-specs b { display:block; font-size:13px; color:#003380; }
+/* ── FLOW BANNER ── */
+.flow-banner {
+  background:#f0f4ff;border:1px solid #99aabb;border-radius:3px;
+  padding:12px 20px;margin:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+.flow-banner-txt { font-size:13px;color:#003380; }
+.flow-banner-txt strong { display:block;font-size:14px;margin-bottom:2px; }
+.flow-btn {
+  background:#003380;color:#fff;border:none;padding:8px 20px;
+  font-family:"Times New Roman",serif;font-size:13px;cursor:pointer;border-radius:2px;
+  white-space:nowrap;
+}
+.flow-btn:hover { background:#001f66; }
+.flow-btn.secondary { background:none;color:#003380;border:1px solid #003380; }
+.flow-btn.secondary:hover { background:#003380;color:#fff; }
 
-  .tiles-label { font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:#6680aa;
-    margin-bottom:10px; text-align:center; }
-  .tiles { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:800px; margin:0 auto 28px; }
-  .tile {
-    border:1px solid #003380; border-radius:3px; padding:14px;
-    cursor:pointer; transition:background .15s;
-  }
-  .tile:hover { background:#f0f4ff; }
-  .tile-num { font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:#6680aa; margin-bottom:6px; }
-  .tile-title { font-size:14px; font-weight:bold; color:#003380; margin-bottom:4px; }
-  .tile-desc { font-size:12px; color:#444; }
+/* ── STEP INDICATOR ── */
+.step-row { display:flex;align-items:center;gap:0;padding:10px 24px;border-bottom:2px solid #003380;background:#fff; }
+.step { display:flex;align-items:center;gap:8px;padding:6px 16px;font-size:12px;color:#6680aa; }
+.step.done { color:#003380;cursor:pointer; }
+.step.done:hover { text-decoration:underline; }
+.step.active { color:#003380;font-weight:bold; }
+.step-num { width:22px;height:22px;border-radius:50%;border:1px solid #99aabb;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0; }
+.step.active .step-num { background:#003380;color:#fff;border-color:#003380; }
+.step.done .step-num { background:#e0e8f8;border-color:#003380; }
+.step-arr { color:#99aabb;font-size:14px;margin:0 -4px; }
 
-  .strip {
-    display:flex; gap:0; border:1px solid #003380; margin-bottom:20px;
-    overflow-x:auto;
-  }
-  .strip-item {
-    flex:1; min-width:120px; text-align:center; padding:8px 10px;
-    border-right:1px solid #003380;
-  }
-  .strip-item:last-child { border-right:none; }
-  .strip-val { font-size:15px; font-weight:bold; color:#003380; }
-  .strip-lbl { font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:#6680aa; }
+/* ── LANDING ── */
+.landing-header { text-align:center;padding:28px 24px 20px;border-bottom:2px solid #003380;margin-bottom:24px; }
+.landing-header h1 { font-size:24px; }
+.landing-meta { font-size:10px;color:#6680aa;margin-top:5px;text-transform:uppercase;letter-spacing:.06em; }
+.strip { display:flex;gap:0;border:1px solid #003380;margin-bottom:22px;overflow-x:auto; }
+.strip-item { flex:1;min-width:110px;text-align:center;padding:7px 8px;border-right:1px solid #003380; }
+.strip-item:last-child { border-right:none; }
+.strip-val { font-size:13px;font-weight:bold;color:#003380; }
+.strip-lbl { font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#6680aa; }
 
-  .sec-top {
-    display:flex; align-items:flex-start; justify-content:space-between;
-    padding:24px 24px 16px; border-bottom:2px solid #003380; flex-wrap:wrap; gap:10px;
-  }
-  .back-btn {
-    background:none; border:1px solid #003380; padding:5px 14px;
-    font-family:"Times New Roman",serif; font-size:13px; color:#003380;
-    cursor:pointer; border-radius:2px;
-  }
-  .back-btn:hover { background:#003380; color:#fff; }
+/* ── AIRCRAFT CATEGORY ── */
+.cat-label { font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#6680aa;margin:20px 0 10px;padding-bottom:4px;border-bottom:1px solid #dde4ee; }
+.ac-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:4px; }
+.ac-card { border:1px solid #99aabb;border-radius:3px;cursor:pointer;transition:all .15s;overflow:hidden; }
+.ac-card:hover { border-color:#003380;background:#f0f4ff; }
+.ac-card.selected { border-color:#003380;border-width:2px;background:#e8f0ff; }
+.ac-photo { width:100%;height:100px;object-fit:cover;display:block;border-bottom:1px solid #dde4ee; }
+.ac-photo-ph { width:100%;height:100px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:32px;border-bottom:1px solid #dde4ee; }
+.ac-body { padding:10px 12px; }
+.ac-type { font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#6680aa;margin-bottom:3px; }
+.ac-name { font-size:14px;font-weight:bold;color:#003380;margin-bottom:3px; }
+.ac-desc { font-size:11px;color:#555;line-height:1.4; }
 
-  .ac-detail { padding:20px 24px; }
-  .ac-photo-full { width:100%; max-width:800px; display:block; margin:0 auto 14px; border:1px solid #ccc; border-radius:3px; }
-  .ac-stat-row { display:flex; gap:24px; flex-wrap:wrap; margin-bottom:14px; justify-content:center; }
-  .ac-stat { text-align:center; }
-  .ac-stat-val { font-size:16px; font-weight:bold; color:#003380; }
-  .ac-stat-lbl { font-size:10px; text-transform:uppercase; color:#6680aa; letter-spacing:.06em; }
+/* ── TILES ── */
+.tiles-label { font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#6680aa;margin:24px 0 10px;text-align:center; }
+.tiles { display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:760px;margin:0 auto 24px; }
+.tile { border:1px solid #99aabb;border-radius:3px;padding:12px;cursor:pointer;transition:background .15s; }
+.tile:hover { background:#f0f4ff;border-color:#003380; }
+.tile-num { font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#6680aa;margin-bottom:5px; }
+.tile-title { font-size:13px;font-weight:bold;color:#003380;margin-bottom:3px; }
+.tile-desc { font-size:11px;color:#555; }
 
-  .chips-section { padding:0 24px 16px; }
-  .chips-label { font-size:12px; color:#6680aa; text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px; }
-  .chips { display:flex; flex-wrap:wrap; gap:6px; }
-  .chip {
-    border:1px solid #003380; padding:4px 12px; font-size:12px;
-    color:#003380; cursor:pointer; border-radius:2px;
-    font-family:"Times New Roman",serif;
-  }
-  .chip:hover, .chip.active { background:#003380; color:#fff; }
+/* ── SECTION HEADER ── */
+.sec-top { display:flex;align-items:flex-start;justify-content:space-between;padding:20px 24px 14px;border-bottom:2px solid #003380;flex-wrap:wrap;gap:10px; }
+.back-btn { background:none;border:1px solid #003380;padding:5px 12px;font-family:"Times New Roman",serif;font-size:12px;color:#003380;cursor:pointer;border-radius:2px; }
+.back-btn:hover { background:#003380;color:#fff; }
 
-  .filter-bar {
-    padding:10px 24px; border-bottom:1px solid #ccccdd;
-    display:flex; gap:6px; flex-wrap:wrap; align-items:center;
-  }
-  .filter-lbl { font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:#6680aa; margin-right:4px; }
-  .filter-btn {
-    border:1px solid #003380; background:none; padding:3px 11px;
-    font-family:"Times New Roman",serif; font-size:12px;
-    color:#003380; cursor:pointer; border-radius:2px;
-  }
-  .filter-btn:hover { background:#f0f4ff; }
-  .filter-btn.on { background:#003380; color:#fff; }
-  .filter-sep { width:1px; height:18px; background:#ccccdd; margin:0 4px; }
+/* ── AIRCRAFT DETAIL ── */
+.ac-detail { padding:16px 24px; }
+.ac-photo-full { width:100%;max-width:700px;display:block;margin:0 auto 12px;border:1px solid #ccc;border-radius:3px; }
+.ac-stat-row { display:flex;gap:20px;flex-wrap:wrap;margin-bottom:12px;justify-content:center; }
+.ac-stat { text-align:center; }
+.ac-stat-val { font-size:15px;font-weight:bold;color:#003380; }
+.ac-stat-lbl { font-size:10px;text-transform:uppercase;color:#6680aa;letter-spacing:.05em; }
 
-  .cards-wrap { padding:20px 24px; }
-  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
-  .co-card {
-    border:1px solid #99aabb; border-radius:3px; padding:12px 14px; margin-bottom:10px;
-  }
-  .co-card:hover { border-color:#003380; background:#f8faff; }
-  .co-top { display:flex; align-items:flex-start; gap:8px; margin-bottom:5px; flex-wrap:wrap; }
-  .co-name { font-size:14px; font-weight:bold; color:#003380; flex:1; }
-  .badges { display:flex; gap:4px; flex-wrap:wrap; }
-  .badge {
-    font-size:10px; padding:2px 7px; border-radius:2px;
-    text-transform:uppercase; letter-spacing:.05em; font-family:"Times New Roman",serif;
-  }
-  .b-mro  { border:1px solid #003380; color:#003380; }
-  .b-mfg  { border:1px solid #006644; color:#006644; }
-  .b-comp { border:1px solid #884400; color:#884400; }
-  .b-caam { border:1px solid #0055cc; background:#e8f0ff; color:#0044aa; }
-  .b-easa { border:1px solid #4455aa; background:#eeeeff; color:#3344aa; }
-  .b-faa  { border:1px solid #005533; background:#eeffee; color:#004422; }
-  .co-loc { font-size:12px; color:#6680aa; margin-bottom:5px; }
-  .co-loc::before { content:"📍 "; }
-  .caps { display:flex; flex-wrap:wrap; gap:4px; margin-top:5px; }
-  .cap {
-    font-size:11px; border:1px solid #ccccdd; padding:2px 7px;
-    border-radius:2px; color:#444;
-  }
-  .co-note { font-size:12px; color:#555; margin-top:5px; }
-  .gap-box {
-    border:1px solid #cc8800; background:#fffbee; border-radius:3px;
-    padding:10px 12px; margin-top:8px;
-  }
-  .gap-lbl { font-size:11px; font-weight:bold; color:#884400; margin-bottom:3px; }
+/* ── ATA CHIPS ── */
+.chips-section { padding:0 24px 14px; }
+.chips-label { font-size:11px;color:#6680aa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px; }
+.chips { display:flex;flex-wrap:wrap;gap:5px; }
+.chip { border:1px solid #003380;padding:4px 11px;font-size:12px;color:#003380;cursor:pointer;border-radius:2px;font-family:"Times New Roman",serif; }
+.chip:hover,.chip.active { background:#003380;color:#fff; }
 
-  .airframe-wrap { display:grid; grid-template-columns:340px 1fr; gap:0; }
-  .map-panel { border-right:1px solid #ccccdd; padding:20px; }
-  .cards-panel { padding:20px; overflow-y:auto; }
-  #my-map { width:100%; }
+/* ── FILTER BAR ── */
+.filter-bar { padding:9px 24px;border-bottom:1px solid #dde4ee;display:flex;gap:5px;flex-wrap:wrap;align-items:center; }
+.filter-lbl { font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#6680aa;margin-right:3px; }
+.filter-btn { border:1px solid #003380;background:none;padding:3px 10px;font-family:"Times New Roman",serif;font-size:11px;color:#003380;cursor:pointer;border-radius:2px; }
+.filter-btn:hover { background:#f0f4ff; }
+.filter-btn.on { background:#003380;color:#fff; }
+.filter-sep { width:1px;height:16px;background:#dde4ee;margin:0 4px; }
 
-  .eco-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; padding:20px 24px; }
-  .eco-card {
-    border:1px solid #99aabb; border-radius:3px; padding:14px;
-  }
-  .eco-card:hover { border-color:#003380; background:#f8faff; }
-  .eco-tag { font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:#6680aa; margin-bottom:5px; }
-  .eco-name { font-size:14px; font-weight:bold; color:#003380; margin-bottom:3px; }
-  .eco-loc { font-size:12px; color:#6680aa; margin-bottom:5px; }
-  .eco-body { font-size:12px; color:#444; line-height:1.5; }
-  .eco-progs { display:flex; flex-wrap:wrap; gap:4px; margin-top:7px; }
-  .eco-prog { font-size:11px; border:1px solid #ccccdd; padding:2px 7px; color:#444; }
+/* ── COMPANY CARDS ── */
+.cards-wrap { padding:16px 24px; }
+.two-col { display:grid;grid-template-columns:1fr 1fr;gap:20px; }
+.co-card { border:1px solid #99aabb;border-radius:3px;padding:11px 13px;margin-bottom:9px; }
+.co-card:hover { border-color:#003380;background:#f8faff; }
+.co-top { display:flex;align-items:flex-start;gap:7px;margin-bottom:5px;flex-wrap:wrap; }
+.co-name { font-size:13px;font-weight:bold;color:#003380;flex:1; }
+.badges { display:flex;gap:3px;flex-wrap:wrap; }
+.badge { font-size:10px;padding:2px 6px;border-radius:2px;text-transform:uppercase;letter-spacing:.04em;font-family:"Times New Roman",serif; }
+.b-mro  { border:1px solid #003380;color:#003380; }
+.b-mfg  { border:1px solid #006644;color:#006644; }
+.b-comp { border:1px solid #884400;color:#884400; }
+.b-caam { border:1px solid #0055cc;background:#e8f0ff;color:#0044aa; }
+.b-easa { border:1px solid #4455aa;background:#eeeeff;color:#3344aa; }
+.b-faa  { border:1px solid #005533;background:#eeffee;color:#004422; }
+.co-loc { font-size:11px;color:#6680aa;margin-bottom:4px; }
+.co-loc::before { content:"📍 "; }
+.caps { display:flex;flex-wrap:wrap;gap:4px;margin-top:4px; }
+.cap { font-size:10px;border:1px solid #dde4ee;padding:2px 6px;border-radius:2px;color:#444; }
+.co-note { font-size:11px;color:#555;margin-top:4px; }
+.gap-box { border:1px solid #cc8800;background:#fffbee;border-radius:3px;padding:9px 12px;margin-top:7px; }
+.gap-lbl { font-size:11px;font-weight:bold;color:#884400;margin-bottom:3px; }
+.drill-link { font-size:11px;color:#003380;cursor:pointer;text-decoration:underline;margin-top:5px;display:inline-block; }
+.drill-link:hover { color:#001f66; }
 
-  .apt-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; padding:20px 24px; }
-  .apt-card { border:1px solid #99aabb; border-radius:3px; padding:14px; }
-  .apt-card:hover { border-color:#003380; background:#f8faff; }
-  .apt-iata { font-size:22px; font-weight:bold; color:#003380; margin-bottom:3px; }
-  .apt-name { font-size:11px; color:#6680aa; margin-bottom:8px; }
-  .svc { display:flex; align-items:center; gap:6px; font-size:12px; color:#333; margin-bottom:3px; }
-  .dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
-  .on  { background:#006644; }
-  .off { background:#cccccc; }
+/* ── AIRFRAME MAP ── */
+.airframe-wrap { display:grid;grid-template-columns:300px 1fr;gap:0; }
+.map-panel { border-right:1px solid #dde4ee;padding:16px; }
+.cards-panel { padding:16px 20px;overflow-y:auto; }
+#my-map { width:100%; }
 
-  .ata-section { margin-bottom:16px; }
-  .ata-hdr {
-    display:flex; align-items:center; gap:8px; padding-bottom:5px;
-    margin-bottom:8px; border-bottom:1px solid #99aabb;
-  }
-  .ata-num  { font-size:14px; font-weight:bold; color:#003380; }
-  .ata-name { font-size:14px; color:#003380; }
-  .ata-cnt  { margin-left:auto; font-size:11px; color:#6680aa; text-transform:uppercase; letter-spacing:.06em; }
+/* ── ATA SECTIONS ── */
+.ata-section { margin-bottom:14px; }
+.ata-hdr { display:flex;align-items:center;gap:8px;padding-bottom:4px;margin-bottom:7px;border-bottom:1px solid #99aabb; }
+.ata-num  { font-size:13px;font-weight:bold;color:#003380; }
+.ata-name { font-size:13px;color:#003380; }
+.ata-cnt  { margin-left:auto;font-size:10px;color:#6680aa;text-transform:uppercase;letter-spacing:.05em; }
 
-  .page-footer {
-    border-top:2px solid #003380; padding:10px 24px;
-    display:flex; align-items:center; justify-content:space-between;
-    font-size:11px; color:#6680aa; text-transform:uppercase; letter-spacing:.05em;
-  }
+/* ── ECO ── */
+.eco-grid { display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px 24px; }
+.eco-card { border:1px solid #99aabb;border-radius:3px;padding:13px; }
+.eco-card:hover { border-color:#003380;background:#f8faff; }
+.eco-tag { font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#6680aa;margin-bottom:5px; }
+.eco-name { font-size:13px;font-weight:bold;color:#003380;margin-bottom:3px; }
+.eco-loc { font-size:11px;color:#6680aa;margin-bottom:5px; }
+.eco-body { font-size:11px;color:#444;line-height:1.5; }
+.eco-progs { display:flex;flex-wrap:wrap;gap:4px;margin-top:6px; }
+.eco-prog { font-size:10px;border:1px solid #dde4ee;padding:2px 6px;color:#444; }
 
-  @media(max-width:768px) {
-    .airframe-wrap, .two-col { grid-template-columns:1fr; }
-    .map-panel { border-right:none; border-bottom:1px solid #ccccdd; }
-    .tiles { grid-template-columns:1fr 1fr; }
-    .eco-grid { grid-template-columns:1fr; }
-    .apt-grid { grid-template-columns:1fr 1fr; }
-    .ac-selector { flex-direction:column; align-items:center; }
-  }
-  @media(max-width:480px) {
-    .tiles { grid-template-columns:1fr; }
-    .apt-grid { grid-template-columns:1fr; }
-  }
+/* ── AIRPORTS ── */
+.apt-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px 24px; }
+.apt-card { border:1px solid #99aabb;border-radius:3px;padding:13px; }
+.apt-card:hover { border-color:#003380;background:#f8faff; }
+.apt-iata { font-size:20px;font-weight:bold;color:#003380;margin-bottom:2px; }
+.apt-name { font-size:10px;color:#6680aa;margin-bottom:7px; }
+.svc { display:flex;align-items:center;gap:5px;font-size:11px;color:#333;margin-bottom:3px; }
+.dot { width:7px;height:7px;border-radius:50%;flex-shrink:0; }
+.on  { background:#006644; }
+.off { background:#cccccc; }
+
+/* ── FOOTER ── */
+.page-footer { border-top:2px solid #003380;padding:9px 24px;display:flex;align-items:center;justify-content:space-between;font-size:10px;color:#6680aa;text-transform:uppercase;letter-spacing:.05em; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px) {
+  .ac-grid { grid-template-columns:repeat(2,1fr); }
+  .airframe-wrap,.two-col { grid-template-columns:1fr; }
+  .map-panel { border-right:none;border-bottom:1px solid #dde4ee; }
+  .eco-grid { grid-template-columns:1fr; }
+  .apt-grid { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:600px) {
+  .ac-grid { grid-template-columns:1fr 1fr; }
+  .tiles { grid-template-columns:1fr 1fr; }
+  .apt-grid { grid-template-columns:1fr; }
+  .step-row { flex-wrap:wrap; }
+}
+@media(max-width:400px) {
+  .tiles { grid-template-columns:1fr; }
+  .ac-grid { grid-template-columns:1fr; }
+}
 </style>
 </head>
 <body>
 
+<!-- TOPBAR -->
 <div id="topbar">
-  <span class="tb-logo">Malaysia Aerospace Bluebook</span>
+  <span class="tb-logo">Malaysia Aerospace Bluebook 2026</span>
   <span class="tb-div">|</span>
-  <span class="tb-sub">SUPPLY CHAIN DIRECTORY · POC</span>
+  <span class="tb-sub">Supply Chain Directory · POC</span>
   <span class="tb-badge" id="tb-ac-label"></span>
   <nav class="tb-nav">
     <button class="tb-btn active" onclick="nav('landing')">Home</button>
@@ -238,62 +227,112 @@
   </nav>
 </div>
 
-<!-- LANDING -->
+<!-- ══════════════════════════ LANDING ══════════════════════════ -->
 <div id="view-landing" class="view active">
-  <div class="page-wrap">
+  <div style="max-width:1100px;margin:0 auto;padding:24px 24px 0">
     <div class="landing-header">
       <div class="eyebrow">Malaysia Aerospace Industry Blueprint 2030</div>
-      <h1>Supply Chain Bluebook</h1>
-      <p style="font-size:14px;color:#444;max-width:600px;margin:8px auto 0">
-        Interactive directory of Malaysia's aerospace MRO, manufacturing, and ecosystem capabilities.
-        Proof of Concept — A320 CEO &amp; B737 NG edition.
+      <h1>Aerospace Ecosystem Bluebook 2026</h1>
+      <p style="font-size:13px;color:#444;max-width:560px;margin:6px auto 0">
+        Interactive MRO, manufacturing and supply chain directory for Malaysia's aerospace sector.
+        Select an aircraft type below to begin.
       </p>
-      <div class="landing-meta">Data: CAAM AMO Registry · MAIA · CTRM · APACS · Collins Aerospace · Public Disclosure</div>
+      <div class="landing-meta">Data: CAAM AMO Registry · MAIA · Public Disclosure · For Illustration</div>
     </div>
 
     <div class="strip">
-      <div class="strip-item"><div class="strip-val">A320 CEO · B737 NG</div><div class="strip-lbl">Aircraft Types</div></div>
-      <div class="strip-item"><div class="strip-val">7</div><div class="strip-lbl">MRO Facilities</div></div>
-      <div class="strip-item"><div class="strip-val">9</div><div class="strip-lbl">Component Shops</div></div>
-      <div class="strip-item"><div class="strip-val">6</div><div class="strip-lbl">Manufacturers</div></div>
-      <div class="strip-item"><div class="strip-val">12</div><div class="strip-lbl">ATA Chapters</div></div>
+      <div class="strip-item"><div class="strip-val">6</div><div class="strip-lbl">Aircraft Types</div></div>
+      <div class="strip-item"><div class="strip-val">12+</div><div class="strip-lbl">MRO Facilities</div></div>
+      <div class="strip-item"><div class="strip-val">10+</div><div class="strip-lbl">Component Shops</div></div>
+      <div class="strip-item"><div class="strip-val">6+</div><div class="strip-lbl">Manufacturers</div></div>
+      <div class="strip-item"><div class="strip-val">10</div><div class="strip-lbl">ATA Chapters</div></div>
       <div class="strip-item"><div class="strip-val">CAAM · EASA · FAA</div><div class="strip-lbl">Authorities</div></div>
     </div>
 
-    <div class="ac-selector-label">Step 1 — Select Aircraft Type</div>
-    <div class="ac-selector">
-      <div class="ac-card" onclick="selectAC('a320')">
-        <img class="ac-photo" src="images/AirbusA320-200.jpg" alt="Airbus A320 CEO">
+    <!-- STEP INDICATOR -->
+    <div class="step-row" style="margin:0 -24px;padding-left:24px;">
+      <div class="step active"><span class="step-num">1</span> Select Aircraft</div>
+      <span class="step-arr">›</span>
+      <div class="step"><span class="step-num">2</span> Airframe MRO</div>
+      <span class="step-arr">›</span>
+      <div class="step"><span class="step-num">3</span> ATA Component Repair</div>
+    </div>
+
+    <!-- COMMERCIAL NARROWBODY -->
+    <div class="cat-label">Commercial — Narrowbody (Jet)</div>
+    <div class="ac-grid">
+      <div class="ac-card" id="card-a320" onclick="selectAC('a320')">
+        <img class="ac-photo" src="images/AirbusA320-200.jpg" alt="A320 CEO" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="ac-photo-ph" style="display:none">✈</div>
         <div class="ac-body">
           <div class="ac-type">Airbus · Narrowbody</div>
           <div class="ac-name">A320 CEO</div>
-          <div class="ac-desc">CFM56-5B / IAE V2500-A5 · Workhorse of AirAsia fleet</div>
-          <div class="ac-specs">
-            <div><b>37.57 m</b>Length</div>
-            <div><b>33.91 m</b>Wingspan</div>
-            <div><b>6,150 km</b>Range</div>
-            <div><b>150–180</b>Seats</div>
-          </div>
+          <div class="ac-desc">CFM56-5B / IAE V2500 · 150–180 seats · AirAsia backbone fleet</div>
         </div>
       </div>
-
-      <div class="ac-card" onclick="selectAC('b737')">
-        <img class="ac-photo" src="images/737NG.jpeg" alt="Boeing 737-800 NG">
+      <div class="ac-card" id="card-b737" onclick="selectAC('b737')">
+        <img class="ac-photo" src="images/737NG.jpeg" alt="B737 NG" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="ac-photo-ph" style="display:none">✈</div>
         <div class="ac-body">
           <div class="ac-type">Boeing · Narrowbody</div>
           <div class="ac-name">B737 NG</div>
-          <div class="ac-desc">CFM56-7B · 737-700 / 737-800 / 737-900 series</div>
-          <div class="ac-specs">
-            <div><b>42.1 m</b>Length</div>
-            <div><b>35.8 m</b>Wingspan</div>
-            <div><b>5,765 km</b>Range</div>
-            <div><b>128–215</b>Seats</div>
-          </div>
+          <div class="ac-desc">CFM56-7B · 737-700/800/900 · 128–215 seats · MAS & Batik Air</div>
         </div>
       </div>
     </div>
 
-    <div style="text-align:center;margin-bottom:14px;font-size:12px;color:#6680aa;text-transform:uppercase;letter-spacing:.08em">— or browse by section —</div>
+    <!-- TURBOPROP -->
+    <div class="cat-label">Commercial — Turboprop (Regional)</div>
+    <div class="ac-grid">
+      <div class="ac-card" id="card-atr42" onclick="selectAC('atr42')">
+        <img class="ac-photo" src="images/ATR42.jpg" alt="ATR 42" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="ac-photo-ph" style="display:none">🛩</div>
+        <div class="ac-body">
+          <div class="ac-type">ATR · Turboprop</div>
+          <div class="ac-name">ATR 42-600</div>
+          <div class="ac-desc">PW127M · 48 seats · MASwings, Firefly, MYAirline feeder routes</div>
+        </div>
+      </div>
+      <div class="ac-card" id="card-atr72" onclick="selectAC('atr72')">
+        <img class="ac-photo" src="images/ATR72.jpg" alt="ATR 72" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="ac-photo-ph" style="display:none">🛩</div>
+        <div class="ac-body">
+          <div class="ac-type">ATR · Turboprop</div>
+          <div class="ac-name">ATR 72-600</div>
+          <div class="ac-desc">PW127M · 70 seats · MASwings backbone · Sabah / Sarawak routes</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUSINESS JET -->
+    <div class="cat-label">Business Aviation</div>
+    <div class="ac-grid">
+      <div class="ac-card" id="card-bizjet" onclick="selectAC('bizjet')">
+        <img class="ac-photo" src="images/Challenger300.jpg" alt="Business Jet" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="ac-photo-ph" style="display:none">🛫</div>
+        <div class="ac-body">
+          <div class="ac-type">Bombardier / Gulfstream / Dassault</div>
+          <div class="ac-name">Business Jets</div>
+          <div class="ac-desc">Challenger 300/350/604, Learjet 45/75, G450/G550, Falcon 2000 · VIP / Charter</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HELICOPTER -->
+    <div class="cat-label">Rotary Wing (Helicopter)</div>
+    <div class="ac-grid">
+      <div class="ac-card" id="card-heli" onclick="selectAC('heli')">
+        <img class="ac-photo" src="images/H125.jpg" alt="Helicopter" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="ac-photo-ph" style="display:none">🚁</div>
+        <div class="ac-body">
+          <div class="ac-type">Airbus H-Series / Bell / Sikorsky</div>
+          <div class="ac-name">Helicopters</div>
+          <div class="ac-desc">H125, H145, H160, H225, Bell 412, S-76 · O&G, SAR, VIP, Plantation</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tiles-label">— or browse by section —</div>
     <div class="tiles">
       <div class="tile" onclick="nav('airframe')">
         <div class="tile-num">02 — Airframe</div>
@@ -302,7 +341,7 @@
       </div>
       <div class="tile" onclick="nav('ata')">
         <div class="tile-num">03 — Components</div>
-        <div class="tile-title">ATA Chapter Directory</div>
+        <div class="tile-title">ATA Component Repair</div>
         <div class="tile-desc">ECS, hydraulics, landing gear, avionics — by ATA chapter.</div>
       </div>
       <div class="tile" onclick="nav('eco')">
@@ -317,178 +356,271 @@
       </div>
       <div class="tile" style="opacity:.5;cursor:default">
         <div class="tile-num">06 — Coming Soon</div>
-        <div class="tile-title">More Aircraft Types</div>
-        <div class="tile-desc">A330 · B777 · Bombardier · Cessna — next editions.</div>
+        <div class="tile-title">A330 · B777 · Widebody</div>
+        <div class="tile-desc">Widebody MRO directory — next edition.</div>
       </div>
       <div class="tile" style="opacity:.5;cursor:default">
         <div class="tile-num">07 — Coming Soon</div>
         <div class="tile-title">Regulation Database</div>
-        <div class="tile-desc">Full CAAM/EASA/FAA Part 145 listing &amp; cross-reference.</div>
+        <div class="tile-desc">Full CAAM/EASA/FAA Part 145 cross-reference.</div>
       </div>
     </div>
   </div>
-  <div class="page-footer">
-    <span>Malaysia Aerospace Ecosystem Bluebook 2026· 1st Edition.Prepared by KAR KEE CHIN</span>
-    <span>Data as publicly disclosed</span>
+  <div class="page-footer" style="margin-top:16px">
+    <span>Malaysia Aerospace Ecosystem Bluebook 2026 · POC</span>
+    <span>Data as publicly disclosed · Not for operational decisions</span>
   </div>
 </div>
 
-<!-- AIRCRAFT -->
+<!-- ══════════════════════════ AIRCRAFT OVERVIEW ══════════════════════════ -->
 <div id="view-aircraft" class="view">
+  <div class="step-row">
+    <div class="step done" onclick="nav('landing')"><span class="step-num">1</span> Select Aircraft</div>
+    <span class="step-arr">›</span>
+    <div class="step active"><span class="step-num">2</span> Aircraft Overview</div>
+    <span class="step-arr">›</span>
+    <div class="step"><span class="step-num">3</span> Airframe MRO</div>
+    <span class="step-arr">›</span>
+    <div class="step"><span class="step-num">4</span> ATA Component Repair</div>
+  </div>
+
   <div class="sec-top">
     <div>
-      <div class="eyebrow" id="ac-eyebrow">Aircraft Type</div>
-      <h1 id="ac-title">Aircraft Overview</h1>
-      <p class="page-sub" id="ac-sub">Select aircraft from Home to load details</p>
+      <div class="eyebrow" id="ac-eyebrow">Aircraft Overview</div>
+      <h1 id="ac-title">Select an Aircraft</h1>
+      <p class="page-sub" id="ac-sub"></p>
     </div>
-    <button class="back-btn" onclick="nav('landing')">← Back to Home</button>
+    <button class="back-btn" onclick="nav('landing')">← Change Aircraft</button>
   </div>
 
-  <div class="ac-detail">
-    <!-- A320 -->
-    <div id="acv-a320">
-      <img class="ac-photo" src="images/AirbusA320-200.jpg" alt="Airbus A320 CEO">
-      <div class="ac-stat-row">
-        <div class="ac-stat"><div class="ac-stat-val">37.57 m</div><div class="ac-stat-lbl">Length</div></div>
-        <div class="ac-stat"><div class="ac-stat-val">33.91 m</div><div class="ac-stat-lbl">Wingspan</div></div>
-        <div class="ac-stat"><div class="ac-stat-val">150–180</div><div class="ac-stat-lbl">Seats</div></div>
-        <div class="ac-stat"><div class="ac-stat-val">CFM56-5B / IAE V2500</div><div class="ac-stat-lbl">Engine Options</div></div>
-        <div class="ac-stat"><div class="ac-stat-val">6,150 km</div><div class="ac-stat-lbl">Max Range</div></div>
-        <div class="ac-stat"><div class="ac-stat-val">28,000 kg</div><div class="ac-stat-lbl">Max Payload</div></div>
-      </div>
-      <p style="font-size:13px;color:#555;max-width:720px;margin:0 auto 10px;text-align:center">
-        The A320 CEO (Current Engine Option) family — comprising A318, A319, A320 and A321 — 
-        is Airbus's first-generation single-aisle programme and the backbone of AirAsia's fleet.
-        Powered by CFM56-5B or IAE V2500-A5 engines.
-      </p>
+  <!-- A320 CEO -->
+  <div id="acv-a320" class="ac-detail" style="display:none">
+    <img class="ac-photo-full" src="images/AirbusA320-200.jpg" alt="Airbus A320 CEO" onerror="this.style.display='none'">
+    <div class="ac-stat-row">
+      <div class="ac-stat"><div class="ac-stat-val">37.57 m</div><div class="ac-stat-lbl">Length</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">33.91 m</div><div class="ac-stat-lbl">Wingspan</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">150–180</div><div class="ac-stat-lbl">Seats</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">CFM56-5B / IAE V2500</div><div class="ac-stat-lbl">Engine</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">6,150 km</div><div class="ac-stat-lbl">Range</div></div>
     </div>
-    <!-- B737 -->
-    <div id="acv-b737" style="display:none">
-      <img class="ac-photo" src="images/737NG.jpeg" alt="Boeing 737-800 NG">
-      <div class="ac-stat-row">
-        <div class="ac-stat"><div class="ac-stat-val">42.1 m</div><div class="ac-stat-lbl">Length (738)</div></div>
-        <div class="ac-stat"><div class="ac-stat-val">35.8 m</div><div class="ac-stat-lbl">Wingspan</div></div>
-        <div class="ac-stat"><div class="ac-stat-val">128–215</div><div class="ac-stat-lbl">Seats</div></div>
-        <div class="ac-stat"><div class="ac-stat-val">CFM56-7B</div><div class="ac-stat-lbl">Engine</div></div>
-        <div class="ac-stat"><div class="ac-stat-val">5,765 km</div><div class="ac-stat-lbl">Max Range</div></div>
-        <div class="ac-stat"><div class="ac-stat-val">-700 / -800 / -900</div><div class="ac-stat-lbl">Variants</div></div>
-      </div>
-      <p style="font-size:13px;color:#555;max-width:720px;margin:0 auto 10px;text-align:center">
-        The Boeing 737 Next Generation (NG) comprises the -600, -700, -800 and -900 variants introduced from 1997.
-        Equipped with CFM56-7B high-bypass turbofans and a redesigned glass cockpit (Honeywell).
-        Malaysia Airlines and Malindo Air (Batik Air Malaysia) are major 737 NG operators in Malaysia.
-      </p>
+    <p style="font-size:12px;color:#555;max-width:660px;margin:0 auto 4px;text-align:center">The A320 CEO (Current Engine Option) — A318/A319/A320/A321 — is Airbus's first-generation single-aisle programme and the backbone of AirAsia's fleet. Powered by CFM56-5B or IAE V2500-A5 engines.</p>
+  </div>
+
+  <!-- B737 NG -->
+  <div id="acv-b737" class="ac-detail" style="display:none">
+    <img class="ac-photo-full" src="images/737NG.jpeg" alt="Boeing 737 NG" onerror="this.style.display='none'">
+    <div class="ac-stat-row">
+      <div class="ac-stat"><div class="ac-stat-val">42.1 m</div><div class="ac-stat-lbl">Length (738)</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">35.8 m</div><div class="ac-stat-lbl">Wingspan</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">128–215</div><div class="ac-stat-lbl">Seats</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">CFM56-7B</div><div class="ac-stat-lbl">Engine</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">5,765 km</div><div class="ac-stat-lbl">Range</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">-700 / -800 / -900</div><div class="ac-stat-lbl">Variants</div></div>
+    </div>
+    <p style="font-size:12px;color:#555;max-width:660px;margin:0 auto 4px;text-align:center">The B737 NG (-600/700/800/900) introduced in 1997 with CFM56-7B turbofans and a redesigned glass cockpit. Operated in Malaysia by Malaysia Airlines (B737-8 MAX transitioning in) and Batik Air Malaysia.</p>
+  </div>
+
+  <!-- ATR 42 -->
+  <div id="acv-atr42" class="ac-detail" style="display:none">
+    <img class="ac-photo-full" src="images/ATR42.jpg" alt="ATR 42-600" onerror="this.style.display='none'">
+    <div class="ac-stat-row">
+      <div class="ac-stat"><div class="ac-stat-val">22.67 m</div><div class="ac-stat-lbl">Length</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">24.57 m</div><div class="ac-stat-lbl">Wingspan</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">40–50</div><div class="ac-stat-lbl">Seats</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">2× PW127M</div><div class="ac-stat-lbl">Engine</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">1,326 km</div><div class="ac-stat-lbl">Range</div></div>
+    </div>
+    <p style="font-size:12px;color:#555;max-width:660px;margin:0 auto 4px;text-align:center">The ATR 42-600 is a twin-turboprop regional aircraft operated by MASwings and Firefly on peninsular and Borneo feeder routes. Equipped with Pratt &amp; Whitney Canada PW127M engines and an advanced avionics suite (IDS). Key ATA addition: ATA 61 Propellers.</p>
+  </div>
+
+  <!-- ATR 72 -->
+  <div id="acv-atr72" class="ac-detail" style="display:none">
+    <img class="ac-photo-full" src="images/ATR72.jpg" alt="ATR 72-600" onerror="this.style.display='none'">
+    <div class="ac-stat-row">
+      <div class="ac-stat"><div class="ac-stat-val">27.17 m</div><div class="ac-stat-lbl">Length</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">27.05 m</div><div class="ac-stat-lbl">Wingspan</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">68–78</div><div class="ac-stat-lbl">Seats</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">2× PW127M</div><div class="ac-stat-lbl">Engine</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">1,528 km</div><div class="ac-stat-lbl">Range</div></div>
+    </div>
+    <p style="font-size:12px;color:#555;max-width:660px;margin:0 auto 4px;text-align:center">The ATR 72-600 is the larger variant of the ATR turboprop family. MASwings operates this type as the backbone for its Sabah and Sarawak network, serving remote communities. AIROD Subang holds CAAM B1 approval for PW127 engine maintenance.</p>
+  </div>
+
+  <!-- Business Jet -->
+  <div id="acv-bizjet" class="ac-detail" style="display:none">
+    <img class="ac-photo-full" src="images/Challenger300.jpg" alt="Business Jet" onerror="this.style.display='none'">
+    <div class="ac-stat-row">
+      <div class="ac-stat"><div class="ac-stat-val">Bombardier</div><div class="ac-stat-lbl">Challenger / Learjet</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">Gulfstream</div><div class="ac-stat-lbl">G450 / G550 / G650</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">Dassault</div><div class="ac-stat-lbl">Falcon 2000 / 7X</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">6–19</div><div class="ac-stat-lbl">Typical Seats</div></div>
+    </div>
+    <p style="font-size:12px;color:#555;max-width:660px;margin:0 auto 4px;text-align:center">Malaysia's business aviation sector operates from Subang Airport (SZB), serving VIP government, corporate, and charter traffic. ExecuJet Malaysia is the primary full-service MRO for business jets in Malaysia, with Bombardier, Honeywell, and Collins Aerospace authorisations.</p>
+  </div>
+
+  <!-- Helicopter -->
+  <div id="acv-heli" class="ac-detail" style="display:none">
+    <img class="ac-photo-full" src="images/H125.jpg" alt="Helicopter" onerror="this.style.display='none'">
+    <div class="ac-stat-row">
+      <div class="ac-stat"><div class="ac-stat-val">H125 / H145 / H160</div><div class="ac-stat-lbl">Airbus H-Series</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">Bell 412 / 206</div><div class="ac-stat-lbl">Bell Textron</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">S-76 / S-92</div><div class="ac-stat-lbl">Sikorsky / Lockheed</div></div>
+      <div class="ac-stat"><div class="ac-stat-val">O&amp;G · SAR · VIP</div><div class="ac-stat-lbl">Primary Roles</div></div>
+    </div>
+    <p style="font-size:12px;color:#555;max-width:660px;margin:0 auto 4px;text-align:center">Malaysia's helicopter fleet supports offshore oil &amp; gas platforms (Sarawak, Sabah), search-and-rescue, plantation surveying, EMS and VIP transport. Airbus Helicopters Malaysia and Hammock Helicopters are the principal MRO operators. Key ATA chapters: 62 (Main Rotor), 63 (MR Drive), 64 (Tail Rotor), 67 (Rotor Controls).</p>
+  </div>
+
+  <!-- CTA FLOW BANNER — shown after aircraft selected -->
+  <div class="flow-banner" id="ac-flow-banner">
+    <div class="flow-banner-txt">
+      <strong id="flow-banner-title">Next Step: View Airframe MRO Facilities</strong>
+      <span id="flow-banner-sub">See which Malaysian facilities are approved to maintain this aircraft type</span>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="flow-btn" onclick="goAirframe()">→ View Airframe MRO</button>
+      <button class="flow-btn secondary" onclick="nav('ata')">Skip to ATA Components</button>
     </div>
   </div>
 
+  <!-- ATA CHIPS -->
   <div class="chips-section">
-    <div class="chips-label">ATA Chapter — Click to explore who can service this system in Malaysia</div>
-    <div class="chips">
-      <span class="chip" onclick="zoneClick('ecs')">ATA 21 — Air Conditioning / ECS</span>
-      <span class="chip" onclick="zoneClick('electrical')">ATA 24 — Electrical Power</span>
-      <span class="chip" onclick="zoneClick('flight-controls')">ATA 27 — Flight Controls</span>
-      <span class="chip" onclick="zoneClick('fuel')">ATA 28 — Fuel System</span>
-      <span class="chip" onclick="zoneClick('hydraulics')">ATA 29 — Hydraulic Power</span>
-      <span class="chip" onclick="zoneClick('landing-gear')">ATA 32 — Landing Gear</span>
-      <span class="chip" onclick="zoneClick('avionics')">ATA 34 — Navigation / Avionics</span>
-      <span class="chip" onclick="zoneClick('apu')">ATA 49 — APU</span>
-      <span class="chip" onclick="zoneClick('airframe')">ATA 51–57 — Airframe Structures</span>
-      <span class="chip" onclick="zoneClick('engine')">ATA 71–80 — Powerplant / Engine</span>
+    <div class="chips-label">Or jump directly to an ATA chapter for component repair</div>
+    <div class="chips" id="ata-chips-container">
+      <!-- chips injected by JS based on aircraft type -->
     </div>
   </div>
 
   <div class="page-footer">
-    <span id="ac-footer">Select an ATA chapter above to go directly to the component directory</span>
+    <span id="ac-footer-txt">Select an aircraft type from Home to begin</span>
+    <span>Step 2 of 4</span>
   </div>
 </div>
 
-<!-- AIRFRAME MRO -->
+<!-- ══════════════════════════ AIRFRAME MRO ══════════════════════════ -->
 <div id="view-airframe" class="view">
+  <div class="step-row">
+    <div class="step done" onclick="nav('landing')"><span class="step-num">1</span> Select Aircraft</div>
+    <span class="step-arr">›</span>
+    <div class="step done" onclick="nav('aircraft')"><span class="step-num">2</span> Aircraft Overview</div>
+    <span class="step-arr">›</span>
+    <div class="step active"><span class="step-num">3</span> Airframe MRO</div>
+    <span class="step-arr">›</span>
+    <div class="step"><span class="step-num">4</span> ATA Component Repair</div>
+  </div>
+
   <div class="sec-top">
     <div>
-      <div class="eyebrow">Level 02 — Airframe MRO</div>
+      <div class="eyebrow">Level 03 — Airframe MRO</div>
       <h1 id="af-title">Airframe MRO · Malaysia</h1>
       <p class="page-sub">CAAM Part 145 approved facilities — Line &amp; Base maintenance</p>
     </div>
-    <button class="back-btn" onclick="nav('aircraft')">← Aircraft</button>
+    <button class="back-btn" onclick="nav('aircraft')">← Aircraft Overview</button>
+  </div>
+
+  <!-- NEXT STEP BANNER -->
+  <div class="flow-banner">
+    <div class="flow-banner-txt">
+      <strong>Next Step: Explore Component Repair by ATA Chapter</strong>
+      After identifying the airframe MRO, drill down into specific system repair capabilities
+    </div>
+    <button class="flow-btn" onclick="nav('ata')">→ ATA Component Directory</button>
   </div>
 
   <div class="filter-bar">
-    <span class="filter-lbl">Regulation:</span>
+    <span class="filter-lbl">Reg:</span>
     <button class="filter-btn on" onclick="filterReg('all',this)">All</button>
     <button class="filter-btn" onclick="filterReg('caam',this)">CAAM 145</button>
     <button class="filter-btn" onclick="filterReg('easa',this)">EASA 145</button>
     <button class="filter-btn" onclick="filterReg('faa',this)">FAA 145</button>
     <div class="filter-sep"></div>
     <span class="filter-lbl">Aircraft:</span>
-    <button class="filter-btn on" onclick="filterAC_af('all',this)">All Types</button>
-    <button class="filter-btn" onclick="filterAC_af('a320',this)">A320 CEO</button>
-    <button class="filter-btn" onclick="filterAC_af('b737',this)">B737 NG</button>
+    <button class="filter-btn on" id="af-filter-all" onclick="filterAC_af('all',this)">All Types</button>
+    <button class="filter-btn" id="af-filter-a320" onclick="filterAC_af('a320',this)">A320 CEO</button>
+    <button class="filter-btn" id="af-filter-b737" onclick="filterAC_af('b737',this)">B737 NG</button>
+    <button class="filter-btn" id="af-filter-atr" onclick="filterAC_af('atr',this)">ATR 42/72</button>
+    <button class="filter-btn" id="af-filter-bizjet" onclick="filterAC_af('bizjet',this)">Business Jet</button>
+    <button class="filter-btn" id="af-filter-heli" onclick="filterAC_af('heli',this)">Helicopter</button>
   </div>
 
   <div class="airframe-wrap">
     <div class="map-panel">
-      <h3 style="margin-top:0;margin-bottom:12px">Facility Locations — Peninsular Malaysia</h3>
+      <h3 style="margin-top:0;margin-bottom:10px">Facility Map — Peninsular Malaysia</h3>
       <svg id="my-map" viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg">
         <rect width="300" height="340" fill="#eef4ff"/>
         <path d="M130 15 L152 13 L172 19 L190 32 L200 48 L204 68 L197 85 L200 103 L194 124 L186 142 L182 160 L176 178 L169 196 L160 212 L151 226 L142 238 L133 248 L122 255 L110 250 L106 238 L108 222 L106 206 L103 190 L99 173 L97 154 L95 134 L94 114 L96 94 L94 74 L97 54 L105 36 L117 21 Z" fill="#c8daf5" stroke="#003380" stroke-width="1.2"/>
-        <line x1="110" y1="108" x2="145" y2="103" stroke="#003380" stroke-width=".6" stroke-dasharray="2 2"/>
-        <line x1="145" y1="103" x2="173" y2="112" stroke="#003380" stroke-width=".6" stroke-dasharray="2 2"/>
-        <line x1="106" y1="148" x2="180" y2="143" stroke="#003380" stroke-width=".6" stroke-dasharray="2 2"/>
-        <line x1="104" y1="190" x2="180" y2="182" stroke="#003380" stroke-width=".6" stroke-dasharray="2 2"/>
         <ellipse cx="140" cy="268" rx="6" ry="3" fill="#e8f0ff" stroke="#003380" stroke-width="1"/>
         <text x="150" y="271" font-family="Times New Roman" font-size="8" fill="#6680aa">SIN</text>
-        <text x="128" y="174" font-family="Times New Roman" font-size="8" fill="#003380">SELANGOR</text>
-        <text x="142" y="222" font-family="Times New Roman" font-size="8" fill="#003380">SEPANG</text>
-        <circle cx="133" cy="182" r="6" fill="#003380" stroke="#003380" stroke-width="1.5"/>
-        <text x="141" y="178" font-family="Times New Roman" font-size="9" fill="#003380">SZB · Subang</text>
-        <circle cx="124" cy="176" r="4" fill="#0055aa" stroke="#003380" stroke-width="1"/>
-        <text x="105" y="171" font-family="Times New Roman" font-size="8" fill="#003380">Shah Alam</text>
-        <circle cx="143" cy="218" r="6" fill="#884400" stroke="#884400" stroke-width="1.5"/>
-        <text x="151" y="222" font-family="Times New Roman" font-size="9" fill="#884400">KUL · KLIA</text>
-        <circle cx="112" cy="78" r="4" fill="#6680aa" stroke="#003380" stroke-width="1"/>
+        <text x="120" y="174" font-family="Times New Roman" font-size="8" fill="#003380">SELANGOR</text>
+        <text x="142" y="228" font-family="Times New Roman" font-size="8" fill="#884400">SEPANG</text>
+        <text x="105" y="155" font-family="Times New Roman" font-size="7" fill="#6680aa">SHAH ALAM</text>
+        <!-- Subang SZB -->
+        <circle cx="133" cy="183" r="7" fill="#003380" stroke="#fff" stroke-width="1.5"/>
+        <text x="143" y="180" font-family="Times New Roman" font-size="9" fill="#003380" font-weight="bold">SZB</text>
+        <!-- KLIA -->
+        <circle cx="143" cy="219" r="7" fill="#884400" stroke="#fff" stroke-width="1.5"/>
+        <text x="153" y="222" font-family="Times New Roman" font-size="9" fill="#884400" font-weight="bold">KUL</text>
+        <!-- Shah Alam -->
+        <circle cx="122" cy="176" r="5" fill="#0055aa" stroke="#fff" stroke-width="1"/>
+        <!-- Penang -->
+        <circle cx="112" cy="78" r="4" fill="#6680aa" stroke="#fff" stroke-width="1"/>
         <text x="118" y="82" font-family="Times New Roman" font-size="8" fill="#6680aa">PEN</text>
-        <rect x="8" y="296" width="180" height="38" rx="2" fill="white" stroke="#99aabb" stroke-width="1"/>
-        <circle cx="19" cy="308" r="4" fill="#003380"/>
-        <text x="27" y="312" font-family="Times New Roman" font-size="8" fill="#003380">Airframe MRO (A320 + B737)</text>
-        <circle cx="19" cy="324" r="4" fill="#0055aa"/>
-        <text x="27" y="328" font-family="Times New Roman" font-size="8" fill="#003380">Component MRO</text>
-        <circle cx="110" cy="308" r="4" fill="#884400"/>
-        <text x="118" y="312" font-family="Times New Roman" font-size="8" fill="#003380">KLIA Hub</text>
+        <!-- Legend -->
+        <rect x="5" y="292" width="190" height="44" rx="2" fill="white" stroke="#99aabb" stroke-width="1"/>
+        <circle cx="16" cy="304" r="4" fill="#003380"/><text x="24" y="308" font-family="Times New Roman" font-size="8" fill="#003380">Subang — Airframe + Component MRO</text>
+        <circle cx="16" cy="320" r="4" fill="#884400"/><text x="24" y="324" font-family="Times New Roman" font-size="8" fill="#003380">KLIA/Sepang — Airframe MRO hub</text>
+        <circle cx="128" cy="304" r="4" fill="#0055aa"/><text x="136" y="308" font-family="Times New Roman" font-size="8" fill="#003380">Shah Alam — Comp. shops</text>
       </svg>
+      <div style="margin-top:10px;font-size:11px;color:#6680aa;border-top:1px solid #dde4ee;padding-top:8px">
+        <strong style="color:#003380">Subang (SZB)</strong> is Malaysia's primary MRO hub — home to AIROD, AAT, ADE, ExecuJet, Collins Aerospace, APACS, and the Subang Aerotech Park (60 acres).
+      </div>
     </div>
 
     <div class="cards-panel" id="af-cards">
-      <h3 style="margin-top:0;margin-bottom:14px">CAAM Part 145 Approved Facilities</h3>
+      <h3 style="margin-top:0;margin-bottom:12px">CAAM Part 145 Approved Facilities</h3>
 
+      <!-- Commercial Narrowbody MROs -->
       <div class="co-card" data-reg="caam easa faa" data-ac="a320 b737">
         <div class="co-top">
           <div class="co-name">Sepang Aircraft Engineering (SAE)</div>
           <div class="badges"><span class="badge b-mro">Line + Base</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div>
         </div>
-        <div class="co-loc">Sepang, Selangor — WMKK (KLIA)</div>
-        <div class="caps"><span class="cap">A320ceo CFM56 &amp; IAE</span><span class="cap">A320neo LEAP-1A</span><span class="cap">A321neo</span><span class="cap">A-Check → E-Check</span><span class="cap">Painting (eco bay)</span><span class="cap">Cabin refurbishment</span></div>
-        <div class="co-note">Airbus Customer Services network partner. JV with SIAEC (SIA Engineering). 17+ authority certifications. Closed-door eco-paint bay at KLIA.</div>
+        <div class="co-loc">Sepang, Selangor — WMKK (KLIA) · JV with SIAEC</div>
+        <div class="caps"><span class="cap">A320ceo CFM56 &amp; IAE</span><span class="cap">A320neo LEAP-1A</span><span class="cap">A321neo</span><span class="cap">A-Check → E-Check</span><span class="cap">Aircraft Painting (eco bay)</span><span class="cap">Cabin Refurbishment</span></div>
+        <div class="co-note">Airbus Customer Services network partner. 17+ authority certifications. Closed-door eco-paint bay at KLIA.</div>
+        <span class="drill-link" onclick="goATA('airframe')">→ View ATA component capabilities</span>
       </div>
 
-      <div class="co-card" data-reg="caam easa" data-ac="a320 b737">
+      <div class="co-card" data-reg="caam easa faa" data-ac="a320 b737">
+        <div class="co-top">
+          <div class="co-name">Malaysia Airlines Engineering (MAE)</div>
+          <div class="badges"><span class="badge b-mro">Line + Base</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div>
+        </div>
+        <div class="co-loc">Subang Engineering Centre + KLIA, Selangor — In-house MRO of Malaysia Airlines</div>
+        <div class="caps"><span class="cap">B737-8 (MAX)</span><span class="cap">A330-300</span><span class="cap">B777-200ER</span><span class="cap">A380 (retired)</span><span class="cap">Line + Heavy Base</span><span class="cap">Component workshops</span></div>
+        <div class="co-note">Malaysia Airlines' in-house engineering division. Full-service MRO for MAS fleet types. Subang Engineering Centre has component workshops for hydraulics, avionics, structures. Provides third-party MRO for select operators.</div>
+        <span class="drill-link" onclick="goATA('all')">→ View ATA component capabilities</span>
+      </div>
+
+      <div class="co-card" data-reg="caam easa" data-ac="a320 b737 atr">
         <div class="co-top">
           <div class="co-name">AIROD Aerospace Technology</div>
           <div class="badges"><span class="badge b-mro">Line + Base</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div>
         </div>
         <div class="co-loc">Subang, Selangor — WMSA · AMO/2016/29</div>
-        <div class="caps"><span class="cap">A319/A320/A321 CFM56 &amp; IAE</span><span class="cap">B737-300/400/500 Classic</span><span class="cap">B737-600/700/800/900 NG</span><span class="cap">ATR 42/72</span><span class="cap">NDT (5 methods)</span><span class="cap">Painting (500+ projects)</span></div>
-        <div class="co-note">Frost &amp; Sullivan "Asia Pacific Customised MRO Centre of the Year". Center Wing Box replacement capability for B737 NG.</div>
+        <div class="caps"><span class="cap">A319/A320/A321 CFM56 &amp; IAE</span><span class="cap">B737 Classic + NG</span><span class="cap">ATR 42/72 (PW127)</span><span class="cap">NDT (5 methods)</span><span class="cap">Painting (500+ projects)</span></div>
+        <div class="co-note">Frost &amp; Sullivan "Asia Pacific Customised MRO Centre of the Year". Center Wing Box replacement for B737 NG. CAAM B1 for PW127 engine (ATR fleet).</div>
+        <span class="drill-link" onclick="goATA('all')">→ View ATA component capabilities</span>
       </div>
 
-      <div class="co-card" data-reg="caam" data-ac="a320 b737">
+      <div class="co-card" data-reg="caam" data-ac="a320 b737 atr">
         <div class="co-top">
           <div class="co-name">Asia AeroTechnic (AAT)</div>
           <div class="badges"><span class="badge b-mro">Line + Base</span><span class="badge b-caam">CAAM</span></div>
         </div>
         <div class="co-loc">Subang, Selangor — Subsidiary of MARA Corporation</div>
-        <div class="caps"><span class="cap">A319/A320/A321 CFM56</span><span class="cap">B737 Classic + NG</span><span class="cap">B777-200/300 RR Trent 800</span><span class="cap">ATR 42/72</span><span class="cap">NDT · Structural repairs</span></div>
-        <div class="co-note">CAAM Part 145 approved. Subsidiary of MARA Corporation Sdn Bhd. Covers both A320 family and B737 NG in one Subang facility.</div>
+        <div class="caps"><span class="cap">A319/A320/A321 CFM56</span><span class="cap">B737 Classic + NG</span><span class="cap">ATR 42/72</span><span class="cap">B777-200/300 RR Trent 800</span><span class="cap">NDT · Structural</span></div>
+        <div class="co-note">CAAM Part 145. Subsidiary of MARA Corporation Sdn Bhd. Covers A320, B737 NG, and ATR turboprop types in one Subang facility.</div>
+        <span class="drill-link" onclick="goATA('all')">→ View ATA component capabilities</span>
       </div>
 
       <div class="co-card" data-reg="caam easa" data-ac="a320">
@@ -498,7 +630,18 @@
         </div>
         <div class="co-loc">Sepang, Selangor — WMKK · AMO/2020/01</div>
         <div class="caps"><span class="cap">A320-200 CFM56-5B</span><span class="cap">A320-200 IAE V2500</span><span class="cap">A320neo LEAP-1A</span><span class="cap">A321neo</span><span class="cap">A330-300 RR Trent 700</span></div>
-        <div class="co-note">AirAsia-linked facility at KLIA. CEO and NEO A320 family variants. Component approvals: C5 Electrical, C14 Landing Gear, C15 Oxygen.</div>
+        <div class="co-note">AirAsia-linked facility at KLIA. CEO and NEO A320 family. Component approvals: C5 Electrical, C14 Landing Gear, C15 Oxygen.</div>
+        <span class="drill-link" onclick="goATA('all')">→ View ATA component capabilities</span>
+      </div>
+
+      <div class="co-card" data-reg="caam" data-ac="a320 b737">
+        <div class="co-top">
+          <div class="co-name">Skyway Technics Sdn Bhd</div>
+          <div class="badges"><span class="badge b-mro">Line</span><span class="badge b-caam">CAAM</span></div>
+        </div>
+        <div class="co-loc">Kuala Lumpur International Airport (WMKK) · Sepang</div>
+        <div class="caps"><span class="cap">A320 family (line maintenance)</span><span class="cap">B737 NG (line maintenance)</span><span class="cap">Transit checks</span><span class="cap">RON checks</span></div>
+        <div class="co-note">CAAM-approved line maintenance specialist based at KLIA. Supports aircraft on transit and overnight stops. Provides contracted line maintenance services to airlines operating at KUL.</div>
       </div>
 
       <div class="co-card" data-reg="caam" data-ac="b737">
@@ -508,25 +651,69 @@
         </div>
         <div class="co-loc">Subang, Selangor — WMSA</div>
         <div class="caps"><span class="cap">B737-300/400/500 Classic</span><span class="cap">B737-600/700/800 NG</span><span class="cap">Line Maintenance</span></div>
-        <div class="co-note">Listed in CAAM AMO registry for B737 Classic and NG line maintenance at Subang.</div>
+        <div class="co-note">CAAM AMO registered for B737 Classic and NG line maintenance at Subang.</div>
+      </div>
+
+      <!-- Business Jet MRO -->
+      <div class="co-card" data-reg="caam easa faa" data-ac="bizjet">
+        <div class="co-top">
+          <div class="co-name">ExecuJet MRO Services Malaysia</div>
+          <div class="badges"><span class="badge b-mro">Line + Heavy</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div>
+        </div>
+        <div class="co-loc">Subang, Selangor — WMSA · Dassault Aviation Partner</div>
+        <div class="caps"><span class="cap">Bombardier Challenger 300/350/600</span><span class="cap">Learjet 45/60/75</span><span class="cap">Gulfstream G450/G550</span><span class="cap">Dassault Falcon 2000/7X</span><span class="cap">Cessna Citation</span><span class="cap">VVIP completions</span></div>
+        <div class="co-note">Winner of Bombardier ASF Best Performance Award. Honeywell-authorised SC for APU and engines. Collins Aerospace Business Regional System Avionics dealer. 24/7 AOG support. Southeast Asia's most comprehensive bizjet MRO.</div>
+        <span class="drill-link" onclick="goATA('apu')">→ View APU &amp; Engine capabilities</span>
+      </div>
+
+      <!-- Helicopter MRO -->
+      <div class="co-card" data-reg="caam easa" data-ac="heli">
+        <div class="co-top">
+          <div class="co-name">Airbus Helicopters Malaysia Sdn Bhd</div>
+          <div class="badges"><span class="badge b-mro">Line + Base</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div>
+        </div>
+        <div class="co-loc">Subang / Shah Alam, Selangor — Airbus OEM Authorised</div>
+        <div class="caps"><span class="cap">H125 / AS350 B3e</span><span class="cap">H135 / EC135</span><span class="cap">H145</span><span class="cap">H160</span><span class="cap">H175</span><span class="cap">H215 / H225 Super Puma</span><span class="cap">Safran Arriel engine SC</span></div>
+        <div class="co-note">Airbus OEM-authorised service centre for all civil H-series helicopters. Covers line maintenance, scheduled heavy maintenance, component overhaul, and spare parts distribution for Malaysia and the ASEAN region. Key customer segments: O&amp;G, government, EMS.</div>
+        <span class="drill-link" onclick="goATA('rotor')">→ View Rotor &amp; Drive System capabilities</span>
+      </div>
+
+      <div class="co-card" data-reg="caam" data-ac="heli">
+        <div class="co-top">
+          <div class="co-name">Hammock Helicopters Sdn Bhd</div>
+          <div class="badges"><span class="badge b-mro">Line + Base</span><span class="badge b-caam">CAAM</span></div>
+        </div>
+        <div class="co-loc">Subang, Selangor + operational bases in Sabah &amp; Sarawak</div>
+        <div class="caps"><span class="cap">Bell 412 EP/EPI</span><span class="cap">Bell 206 B3</span><span class="cap">Bell 206 L4</span><span class="cap">Airbus H125</span><span class="cap">Heavy maintenance</span><span class="cap">Overhaul</span></div>
+        <div class="co-note">One of Malaysia's established helicopter MRO and charter operators. Supports offshore O&amp;G platforms in Sabah and Sarawak, plantation surveying, and charter operations. CAAM Part 145 approved for Bell and Airbus helicopter types.</div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ATA COMPONENTS -->
+<!-- ══════════════════════════ ATA COMPONENTS ══════════════════════════ -->
 <div id="view-ata" class="view">
+  <div class="step-row">
+    <div class="step done" onclick="nav('landing')"><span class="step-num">1</span> Select Aircraft</div>
+    <span class="step-arr">›</span>
+    <div class="step done" onclick="nav('aircraft')"><span class="step-num">2</span> Aircraft Overview</div>
+    <span class="step-arr">›</span>
+    <div class="step done" onclick="nav('airframe')"><span class="step-num">3</span> Airframe MRO</div>
+    <span class="step-arr">›</span>
+    <div class="step active"><span class="step-num">4</span> ATA Component Repair</div>
+  </div>
+
   <div class="sec-top">
     <div>
-      <div class="eyebrow">Level 03 — ATA Components</div>
+      <div class="eyebrow">Level 04 — ATA Component Repair</div>
       <h1 id="ata-title">ATA Chapter Directory</h1>
-      <p class="page-sub">Who repairs and overhauls aircraft components in Malaysia — by ATA chapter</p>
+      <p class="page-sub">Who repairs and overhauls aircraft components in Malaysia — filter by chapter or regulation</p>
     </div>
-    <button class="back-btn" onclick="nav('aircraft')">← Aircraft</button>
+    <button class="back-btn" onclick="nav('airframe')">← Airframe MRO</button>
   </div>
 
   <div class="filter-bar">
-    <span class="filter-lbl">ATA Chapter:</span>
+    <span class="filter-lbl">ATA:</span>
     <button class="filter-btn on" onclick="filterATA('all',this)">All</button>
     <button class="filter-btn" onclick="filterATA('ecs',this)">21 ECS</button>
     <button class="filter-btn" onclick="filterATA('electrical',this)">24 Electrical</button>
@@ -536,6 +723,8 @@
     <button class="filter-btn" onclick="filterATA('landing-gear',this)">32 Ldg Gear</button>
     <button class="filter-btn" onclick="filterATA('avionics',this)">34 Avionics</button>
     <button class="filter-btn" onclick="filterATA('apu',this)">49 APU</button>
+    <button class="filter-btn" onclick="filterATA('propeller',this)">61 Propeller</button>
+    <button class="filter-btn" onclick="filterATA('rotor',this)">62–67 Rotor</button>
     <button class="filter-btn" onclick="filterATA('airframe',this)">51–57 Struct.</button>
     <button class="filter-btn" onclick="filterATA('engine',this)">71–80 Engine</button>
     <div class="filter-sep"></div>
@@ -553,16 +742,16 @@
         <div class="ata-section" data-ata="ecs">
           <div class="ata-hdr"><span class="ata-num">ATA 21</span><span class="ata-name">Air Conditioning &amp; ECS</span><span class="ata-cnt">2 shops</span></div>
           <div class="co-card" data-reg="caam easa faa">
-            <div class="co-top"><div class="co-name">Collins Aerospace Malaysia</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
-            <div class="co-loc">Subang Aerotech Park (SAP), Klang, Selangor — 160,000 sqft</div>
-            <div class="caps"><span class="cap">Air Cycle Machines</span><span class="cap">Heat Exchangers</span><span class="cap">ECS Valves</span><span class="cap">A320 · A380 · B787</span></div>
-            <div class="co-note">$16M expansion at SAP. RTX / Collins OEM-authorised. Also covers engine starters, actuation, propellers, avionics.</div>
+            <div class="co-top"><div class="co-name">Collins Aerospace Malaysia</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
+            <div class="co-loc">Subang Aerotech Park (SAP), Klang — 160,000 sqft</div>
+            <div class="caps"><span class="cap">Air Cycle Machines</span><span class="cap">Heat Exchangers</span><span class="cap">ECS Valves</span><span class="cap">A320 · A380 · B787 · ATR</span></div>
+            <div class="co-note">$16M expansion (2022). RTX/Collins OEM-authorised. Also covers engine starters, propellers, actuation, avionics.</div>
           </div>
           <div class="co-card" data-reg="caam easa faa">
-            <div class="co-top"><div class="co-name">APACS (Asia Pacific Aircraft Component Services)</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
-            <div class="co-loc">Shah Alam, Selangor — SIAEC + SR Technics JV, 90,000 sqft</div>
-            <div class="caps"><span class="cap">Pneumatic Valves</span><span class="cap">600+ capabilities</span><span class="cap">A320 · A330 · B737</span><span class="cap">CAAC · JCAB · CAAS · CAAV · CAAT</span></div>
-            <div class="co-note">2025: First ADIRU (Air Data Inertial Reference Unit) repair capability in Asia Pacific. 9+ authority approvals worldwide.</div>
+            <div class="co-top"><div class="co-name">APACS (Asia Pacific Aircraft Component Services)</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
+            <div class="co-loc">Shah Alam, Selangor — SIAEC + SR Technics JV · 90,000 sqft</div>
+            <div class="caps"><span class="cap">Pneumatic Valves</span><span class="cap">600+ capabilities</span><span class="cap">A320 · A330 · B737 · B747</span><span class="cap">CAAC · JCAB · CAAS · CAAV · CAAT</span></div>
+            <div class="co-note">2025: First ADIRU repair capability in Asia Pacific. 9+ authority approvals including FAA, EASA, CAAC, JCAB.</div>
           </div>
         </div>
 
@@ -570,17 +759,17 @@
         <div class="ata-section" data-ata="electrical">
           <div class="ata-hdr"><span class="ata-num">ATA 24</span><span class="ata-name">Electrical Power</span><span class="ata-cnt">3 shops</span></div>
           <div class="co-card" data-reg="caam easa">
-            <div class="co-top"><div class="co-name">AIROD Sdn Bhd</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
-            <div class="co-loc">Subang, Selangor — AMO/2016/19</div>
-            <div class="caps"><span class="cap">C5 — Electrical Power</span><span class="cap">Glass Cockpit / FMS upgrades</span><span class="cap">GATM compliance</span></div>
+            <div class="co-top"><div class="co-name">AIROD Sdn Bhd</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
+            <div class="co-loc">Subang, Selangor</div>
+            <div class="caps"><span class="cap">C5 — Electrical Power</span><span class="cap">Glass Cockpit upgrades</span><span class="cap">GATM / ADS-B compliance</span></div>
           </div>
           <div class="co-card" data-reg="caam">
-            <div class="co-top"><div class="co-name">Asia AeroTechnic (AAT)</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span></div></div>
+            <div class="co-top"><div class="co-name">Asia AeroTechnic (AAT)</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span></div></div>
             <div class="co-loc">Subang, Selangor</div>
             <div class="caps"><span class="cap">C5 — Electrical Power &amp; Lights</span><span class="cap">C20 — Structural</span></div>
           </div>
           <div class="co-card" data-reg="caam easa">
-            <div class="co-top"><div class="co-name">Asia Digital Engineering (ADE)</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
+            <div class="co-top"><div class="co-name">Asia Digital Engineering (ADE)</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
             <div class="co-loc">Sepang, Selangor</div>
             <div class="caps"><span class="cap">C5 — Electrical</span><span class="cap">C14 — Landing Gear</span><span class="cap">C15 — Oxygen</span></div>
           </div>
@@ -590,15 +779,15 @@
         <div class="ata-section" data-ata="flight-controls">
           <div class="ata-hdr"><span class="ata-num">ATA 27</span><span class="ata-name">Flight Controls</span><span class="ata-cnt">2 shops</span></div>
           <div class="co-card" data-reg="caam easa faa">
-            <div class="co-top"><div class="co-name">APACS</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
+            <div class="co-top"><div class="co-name">APACS</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
             <div class="co-loc">Shah Alam, Selangor</div>
-            <div class="caps"><span class="cap">Power Drive Units</span><span class="cap">Actuators</span><span class="cap">Hydraulic Pumps &amp; Valves</span><span class="cap">AOG advance exchange</span></div>
+            <div class="caps"><span class="cap">Power Drive Units</span><span class="cap">Actuators</span><span class="cap">Hydraulic Pumps &amp; Valves</span><span class="cap">AOG advance exchange pool</span></div>
           </div>
           <div class="co-card" data-reg="caam">
             <div class="co-top"><div class="co-name">CTRM Aero Composites</div><div class="badges"><span class="badge b-mfg">Manufacturer</span><span class="badge b-caam">CAAM</span></div></div>
             <div class="co-loc">Batu Berendam, Malacca + Subang MIAC (Spirit facility, 2025)</div>
-            <div class="caps"><span class="cap">A320neo Ailerons</span><span class="cap">Spoilers</span><span class="cap">Wing Fairings</span><span class="cap">Sharklets — OEM to Airbus</span></div>
-            <div class="co-note">DRB-HICOM / DEFTECH subsidiary. Acquired Spirit AeroSystems Subang (~$95M, Q4 2025). Supplies A320neo, A350, A380, A400M, B737 NG, B787.</div>
+            <div class="caps"><span class="cap">A320neo Ailerons</span><span class="cap">Spoilers</span><span class="cap">Wing Fairings</span><span class="cap">Sharklets</span><span class="cap">OEM supplier to Airbus &amp; Boeing</span></div>
+            <div class="co-note">DRB-HICOM subsidiary. Acquired Spirit AeroSystems Subang (~$95M, Q4 2025). Supplies A320neo, A350, A380, A400M, B737 NG, B787 structural components.</div>
           </div>
         </div>
 
@@ -606,7 +795,7 @@
         <div class="ata-section" data-ata="fuel">
           <div class="ata-hdr"><span class="ata-num">ATA 28</span><span class="ata-name">Fuel System</span><span class="ata-cnt">1 shop</span></div>
           <div class="co-card" data-reg="caam easa faa">
-            <div class="co-top"><div class="co-name">APACS</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
+            <div class="co-top"><div class="co-name">APACS</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
             <div class="co-loc">Shah Alam, Selangor</div>
             <div class="caps"><span class="cap">Fuel Pumps</span><span class="cap">Fuel Control Valves</span><span class="cap">Dedicated Fuel Test Stand</span><span class="cap">A320 · A330 · B737</span></div>
           </div>
@@ -616,19 +805,58 @@
         <div class="ata-section" data-ata="hydraulics">
           <div class="ata-hdr"><span class="ata-num">ATA 29</span><span class="ata-name">Hydraulic Power</span><span class="ata-cnt">3 shops</span></div>
           <div class="co-card" data-reg="caam easa faa">
-            <div class="co-top"><div class="co-name">APACS</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
+            <div class="co-top"><div class="co-name">APACS</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
             <div class="co-loc">Shah Alam, Selangor</div>
             <div class="caps"><span class="cap">Hydraulic Pumps</span><span class="cap">Hydraulic Valves</span><span class="cap">Hydraulic Test Stand</span></div>
           </div>
           <div class="co-card" data-reg="caam easa">
-            <div class="co-top"><div class="co-name">AIROD Sdn Bhd</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
+            <div class="co-top"><div class="co-name">AIROD Sdn Bhd</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
             <div class="co-loc">Subang, Selangor</div>
             <div class="caps"><span class="cap">C12 — Hydraulic Power</span><span class="cap">Full hydraulic component overhaul</span></div>
           </div>
-          <div class="co-card" data-reg="caam easa faa">
-            <div class="co-top"><div class="co-name">Collins Aerospace Malaysia</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-faa">FAA</span></div></div>
+          <div class="co-card" data-reg="caam faa">
+            <div class="co-top"><div class="co-name">Collins Aerospace Malaysia</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-faa">FAA</span></div></div>
             <div class="co-loc">Subang Aerotech Park</div>
             <div class="caps"><span class="cap">Actuation Systems</span><span class="cap">ECS Valves</span><span class="cap">Engine Starters</span></div>
+          </div>
+        </div>
+
+        <!-- ATA 61 — Propellers (ATR specific) -->
+        <div class="ata-section" data-ata="propeller">
+          <div class="ata-hdr"><span class="ata-num">ATA 61</span><span class="ata-name">Propellers (Turboprop)</span><span class="ata-cnt">1 shop</span></div>
+          <div class="co-card" data-reg="caam easa faa">
+            <div class="co-top"><div class="co-name">Collins Aerospace Malaysia</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
+            <div class="co-loc">Subang Aerotech Park (SAP), Klang, Selangor</div>
+            <div class="caps"><span class="cap">ATR 568F propeller system</span><span class="cap">PW127 propeller governor</span><span class="cap">Hamilton Sundstrand systems</span><span class="cap">Overhaul &amp; repair</span></div>
+            <div class="co-note">Collins Aerospace (formerly Hamilton Sundstrand) is the OEM for ATR propeller assemblies. The SAP facility is authorised for overhaul and repair of ATR 42/72 propeller systems.</div>
+          </div>
+        </div>
+
+        <!-- ATA 62-67 — Rotor (Helicopter) -->
+        <div class="ata-section" data-ata="rotor">
+          <div class="ata-hdr"><span class="ata-num">ATA 62–67</span><span class="ata-name">Rotor &amp; Drive Systems (Helicopter)</span><span class="ata-cnt">2 shops</span></div>
+          <div class="co-card" data-reg="caam easa">
+            <div class="co-top"><div class="co-name">Airbus Helicopters Malaysia</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
+            <div class="co-loc">Subang / Shah Alam, Selangor</div>
+            <div class="caps">
+              <span class="cap">ATA 62 — Main Rotor Blades &amp; Head</span>
+              <span class="cap">ATA 63 — Main Rotor Drive (gearbox)</span>
+              <span class="cap">ATA 64 — Tail Rotor</span>
+              <span class="cap">ATA 65 — Tail Rotor Drive</span>
+              <span class="cap">ATA 67 — Rotor Flight Controls</span>
+              <span class="cap">H125 / H135 / H145 / H175 / H225</span>
+            </div>
+            <div class="co-note">Airbus OEM-authorised. Full rotor system overhaul capability for the H-series fleet. Gearbox overhaul, blade inspection/repair, hydraulic flight control servos.</div>
+          </div>
+          <div class="co-card" data-reg="caam">
+            <div class="co-top"><div class="co-name">Hammock Helicopters Sdn Bhd</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span></div></div>
+            <div class="co-loc">Subang, Selangor</div>
+            <div class="caps">
+              <span class="cap">ATA 62 — Main Rotor (Bell 412)</span>
+              <span class="cap">ATA 63 — Transmission</span>
+              <span class="cap">ATA 64 — Tail Rotor (Bell 206/412)</span>
+              <span class="cap">ATA 67 — Rotor Controls</span>
+            </div>
           </div>
         </div>
       </div>
@@ -638,18 +866,18 @@
         <div class="ata-section" data-ata="landing-gear">
           <div class="ata-hdr"><span class="ata-num">ATA 32</span><span class="ata-name">Landing Gear</span><span class="ata-cnt">3 shops</span></div>
           <div class="co-card" data-reg="caam">
-            <div class="co-top"><div class="co-name">AAR Landing Gear Services</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span></div></div>
+            <div class="co-top"><div class="co-name">AAR Landing Gear Services</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span></div></div>
             <div class="co-loc">Shah Alam, Selangor — AMO/2017/16</div>
-            <div class="caps"><span class="cap">C14 — Full Landing Gear Overhaul</span><span class="cap">NDT — Liquid Penetrant</span><span class="cap">NDT — Magnetic Particle</span><span class="cap">NDT — Eddy Current</span></div>
-            <div class="co-note">AAR Corp (US-based) dedicated landing gear overhaul facility. Full NDT for all MLG/NLG components, A320 and B737 families.</div>
+            <div class="caps"><span class="cap">C14 — Full Landing Gear OH</span><span class="cap">NDT — Liquid Penetrant</span><span class="cap">NDT — Magnetic Particle</span><span class="cap">NDT — Eddy Current</span></div>
+            <div class="co-note">AAR Corp (US) dedicated landing gear overhaul. Full NDT for all MLG/NLG components — A320 and B737 families.</div>
           </div>
           <div class="co-card" data-reg="caam easa">
-            <div class="co-top"><div class="co-name">AIROD Sdn Bhd</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
+            <div class="co-top"><div class="co-name">AIROD Sdn Bhd</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
             <div class="co-loc">Subang, Selangor</div>
             <div class="caps"><span class="cap">C14 — Landing Gear</span><span class="cap">Full NDT suite (5 methods)</span></div>
           </div>
           <div class="co-card" data-reg="caam easa">
-            <div class="co-top"><div class="co-name">Asia Digital Engineering (ADE)</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
+            <div class="co-top"><div class="co-name">Asia Digital Engineering (ADE)</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
             <div class="co-loc">Sepang, Selangor</div>
             <div class="caps"><span class="cap">C14 — Landing Gear</span><span class="cap">C15 — Oxygen</span></div>
           </div>
@@ -657,27 +885,39 @@
 
         <!-- ATA 34 -->
         <div class="ata-section" data-ata="avionics">
-          <div class="ata-hdr"><span class="ata-num">ATA 34/22</span><span class="ata-name">Navigation &amp; Avionics</span><span class="ata-cnt">2 shops</span></div>
+          <div class="ata-hdr"><span class="ata-num">ATA 34/22</span><span class="ata-name">Navigation &amp; Avionics</span><span class="ata-cnt">3 shops</span></div>
           <div class="co-card" data-reg="caam easa faa">
-            <div class="co-top"><div class="co-name">Collins Aerospace Malaysia</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
+            <div class="co-top"><div class="co-name">Collins Aerospace Malaysia</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
             <div class="co-loc">Subang Aerotech Park, Klang</div>
-            <div class="caps"><span class="cap">B737-8 Avionics (MAS 2024 deal)</span><span class="cap">Collins Dispatch℠ programme</span><span class="cap">Air Data Sensors</span><span class="cap">CNS/Nav Systems</span></div>
-            <div class="co-note">2024 Singapore Airshow: Malaysia Airlines signed Collins Dispatch℠ avionics support agreement for its B737-8 fleet.</div>
+            <div class="caps"><span class="cap">B737-8 Avionics (MAS 2024)</span><span class="cap">Collins Dispatch℠ programme</span><span class="cap">Air Data Sensors</span><span class="cap">CNS/Nav Systems</span><span class="cap">ADIRU (1st in Asia Pacific, 2025)</span></div>
+            <div class="co-note">2024 Singapore Airshow: Malaysia Airlines signed Collins Dispatch℠ avionics support for B737-8 fleet.</div>
           </div>
           <div class="co-card" data-reg="caam easa">
-            <div class="co-top"><div class="co-name">AIROD Sdn Bhd</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
+            <div class="co-top"><div class="co-name">AIROD Sdn Bhd</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
             <div class="co-loc">Subang, Selangor</div>
             <div class="caps"><span class="cap">C13 — Instruments</span><span class="cap">Avionics instrument overhaul</span></div>
+          </div>
+          <div class="co-card" data-reg="caam easa faa">
+            <div class="co-top"><div class="co-name">ExecuJet MRO Services Malaysia</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
+            <div class="co-loc">Subang, Selangor</div>
+            <div class="caps"><span class="cap">Collins Aerospace BRSA dealer</span><span class="cap">Honeywell avionics</span><span class="cap">Bizjet avionics upgrade</span></div>
           </div>
         </div>
 
         <!-- ATA 49 -->
         <div class="ata-section" data-ata="apu">
-          <div class="ata-hdr"><span class="ata-num">ATA 49</span><span class="ata-name">Auxiliary Power Unit (APU)</span><span class="ata-cnt">1 shop</span></div>
+          <div class="ata-hdr"><span class="ata-num">ATA 49</span><span class="ata-name">Auxiliary Power Unit (APU)</span><span class="ata-cnt">2 shops</span></div>
           <div class="co-card" data-reg="caam easa faa">
-            <div class="co-top"><div class="co-name">ExecuJet MRO Services Malaysia</div><div class="badges"><span class="badge b-comp">Component MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
+            <div class="co-top"><div class="co-name">ExecuJet MRO Services Malaysia</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
             <div class="co-loc">Subang, Selangor — WMSA</div>
-            <div class="caps"><span class="cap">Honeywell APU (Authorised SC)</span><span class="cap">Honeywell Avionics &amp; Engines</span><span class="cap">RR BR710 · GE CF34</span></div>
+            <div class="caps"><span class="cap">Honeywell APU (Authorised SC)</span><span class="cap">Honeywell Avionics &amp; Engines</span><span class="cap">RR BR710 · GE CF34</span><span class="cap">HTS900 (bizjet turboshaft)</span></div>
+            <div class="co-note">Primary APU service centre for Malaysia. Covers Honeywell APUs used on major bizjet types. Also serves ATR and some narrowbody APU accessory items.</div>
+          </div>
+          <div class="co-card" data-reg="caam easa">
+            <div class="co-top"><div class="co-name">Malaysia Airlines Engineering (MAE)</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
+            <div class="co-loc">Subang Engineering Centre, Selangor</div>
+            <div class="caps"><span class="cap">APS3200 APU (A320 family)</span><span class="cap">GTCP85 (B737 Classic)</span><span class="cap">GTCP131-9B (B737 NG)</span></div>
+            <div class="co-note">MAE handles APU servicing for its own A330, B737 and B777 fleet. Provides third-party APU component support for select operators.</div>
           </div>
         </div>
 
@@ -687,27 +927,39 @@
           <div class="co-card" data-reg="caam easa">
             <div class="co-top"><div class="co-name">AIROD Aerospace Technology</div><div class="badges"><span class="badge b-mro">Airframe MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
             <div class="co-loc">Subang, Selangor</div>
-            <div class="caps"><span class="cap">C20 — Structural</span><span class="cap">Full NDT (Ultrasonic, Radiographic)</span><span class="cap">Center Wing Box (B737) replacement</span></div>
+            <div class="caps"><span class="cap">C20 — Structural</span><span class="cap">Full NDT (Ultrasonic, Radiographic)</span><span class="cap">Center Wing Box replacement (B737)</span><span class="cap">SRM repairs</span></div>
           </div>
           <div class="co-card" data-reg="caam">
             <div class="co-top"><div class="co-name">CTRM Aero Composites</div><div class="badges"><span class="badge b-mfg">Manufacturer</span><span class="badge b-caam">CAAM</span></div></div>
             <div class="co-loc">Batu Berendam, Malacca + Subang MIAC</div>
-            <div class="caps"><span class="cap">Composite aerostructures</span><span class="cap">OEM supplier Airbus &amp; Boeing</span></div>
+            <div class="caps"><span class="cap">Composite aerostructures (OEM)</span><span class="cap">A320 panels, A350, B737, B787</span></div>
+            <div class="co-note">OEM manufacturer — not a repair station. Supplies Airbus and Boeing production lines.</div>
+          </div>
+          <div class="co-card" data-reg="caam easa">
+            <div class="co-top"><div class="co-name">Asia AeroTechnic (AAT)</div><div class="badges"><span class="badge b-mro">Airframe MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div></div>
+            <div class="co-loc">Subang, Selangor</div>
+            <div class="caps"><span class="cap">C20 — Structural</span><span class="cap">NDT suite</span><span class="cap">SRM &amp; major repairs</span></div>
           </div>
         </div>
 
         <!-- ATA 71-80 -->
         <div class="ata-section" data-ata="engine">
-          <div class="ata-hdr"><span class="ata-num">ATA 71–80</span><span class="ata-name">Powerplant / Engine</span><span class="ata-cnt">1 certified</span></div>
+          <div class="ata-hdr"><span class="ata-num">ATA 71–80</span><span class="ata-name">Powerplant (Engine)</span><span class="ata-cnt">2 shops</span></div>
           <div class="co-card" data-reg="caam">
             <div class="co-top"><div class="co-name">AIROD Aerospace Technology</div><div class="badges"><span class="badge b-mro">Engine</span><span class="badge b-caam">CAAM</span></div></div>
             <div class="co-loc">Subang, Selangor</div>
-            <div class="caps"><span class="cap">B1 — Turbine Engine (PW127 / ATR)</span></div>
-            <div class="co-note">CAAM B1 turbine approved for PW127 (ATR). CFM56-5B (A320) and CFM56-7B (B737 NG) full engine shop capability not yet available in Malaysia.</div>
+            <div class="caps"><span class="cap">B1 — Turbine Engine</span><span class="cap">PW127M (ATR 42/72) — CAAM approved</span><span class="cap">Engine run-up test cell</span></div>
+            <div class="co-note">CAAM B1 turbine approved for PW127M (ATR fleet). CFM56-5B (A320) and CFM56-7B (B737 NG) full shop not yet established in Malaysia.</div>
+          </div>
+          <div class="co-card" data-reg="caam easa faa">
+            <div class="co-top"><div class="co-name">ExecuJet MRO Services Malaysia</div><div class="badges"><span class="badge b-comp">Comp. MRO</span><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div></div>
+            <div class="co-loc">Subang, Selangor</div>
+            <div class="caps"><span class="cap">Honeywell HTF7000 (Challenger 300)</span><span class="cap">Honeywell TFE731 (Learjet)</span><span class="cap">RR BR710 (Global 5000)</span><span class="cap">GE CF34 (CRJ series)</span><span class="cap">Turbomeca Arriel (H125/H135)</span></div>
+            <div class="co-note">Multi-engine authorised service centre for business jet and helicopter turbine engines. Covers major bizjet engine types operated in Malaysia.</div>
           </div>
           <div class="gap-box">
-            <div class="gap-lbl">⚠ Capability Gap Identified</div>
-            <p style="font-size:12px;margin:0">No CAAM-approved full CFM56-5B or CFM56-7B engine shop is currently listed in Malaysia. Major overhauls are routed to Singapore (ST Engineering), Bangkok, or Europe. This represents a strategic investment opportunity under the Malaysia Aerospace Industry Blueprint (MAIB) 2030.</p>
+            <div class="gap-lbl">⚠ Capability Gap — CFM56 Full Engine Shop</div>
+            <p style="font-size:11px;margin:0;color:#555">No CAAM-approved full CFM56-5B or CFM56-7B engine shop is currently listed in Malaysia. Major overhauls are routed to ST Engineering (Singapore), Lufthansa Technik (Germany), or Air France Industries KLM E&amp;M. This represents a strategic gap and investment opportunity under MAIB 2030.</p>
           </div>
         </div>
       </div>
@@ -715,11 +967,11 @@
   </div>
 </div>
 
-<!-- ECOSYSTEM -->
+<!-- ══════════════════════════ ECOSYSTEM ══════════════════════════ -->
 <div id="view-eco" class="view">
   <div class="sec-top">
     <div>
-      <div class="eyebrow">Level 04 — Ecosystem</div>
+      <div class="eyebrow">Level 05 — Ecosystem</div>
       <h1>Manufacturers &amp; Supply Chain</h1>
       <p class="page-sub">Aerostructure manufacturers, precision parts makers, and OEM-approved suppliers</p>
     </div>
@@ -740,7 +992,7 @@
       <div class="eco-name">CTRM Holdings (Composites Technology Research Malaysia)</div>
       <div class="eco-loc">📍 Batu Berendam, Malacca + Subang MIAC (Spirit facility, acquired 2025)</div>
       <div class="badges" style="margin-bottom:7px"><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">NADCAP</span></div>
-      <div class="eco-body">DRB-HICOM / DEFTECH subsidiary. Acquired Spirit AeroSystems' 45-acre Subang facility (~$95M, Q4 2025). 400,000 sqft manufacturing. OEM supplier to Airbus and Boeing.</div>
+      <div class="eco-body">DRB-HICOM / DEFTECH subsidiary. Acquired Spirit AeroSystems' 45-acre Subang facility (~$95M, Q4 2025). 400,000 sqft of manufacturing. OEM supplier to Airbus and Boeing.</div>
       <div class="eco-progs"><span class="eco-prog">A320neo ailerons/spoilers/sharklets</span><span class="eco-prog">A350 XWB</span><span class="eco-prog">A380</span><span class="eco-prog">A400M</span><span class="eco-prog">B737 NG</span><span class="eco-prog">B787</span></div>
     </div>
     <div class="eco-card" data-reg="caam easa faa">
@@ -748,23 +1000,23 @@
       <div class="eco-name">Zenix Aerospace UPECA</div>
       <div class="eco-loc">📍 Shah Alam (2 plants) + Subang, Selangor</div>
       <div class="badges" style="margin-bottom:7px"><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">NADCAP</span></div>
-      <div class="eco-body">Formerly Senior plc / UPECA. Independent as Zenix Aerospace from 2025. 80+ year heritage. Precision CNC machining of metallic aerostructures. Supplies A320neo and other civil OEM programmes.</div>
-      <div class="eco-progs"><span class="eco-prog">A320neo metallic parts</span><span class="eco-prog">Build-to-print</span><span class="eco-prog">CNC machining</span><span class="eco-prog">NDT + surface treatment</span></div>
+      <div class="eco-body">Formerly Senior plc / UPECA. Independent as Zenix Aerospace 2025. 80+ year heritage. Precision CNC machining of metallic aerostructures for A320neo and other civil OEM programmes.</div>
+      <div class="eco-progs"><span class="eco-prog">A320neo metallic parts</span><span class="eco-prog">Build-to-print</span><span class="eco-prog">CNC machining</span><span class="eco-prog">Surface treatment</span></div>
     </div>
     <div class="eco-card" data-reg="caam">
       <div class="eco-tag">Tier 1 · Engine Components</div>
       <div class="eco-name">UMW Aerospace</div>
       <div class="eco-loc">📍 Shah Alam, Selangor</div>
       <div class="badges" style="margin-bottom:7px"><span class="badge b-caam">CAAM</span></div>
-      <div class="eco-body">UMW Group subsidiary. Manufactures Rolls-Royce Trent fan cases under government offset programme. Key contributor to MAIB 2030 high-value manufacturing targets.</div>
-      <div class="eco-progs"><span class="eco-prog">RR Trent fan cases</span><span class="eco-prog">Tier 1 OEM supplier</span></div>
+      <div class="eco-body">UMW Group subsidiary. Manufactures Rolls-Royce Trent fan cases under government offset programme. Tier 1 OEM supplier — contributor to MAIB 2030 high-value manufacturing targets.</div>
+      <div class="eco-progs"><span class="eco-prog">RR Trent fan cases</span><span class="eco-prog">Engine components</span></div>
     </div>
     <div class="eco-card" data-reg="caam easa">
       <div class="eco-tag">Tier 2 · Precision Manufacturing</div>
       <div class="eco-name">SAM Malaysia (Singapore Aerospace Manufacturing)</div>
       <div class="eco-loc">📍 Shah Alam / Selangor</div>
       <div class="badges" style="margin-bottom:7px"><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span></div>
-      <div class="eco-body">Subsidiary of SAM Pte Ltd (Singapore). Precision metallic component manufacturing for Airbus and Boeing global supply chains. Contributes to Malaysia's aerospace export target under MAIB 2030.</div>
+      <div class="eco-body">Subsidiary of SAM Pte Ltd (Singapore). Precision metallic component manufacturing for Airbus and Boeing global supply chains. Key contributor to Malaysia's aerospace export target under MAIB 2030.</div>
       <div class="eco-progs"><span class="eco-prog">Precision sheet metal</span><span class="eco-prog">CNC machining</span><span class="eco-prog">Airbus &amp; Boeing supply chains</span></div>
     </div>
     <div class="eco-card" data-reg="caam easa faa">
@@ -772,25 +1024,25 @@
       <div class="eco-name">Collins Aerospace Malaysia (RTX / Raytheon Technologies)</div>
       <div class="eco-loc">📍 Subang Aerotech Park (160,000 sqft) + Klang, Selangor</div>
       <div class="badges" style="margin-bottom:7px"><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div>
-      <div class="eco-body">$16M expansion (2022) at Subang Aerotech Park. Covers ECS, ACM, heat exchangers, engine starters, actuation, avionics. Honeywell APU authorised service centre. Collins Dispatch℠ for Malaysia Airlines B737-8.</div>
-      <div class="eco-progs"><span class="eco-prog">ECS / ATA 21</span><span class="eco-prog">Actuation / ATA 27</span><span class="eco-prog">B787 · B777X · A320 · A380 · ATR</span></div>
+      <div class="eco-body">$16M expansion (2022) at Subang Aerotech Park. Covers ECS, ACM, heat exchangers, engine starters, actuation, propellers (ATR), avionics. Collins Dispatch℠ for MAS B737-8.</div>
+      <div class="eco-progs"><span class="eco-prog">ECS / ATA 21</span><span class="eco-prog">Propellers / ATA 61</span><span class="eco-prog">Actuation / ATA 27</span><span class="eco-prog">B787 · B777X · A320 · A380 · ATR</span></div>
     </div>
     <div class="eco-card" data-reg="caam easa faa">
       <div class="eco-tag">Component MRO · Multi-System</div>
       <div class="eco-name">APACS (Asia Pacific Aircraft Component Services)</div>
-      <div class="eco-loc">📍 Shah Alam, Selangor — 90,000 sqft</div>
+      <div class="eco-loc">📍 Shah Alam, Selangor — 90,000 sqft · SIAEC + SR Technics JV</div>
       <div class="badges" style="margin-bottom:7px"><span class="badge b-caam">CAAM</span><span class="badge b-easa">EASA</span><span class="badge b-faa">FAA</span></div>
-      <div class="eco-body">JV: SIAEC + SR Technics Switzerland. 600+ active repair capabilities. Hydraulic, Pneumatic &amp; Fuel test stands. 2025: First ADIRU repair capability in Asia Pacific. 9+ authority approvals.</div>
+      <div class="eco-body">600+ active repair capabilities. Hydraulic, Pneumatic &amp; Fuel test stands. 2025: First ADIRU repair in Asia Pacific. 9+ authority approvals globally.</div>
       <div class="eco-progs"><span class="eco-prog">A320 / A330 / B737 / B747</span><span class="eco-prog">CFM56 · PW4000</span><span class="eco-prog">FAA · EASA · CAAC · JCAB · CAAS</span></div>
     </div>
   </div>
 </div>
 
-<!-- AIRPORTS -->
+<!-- ══════════════════════════ AIRPORTS ══════════════════════════ -->
 <div id="view-airports" class="view">
   <div class="sec-top">
     <div>
-      <div class="eyebrow">Level 05 — Airports</div>
+      <div class="eyebrow">Level 06 — Airports</div>
       <h1>Airport Services Directory</h1>
       <p class="page-sub">MRO, hangar, fuelling and ground handling availability at key Malaysian airports</p>
     </div>
@@ -803,20 +1055,22 @@
       <div class="apt-name">Kuala Lumpur International Airport (WMKK) · Sepang</div>
       <div class="svc"><div class="dot on"></div>A320 / A321 / A330 Hangar (SAE, ADE, AAX)</div>
       <div class="svc"><div class="dot on"></div>A320 CEO + NEO Base MRO</div>
+      <div class="svc"><div class="dot on"></div>Skyway Technics line maintenance</div>
       <div class="svc"><div class="dot on"></div>Jet fuel (AVTUR) — multiple suppliers</div>
       <div class="svc"><div class="dot on"></div>Aircraft painting (SAE eco bay)</div>
-      <div class="svc"><div class="dot on"></div>Cabin refurbishment</div>
       <div class="svc"><div class="dot off"></div>B737 Base MRO (limited at KUL)</div>
+      <div class="svc"><div class="dot off"></div>Helicopter pad (none at KLIA main)</div>
     </div>
     <div class="apt-card">
       <div class="apt-iata">SZB</div>
       <div class="apt-name">Sultan Abdul Aziz Shah Airport · Subang (WMSA)</div>
       <div class="svc"><div class="dot on"></div>Subang Aerotech Park (60 acres)</div>
-      <div class="svc"><div class="dot on"></div>A320 + B737 NG Line &amp; Base MRO</div>
+      <div class="svc"><div class="dot on"></div>A320 + B737 NG + ATR Line &amp; Base MRO</div>
       <div class="svc"><div class="dot on"></div>Business jet MRO (ExecuJet)</div>
+      <div class="svc"><div class="dot on"></div>Helicopter MRO (Airbus, Hammock)</div>
       <div class="svc"><div class="dot on"></div>Component shops (APACS, Collins, AAR)</div>
-      <div class="svc"><div class="dot on"></div>CTRM manufacturing base (post-2025)</div>
-      <div class="svc"><div class="dot on"></div>60+ aerospace players · 4,000+ jobs</div>
+      <div class="svc"><div class="dot on"></div>CTRM manufacturing (post-2025)</div>
+      <div class="svc"><div class="dot on"></div>Malaysia Airlines Engineering Centre</div>
     </div>
     <div class="apt-card">
       <div class="apt-iata">PEN</div>
@@ -824,22 +1078,23 @@
       <div class="svc"><div class="dot on"></div>Line maintenance (narrowbody)</div>
       <div class="svc"><div class="dot on"></div>Jet fuel</div>
       <div class="svc"><div class="dot on"></div>Ground handling</div>
-      <div class="svc"><div class="dot off"></div>Base maintenance (limited)</div>
-      <div class="svc"><div class="dot off"></div>Wide-body hangar (none)</div>
+      <div class="svc"><div class="dot off"></div>ATR base maintenance (none)</div>
+      <div class="svc"><div class="dot off"></div>Heavy base MRO (limited)</div>
     </div>
     <div class="apt-card">
       <div class="apt-iata">BKI</div>
       <div class="apt-name">Kota Kinabalu International · Sabah (WBKK)</div>
-      <div class="svc"><div class="dot on"></div>Line maintenance (A320 / B737)</div>
-      <div class="svc"><div class="dot on"></div>Jet fuel</div>
+      <div class="svc"><div class="dot on"></div>Line maintenance (A320 / B737 / ATR)</div>
+      <div class="svc"><div class="dot on"></div>Helicopter operations (O&amp;G)</div>
+      <div class="svc"><div class="dot on"></div>Jet fuel + Aviation turbine fuel</div>
       <div class="svc"><div class="dot on"></div>Ground handling</div>
-      <div class="svc"><div class="dot on"></div>Helicopter support (oil &amp; gas)</div>
       <div class="svc"><div class="dot off"></div>Heavy base maintenance (none)</div>
     </div>
     <div class="apt-card">
       <div class="apt-iata">KCH</div>
       <div class="apt-name">Kuching International · Sarawak (WBGG)</div>
-      <div class="svc"><div class="dot on"></div>Line maintenance (A320 / ATR)</div>
+      <div class="svc"><div class="dot on"></div>Line maintenance (A320 / ATR 72)</div>
+      <div class="svc"><div class="dot on"></div>Helicopter operations (O&amp;G)</div>
       <div class="svc"><div class="dot on"></div>Jet fuel</div>
       <div class="svc"><div class="dot on"></div>Ground handling</div>
       <div class="svc"><div class="dot off"></div>Heavy base maintenance (none)</div>
@@ -849,7 +1104,7 @@
       <div class="apt-name">Senai International · Johor (WMKJ)</div>
       <div class="svc"><div class="dot on"></div>Line maintenance</div>
       <div class="svc"><div class="dot on"></div>Jet fuel</div>
-      <div class="svc"><div class="dot on"></div>Cargo operations</div>
+      <div class="svc"><div class="dot on"></div>Cargo hub operations</div>
       <div class="svc"><div class="dot off"></div>Heavy MRO (limited)</div>
     </div>
     <div class="apt-card">
@@ -860,61 +1115,192 @@
       <div class="svc"><div class="dot on"></div>LIMA Airshow venue (biannual)</div>
       <div class="svc"><div class="dot off"></div>Base maintenance (none)</div>
     </div>
+    <div class="apt-card">
+      <div class="apt-iata">TWU</div>
+      <div class="apt-name">Tawau Airport · Sabah (WBKW)</div>
+      <div class="svc"><div class="dot on"></div>ATR 72 line maintenance (MASwings)</div>
+      <div class="svc"><div class="dot on"></div>Jet fuel</div>
+      <div class="svc"><div class="dot off"></div>Heavy maintenance (none)</div>
+    </div>
+    <div class="apt-card">
+      <div class="apt-iata">MYY</div>
+      <div class="apt-name">Miri Airport · Sarawak (WBGR)</div>
+      <div class="svc"><div class="dot on"></div>ATR / DHC line maintenance</div>
+      <div class="svc"><div class="dot on"></div>Helicopter hub (O&amp;G offshore)</div>
+      <div class="svc"><div class="dot on"></div>Jet fuel + Avgas</div>
+      <div class="svc"><div class="dot on"></div>Helicopter servicing (Bell, H225)</div>
+    </div>
   </div>
 
   <div class="page-footer">
-    <span>Airport data — illustrative. Verify with MAHB &amp; CAAM before operational decisions.</span>
-    <span>Malaysia Aerospace Bluebook · A320 CEO + B737 NG POC</span>
+    <span>Airport data — illustrative · Verify with MAHB &amp; CAAM before operational decisions</span>
+    <span>Malaysia Aerospace Bluebook 2026</span>
   </div>
 </div>
 
+<!-- ══════════════════════════ JAVASCRIPT ══════════════════════════ -->
 <script>
-var currentAC = "a320";
+var currentAC = "";
+
+// ATA chapter sets per aircraft type
+var AC_DATA = {
+  a320: {
+    eyebrow: "Aircraft Type 01 — Airbus",
+    title: "Airbus A320 CEO",
+    sub: "CFM56-5B / IAE V2500-A5 · Single aisle narrowbody",
+    afFilter: "a320",
+    ataChips: ["ecs","electrical","flight-controls","fuel","hydraulics","landing-gear","avionics","apu","airframe","engine"]
+  },
+  b737: {
+    eyebrow: "Aircraft Type 02 — Boeing",
+    title: "Boeing 737 NG",
+    sub: "CFM56-7B · 737-700 / 737-800 / 737-900 series",
+    afFilter: "b737",
+    ataChips: ["ecs","electrical","flight-controls","fuel","hydraulics","landing-gear","avionics","apu","airframe","engine"]
+  },
+  atr42: {
+    eyebrow: "Aircraft Type 03 — ATR Turboprop",
+    title: "ATR 42-600",
+    sub: "PW127M · 48 seats · Regional turboprop",
+    afFilter: "atr",
+    ataChips: ["ecs","electrical","flight-controls","fuel","hydraulics","landing-gear","avionics","apu","propeller","airframe","engine"]
+  },
+  atr72: {
+    eyebrow: "Aircraft Type 04 — ATR Turboprop",
+    title: "ATR 72-600",
+    sub: "PW127M · 70 seats · MASwings backbone",
+    afFilter: "atr",
+    ataChips: ["ecs","electrical","flight-controls","fuel","hydraulics","landing-gear","avionics","apu","propeller","airframe","engine"]
+  },
+  bizjet: {
+    eyebrow: "Aircraft Category — Business Aviation",
+    title: "Business Jets",
+    sub: "Bombardier · Gulfstream · Dassault · Cessna Citation",
+    afFilter: "bizjet",
+    ataChips: ["ecs","electrical","flight-controls","fuel","hydraulics","landing-gear","avionics","apu","airframe","engine"]
+  },
+  heli: {
+    eyebrow: "Aircraft Category — Rotary Wing",
+    title: "Helicopters",
+    sub: "Airbus H-Series · Bell · Sikorsky · O&G / SAR / VIP",
+    afFilter: "heli",
+    ataChips: ["ecs","electrical","hydraulics","landing-gear","avionics","apu","rotor","engine"]
+  }
+};
+
+var ATA_LABELS = {
+  "ecs": "ATA 21 — Air Conditioning / ECS",
+  "electrical": "ATA 24 — Electrical Power",
+  "flight-controls": "ATA 27 — Flight Controls",
+  "fuel": "ATA 28 — Fuel System",
+  "hydraulics": "ATA 29 — Hydraulic Power",
+  "landing-gear": "ATA 32 — Landing Gear",
+  "avionics": "ATA 34 — Navigation / Avionics",
+  "apu": "ATA 49 — APU",
+  "propeller": "ATA 61 — Propellers",
+  "rotor": "ATA 62–67 — Rotor & Drive Systems",
+  "airframe": "ATA 51–57 — Airframe Structures",
+  "engine": "ATA 71–80 — Powerplant / Engine"
+};
 
 function selectAC(type) {
   currentAC = type;
-  nav("aircraft");
+  // highlight selected card on landing
+  document.querySelectorAll(".ac-card").forEach(function(c){ c.classList.remove("selected"); });
+  var card = document.getElementById("card-" + type);
+  if (card) card.classList.add("selected");
+
   updateACContext();
+  nav("aircraft");
 }
 
 function updateACContext() {
-  var a = currentAC === "a320";
-  document.getElementById("acv-a320").style.display = a ? "" : "none";
-  document.getElementById("acv-b737").style.display = a ? "none" : "";
-  document.getElementById("ac-eyebrow").textContent = a ? "Aircraft Type 01 — Airbus" : "Aircraft Type 02 — Boeing";
-  document.getElementById("ac-title").textContent = a ? "Airbus A320 CEO" : "Boeing 737 NG";
-  document.getElementById("ac-sub").textContent = a ? "CFM56-5B / IAE V2500-A5 · Single aisle narrowbody" : "CFM56-7B · 737-700 / 737-800 / 737-900 series";
-  document.getElementById("af-title").textContent = a ? "Airframe MRO · A320 CEO · Malaysia" : "Airframe MRO · B737 NG · Malaysia";
-  document.getElementById("ata-title").textContent = a ? "ATA Chapter Directory · A320 CEO" : "ATA Chapter Directory · B737 NG";
-  document.getElementById("ac-footer").textContent = a ? "A320 CEO — Click any ATA chapter above to jump to the component directory" : "B737 NG — Click any ATA chapter above to jump to the component directory";
+  var d = AC_DATA[currentAC];
+  if (!d) return;
+
+  // show/hide detail panels
+  ["a320","b737","atr42","atr72","bizjet","heli"].forEach(function(t){
+    var el = document.getElementById("acv-" + t);
+    if (el) el.style.display = (t === currentAC) ? "" : "none";
+  });
+
+  document.getElementById("ac-eyebrow").textContent = d.eyebrow;
+  document.getElementById("ac-title").textContent = d.title;
+  document.getElementById("ac-sub").textContent = d.sub;
+  document.getElementById("ac-footer-txt").textContent = d.title + " — select Airframe MRO or an ATA chapter below";
+
   var badge = document.getElementById("tb-ac-label");
-  badge.textContent = a ? "A320 CEO active" : "B737 NG active";
+  badge.textContent = d.title;
   badge.className = "tb-badge show";
+
+  // rebuild ATA chips
+  var chips = document.getElementById("ata-chips-container");
+  chips.innerHTML = "";
+  d.ataChips.forEach(function(k){
+    var el = document.createElement("span");
+    el.className = "chip";
+    el.textContent = ATA_LABELS[k] || k;
+    el.onclick = function(){ goATA(k); };
+    chips.appendChild(el);
+  });
+
+  // update airframe page title
+  document.getElementById("af-title").textContent = "Airframe MRO · " + d.title + " · Malaysia";
+  document.getElementById("ata-title").textContent = "ATA Chapter Directory · " + d.title;
+
+  // pre-filter airframe filter buttons
+  document.querySelectorAll("[id^='af-filter-']").forEach(function(b){ b.classList.remove("on"); });
+  var afBtn = document.getElementById("af-filter-" + d.afFilter);
+  if (afBtn) afBtn.classList.add("on");
+  else document.getElementById("af-filter-all").classList.add("on");
+  _acAf = d.afFilter || "all";
+  _regAf = "all";
+  document.getElementById("af-cards").querySelectorAll(".co-card").forEach(function(c){
+    var acOk = (_acAf === "all") || (c.dataset.ac||"").indexOf(_acAf) > -1;
+    c.style.display = acOk ? "" : "none";
+  });
+}
+
+// go to airframe MRO pre-filtered for current aircraft
+function goAirframe() {
+  nav("airframe");
+  if (currentAC && AC_DATA[currentAC]) {
+    var af = AC_DATA[currentAC].afFilter;
+    _acAf = af || "all";
+    applyAf();
+  }
+}
+
+// go to ATA components page, optionally pre-filtered
+function goATA(zone) {
+  nav("ata");
+  setTimeout(function(){ filterATA(zone || "all", null); }, 60);
 }
 
 function nav(id) {
-  document.querySelectorAll(".view").forEach(function(v){v.classList.remove("active");});
+  document.querySelectorAll(".view").forEach(function(v){ v.classList.remove("active"); });
   document.getElementById("view-" + id).classList.add("active");
+  var navIds = ["landing","aircraft","airframe","ata","eco","airports"];
   document.querySelectorAll(".tb-btn").forEach(function(b, i){
-    var ids = ["landing","aircraft","airframe","ata","eco","airports"];
-    b.classList.toggle("active", ids[i] === id);
+    b.classList.toggle("active", navIds[i] === id);
   });
   window.scrollTo(0, 0);
 }
 
-function zoneClick(zone) {
-  nav("ata");
-  setTimeout(function(){filterATA(zone, null);}, 80);
-}
-
+// ── FILTER FUNCTIONS ──
 function filterATA(key, btn) {
-  document.querySelectorAll(".filter-bar .filter-btn").forEach(function(b){
-    if (b.getAttribute("onclick") && b.getAttribute("onclick").indexOf("filterATA(") > -1) b.classList.remove("on");
+  // clear ATA filter buttons
+  document.querySelectorAll("#view-ata .filter-bar .filter-btn").forEach(function(b){
+    if (b.getAttribute("onclick") && b.getAttribute("onclick").indexOf("filterATA(") > -1)
+      b.classList.remove("on");
   });
-  if (btn) btn.classList.add("on");
-  else {
-    document.querySelectorAll(".filter-bar .filter-btn").forEach(function(b){
-      if (b.getAttribute("onclick") && b.getAttribute("onclick").indexOf("filterATA('" + key + "'") > -1) b.classList.add("on");
+  if (btn) {
+    btn.classList.add("on");
+  } else {
+    // find matching button
+    document.querySelectorAll("#view-ata .filter-bar .filter-btn").forEach(function(b){
+      var oc = b.getAttribute("onclick") || "";
+      if (oc.indexOf("filterATA('" + key + "'") > -1) b.classList.add("on");
     });
   }
   document.querySelectorAll(".ata-section").forEach(function(s){
@@ -925,14 +1311,21 @@ function filterATA(key, btn) {
 var _regAf = "all", _acAf = "all";
 function filterReg(key, btn) {
   _regAf = key;
-  document.querySelectorAll(".filter-bar .filter-btn").forEach(function(b){
-    if (b.getAttribute("onclick") && b.getAttribute("onclick").indexOf("filterReg(") > -1 && b.getAttribute("onclick").indexOf("filterRegATA") === -1) b.classList.remove("on");
+  document.querySelectorAll("#view-airframe .filter-bar .filter-btn").forEach(function(b){
+    var oc = b.getAttribute("onclick") || "";
+    if (oc.indexOf("filterReg(") > -1 && oc.indexOf("filterRegATA") === -1)
+      b.classList.remove("on");
   });
   if (btn) btn.classList.add("on");
   applyAf();
 }
 function filterAC_af(key, btn) {
   _acAf = key;
+  document.querySelectorAll("#view-airframe .filter-bar .filter-btn").forEach(function(b){
+    var oc = b.getAttribute("onclick") || "";
+    if (oc.indexOf("filterAC_af(") > -1) b.classList.remove("on");
+  });
+  if (btn) btn.classList.add("on");
   applyAf();
 }
 function applyAf() {
@@ -944,8 +1337,8 @@ function applyAf() {
 }
 
 function filterRegATA(key, btn) {
-  document.querySelectorAll(".filter-bar .filter-btn").forEach(function(b){
-    if (b.getAttribute("onclick") && b.getAttribute("onclick").indexOf("filterRegATA") > -1) b.classList.remove("on");
+  document.querySelectorAll("#view-ata .filter-bar .filter-btn").forEach(function(b){
+    if ((b.getAttribute("onclick")||"").indexOf("filterRegATA") > -1) b.classList.remove("on");
   });
   if (btn) btn.classList.add("on");
   document.querySelectorAll("#view-ata .co-card").forEach(function(c){
@@ -955,15 +1348,13 @@ function filterRegATA(key, btn) {
 
 function filterRegEco(key, btn) {
   document.querySelectorAll(".filter-bar .filter-btn").forEach(function(b){
-    if (b.getAttribute("onclick") && b.getAttribute("onclick").indexOf("filterRegEco") > -1) b.classList.remove("on");
+    if ((b.getAttribute("onclick")||"").indexOf("filterRegEco") > -1) b.classList.remove("on");
   });
   if (btn) btn.classList.add("on");
   document.querySelectorAll("#eco-grid .eco-card").forEach(function(c){
     c.style.display = (key === "all" || (c.dataset.reg||"").indexOf(key) > -1) ? "" : "none";
   });
 }
-
-updateACContext();
 </script>
 </body>
 </html>
