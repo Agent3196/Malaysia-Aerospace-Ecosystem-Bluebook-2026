@@ -120,7 +120,7 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
     <div class="ac-card" onclick="selectAC('b747')"><img class="ac-ph" src="images/B747.jpg" alt="B747-400" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B747-400</div><div class="ac-desc">P&amp;W PW4000 · 2L 1B</div></div></div>
     <div class="ac-card" onclick="selectAC('b767')"><img class="ac-ph" src="images/B767.jpg" alt="B767" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B767</div><div class="ac-desc">GE CF6 · 1 AMO Raya</div></div></div>
     <div class="ac-card" onclick="selectAC('b777')"><img class="ac-ph" src="images/B777.jpeg" alt="B777" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B777</div><div class="ac-desc">GE90/RR Trent 800 · 3L 1B</div></div></div>
-    <div class="ac-card" onclick="selectAC('b787')"><div class="ac-phb">✈</div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B787</div><div class="ac-desc">GEnx/Trent 1000 · 1L Dviation</div></div></div>
+    <div class="ac-card" onclick="selectAC('b787')"><div class="ac-ph" src="images/B787.png" alt="B787" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B787</div><div class="ac-desc">GEnx/Trent 1000 · 1L Dviation</div></div></div>
   </div>
 
   <div class="cat-lbl">Regional — Turboprop (A1 &amp; A2)</div>
@@ -434,58 +434,89 @@ const _db = {
   // 供应商列表（基于 mindmap 的核心数据）
   vendors: [
     // ====== 窄体主线 ======
-    { id:"sae", name:"Sepang Aircraft Engineering (SAE)", loc:"Sepang, KLIA · AMO/2018/06", tags:["Line","Base"], caps:["a320ceo-cfm","a320ceo-iae","a320neo-leap","a320neo-pw","a330-trent700","a330-trent7000"], note:"Airbus network partner. 17+ certifications. Eco-paint bay." },
-    { id:"airod", name:"AIROD Aerospace Technology", loc:"Subang · AMO/2016/29", tags:["Line","Base","Component"], caps:["a320ceo-cfm","b737cl-cfm","b737ng-cfm","b737max-leap","atr42-pw127","atr72-pw127m","falcon7x-pw307"], note:"Center Wing Box capability. EASA approved." },
+     vendors: [
+    // ===== 全表 79 家 AMO（按 mindmap 表格顺序）=====
+    // 1
+    { id:"admal", name:"Admal Sdn Bhd", loc:"Subang · AMO/2017/18", tags:["Line","Base"], caps:["cessna-cont","cessna-lyc","cessna-pt6a","cirrus-cont","piper-lyc","piper-cont","beech-pt6a"] },
+    { id:"aeroclear", name:"Aeroclear (Asia) Sdn Bhd", loc:"Shah Alam · AMO/2025/03", tags:["Component"], caps:["component-general"] },
+    { id:"aerodynamic", name:"Aerodynamic Engineering Sdn Bhd", loc:"Subang · AMO/2025/01", tags:["Component"], caps:["component-general"] },
+    { id:"aerotree", name:"Aerotree Defence & Services", loc:"Kuala Lumpur · AMO/2018/04", tags:["Line","Base"], caps:["beech-pt6a"] },
+    { id:"aerotrends", name:"Aerotrends Wheels & Brakes", loc:"Subang · AMO/2018/05", tags:["Component"], caps:["component-general"] },
+    { id:"airbusheli", name:"Airbus Helicopters Malaysia", loc:"Subang · AMO/2017/15", tags:["Line","Base"], caps:["h125-arriel2","ec135-arrius2b2","h160-pt6c","h225-makila2a"], note:"OEM authorised." },
+    { id:"airfoil", name:"Airfoil Services Sdn Bhd", loc:"Petaling Jaya · AMO/2017/10", tags:["Component"], caps:["component-general"] },
+    { id:"airod", name:"AIROD Aerospace Technology", loc:"Subang · AMO/2016/29", tags:["Line","Base","Component"], caps:["a320ceo-cfm","b737cl-cfm","b737ng-cfm","b737max-leap","atr42-pw127","atr72-pw127m","falcon7x-pw307"] },
+    { id:"airodsb", name:"AIROD Sdn Bhd", loc:"Subang · AMO/2016/19", tags:["Component"], caps:["component-general"] },
+    { id:"apr", name:"APR Aerospace Engineering", loc:"Ayer Keroh, Melaka · AMO/2017/50", tags:["Component"], caps:["component-general"] },
+    { id:"aps", name:"APS Asia Pacific Sdn Bhd", loc:"Shah Alam · AMO/2025/02", tags:["Component"], caps:["component-general"] },
+    { id:"asiaaeroeng", name:"Asia Aero Engineering Sdn Bhd", loc:"Shah Alam · AMO/2017/38", tags:["Line","Base"], caps:["piaggio-pt6a"] },
     { id:"aat", name:"Asia AeroTechnic (AAT)", loc:"Subang · AMO/2017/31", tags:["Line","Base"], caps:["a320ceo-cfm","b737cl-cfm","b737ng-cfm","atr42-pw120","atr72-pw120"] },
     { id:"ade", name:"Asia Digital Engineering (ADE)", loc:"Sepang, KLIA · AMO/2020/01", tags:["Line","Base"], caps:["a320ceo-cfm","a320ceo-iae","a320neo-leap","a320neo-pw","a330-trent700","b737ng-cfm"], note:"AirAsia-linked. EASA." },
-    { id:"mabeng", name:"MAB Engineering Services (Malaysia Airlines)", loc:"Sepang · AMO/2023/01", tags:["Line","Base"], caps:["a320ceo-cfm","a320ceo-iae","a320neo-leap","a320neo-pw","b737ng-cfm","b737max-leap","a330-pw4000","a330-trent700","a350-trentxwb","b747-pw4000","b777-ge90","b777-trent800"], note:"Broadest single-AMO scope. Only B3 APU in MY." },
-    { id:"karbon", name:"KarbonMRO Services", loc:"Shah Alam · AMO/2024/01", tags:["Line","Base","Component"], caps:["a320ceo-cfm","a320ceo-iae","a320neo-leap","b737ng-cfm","b737max-leap","hondajet-hf120"], note:"HondaJet specialist. B1 Turbine." },
-    { id:"jetpremier", name:"Jet Premier One (M)", loc:"Subang · AMO/2016/27", tags:["Line"], caps:["a320ceo-cfm"] },
-    { id:"dviation", name:"Dviation Technics", loc:"Shah Alam · AMO/2017/06", tags:["Line"], caps:["a320ceo-cfm","a320ceo-iae","a320neo-leap","b737cl-cfm","b737ng-cfm","b737max-leap","a330-cf6","a330-pw4000","a330-trent700","a350-trentxwb","b747-pw4000","b777-ge90","b777-rb211","b787-genx","b787-trent1000","hondajet-hf120"], note:"Only B787 AMO." },
-    { id:"safeair", name:"SafeAir Technical", loc:"Sepang · AMO/2017/02", tags:["Line"], caps:["a320ceo-cfm","a320ceo-iae","a320neo-leap","a320neo-pw","a330-cf6","a330-trent700","b737cl-cfm","b737ng-cfm","b737max-leap","b777-rb211","atr42-pw120","atr72-pw127m"] },
-    { id:"pos", name:"Pos Aviation Engineering", loc:"Sepang · AMO/2016/13", tags:["Line"], caps:["a320ceo-cfm","a320ceo-iae","a320neo-leap","a330-cf6","a330-trent700","a330-pw4000","a350-trentxwb","b737cl-cfm","b737ng-cfm","b737max-leap"] },
-
-    // ====== B737 专用 ======
-    { id:"malindo", name:"Malindo/Batik Air (in-house)", loc:"Petaling Jaya · AMO/2017/11", tags:["Line"], caps:["b737ng-cfm","b737max-leap","atr42-pw120","atr72-pw120","a330-trent700","a330-trent7000"] },
-    { id:"mados", name:"Mados's Holdings", loc:"Johor · AMO/2021/01", tags:["Line"], caps:["b737ng-cfm","gulfstream-br700","s76-pt6b"] },
-    { id:"mjets", name:"MJETS Air", loc:"Sepang", tags:["Line"], caps:["b737cl-cfm","b737ng-cfm"] },
-    { id:"worldcargo", name:"World Cargo Airline", loc:"Sepang", tags:["Line"], caps:["b737cl-cfm","b737ng-cfm"] },
-    { id:"maz", name:"MAZ Gerbang", loc:"Nilai · AMO/2021/03", tags:["Line"], caps:["b737cl-cfm","b737ng-cfm","a320ceo-cfm"] },
-
-    // ====== 宽体 ======
-    { id:"raya", name:"Raya Airways", loc:"Subang · AMO/2016/15", tags:["Line","Base"], caps:["a320ceo-cfm","a320ceo-iae","b737cl-cfm","b767-cf6","a330-cf6"] },
-
-    // ====== 支线 ======
-    { id:"berjaya", name:"Berjaya Air", loc:"Subang · AMO/2016/25", tags:["Line"], caps:["atr42-pw127","atr72-pw127m","global-br700"] },
-    { id:"skyways", name:"Skyways Technics (ATR + Component)", loc:"Shah Alam · AMO/2026/02", tags:["Line","Base","Component"], caps:["atr42-pw120","atr72-pw120"], note:"European MRO group. Airbus structural repair." },
-    { id:"aerotree", name:"Aerotree Defence & Services", loc:"KL · AMO/2018/04", tags:["Line","Base"], caps:["beech-pt6a"] },
-    { id:"layang", name:"Layang Layang Aerospace", loc:"Kota Kinabalu · AMO/2016/09", tags:["Line","Base"], caps:["beech-pt6a","cessna-cont","cessna-lyc","piper-lyc","diamond-austro","h125-arriel2","ec135-pw206"] },
-
-    // ====== 公务机 ======
+    { id:"apacs", name:"APACS (Asia Pacific Aircraft Component Services)", loc:"Shah Alam · AMO/2017/13", tags:["Component"], caps:["component-general"], note:"SIAEC+SR Technics JV. 90,000sqft. 600+ capabilities." },
+    { id:"atas", name:"Atas Aero Engineering Sdn Bhd", loc:"Senai, Johor · AMO/2021/02", tags:["Line","Base"], caps:["diamond-austro","cessna-lyc","bell-arrius2r"] },
+    { id:"ats", name:"ATS Turbine Service Sdn Bhd", loc:"Subang · AMO/2023/02", tags:["Engine"], caps:["engine-pt6a"] },
+    { id:"avia", name:"Avia Technique Sdn Bhd", loc:"Shah Alam · AMO/2017/04", tags:["Component"], caps:["component-general"] },
+    { id:"basem", name:"Base Maintenance Malaysia Sdn Bhd", loc:"Malaysia · AMO/2025/04", tags:["Line"], caps:["a320ceo-iae"] },
+    { id:"berjaya", name:"Berjaya Air Sdn Bhd", loc:"Subang · AMO/2016/25", tags:["Line"], caps:["atr42-pw127","atr72-pw127m","global-br700"] },
+    { id:"bhic", name:"BHIC Aeroservices Sdn Bhd", loc:"Subang · AMO/2019/06", tags:["Component"], caps:["component-general"] },
+    { id:"btair", name:"BT Airworks Sdn Bhd", loc:"Sepang · AMO/2022/03", tags:["Component"], caps:["component-general"] },
+    { id:"cna", name:"C&A Aviation Sdn Bhd", loc:"Johor Bahru · AMO/2019/05", tags:["Component","Engine"], caps:["component-general","engine-piston"] },
+    { id:"cosmo", name:"Cosmo Aviation (M) Sdn Bhd", loc:"Shah Alam · AMO/2017/30", tags:["Component"], caps:["component-general"] },
+    { id:"deftech", name:"Deftech Aviation Sdn Bhd", loc:"Batu Berendam, Melaka · AMO/2017/36", tags:["Component"], caps:["component-general"] },
+    { id:"dviation", name:"Dviation Technics Sdn Bhd", loc:"Shah Alam · AMO/2017/06", tags:["Line"], caps:["a320ceo-cfm","a320ceo-iae","a320neo-leap","b737cl-cfm","b737ng-cfm","b737max-leap","a330-cf6","a330-pw4000","a330-trent700","a350-trentxwb","b747-pw4000","b777-ge90","b777-rb211","b787-genx","b787-trent1000","hondajet-hf120"], note:"Only B787 AMO." },
+    { id:"eaton", name:"Eaton Aerospace Component Services Asia", loc:"Shah Alam · AMO/2025/05", tags:["Component"], caps:["component-general"] },
+    { id:"eja", name:"EJA Sdn Bhd", loc:"Ipoh, Perak · AMO/2016/21", tags:["Line","Base"], caps:["cessna-cont","cessna-lyc","piper-lyc","piper-cont","h160-arrano","h125-arriel2"] },
+    { id:"epic", name:"Epic Aero Sdn Bhd", loc:"Shah Alam · AMO/2017/17", tags:["NDT"], caps:["ndt-general"] },
     { id:"execujet", name:"ExecuJet MRO Services Malaysia", loc:"Subang · AMO/2016/12", tags:["Line","Base"], caps:["challenger-as907","challenger-cf34","challenger-br700","global-br700","falcon7x-pw307","falcon2000-cfe738","gulfstream-tay","gulfstream-br700"], note:"Dassault ASC. Honeywell APU. 24/7 AOG." },
-
-    // ====== 通航 ======
-    { id:"admal", name:"Admal Sdn Bhd", loc:"Subang · AMO/2017/18", tags:["Line","Base"], caps:["cessna-cont","cessna-lyc","cessna-pt6a","cirrus-cont","piper-lyc","piper-cont","beech-pt6a"] },
-    { id:"eja", name:"EJA Sdn Bhd", loc:"Ipoh·AMO/2016/21", tags:["Line","Base"], caps:["cessna-cont","cessna-lyc","piper-lyc","piper-cont","h160-arrano","h125-arriel2"] },
-    { id:"iata", name:"IATA (International Aero Training Academy)", loc:"Melaka·AMO/2017/37", tags:["Line","Base"], caps:["diamond-lyc","diamond-austro","diamond-tae125","piper-lyc"] },
-    { id:"mfa", name:"Malaysian Flying Academy (MFA)", loc:"Melaka·AMO/2017/25", tags:["Line","Base"], caps:["piper-lyc"] },
-    { id:"sinkung", name:"Sin-Kung Airways", loc:"Langkawi·AMO/2016/14", tags:["Line","Base"], caps:["cessna-pt6a","diamond-austro","diamond-tae125","piaggio-pt6a"] },
-    { id:"atas", name:"Atas Aero Engineering", loc:"Senai, Johor·AMO/2021/02", tags:["Line","Base"], caps:["diamond-austro","cessna-lyc","bell-arrius2r"] },
-    { id:"fras", name:"Kelab Penerbangan FRAS Johor", loc:"Senai", tags:["Line","Base"], caps:["piper-lyc","cessna-lyc"] },
-
-    // ====== 直升机重型 ======
-    { id:"airbush", name:"Airbus Helicopters Malaysia", loc:"Subang·AMO/2017/15", tags:["Line","Base"], caps:["h125-arriel2","ec135-arrius2b2","h160-pt6c","h225-makila2a"], note:"OEM authorised." },
-    { id:"hammock", name:"Hammock Helicopter", loc:"Subang·AMO/2020/03", tags:["Line","Base"], caps:["ec135-arrius2b2","ec135-pw206","ec135-arriel2c2","h225-makila1a2","h225-makila2a","bell-rr250"] },
-    { id:"leonardo_my", name:"Leonardo Malaysia", loc:"Subang·AMO/2016/40", tags:["Line","Base"], caps:["aw139-pt6c","aw139-ct7","aw139-pw206"] },
-    { id:"weststar", name:"Weststar Aviation Services", loc:"Ampang·AMO/2017/29", tags:["Line","Base"], caps:["aw139-pt6c","aw139-ct7"] },
-    { id:"has", name:"HAS International", loc:"Miri, Sarawak·AMO/2016/16", tags:["Line","Base"], caps:["h160-pt6c"] },
-    { id:"galaxy", name:"Galaxy Aerospace (M)", loc:"Shah Alam·AMO/2016/02", tags:["Line","Base"], caps:["aw139-pt6c","h125-arriel2","beech-pt6a","cessna-pt6a"] },
-    { id:"hornbill", name:"Hornbill Skyways", loc:"Kuching·AMO/2017/28", tags:["Line","Base"], caps:["beech-pt6a","ec135-pw206"] },
-    { id:"sabah", name:"Sabah Air Aviation", loc:"Kota Kinabalu·AMO/2016/11", tags:["Line","Base"], caps:["beech-pt6a","bell-rr250","aw139-pw206"] },
-    { id:"mhs", name:"MHS Aviation Berhad", loc:"KL·AMO/2016/28", tags:["Line","Base"], caps:["h225-makila1a2"] },
-    { id:"mycopter", name:"Mycopter Aviation Services", loc:"Subang·AMO/2017/21", tags:["Line","Base"], caps:["h125-arriel1","h125-arriel2"] }
+    { id:"g7", name:"G7 Aerospace Sdn Bhd", loc:"Melaka · AMO/2019/04", tags:["Component","NDT"], caps:["component-general"] },
+    { id:"galaxy", name:"Galaxy Aerospace (M) Sdn Bhd", loc:"Shah Alam · AMO/2016/02", tags:["Line","Base"], caps:["aw139-pt6c","h125-arriel2","beech-pt6a","cessna-pt6a"] },
+    { id:"geeng", name:"GE Engine Services Malaysia", loc:"Subang · AMO/2016/23", tags:["Engine"], caps:["engine-cfm56-5b","engine-cfm56-7b","engine-leap-1a","engine-leap-1b"], note:"GE/CFM OEM. Full LEAP shop." },
+    { id:"gkn", name:"GKN Engine Systems Component Repair", loc:"Iskandar Puteri, Johor · AMO/2020/05", tags:["Component","Engine","NDT"], caps:["component-general"] },
+    { id:"globalcomp", name:"Global Component Asia Sdn Bhd", loc:"Subang · AMO/2016/30", tags:["Component"], caps:["component-general"] },
+    { id:"globalturbine", name:"Global Turbine Asia Sdn Bhd", loc:"Subang · AMO/2017/39", tags:["Engine"], caps:["engine-arriel1","engine-arriel2","engine-arrius1","engine-arrius2","engine-makila2"], note:"Safran Helicopter Engines OEM." },
+    { id:"collins", name:"Hamilton Sundstrand / Collins Aerospace Malaysia", loc:"Klang, Selangor · AMO/2016/17", tags:["Component"], caps:["component-general"], note:"RTX/Collins OEM. 160,000sqft." },
+    { id:"hammock", name:"Hammock Helicopter Sdn Bhd", loc:"Subang · AMO/2020/03", tags:["Line","Base"], caps:["ec135-arrius2b2","ec135-pw206","ec135-arriel2c2","h225-makila1a2","h225-makila2a","bell-rr250"] },
+    { id:"has", name:"HAS International Sdn Bhd", loc:"Miri, Sarawak · AMO/2016/16", tags:["Line","Base"], caps:["h160-pt6c"] },
+    { id:"helistar", name:"Helistar Resources Sdn Bhd", loc:"Kota Bharu, Kelantan · AMO/2022/04", tags:["Line","Base"], caps:["aw139-pt6c"] },
+    { id:"honeywell", name:"Honeywell Aerospace Avionics Malaysia", loc:"Prai, Penang · AMO/2017/34", tags:["Component"], caps:["component-general"] },
+    { id:"hornbill", name:"Hornbill Skyways Sdn Bhd", loc:"Kuching, Sarawak · AMO/2017/28", tags:["Line","Base"], caps:["beech-pt6a","ec135-pw206"] },
+    { id:"hrd", name:"HRD Aero Systems Sdn Bhd", loc:"Nilai, Negeri Sembilan · AMO/2017/22", tags:["Component"], caps:["component-general"] },
+    { id:"interiors", name:"Interiors Aeroservices (M) Sdn Bhd", loc:"Shah Alam · AMO/2016/26", tags:["Component"], caps:["component-general"] },
+    { id:"iata", name:"International Aero Training Academy (IATA)", loc:"Batu Berendam, Melaka · AMO/2017/37", tags:["Line","Base"], caps:["diamond-lyc","diamond-austro","diamond-tae125","piper-lyc"] },
+    { id:"jetpremier", name:"Jet Premier One (M) Sdn Bhd", loc:"Subang · AMO/2016/27", tags:["Line"], caps:["a320ceo-cfm"] },
+    { id:"karbon", name:"KarbonMRO Services Sdn Bhd", loc:"Shah Alam · AMO/2024/01", tags:["Line","Base","Component"], caps:["a320ceo-cfm","a320ceo-iae","a320neo-leap","b737ng-cfm","b737max-leap","hondajet-hf120"], note:"HondaJet specialist. B1 Turbine." },
+    { id:"fras", name:"Kelab Penerbangan FRAS Johor", loc:"Senai, Johor · LAMO/2018/02", tags:["Line","Base"], caps:["piper-lyc","cessna-lyc"] },
+    { id:"layang", name:"Layang Layang Aerospace Sdn Bhd", loc:"Kota Kinabalu, Sabah · AMO/2016/09", tags:["Line","Base"], caps:["beech-pt6a","cessna-cont","cessna-lyc","piper-lyc","diamond-austro","h125-arriel2","ec135-pw206"] },
+    { id:"leonardo_my", name:"Leonardo Malaysia Sdn Bhd", loc:"Subang · AMO/2016/40", tags:["Line","Base"], caps:["aw139-pt6c","aw139-ct7","aw139-pw206"] },
+    { id:"mabeng", name:"MAB Engineering Services (Malaysia Airlines)", loc:"Sepang · AMO/2023/01", tags:["Line","Base"], caps:["a320ceo-cfm","a320ceo-iae","a320neo-leap","a320neo-pw","b737ng-cfm","b737max-leap","a330-pw4000","a330-trent700","a350-trentxwb","b747-pw4000","b777-ge90","b777-trent800"], note:"Broadest single-AMO scope. Only B3 APU in MY." },
+    { id:"mados", name:"Mados's Holdings Sdn Bhd", loc:"Johor Bahru · AMO/2021/01", tags:["Line"], caps:["b737ng-cfm","gulfstream-br700","s76-pt6b"] },
+    { id:"mfa", name:"Malaysian Flying Academy (MFA)", loc:"Batu Berendam, Melaka · AMO/2017/25", tags:["Line","Base"], caps:["piper-lyc"] },
+    { id:"malindo", name:"Malindo Airways / Batik Air Malaysia", loc:"Petaling Jaya · AMO/2017/11", tags:["Line"], caps:["b737ng-cfm","b737max-leap","atr42-pw120","atr72-pw120","a330-trent700","a330-trent7000"] },
+    { id:"maz", name:"Maz Gerbang Sdn Bhd", loc:"Nilai, Negeri Sembilan · AMO/2021/03", tags:["Line"], caps:["b737cl-cfm","b737ng-cfm","a320ceo-cfm"] },
+    { id:"mhs", name:"MHS Aviation Berhad", loc:"Kuala Lumpur · AMO/2016/28", tags:["Line","Base"], caps:["h225-makila1a2"] },
+    { id:"mjets", name:"MJETS Air Sdn Bhd", loc:"Sepang · AMO/2023/03", tags:["Line"], caps:["b737cl-cfm","b737ng-cfm"] },
+    { id:"mycopter", name:"Mycopter Aviation Services Sdn Bhd", loc:"Subang · AMO/2017/21", tags:["Line","Base"], caps:["h125-arriel1","h125-arriel2"] },
+    { id:"parker", name:"Parker Hannifin (Malaysia) Sdn Bhd", loc:"Shah Alam · AMO/2017/09", tags:["Component"], caps:["component-general"] },
+    { id:"pecca", name:"Pecca Aviation Services Sdn Bhd", loc:"Kuala Lumpur · AMO/2017/12", tags:["Component"], caps:["component-general"] },
+    { id:"pos", name:"Pos Aviation Engineering Services Sdn Bhd", loc:"Sepang, KLIA · AMO/2016/13", tags:["Line"], caps:["a320ceo-cfm","a320ceo-iae","a320neo-leap","a330-cf6","a330-trent700","a330-pw4000","a350-trentxwb","b737cl-cfm","b737ng-cfm","b737max-leap"] },
+    { id:"raya", name:"Raya Airways Sdn Bhd", loc:"Subang · AMO/2016/15", tags:["Line","Base"], caps:["a320ceo-cfm","a320ceo-iae","b737cl-cfm","b767-cf6","a330-cf6"] },
+    { id:"realturbine", name:"Real Turbine Engine Consultant Enterprise", loc:"Johor Bahru · AMO/2024/03", tags:["Engine"], caps:["engine-pt6a"] },
+    { id:"rise", name:"Rise Aero Sdn Bhd", loc:"Sepang · AMO/2019/03", tags:["Component"], caps:["component-general"] },
+    { id:"sabah", name:"Sabah Air Aviation Sdn Bhd", loc:"Kota Kinabalu, Sabah · AMO/2016/11", tags:["Line","Base"], caps:["beech-pt6a","bell-rr250","aw139-pw206"] },
+    { id:"safeair", name:"SafeAir Technical Sdn Bhd", loc:"Sepang, KLIA · AMO/2017/02", tags:["Line"], caps:["a320ceo-cfm","a320ceo-iae","a320neo-leap","a320neo-pw","a330-cf6","a330-trent700","b737cl-cfm","b737ng-cfm","b737max-leap","b777-rb211","atr42-pw120","atr72-pw127m"] },
+    { id:"safran", name:"Safran Landing Systems Malaysia", loc:"Negeri Sembilan · AMO/2018/01", tags:["Component"], caps:["component-general"] },
+    { id:"sazma", name:"Sazma Aviation Sdn Bhd", loc:"Kota Kinabalu, Sabah · AMO/2016/20", tags:["Line","Base"], caps:["aw139-pt6c"] },
+    { id:"scandavionics", name:"Scandinavian Avionics (M) Sdn Bhd", loc:"Subang · AMO/2017/14", tags:["Component"], caps:["component-general"] },
+    { id:"sae", name:"Sepang Aircraft Engineering (SAE)", loc:"Sepang, KLIA · AMO/2018/06", tags:["Line","Base"], caps:["a320ceo-cfm","a320ceo-iae","a320neo-leap","a320neo-pw","a330-trent700","a330-trent7000"], note:"Airbus network partner. 17+ certifications. Eco-paint bay." },
+    { id:"sinkung", name:"Sin-Kung Airways Sdn Bhd", loc:"Langkawi, Kedah · AMO/2016/14", tags:["Line","Base"], caps:["cessna-pt6a","diamond-austro","diamond-tae125","piaggio-pt6a"] },
+    { id:"skywaysmaint", name:"Skyways Technics Aircraft Maintenance", loc:"Shah Alam · AMO/2026/02", tags:["Line","Base"], caps:["atr42-pw120","atr72-pw120"], note:"European MRO group. Airbus structural repair." },
+    { id:"skywaysasia", name:"Skyways Technics Asia Sdn Bhd", loc:"Subang · AMO/2019/07", tags:["Component"], caps:["component-general"] },
+    { id:"sraviation", name:"SR Aviation Sdn Bhd", loc:"Subang · AMO/2021/04", tags:["Component"], caps:["component-general"] },
+    { id:"subangmro", name:"Subang MRO Sdn Bhd", loc:"Subang · AMO/2023/04", tags:["Line","Base"], caps:["beech-pt6a"] },
+    { id:"tpaero", name:"TP Aerospace Malaysia Sdn Bhd", loc:"Subang · AMO/2019/01", tags:["Component"], caps:["component-general"] },
+    { id:"weststar", name:"Weststar Aviation Services Sdn Bhd", loc:"Ampang, Selangor · AMO/2017/29", tags:["Line","Base"], caps:["aw139-pt6c","aw139-ct7"] },
+    { id:"worldcargo", name:"World Cargo Airline Sdn Bhd", loc:"Sepang · AMO/2017/05", tags:["Line"], caps:["b737cl-cfm","b737ng-cfm"] },
+    { id:"zigmar", name:"Zigmar Sdn Bhd", loc:"Kuala Lumpur · AMO/2025/06", tags:["Component"], caps:["component-general"] }
   ]
-};
 
 // ================ 交互逻辑 ================
 function nav(viewId) {
