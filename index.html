@@ -345,12 +345,7 @@ h2{font-size:15px;color:#003380;margin:14px 0 6px;border-bottom:1px solid #00338
 <div class="pfoot"><span>Malaysia Aerospace Ecosystem Bluebook 2026 &middot; CAAM AMO Registry May 2026</span><span>Verify with CAAM before operational decisions</span></div>
 </div>
 """)
-f.close()
-print("Part 1 done")
 
-  f = open('/home/claude/out.html', 'a', encoding='utf-8')
-f.write("""
-<!-- MTYPE -->
 <div id="view-mtype" class="view">
   <div class="stepbar"><div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft Selected</div><span class="sarr">&rsaquo;</span><div class="step active"><span class="step-n">2</span>Maintenance Category</div><span class="sarr">&rsaquo;</span><div class="step"><span class="step-n">3</span>Facilities</div></div>
   <div class="sec-top"><div><div class="eyebrow" id="mt-ey">Step 2</div><h1 id="mt-title">Select Maintenance Category</h1><p class="page-sub" id="mt-sub"></p></div><button class="back-btn" onclick="nav('landing')">&larr; Change Aircraft</button></div>
@@ -825,11 +820,7 @@ f.write("""
   </div>
 </div>
 """)
-f.close()
-print("Part 2 done")
 
-  f = open('/home/claude/out.html', 'a', encoding='utf-8')
-f.write("""
 <!-- ATA COMPONENTS -->
 <div id="view-ata" class="view">
   <div class="stepbar"><div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div><span class="sarr">&rsaquo;</span><div class="step done" onclick="nav('mtype')"><span class="step-n">2</span>Component Repair</div><span class="sarr">&rsaquo;</span><div class="step active"><span class="step-n">3</span>ATA Chapter &amp; Release Authority</div></div>
@@ -1099,6 +1090,4 @@ function filterATA(k,btn){
 </script>
 </body>
 </html>""")
-f.close()
-print("Part 3 done")
   
