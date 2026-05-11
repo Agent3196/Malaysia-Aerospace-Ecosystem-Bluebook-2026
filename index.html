@@ -1,979 +1,15 @@
-cat > /home/claude/build_html.py << 'PYEOF'
-html = r"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Malaysia Aerospace Ecosystem Bluebook 2026</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;font-size:14px;line-height:1.6}
-#topbar{position:fixed;top:0;left:0;right:0;z-index:100;background:#003380;padding:0 18px;display:flex;align-items:center;gap:10px;height:46px;border-bottom:2px solid #001f66}
-.tb-logo{color:#fff;font-size:13px;font-weight:bold;white-space:nowrap}
-.tb-div{color:rgba(255,255,255,.4);margin:0 2px}
-.tb-sub{color:rgba(255,255,255,.6);font-size:11px}
-.tb-nav{margin-left:auto;display:flex;gap:3px;flex-wrap:wrap}
-.tb-btn{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.8);padding:3px 9px;font-family:"Times New Roman",serif;font-size:11px;cursor:pointer;border-radius:2px}
-.tb-btn:hover{background:rgba(255,255,255,.15);color:#fff}
-.tb-btn.active{background:#fff;color:#003380;font-weight:bold}
-.view{display:none;padding-top:46px;min-height:100vh}
-.view.active{display:block}
-.stepbar{display:flex;align-items:center;padding:8px 20px;border-bottom:2px solid #003380;background:#f8faff;flex-wrap:wrap;gap:4px;font-size:12px}
-.step{display:flex;align-items:center;gap:5px;color:#99aabb}
-.step.done{color:#6680aa;cursor:pointer;text-decoration:underline}
-.step.active{color:#003380;font-weight:bold}
-.step-n{width:19px;height:19px;border-radius:50%;border:1px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
-.step.active .step-n{background:#003380;color:#fff;border-color:#003380}
-.sarr{color:#99aabb;margin:0 2px}
-.pw{max-width:1120px;margin:0 auto;padding:18px 20px}
-.sec-top{display:flex;align-items:flex-start;justify-content:space-between;padding:18px 20px 12px;border-bottom:2px solid #003380;flex-wrap:wrap;gap:8px}
-.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#6680aa;margin-bottom:3px}
-.page-sub{font-size:12px;color:#6680aa;margin-top:2px}
-h1{font-size:20px;color:#003380}
-h2{font-size:15px;color:#003380;margin:14px 0 6px;border-bottom:1px solid #003380;padding-bottom:3px}
-h3{font-size:13px;color:#003380;margin:10px 0 4px}
-.back-btn{background:none;border:1px solid #003380;padding:4px 11px;font-family:"Times New Roman",serif;font-size:11px;color:#003380;cursor:pointer;border-radius:2px}
-.back-btn:hover{background:#003380;color:#fff}
-.lhdr{text-align:center;padding:24px 20px 16px;border-bottom:2px solid #003380;margin-bottom:16px}
-.lhdr h1{font-size:22px}
-.lmeta{font-size:10px;color:#6680aa;margin-top:5px;text-transform:uppercase;letter-spacing:.05em}
-.strip{display:flex;border:1px solid #003380;margin-bottom:16px;overflow-x:auto}
-.si{flex:1;min-width:90px;text-align:center;padding:6px 8px;border-right:1px solid #003380}
-.si:last-child{border-right:none}
-.sv{font-size:13px;font-weight:bold;color:#003380}
-.sl{font-size:9px;text-transform:uppercase;letter-spacing:.05em;color:#6680aa}
-.cat-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#6680aa;padding-bottom:3px;border-bottom:1px solid #dde4ee;margin-bottom:8px;margin-top:14px}
-.ac-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:2px}
-.ac-grid-6{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:2px}
-.ac-card{border:1px solid #99aabb;border-radius:3px;cursor:pointer;overflow:hidden;transition:all .15s}
-.ac-card:hover{border-color:#003380;background:#f0f4ff}
-.ac-card.selected{border:2px solid #003380;background:#e8f0ff}
-.ac-ph{width:100%;height:75px;object-fit:cover;display:block;border-bottom:1px solid #dde4ee}
-.ac-phb{width:100%;height:75px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:24px;border-bottom:1px solid #dde4ee}
-.ac-body{padding:6px 8px}
-.ac-type{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:#6680aa;margin-bottom:1px}
-.ac-name{font-size:12px;font-weight:bold;color:#003380;margin-bottom:1px}
-.ac-desc{font-size:10px;color:#555;line-height:1.3}
-.mtype-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:680px;margin-top:16px}
-.mtype-card{border:2px solid #003380;border-radius:4px;padding:18px 20px;cursor:pointer}
-.mtype-card:hover{background:#f0f4ff}
-.mi{font-size:28px;margin-bottom:6px}
-.mn{font-size:15px;font-weight:bold;color:#003380;margin-bottom:4px}
-.md{font-size:12px;color:#555;line-height:1.4}
-.mnote{font-size:10px;color:#6680aa;margin-top:5px;font-style:italic}
-.auth-banner{background:#f0f4ff;border:1px solid #99aabb;padding:10px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid #dde4ee}
-.auth-lbl{font-size:12px;font-weight:bold;color:#003380}
-.auth-btn{border:1px solid #003380;background:#fff;padding:4px 13px;font-family:"Times New Roman",serif;font-size:11px;color:#003380;cursor:pointer;border-radius:2px}
-.auth-btn:hover{background:#e8f0ff}
-.auth-btn.on{background:#003380;color:#fff}
-.auth-note{font-size:10px;color:#6680aa;margin-left:auto}
-.fbar{padding:7px 20px;border-bottom:1px solid #dde4ee;display:flex;gap:4px;flex-wrap:wrap;align-items:center}
-.fl{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#6680aa;margin-right:2px}
-.fb{border:1px solid #003380;background:none;padding:2px 9px;font-family:"Times New Roman",serif;font-size:11px;color:#003380;cursor:pointer;border-radius:2px}
-.fb:hover{background:#f0f4ff}
-.fb.on{background:#003380;color:#fff}
-.fsep{width:1px;height:14px;background:#dde4ee;margin:0 3px}
-.cw{padding:14px 20px}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.co{border:1px solid #99aabb;border-radius:3px;padding:10px 12px;margin-bottom:8px}
-.co:hover{border-color:#003380;background:#f8faff}
-.co-top{display:flex;align-items:flex-start;gap:6px;margin-bottom:4px;flex-wrap:wrap}
-.co-nm{font-size:13px;font-weight:bold;color:#003380;flex:1}
-.bgs{display:flex;gap:3px;flex-wrap:wrap}
-.bg{font-size:9px;padding:1px 5px;border-radius:2px;text-transform:uppercase;letter-spacing:.04em;font-family:"Times New Roman",serif}
-.bm{border:1px solid #003380;color:#003380}
-.bmf{border:1px solid #006644;color:#006644}
-.bc{border:1px solid #884400;color:#884400}
-.bc2{border:1px solid #0044bb;background:#e8f0ff;color:#0033aa}
-.be{border:1px solid #4455aa;background:#eeeeff;color:#3344aa}
-.bf{border:1px solid #005533;background:#eeffee;color:#004422}
-.co-loc{font-size:11px;color:#6680aa;margin-bottom:3px}
-.co-loc::before{content:"📍 "}
-.caps{display:flex;flex-wrap:wrap;gap:3px;margin-top:3px}
-.cap{font-size:10px;border:1px solid #dde4ee;padding:1px 5px;border-radius:2px;color:#444}
-.cap-l{font-size:10px;border:1px solid #006633;background:#eefff6;padding:1px 5px;border-radius:2px;color:#004422}
-.cap-b{font-size:10px;border:1px solid #003380;background:#e8f0ff;padding:1px 5px;border-radius:2px;color:#002266}
-.cap-lb{font-size:10px;border:1px solid #884400;background:#fff8ee;padding:1px 5px;border-radius:2px;color:#662200}
-.co-note{font-size:11px;color:#555;margin-top:3px;line-height:1.4}
-.co-auth{margin-top:6px;padding-top:5px;border-top:1px solid #eef2f8}
-.co-al{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#6680aa;margin-bottom:3px}
-.atags{display:flex;gap:4px;flex-wrap:wrap}
-.at{font-size:11px;font-weight:bold;padding:2px 8px;border-radius:2px}
-.at-c{background:#e8f0ff;color:#0033aa;border:1px solid #0044bb}
-.at-e{background:#eeeeff;color:#3344aa;border:1px solid #4455aa}
-.at-f{background:#eeffee;color:#004422;border:1px solid #005533}
-.ata-sec{margin-bottom:12px}
-.ata-hdr{display:flex;align-items:center;gap:7px;padding-bottom:3px;margin-bottom:6px;border-bottom:1px solid #99aabb}
-.ata-n{font-size:12px;font-weight:bold;color:#003380}
-.ata-nm{font-size:12px;color:#003380}
-.ata-cnt{margin-left:auto;font-size:10px;color:#6680aa;text-transform:uppercase}
-.eco-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 20px}
-.eco-card{border:1px solid #99aabb;border-radius:3px;padding:12px}
-.eco-card:hover{border-color:#003380;background:#f8faff}
-.eco-tag{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#6680aa;margin-bottom:4px}
-.eco-nm{font-size:13px;font-weight:bold;color:#003380;margin-bottom:2px}
-.eco-loc{font-size:11px;color:#6680aa;margin-bottom:4px}
-.eco-body{font-size:11px;color:#444;line-height:1.45}
-.eco-progs{display:flex;flex-wrap:wrap;gap:3px;margin-top:5px}
-.ep{font-size:10px;border:1px solid #dde4ee;padding:1px 5px;color:#444}
-.apt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;padding:14px 20px}
-.apt-card{border:1px solid #99aabb;border-radius:3px;padding:12px}
-.apt-card:hover{border-color:#003380;background:#f8faff}
-.apt-iata{font-size:19px;font-weight:bold;color:#003380;margin-bottom:2px}
-.apt-nm{font-size:10px;color:#6680aa;margin-bottom:6px}
-.sv{display:flex;align-items:center;gap:5px;font-size:11px;color:#333;margin-bottom:3px}
-.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.on{background:#006644}.off{background:#ccc}
-.pfoot{border-top:2px solid #003380;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;font-size:10px;color:#6680aa;text-transform:uppercase;letter-spacing:.04em}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:660px;margin:16px auto}
-.tile{border:1px solid #99aabb;border-radius:3px;padding:11px;cursor:pointer}
-.tile:hover{background:#f0f4ff;border-color:#003380}
-.t-num{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#6680aa;margin-bottom:3px}
-.t-title{font-size:12px;font-weight:bold;color:#003380;margin-bottom:2px}
-.t-desc{font-size:11px;color:#555}
-.leg{display:flex;gap:10px;flex-wrap:wrap;font-size:10px;margin:4px 0 10px;padding:4px 0}
-.leg span{display:flex;align-items:center;gap:3px}
-@media(max-width:1000px){.ac-grid{grid-template-columns:repeat(4,1fr)}.ac-grid-6{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:800px){.ac-grid{grid-template-columns:repeat(3,1fr)}.ac-grid-6{grid-template-columns:repeat(3,1fr)}.two-col{grid-template-columns:1fr}.eco-grid{grid-template-columns:1fr}.mtype-grid{grid-template-columns:1fr}}
-@media(max-width:540px){.ac-grid{grid-template-columns:repeat(2,1fr)}.ac-grid-6{grid-template-columns:repeat(2,1fr)}.apt-grid{grid-template-columns:1fr 1fr}.tiles{grid-template-columns:1fr 1fr}}
-</style>
-</head>
-<body>
-<div id="topbar">
-  <span class="tb-logo">Malaysia Aerospace Bluebook 2026</span>
-  <span class="tb-div">|</span>
-  <span class="tb-sub">CAAM AMO Registry · MRO Directory</span>
-  <nav class="tb-nav">
-    <button class="tb-btn active" onclick="nav('landing')">Home</button>
-    <button class="tb-btn" id="tb-mt" style="display:none" onclick="nav('mtype')">Maint. Type</button>
-    <button class="tb-btn" onclick="nav('airframe')">Airframe MRO</button>
-    <button class="tb-btn" onclick="nav('ata')">ATA Components</button>
-    <button class="tb-btn" onclick="nav('eco')">Ecosystem</button>
-    <button class="tb-btn" onclick="nav('airports')">Airports</button>
-  </nav>
-</div>
-
-<!-- ══ LANDING ══ -->
-<div id="view-landing" class="view active">
-<div class="pw">
-  <div class="lhdr">
-    <div class="eyebrow">Malaysia Aerospace Industry Blueprint 2030</div>
-    <h1>Aerospace Ecosystem Bluebook 2026</h1>
-    <p style="font-size:12px;color:#444;max-width:560px;margin:5px auto 0">Interactive MRO and supply chain directory, built from the CAAM AMO Registry (May 2026). All 79 CAAM Part 145 approved organisations — for aircraft registered 9M in Malaysia.</p>
-    <div class="lmeta">Source: CAAM AMO Registry May 2026 · 79 Approved Organisations · CAAM CRS (9M registration)</div>
-  </div>
-  <div class="strip">
-    <div class="si"><div class="sv">79</div><div class="sl">CAAM AMOs</div></div>
-    <div class="si"><div class="sv">13</div><div class="sl">A320 Family AMOs</div></div>
-    <div class="si"><div class="sv">12</div><div class="sl">B737 AMOs</div></div>
-    <div class="si"><div class="sv">2</div><div class="sl">B747-400 AMOs</div></div>
-    <div class="si"><div class="sv">28</div><div class="sl">Helicopter AMOs</div></div>
-    <div class="si"><div class="sv">18</div><div class="sl">GA / Training AMOs</div></div>
-  </div>
-  <div style="text-align:center;font-size:12px;color:#003380;font-weight:bold;margin-bottom:4px">Step 1 — Select Aircraft Type to explore Malaysia's maintenance capability</div>
-  <div class="leg"><span><span class="cap-lb">■</span> Line &amp; Base</span><span><span class="cap-l">■</span> Line Only</span><span><span class="cap-b">■</span> Base Only</span></div>
-
-  <!-- Commercial Narrowbody -->
-  <div class="cat-lbl">Commercial — Narrowbody Jet (CAAM Category A1, above 5,700 kg)</div>
-  <div class="ac-grid">
-    <div class="ac-card" id="card-a320ceo" onclick="selectAC('a320ceo')">
-      <img class="ac-ph" src="images/AirbusA320-200.jpg" alt="A320 CEO" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">✈</div>
-      <div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A320 CEO</div><div class="ac-desc">CFM56-5B / IAE V2500 · 12L 6B</div></div>
-    </div>
-    <div class="ac-card" id="card-a320neo" onclick="selectAC('a320neo')">
-      <img class="ac-ph" src="images/A320neo.jpg" alt="A320 NEO" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">✈</div>
-      <div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A320 NEO</div><div class="ac-desc">LEAP-1A / PW1100G-JM · 7L 5L(PW)</div></div>
-    </div>
-    <div class="ac-card" id="card-b737cl" onclick="selectAC('b737cl')">
-      <img class="ac-ph" src="images/737NG.jpeg" alt="B737 Classic" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">✈</div>
-      <div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B737 Classic</div><div class="ac-desc">CFM56 series · 8L 1B</div></div>
-    </div>
-    <div class="ac-card" id="card-b737ng" onclick="selectAC('b737ng')">
-      <img class="ac-ph" src="images/737NG.jpeg" alt="B737 NG" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">✈</div>
-      <div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B737 NG</div><div class="ac-desc">CFM56-7B · 12L 3B</div></div>
-    </div>
-    <div class="ac-card" id="card-b737max" onclick="selectAC('b737max')">
-      <img class="ac-ph" src="images/B737max.jpeg" alt="B737 MAX" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">✈</div>
-      <div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B737 MAX</div><div class="ac-desc">LEAP-1B · 5L 1B</div></div>
-    </div>
-  </div>
-
-  <!-- Commercial Widebody -->
-  <div class="cat-lbl">Commercial — Widebody (CAAM Category A1)</div>
-  <div class="ac-grid-6">
-    <div class="ac-card" id="card-a330" onclick="selectAC('a330')">
-      <img class="ac-ph" src="images/A330.jpg" alt="A330" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">✈</div>
-      <div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A330</div><div class="ac-desc">CF6 / PW4000 / Trent 700/7000 · 7L 3B</div></div>
-    </div>
-    <div class="ac-card" id="card-a350" onclick="selectAC('a350')">
-      <div class="ac-phb">✈</div>
-      <div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A350</div><div class="ac-desc">RR Trent XWB · 3L 1B</div></div>
-    </div>
-    <div class="ac-card" id="card-b747" onclick="selectAC('b747')">
-      <img class="ac-ph" src="images/B747.jpg" alt="B747-400" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">✈</div>
-      <div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B747-400</div><div class="ac-desc">P&amp;W PW4000 · 2L 1B</div></div>
-    </div>
-    <div class="ac-card" id="card-b767" onclick="selectAC('b767')">
-      <img class="ac-ph" src="images/B767.jpg" alt="B767" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">✈</div>
-      <div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B767</div><div class="ac-desc">GE CF6 · 1 AMO (Raya L/B)</div></div>
-    </div>
-    <div class="ac-card" id="card-b777" onclick="selectAC('b777')">
-      <img class="ac-ph" src="images/B777.jpeg" alt="B777" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">✈</div>
-      <div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B777</div><div class="ac-desc">GE90 / RR RB211 / Trent 800 · 3L 1B</div></div>
-    </div>
-    <div class="ac-card" id="card-b787" onclick="selectAC('b787')">
-      <div class="ac-phb">✈</div>
-      <div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B787</div><div class="ac-desc">GEnx / RR Trent 1000 · 1L (Dviation)</div></div>
-    </div>
-  </div>
-
-  <!-- Regional -->
-  <div class="cat-lbl">Regional — Turboprop (CAAM Category A1 &amp; A2)</div>
-  <div class="ac-grid">
-    <div class="ac-card" id="card-atr42" onclick="selectAC('atr42')">
-      <img class="ac-ph" src="images/ATR 42.png" alt="ATR 42" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🛩</div>
-      <div class="ac-body"><div class="ac-type">ATR</div><div class="ac-name">ATR 42</div><div class="ac-desc">P&amp;W PW120/127 · 5L 3B</div></div>
-    </div>
-    <div class="ac-card" id="card-atr72" onclick="selectAC('atr72')">
-      <img class="ac-ph" src="images/ATR-75.jpg" alt="ATR 72" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🛩</div>
-      <div class="ac-body"><div class="ac-type">ATR</div><div class="ac-name">ATR 72</div><div class="ac-desc">P&amp;W PW120/127M · 5L 3B</div></div>
-    </div>
-    <div class="ac-card" id="card-beech" onclick="selectAC('beech')">
-      <img class="ac-ph" src="images/bEECHCRAFT B200.jpg" alt="Beechcraft B200/B300" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🛩</div>
-      <div class="ac-body"><div class="ac-type">Textron Aviation</div><div class="ac-name">Beechcraft B200/B300</div><div class="ac-desc">P&amp;WC PT6A · 6 AMOs all L/B</div></div>
-    </div>
-    <div class="ac-card" id="card-erj190" onclick="selectAC('erj190')">
-      <div class="ac-phb">🛩</div>
-      <div class="ac-body"><div class="ac-type">Embraer</div><div class="ac-name">ERJ-190</div><div class="ac-desc">P&amp;W PW1900G · 1L (SafeAir)</div></div>
-    </div>
-  </div>
-
-  <!-- Business Aviation -->
-  <div class="cat-lbl">Business Aviation (CAAM Category A1 &amp; A2)</div>
-  <div class="ac-grid-6">
-    <div class="ac-card" id="card-challenger" onclick="selectAC('challenger')">
-      <img class="ac-ph" src="images/Bombardier Challenger.jpg" alt="Challenger" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🛫</div>
-      <div class="ac-body"><div class="ac-type">Bombardier</div><div class="ac-name">Challenger 300/604/605</div><div class="ac-desc">AS907 / CF-34 / RR BR700 · ExecuJet L/B</div></div>
-    </div>
-    <div class="ac-card" id="card-global" onclick="selectAC('global')">
-      <img class="ac-ph" src="images/Bombardier Challenger.jpg" alt="Global/BD-700" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🛫</div>
-      <div class="ac-body"><div class="ac-type">Bombardier</div><div class="ac-name">Global / BD-700</div><div class="ac-desc">RR BR700 · ExecuJet L/B · Berjaya L</div></div>
-    </div>
-    <div class="ac-card" id="card-falcon7x" onclick="selectAC('falcon7x')">
-      <img class="ac-ph" src="images/Falcon 8X.jpg" alt="Falcon 7X" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🛫</div>
-      <div class="ac-body"><div class="ac-type">Dassault</div><div class="ac-name">Falcon 7X</div><div class="ac-desc">P&amp;WC PW307 · ExecuJet L/B</div></div>
-    </div>
-    <div class="ac-card" id="card-falcon2000" onclick="selectAC('falcon2000')">
-      <img class="ac-ph" src="images/Falcon 2000.jpg" alt="Falcon 2000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🛫</div>
-      <div class="ac-body"><div class="ac-type">Dassault</div><div class="ac-name">Falcon 2000</div><div class="ac-desc">CFE 738-1-1B · ExecuJet L/B</div></div>
-    </div>
-    <div class="ac-card" id="card-gulfstream" onclick="selectAC('gulfstream')">
-      <img class="ac-ph" src="images/G550.jpg" alt="Gulfstream" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🛫</div>
-      <div class="ac-body"><div class="ac-type">Gulfstream</div><div class="ac-name">GIV / GV-SP / G-VI</div><div class="ac-desc">RR Tay / BR700 · 2 AMOs</div></div>
-    </div>
-    <div class="ac-card" id="card-hondajet" onclick="selectAC('hondajet')">
-      <img class="ac-ph" src="images/Honda Jet.png" alt="HondaJet HA-420" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🛫</div>
-      <div class="ac-body"><div class="ac-type">Honda Aircraft</div><div class="ac-name">HA-420 HondaJet</div><div class="ac-desc">GE Honda HF120 · 2 AMOs</div></div>
-    </div>
-  </div>
-
-  <!-- GA -->
-  <div class="cat-lbl">General Aviation / Flight Training (CAAM Category A2, below 5,700 kg)</div>
-  <div class="ac-grid">
-    <div class="ac-card" id="card-cessna" onclick="selectAC('cessna')">
-      <img class="ac-ph" src="images/Cessna 150.jpg" alt="Cessna" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">✈</div>
-      <div class="ac-body"><div class="ac-type">Textron / Cessna</div><div class="ac-name">Cessna 150/172/182/208</div><div class="ac-desc">Continental / Lycoming / PT6A · 7 AMOs</div></div>
-    </div>
-    <div class="ac-card" id="card-piper" onclick="selectAC('piper')">
-      <img class="ac-ph" src="images/PA-28.jpg" alt="Piper PA-28" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">✈</div>
-      <div class="ac-body"><div class="ac-type">Piper</div><div class="ac-name">PA-28 / PA-34 / PA-44</div><div class="ac-desc">Lycoming / Continental · 6 AMOs L/B</div></div>
-    </div>
-    <div class="ac-card" id="card-diamond" onclick="selectAC('diamond')">
-      <img class="ac-ph" src="images/DA40.jpeg" alt="Diamond DA40/DA42" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">✈</div>
-      <div class="ac-body"><div class="ac-type">Diamond</div><div class="ac-name">DA40 / DA42 / DA62</div><div class="ac-desc">Lycoming / Austro E4 / TAE 125 · 5 AMOs</div></div>
-    </div>
-    <div class="ac-card" id="card-cirrus" onclick="selectAC('cirrus')">
-      <img class="ac-ph" src="images/SR20.jpg" alt="Cirrus SR20" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">✈</div>
-      <div class="ac-body"><div class="ac-type">Cirrus</div><div class="ac-name">SR20 / SR22 / SR22T</div><div class="ac-desc">Teledyne Continental · 1 AMO (Admal L/B)</div></div>
-    </div>
-    <div class="ac-card" id="card-piaggio" onclick="selectAC('piaggio')">
-      <img class="ac-ph" src="images/P180 advanti.webp" alt="Piaggio P180" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">✈</div>
-      <div class="ac-body"><div class="ac-type">Piaggio</div><div class="ac-name">P180 Avanti</div><div class="ac-desc">P&amp;WC PT6A · 2 AMOs L/B</div></div>
-    </div>
-  </div>
-
-  <!-- Helicopter -->
-  <div class="cat-lbl">Rotary Wing — Helicopter (CAAM Category A3) · All types are Line/Base unless noted</div>
-  <div class="ac-grid">
-    <div class="ac-card" id="card-h125" onclick="selectAC('h125')">
-      <img class="ac-ph" src="images/h125.jpg" alt="H125/AS350" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🚁</div>
-      <div class="ac-body"><div class="ac-type">Airbus Helicopters</div><div class="ac-name">H125 / AS350 / AS355</div><div class="ac-desc">Arriel 1/2 / Arrius 1 · 5 AMOs L/B</div></div>
-    </div>
-    <div class="ac-card" id="card-ec135" onclick="selectAC('ec135')">
-      <img class="ac-ph" src="images/h145.jpg" alt="EC135" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🚁</div>
-      <div class="ac-body"><div class="ac-type">Airbus Helicopters</div><div class="ac-name">EC135</div><div class="ac-desc">Arrius 2B2 / PW206 · 3 AMOs L/B</div></div>
-    </div>
-    <div class="ac-card" id="card-h160" onclick="selectAC('h160')">
-      <img class="ac-ph" src="images/h160.jpg" alt="H160/EC175" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🚁</div>
-      <div class="ac-body"><div class="ac-type">Airbus Helicopters</div><div class="ac-name">H160 / EC175</div><div class="ac-desc">Safran Arrano / PT6C · 4 AMOs L/B</div></div>
-    </div>
-    <div class="ac-card" id="card-h225" onclick="selectAC('h225')">
-      <img class="ac-ph" src="images/H215.jpg" alt="H215/H225" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🚁</div>
-      <div class="ac-body"><div class="ac-type">Airbus Helicopters</div><div class="ac-name">H215 / H225 / AS332 / EC225</div><div class="ac-desc">Makila 1/2 · 3 AMOs L/B</div></div>
-    </div>
-    <div class="ac-card" id="card-aw139" onclick="selectAC('aw139')">
-      <img class="ac-ph" src="images/AW139.jpg" alt="AW139" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🚁</div>
-      <div class="ac-body"><div class="ac-type">Leonardo</div><div class="ac-name">AW139 / AW189 / AW169 / A109</div><div class="ac-desc">PT6C / PT6B / CT7 / PW206 · 6 AMOs L/B</div></div>
-    </div>
-    <div class="ac-card" id="card-bell" onclick="selectAC('bell')">
-      <img class="ac-ph" src="images/Bell 206.jpg" alt="Bell" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🚁</div>
-      <div class="ac-body"><div class="ac-type">Bell Textron</div><div class="ac-name">Bell 206 / 407 / 429 / 505</div><div class="ac-desc">RR 250 / PW207 / Arrius 2R · 3–5 AMOs</div></div>
-    </div>
-    <div class="ac-card" id="card-s76" onclick="selectAC('s76')">
-      <img class="ac-ph" src="images/S76.jpg" alt="S-76" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="ac-phb" style="display:none">🚁</div>
-      <div class="ac-body"><div class="ac-type">Sikorsky</div><div class="ac-name">S-76B</div><div class="ac-desc">P&amp;WC PT6B · 1 AMO (Mados's L/B)</div></div>
-    </div>
-    <div class="ac-card" id="card-robinson" onclick="selectAC('robinson')">
-      <div class="ac-phb">🚁</div>
-      <div class="ac-body"><div class="ac-type">Robinson</div><div class="ac-name">R22 / R44 / R66</div><div class="ac-desc">Lycoming / RR 250 · 3 AMOs L/B</div></div>
-    </div>
-  </div>
-
-  <div style="text-align:center;font-size:11px;color:#6680aa;margin:16px 0 8px">— or browse directly by section —</div>
-  <div class="tiles">
-    <div class="tile" onclick="nav('airframe')"><div class="t-num">A — Airframe</div><div class="t-title">Airframe MRO</div><div class="t-desc">All 79 CAAM Part 145 airframe facilities</div></div>
-    <div class="tile" onclick="nav('ata')"><div class="t-num">B — Components</div><div class="t-title">ATA Component Repair</div><div class="t-desc">APACS, Collins, GE Engine, Skyways + more</div></div>
-    <div class="tile" onclick="nav('eco')"><div class="t-num">C — Ecosystem</div><div class="t-title">Manufacturers</div><div class="t-desc">CTRM · Zenix · SAM · UMW</div></div>
-    <div class="tile" onclick="nav('airports')"><div class="t-num">D — Airports</div><div class="t-title">Airport Services</div><div class="t-desc">KUL · SZB · PEN · BKI · KCH · MYY</div></div>
-  </div>
-</div>
-<div class="pfoot"><span>Malaysia Aerospace Ecosystem Bluebook 2026 · Built from CAAM AMO Registry May 2026</span><span>For Illustration · Verify with CAAM before operational decisions</span></div>
-</div>
-
-<!-- ══ MTYPE ══ -->
-<div id="view-mtype" class="view">
-  <div class="stepbar">
-    <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft Selected</div>
-    <span class="sarr">›</span>
-    <div class="step active"><span class="step-n">2</span>Maintenance Category</div>
-    <span class="sarr">›</span>
-    <div class="step"><span class="step-n">3</span>Facilities &amp; Release Authority</div>
-  </div>
-  <div class="sec-top">
-    <div>
-      <div class="eyebrow" id="mt-ey">Step 2</div>
-      <h1 id="mt-title">Select Maintenance Category</h1>
-      <p class="page-sub" id="mt-sub"></p>
-    </div>
-    <button class="back-btn" onclick="nav('landing')">← Change Aircraft</button>
-  </div>
-  <div class="pw">
-    <div class="mtype-grid">
-      <div class="mtype-card" onclick="goMtype('airframe')">
-        <div class="mi">🏭</div>
-        <div class="mn">Airframe Maintenance</div>
-        <div class="md">Line checks, A/C/D-checks, structural repairs, painting, cabin refurbishment.</div>
-        <div class="mnote">→ Shows CAAM Part 145 approved MRO facilities and which release certificates they can issue</div>
-      </div>
-      <div class="mtype-card" onclick="goMtype('ata')">
-        <div class="mi">⚙️</div>
-        <div class="mn">Component / ATA Chapter Repair</div>
-        <div class="md">Specific system or component overhaul removed from aircraft — ECS, hydraulics, landing gear, avionics, APU, engines.</div>
-        <div class="mnote">→ Browse by ATA chapter, filtered by release authority (CAAM CRS · EASA Form 1 · FAA 8130-3)</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ AIRFRAME MRO ══ -->
-<div id="view-airframe" class="view">
-  <div class="stepbar">
-    <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div>
-    <span class="sarr">›</span>
-    <div class="step done" onclick="nav('mtype')"><span class="step-n">2</span>Airframe Maint.</div>
-    <span class="sarr">›</span>
-    <div class="step active"><span class="step-n">3</span>Facilities &amp; Release Authority</div>
-  </div>
-  <div class="sec-top">
-    <div>
-      <div class="eyebrow">Airframe MRO — CAAM Part 145 Approved</div>
-      <h1 id="af-title">Airframe MRO Facilities · Malaysia</h1>
-      <p class="page-sub">Filter by required release authority. All facilities hold CAAM approval for 9M-registered aircraft.</p>
-    </div>
-    <button class="back-btn" onclick="nav('mtype')">← Maint. Type</button>
-  </div>
-  <div class="auth-banner">
-    <div class="auth-lbl">Release Certificate Required:</div>
-    <button class="auth-btn on" onclick="filterAuth('all',this,'af')">All</button>
-    <button class="auth-btn" onclick="filterAuth('caam',this,'af')">🇲🇾 CAAM CRS</button>
-    <button class="auth-btn" onclick="filterAuth('easa',this,'af')">🇪🇺 EASA Form 1</button>
-    <button class="auth-btn" onclick="filterAuth('faa',this,'af')">🇺🇸 FAA 8130-3</button>
-    <span class="auth-note">CRS = Certificate of Release to Service</span>
-  </div>
-  <div class="fbar">
-    <span class="fl">Aircraft:</span>
-    <button class="fb on" id="afall" onclick="filterACaf('all',this)">All</button>
-    <button class="fb" id="afa320" onclick="filterACaf('a320',this)">A320 Family</button>
-    <button class="fb" id="afb737" onclick="filterACaf('b737',this)">B737</button>
-    <button class="fb" id="afa330" onclick="filterACaf('a330',this)">Widebody</button>
-    <button class="fb" id="afatr" onclick="filterACaf('atr',this)">ATR / Turboprop</button>
-    <button class="fb" id="afbizjet" onclick="filterACaf('bizjet',this)">Business Jet</button>
-    <button class="fb" id="afheli" onclick="filterACaf('heli',this)">Helicopter</button>
-    <button class="fb" id="afga" onclick="filterACaf('ga',this)">GA / Training</button>
-  </div>
-  <div class="cw" id="af-cards">
-    <div class="leg"><span><span class="cap-lb">■</span> Line &amp; Base</span><span><span class="cap-l">■</span> Line Only</span></div>
-
-    <!-- NARROWBODY -->
-    <h2>Commercial Narrowbody — A320 Family &amp; B737</h2>
-
-    <div class="co" data-reg="caam easa faa" data-ac="a320 b737">
-      <div class="co-top"><div class="co-nm">Sepang Aircraft Engineering (SAE)</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Sepang, Selangor — WMKK (KLIA) · AMO/2018/06</div>
-      <div class="caps">
-        <span class="cap-lb">A318/A319/A320/A321 CFM International CFM56 (L/B)</span>
-        <span class="cap-lb">A318/A319/A320/A321 CFM LEAP-1A (L/B)</span>
-        <span class="cap-lb">A319/A320/A321 IAE V2500 (L/B)</span>
-        <span class="cap-lb">A319/A320/A321 PW1100G-JM (L/B)</span>
-        <span class="cap-lb">A330 RR Trent 700 (L/B)</span>
-        <span class="cap">NDT: LP / EC / UT / MP / Thermography</span>
-      </div>
-      <div class="co-note">Airbus Customer Services network partner. JV with SIAEC. 17+ authority certifications. Eco-paint bay at KLIA. A-Check to E-Check capability.</div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam easa" data-ac="a320 b737 atr">
-      <div class="co-top"><div class="co-nm">AIROD Aerospace Technology Sdn Bhd</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Subang, Selangor — WMSA · AMO/2016/29</div>
-      <div class="caps">
-        <span class="cap-lb">B737-300/400/500 Classic CFM56 (L/B)</span>
-        <span class="cap-lb">B737-600/700/800/900 NG CFM56 (L/B)</span>
-        <span class="cap-lb">B737 MAX LEAP-1B (L/B)</span>
-        <span class="cap-lb">A318/A319/A320/A321 CFM56 (L/B)</span>
-        <span class="cap-lb">ATR 42/72 PW127 (L/B)</span>
-        <span class="cap-lb">Dassault Falcon 7X PW307 (L/B)</span>
-        <span class="cap">NDT (5 methods) · C20 Structural</span>
-      </div>
-      <div class="co-note">Frost &amp; Sullivan "Asia Pacific Customised MRO Centre of the Year". Center Wing Box replacement capability. CAAM B1 turbine PW127.</div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="a320 b737 atr">
-      <div class="co-top"><div class="co-nm">Asia AeroTechnic Sdn Bhd (AAT)</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Subang, Selangor — AMO/2017/31 · Subsidiary of MARA Corporation</div>
-      <div class="caps">
-        <span class="cap-lb">A318/A319/A320/A321 CFM56 (L/B)</span>
-        <span class="cap-lb">B737-300/400/500 Classic CFM56 (L/B)</span>
-        <span class="cap-lb">B737-600/500/700/800 NG CFM56 (L/B)</span>
-        <span class="cap-lb">ATR 42/72 PW127 (L/B)</span>
-        <span class="cap">C5 Electrical · C20 Structural · NDT</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam easa" data-ac="a320">
-      <div class="co-top"><div class="co-nm">Asia Digital Engineering Sdn Bhd (ADE)</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Sepang, Selangor — WMKK · AMO/2020/01 · AirAsia-linked</div>
-      <div class="caps">
-        <span class="cap-lb">A318/A319/A320/A321 CFM56 (L/B)</span>
-        <span class="cap-lb">A319/A320/A321 CFM LEAP-1A (L/B)</span>
-        <span class="cap-lb">A319/A320/A321 IAE V2500 (L/B)</span>
-        <span class="cap-lb">A319/A320/A321 PW1100G-JM (L/B)</span>
-        <span class="cap-lb">A330 RR Trent 700 (L/B)</span>
-        <span class="cap-l">B737-600/700/800/900 NG CFM56 (L)</span>
-        <span class="cap">C4 Doors · C5 Electrical · C6 Equipment · C7 Engine &amp; APU · C8 Flight Controls · C14 Landing Gear · C15 Oxygen · C20 Structural</span>
-        <span class="cap">NDT: LP / MP / EC / UT / Thermography</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam easa faa" data-ac="a320 b737 a330">
-      <div class="co-top"><div class="co-nm">MAB Engineering Services Sdn Bhd (Malaysia Airlines Engineering)</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Sepang, Selangor — AMO/2023/01 · In-house MRO of Malaysia Airlines</div>
-      <div class="caps">
-        <span class="cap-lb">A318/A319/A320/A321 CFM56 (L/B)</span>
-        <span class="cap-l">A318/A319/A320/A321 LEAP-1A (L)</span>
-        <span class="cap-lb">A319/A320/A321 IAE V2500 (L/B)</span>
-        <span class="cap-l">A319/A320/A321 PW1100G-JM (L)</span>
-        <span class="cap-lb">A330 PW4000 (L/B)</span>
-        <span class="cap-l">A330 RR Trent 7000 (L)</span>
-        <span class="cap-lb">A330 RR Trent 700 (L/B)</span>
-        <span class="cap-lb">A350 RR Trent XWB (L/B)</span>
-        <span class="cap-lb">ATR 42-400/500/72-212A PW120 (L/B)</span>
-        <span class="cap-lb">B737-600/700/800/900 NG CFM56 (L/B)</span>
-        <span class="cap-lb">B737-7/8/9 MAX LEAP-1B (L/B)</span>
-        <span class="cap-lb">B747-400 P&amp;W PW4000 (L/B)</span>
-        <span class="cap-l">B777-200/300 GE90 (L)</span>
-        <span class="cap-lb">B777-200/300 RR Trent 800 (L/B)</span>
-        <span class="cap-lb">Viking DHC-6 PT6 (L/B)</span>
-        <span class="cap">B1 Turbine: CFM56-7B · LEAP-1B · PW100 · PW4000 · Trent XWB · Trent 7000</span>
-        <span class="cap">B3 APU: Honeywell GTCP 131 · GTCP 331 · HGT 1700</span>
-        <span class="cap">C1 C3 C5 C6 C7 C8 C13 C14 C15 C16 C18 C20 · NDT (full 6 methods)</span>
-      </div>
-      <div class="co-note">Malaysia's most comprehensive single-operator MRO. Broadest aircraft/engine type coverage in the CAAM registry. Also holds the only B3 APU approval in Malaysia.</div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="a320 b737">
-      <div class="co-top"><div class="co-nm">KarbonMRO Services Sdn Bhd</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Shah Alam, Selangor — AMO/2024/01</div>
-      <div class="caps">
-        <span class="cap-lb">B737-600/700/800/900 NG CFM56 (L/B)</span>
-        <span class="cap-lb">A318/A319/A320/A321 CFM56 (L/B)</span>
-        <span class="cap-lb">A318/A319/A320/A321 IAE V2500 (L/B)</span>
-        <span class="cap-lb">Honda HA-420 GE Honda HF120 (L/B)</span>
-        <span class="cap">B1 Turbine: CFM56-5B · CFM56-7B · Government Aircraft support</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="a320">
-      <div class="co-top"><div class="co-nm">SafeAir Technical Sdn Bhd</div><div class="bgs"><span class="bg bm">Line</span></div></div>
-      <div class="co-loc">Sepang, Selangor — AMO/2017/02</div>
-      <div class="caps">
-        <span class="cap-l">A318/A319/A320/A321 CFM56 (L)</span>
-        <span class="cap-l">A319/A320/A321 IAE V2500 (L)</span>
-        <span class="cap-l">A318/A319/A320/A321 LEAP-1A (L)</span>
-        <span class="cap-l">A319/A320/A321 PW1100G-JM (L)</span>
-        <span class="cap-l">A330 GE CF6 (L)</span>
-        <span class="cap-l">A330 RR Trent 700 (L)</span>
-        <span class="cap-l">A330 P&amp;W PW4000 (L)</span>
-        <span class="cap-l">B737-300/400/500 Classic CFM56 (L)</span>
-        <span class="cap-l">B737-600/700/800/900 NG CFM56 (L)</span>
-        <span class="cap-l">B737-7/8/9 MAX LEAP-1B (L)</span>
-        <span class="cap-l">B777-200/300 RR RB211 (L)</span>
-        <span class="cap-l">Embraer ERJ-190 P&amp;W PW1900G (L)</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="a320 b737 a330">
-      <div class="co-top"><div class="co-nm">Pos Aviation Engineering Services Sdn Bhd</div><div class="bgs"><span class="bg bm">Line</span></div></div>
-      <div class="co-loc">Sepang, Selangor — AMO/2016/13</div>
-      <div class="caps">
-        <span class="cap-l">A318/A319/A320/A321 CFM56 (L)</span>
-        <span class="cap-l">A318/A319/A320/A321 LEAP-1A (L)</span>
-        <span class="cap-l">A319/A320/A321 IAE V2500 (L)</span>
-        <span class="cap-l">A350 RR Trent XWB (L)</span>
-        <span class="cap-l">A330 GE CF6 (L)</span>
-        <span class="cap-l">A330 RR Trent 700 (L)</span>
-        <span class="cap-l">A330 P&amp;W PW4000 (L)</span>
-        <span class="cap-l">B737-300/400/500 Classic CFM56 (L)</span>
-        <span class="cap-l">B737-600/700/800/900 NG CFM56 (L)</span>
-        <span class="cap-l">B737-7/8/9 MAX LEAP-1B (L)</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="a320">
-      <div class="co-top"><div class="co-nm">Jet Premier One (M) Sdn Bhd</div><div class="bgs"><span class="bg bm">Line</span></div></div>
-      <div class="co-loc">Subang, Selangor — AMO/2016/27</div>
-      <div class="caps"><span class="cap-l">A318/A319/A320/A321 CFM56 (L only)</span></div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="a320">
-      <div class="co-top"><div class="co-nm">Base Maintenance Malaysia Sdn Bhd</div><div class="bgs"><span class="bg bm">Line</span></div></div>
-      <div class="co-loc">Malaysia — AMO/2025/04</div>
-      <div class="caps"><span class="cap-l">A319/A320/A321 IAE V2500 (L only)</span></div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="a320 b737">
-      <div class="co-top"><div class="co-nm">Malindo Airways Sdn Bhd (Batik Air Malaysia)</div><div class="bgs"><span class="bg bm">Line</span></div></div>
-      <div class="co-loc">Petaling Jaya, Selangor — AMO/2017/11</div>
-      <div class="caps">
-        <span class="cap-l">B737-600/700/800/900 NG CFM56 (L)</span>
-        <span class="cap-l">B737-7/8/9 MAX LEAP-1B (L)</span>
-        <span class="cap-l">ATR 42-400/500/72-212A PW120 (L)</span>
-        <span class="cap-l">A330 RR Trent 700 (L)</span>
-        <span class="cap-l">A330 RR Trent 7000 (L)</span>
-        <span class="cap">C5/C6/C13/C14/C15/C18 · NDT: LP/EC/UT/MP</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="b737">
-      <div class="co-top"><div class="co-nm">MAZ Gerbang Sdn Bhd</div><div class="bgs"><span class="bg bm">Line</span></div></div>
-      <div class="co-loc">Nilai, Negeri Sembilan — AMO/2021/03</div>
-      <div class="caps">
-        <span class="cap-l">B737-300/400/500 Classic CFM56 (L)</span>
-        <span class="cap-l">B737-600/700/800/900 NG CFM56 (L)</span>
-        <span class="cap-l">A318/A319/A320/A321 CFM56 (L)</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="b737">
-      <div class="co-top"><div class="co-nm">MJETS Air Sdn Bhd</div><div class="bgs"><span class="bg bm">Line</span></div></div>
-      <div class="co-loc">Sepang, Selangor — AMO/2023/03</div>
-      <div class="caps">
-        <span class="cap-l">B737-300/400/500 Classic CFM56 (L)</span>
-        <span class="cap-l">B737-600/700/800/900 NG CFM56 (L)</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="b737">
-      <div class="co-top"><div class="co-nm">World Cargo Airline Sdn Bhd</div><div class="bgs"><span class="bg bm">Line</span></div></div>
-      <div class="co-loc">Sepang, Selangor — AMO/2017/05</div>
-      <div class="caps">
-        <span class="cap-l">B737-300/400/500 Classic CFM56 (L)</span>
-        <span class="cap-l">B737-600/700/800/900 NG CFM56 (L)</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="b737 atr">
-      <div class="co-top"><div class="co-nm">Skyways Technics Aircraft Maintenance</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Shah Alam, Selangor — AMO/2026/02 · Newest CAAM approval (2026)</div>
-      <div class="caps">
-        <span class="cap-lb">ATR 42-400/500/72-212A P&amp;W PW120 (L/B)</span>
-      </div>
-      <div class="co-note">Skyways Technics (Hungary-based European MRO group). New 2026 CAAM approval. Also holds EASA approval for Airbus A320 family structural component repair (fuselage panels, doors, wing fairings).</div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span></div></div>
-    </div>
-
-    <!-- WIDEBODY -->
-    <h2>Commercial Widebody — A330 / A350 / B747 / B767 / B777 / B787</h2>
-
-    <div class="co" data-reg="caam" data-ac="a330 a350 b737 b747 b777 bizjet">
-      <div class="co-top"><div class="co-nm">Dviation Technics Sdn Bhd</div><div class="bgs"><span class="bg bm">Line (all types)</span></div></div>
-      <div class="co-loc">Shah Alam, Selangor — AMO/2017/06 · Broadest single-AMO type coverage in Malaysia</div>
-      <div class="caps">
-        <span class="cap-l">A318/A319/A320/A321 CFM56 (L)</span>
-        <span class="cap-l">A319/A320/A321 IAE V2500 (L)</span>
-        <span class="cap-l">A318/A319/A320/A321 LEAP-1A (L)</span>
-        <span class="cap-l">A319/A320/A321 PW1100G-JM (L)</span>
-        <span class="cap-l">A330 GE CF6 (L)</span>
-        <span class="cap-l">A330 P&amp;W PW4000 (L)</span>
-        <span class="cap-l">A330 RR Trent 700 (L)</span>
-        <span class="cap-l">A350 RR Trent XWB (L)</span>
-        <span class="cap-l">B737-300/400/500 Classic CFM56 (L)</span>
-        <span class="cap-l">B737-600/700/800/900 NG CFM56 (L)</span>
-        <span class="cap-l">B737-7/8/9 MAX LEAP-1B (L)</span>
-        <span class="cap-l">B747-400 P&amp;W PW4000 (L)</span>
-        <span class="cap-l">B777-200/300 GE GE90 (L)</span>
-        <span class="cap-l">B777-200/300 RR RB211 (L)</span>
-        <span class="cap-l">B787-8/9/10 GE GEnx (L)</span>
-        <span class="cap-l">B787-8/9/10 RR Trent 1000 (L)</span>
-        <span class="cap-l">Honda HA-420 GE Honda HF120 (L)</span>
-      </div>
-      <div class="co-note">Line maintenance only across all 17 type approvals. Only AMO in Malaysia approved for B787 and the only AMO approved for B777 GEnx/RB211 combination. Unique in having both widebody Boeing fleet and HondaJet on the same approval.</div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="a330 b737">
-      <div class="co-top"><div class="co-nm">Raya Airways Sdn Bhd</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Subang, Selangor — AMO/2016/15</div>
-      <div class="caps">
-        <span class="cap-lb">B767-200/300/400 GE CF6 (L/B)</span>
-        <span class="cap-lb">A318/A319/A320/A321 CFM56 (L/B)</span>
-        <span class="cap-lb">A319/A320/A321 IAE V2500 (L/B)</span>
-        <span class="cap-l">B737-300/400/500 Classic CFM56 (L)</span>
-        <span class="cap">C5/C14/C15/C18 · NDT: LP/EC/MP/UT</span>
-      </div>
-      <div class="co-note">Only AMO in Malaysia with Line &amp; Base approval for the B767. Raya operates B767 cargo fleet.</div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <!-- ATR -->
-    <h2>ATR 42 / 72 Turboprop (PW120 / PW127)</h2>
-    <div class="co" data-reg="caam" data-ac="atr">
-      <div class="co-top"><div class="co-nm">Berjaya Air Sdn Bhd</div><div class="bgs"><span class="bg bm">Line</span></div></div>
-      <div class="co-loc">Subang, Selangor — AMO/2016/25</div>
-      <div class="caps">
-        <span class="cap-l">ATR 42-500 P&amp;W PW127 (L)</span>
-        <span class="cap-l">ATR 72-212A P&amp;W PW127 (L)</span>
-        <span class="cap-l">Bombardier BD-700-1A11 RR BR700-710A2-20 (L)</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <!-- BUSINESS JET -->
-    <h2>Business Aviation</h2>
-    <div class="co" data-reg="caam easa faa" data-ac="bizjet">
-      <div class="co-top"><div class="co-nm">ExecuJet MRO Services Malaysia Sdn Bhd</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Subang, Selangor — WMSA · AMO/2016/12 · Dassault Authorised Service Centre</div>
-      <div class="caps">
-        <span class="cap-lb">Bombardier Challenger 300 — Honeywell AS907 (L/B)</span>
-        <span class="cap-lb">Bombardier BD-700 (Global) — RR BR700 (L/B)</span>
-        <span class="cap-lb">Bombardier Challenger 604/605 — GE CF-34 (L/B)</span>
-        <span class="cap-lb">Gulfstream G-IV — RR Tay (L/B)</span>
-        <span class="cap-lb">Gulfstream 200/Galaxy — P&amp;WC PW306A (L/B)</span>
-        <span class="cap-lb">Dassault Falcon 7X — P&amp;WC PW307 (L/B)</span>
-        <span class="cap-lb">Dassault Falcon 2000 — CFE 738-1-1B (L/B)</span>
-        <span class="cap">C5 Electrical · C14 Landing Gear</span>
-      </div>
-      <div class="co-note">Winner Bombardier ASF Best Performance Award. Honeywell APU authorised SC. Collins BRSA dealer. 24/7 AOG support. SE Asia's most comprehensive bizjet MRO.</div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="bizjet b737">
-      <div class="co-top"><div class="co-nm">Mados's Holdings Sdn Bhd</div><div class="bgs"><span class="bg bm">Line</span></div></div>
-      <div class="co-loc">Johor Bahru, Johor — AMO/2021/01 · Johor Royal aviation support</div>
-      <div class="caps">
-        <span class="cap-l">B737-600/700/800/900 NG CFM56 (L)</span>
-        <span class="cap-l">Gulfstream GV-SP — RR BR700-710C4-11 (L)</span>
-        <span class="cap-l">Gulfstream G-VI — RR BR700-725A1-12 (L)</span>
-        <span class="cap-lb">Sikorsky S-76B — P&amp;WC PT6B (L/B)</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="bizjet">
-      <div class="co-top"><div class="co-nm">KarbonMRO Services Sdn Bhd (Honda HA-420)</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Shah Alam, Selangor — AMO/2024/01</div>
-      <div class="caps">
-        <span class="cap-lb">Honda Aircraft HA-420 HondaJet — GE Honda HF120 (L/B)</span>
-      </div>
-      <div class="co-note">One of only two CAAM AMOs approved for the HondaJet HA-420. KarbonMRO holds both Line and Base approval, making it the primary MRO option for 9M-registered HondaJets.</div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <!-- HELICOPTER -->
-    <h2>Rotary Wing — Helicopter (All types L/B unless noted)</h2>
-
-    <div class="co" data-reg="caam easa" data-ac="heli">
-      <div class="co-top"><div class="co-nm">Airbus Helicopters Malaysia Sdn Bhd</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Subang, Selangor — AMO/2017/15 · Airbus OEM Authorised Service Centre</div>
-      <div class="caps">
-        <span class="cap-lb">Airbus H-family: AS350, EC135, EC225, H160 (L/B)</span>
-        <span class="cap">C5 Electrical · C20 Structural · Safran Arriel SC</span>
-      </div>
-      <div class="co-note">OEM-authorised for all civil Airbus helicopter types. Covers Malaysia and ASEAN region.</div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="heli">
-      <div class="co-top"><div class="co-nm">Hammock Helicopter Sdn Bhd</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Subang, Selangor — AMO/2020/03</div>
-      <div class="caps">
-        <span class="cap-lb">EC120B — Safran Arrius 2F (L/B)</span>
-        <span class="cap-lb">EC135 T2/T2+/T3/T3H — Safran Arrius 2B2 (L/B)</span>
-        <span class="cap-lb">EC135 P1/P2/P2+/P3/P3H — P&amp;WC PW206B series (L/B)</span>
-        <span class="cap-lb">AS365 N3 — Safran Arriel 2C (L/B)</span>
-        <span class="cap-lb">EC225 LP — Safran Makila 2A / 2A1 (L/B)</span>
-        <span class="cap-lb">AS350 B3 — Safran Arriel 2B / 2B1 (L/B)</span>
-        <span class="cap-lb">Bell 407 — RR 250 series (L/B)</span>
-        <span class="cap-lb">Bell 429 — P&amp;WC PW207 (L/B)</span>
-        <span class="cap-lb">Robinson R66 — RR 250-C300/A1 (L/B)</span>
-        <span class="cap">C5 Electrical</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="heli">
-      <div class="co-top"><div class="co-nm">Leonardo Malaysia Sdn Bhd</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Subang, Selangor — AMO/2016/40 · Leonardo OEM Authorised</div>
-      <div class="caps">
-        <span class="cap-lb">AW139 — P&amp;WC PT6C series (L/B)</span>
-        <span class="cap-lb">AW189 — GE CT7-2E1 (L/B)</span>
-        <span class="cap-lb">A109 — P&amp;WC PW206C / PW207C (L/B)</span>
-        <span class="cap-lb">A119 — P&amp;WC PT6B series (L/B)</span>
-        <span class="cap-lb">AW169 — P&amp;WC PW210A (L/B)</span>
-        <span class="cap">C5 Electrical · C6 Equipment · C10 Helicopter Rotors · C11 Helicopter Trans</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="heli">
-      <div class="co-top"><div class="co-nm">Galaxy Aerospace (M) Sdn Bhd</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Shah Alam, Selangor — AMO/2016/02 · Largest helicopter type list in Malaysia</div>
-      <div class="caps">
-        <span class="cap-lb">AW139 — P&amp;WC PT6C (L/B)</span>
-        <span class="cap-lb">AW189 — GE CT7-2E1 (L/B)</span>
-        <span class="cap-lb">A109 — P&amp;WC PW206C (L/B)</span>
-        <span class="cap-lb">EC120B — Safran Arrius 2F (L/B)</span>
-        <span class="cap-lb">EC175 — P&amp;WC PT6C-67E (L/B)</span>
-        <span class="cap-lb">EC155 B/B1 — Safran Arriel 2C1/2C2 (L/B)</span>
-        <span class="cap-lb">AS365 N3 — Safran Arriel 2C (L/B)</span>
-        <span class="cap-lb">AS355 N/F2 — Safran Arrius 1A / RR 250 (L/B)</span>
-        <span class="cap-lb">AS350 B2/B3 — Safran Arriel 1D1 / 2D (L/B)</span>
-        <span class="cap-lb">Bell 407 — RR 250 (L/B)</span>
-        <span class="cap-lb">Bell 429 — P&amp;WC PW207 (L/B)</span>
-        <span class="cap-lb">Bell 505 — Safran Arrius 2R (L/B)</span>
-        <span class="cap-lb">Robinson R22/R44 — Lycoming O-540/IO-540 (L/B)</span>
-        <span class="cap-lb">Robinson R66 — RR 250-C300/A1 (L/B)</span>
-        <span class="cap-lb">Pilatus PC-6 — P&amp;WC PT6A (L/B)</span>
-        <span class="cap-lb">Cessna 172 — Lycoming IO-360 (L/B)</span>
-        <span class="cap-lb">Cessna 208 — P&amp;WC PT6A (L/B)</span>
-        <span class="cap">B1 Turbine · B2 Piston · C5 Electrical · C6 Equipment</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="heli">
-      <div class="co-top"><div class="co-nm">Weststar Aviation Services Sdn Bhd</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Ampang, Selangor — AMO/2017/29 · Major O&amp;G helicopter operator</div>
-      <div class="caps">
-        <span class="cap-lb">Leonardo AW139 — P&amp;WC PT6-67C (L/B)</span>
-        <span class="cap-lb">Leonardo AW189 — GE CT7-2E1 (L/B)</span>
-        <span class="cap">C5 Electrical · C6 Equipment · C14 Landing Gear · C18 Protection</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="heli">
-      <div class="co-top"><div class="co-nm">HAS International Sdn Bhd</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Miri, Sarawak — AMO/2016/16 · Key O&amp;G base</div>
-      <div class="caps">
-        <span class="cap-lb">Airbus EC175B — P&amp;WC PT6C-67E (L/B)</span>
-        <span class="cap">C5 Electrical · C6 Equipment · C10 Helicopter Rotors · C14 Landing Gear</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="heli">
-      <div class="co-top"><div class="co-nm">MHS Aviation Berhad</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Kuala Lumpur — AMO/2016/28</div>
-      <div class="caps"><span class="cap-lb">AS332L2 Super Puma — Safran Makila 1A2 (L/B)</span></div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="heli">
-      <div class="co-top"><div class="co-nm">Hornbill Skyways Sdn Bhd</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Kuching, Sarawak — AMO/2017/28</div>
-      <div class="caps">
-        <span class="cap-lb">Beech B300 — P&amp;WC PT6A (L/B)</span>
-        <span class="cap-lb">Beech B200GT — P&amp;WC PT6A (L/B)</span>
-        <span class="cap-lb">EC135 P2/P2+ — P&amp;WC PW206B2 (L/B)</span>
-        <span class="cap-lb">EC155 B1 — Safran Arriel 2C2 (L/B)</span>
-        <span class="cap-lb">EC175 — P&amp;WC PT6C-67E (L/B)</span>
-        <span class="cap-lb">AB206/Bell 206 — RR 250 (L/B)</span>
-        <span class="cap-lb">Bell 206L-4 — RR 250 (L/B)</span>
-        <span class="cap">C5 Electrical · C14 Landing Gear · B1 Turbine RR 250</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <!-- GA -->
-    <h2>General Aviation / Flight Training (A2 — below 5,700 kg)</h2>
-    <div class="co" data-reg="caam" data-ac="ga">
-      <div class="co-top"><div class="co-nm">Admal Sdn Bhd</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Subang, Selangor — AMO/2017/18</div>
-      <div class="caps">
-        <span class="cap-lb">Cessna 150 — Continental (L/B)</span>
-        <span class="cap-lb">Cessna 172 — Lycoming (L/B)</span>
-        <span class="cap-lb">Cessna 182 — Continental (L/B)</span>
-        <span class="cap-lb">Cessna 206 — Continental (L/B)</span>
-        <span class="cap-lb">Cessna 208B — P&amp;WC PT6 (L/B)</span>
-        <span class="cap-lb">Cirrus SR20/SR22/SR22T — Teledyne Continental (L/B)</span>
-        <span class="cap-lb">Diamond DA42 — Technify TAE 125 (L/B)</span>
-        <span class="cap-lb">Piper PA-28 — Lycoming (L/B)</span>
-        <span class="cap-lb">Piper PA-34 — Teledyne Continental (L/B)</span>
-        <span class="cap-lb">Beech B200 — P&amp;WC PT6 (L/B)</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="ga">
-      <div class="co-top"><div class="co-nm">Layang Layang Aerospace Sdn Bhd</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Kota Kinabalu, Sabah — AMO/2016/09 · Widest GA scope in East Malaysia</div>
-      <div class="caps">
-        <span class="cap-lb">Beech B300 — P&amp;WC PT6A (L/B)</span>
-        <span class="cap-lb">Beech B200 — P&amp;WC PT6A (L/B)</span>
-        <span class="cap-lb">Nomad N22/N24 — RR 250 (L/B)</span>
-        <span class="cap-lb">Cessna 150/172 — Lycoming O-320/IO-360 (L/B)</span>
-        <span class="cap-lb">Piper PA-28/34/44 — Lycoming / Continental (L/B)</span>
-        <span class="cap-lb">Diamond DA40 NG — Austro E4 (L/B)</span>
-        <span class="cap-lb">Diamond DA42 — Austro E4 (L/B)</span>
-        <span class="cap-lb">Diamond DA62 — Austro E4P (L/B)</span>
-        <span class="cap-lb">Britten-Norman BN2 Islander — Lycoming IO-540 (L/B)</span>
-        <span class="cap-lb">Gamebird 1 — Lycoming AEIO-580 (L/B)</span>
-        <span class="cap-lb">AB206/Bell 206 — RR 250 (L/B)</span>
-        <span class="cap-lb">BO105 C/S — RR Model 250 (L/B)</span>
-        <span class="cap-lb">AS355 F1/F2 — RR 250 (L/B)</span>
-        <span class="cap-lb">AS355 N — Safran Arrius 1A (L/B)</span>
-        <span class="cap-lb">EC135 P2+ — P&amp;WC PW206B2 (L/B)</span>
-        <span class="cap-lb">Robinson R22/R44 — Lycoming (L/B)</span>
-        <span class="cap-lb">Robinson R66 — RR 250 (L/B)</span>
-        <span class="cap-lb">AW139 — P&amp;WC PT6C (L/B)</span>
-        <span class="cap-lb">A109 — P&amp;WC PW207C (L/B)</span>
-        <span class="cap">B1 Turbine: RR 250-B17 / 250-C20 / 250-C30 · B2 Piston · C5/C7/C8/C11/C14</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="ga">
-      <div class="co-top"><div class="co-nm">International Aero Training Academy Sdn Bhd (IATA)</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Batu Berendam, Melaka — AMO/2017/37</div>
-      <div class="caps">
-        <span class="cap-lb">Diamond DA40 — Lycoming IO-360-M1A (L/B)</span>
-        <span class="cap-lb">Diamond DA40 NG — Austro E4-A (L/B)</span>
-        <span class="cap-lb">Diamond DA42 — Technify TAE 125-02-99 (L/B)</span>
-        <span class="cap-lb">Diamond DA42 NG — Austro E4-C (L/B)</span>
-        <span class="cap-lb">Piper PA-28-181 (Archer III) — Lycoming IO-360-B4A (L/B)</span>
-        <span class="cap">C5 Electrical</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-
-    <div class="co" data-reg="caam" data-ac="ga">
-      <div class="co-top"><div class="co-nm">Malaysian Flying Academy Sdn Bhd (MFA)</div><div class="bgs"><span class="bg bm">Line + Base</span></div></div>
-      <div class="co-loc">Batu Berendam, Melaka — AMO/2017/25</div>
-      <div class="caps">
-        <span class="cap-lb">Piper PA-28 — Lycoming O-360 / IO-360 (L/B)</span>
-        <span class="cap-lb">Piper PA-44 — Lycoming O-360 / LO-360 (L/B)</span>
-      </div>
-      <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ ATA COMPONENTS ══ -->
+f = open('/home/claude/out.html', 'a', encoding='utf-8')
+f.write("""
+<!-- ATA COMPONENTS -->
 <div id="view-ata" class="view">
-  <div class="stepbar">
-    <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div>
-    <span class="sarr">›</span>
-    <div class="step done" onclick="nav('mtype')"><span class="step-n">2</span>Component Repair</div>
-    <span class="sarr">›</span>
-    <div class="step active"><span class="step-n">3</span>ATA Chapter &amp; Release Authority</div>
-  </div>
-  <div class="sec-top">
-    <div>
-      <div class="eyebrow">ATA Component Repair — Malaysia</div>
-      <h1 id="ata-title">Component Repair Directory</h1>
-      <p class="page-sub">Filter by ATA chapter · Data from CAAM AMO Registry May 2026</p>
-    </div>
-    <button class="back-btn" onclick="nav('mtype')">← Maint. Type</button>
-  </div>
+  <div class="stepbar"><div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div><span class="sarr">&rsaquo;</span><div class="step done" onclick="nav('mtype')"><span class="step-n">2</span>Component Repair</div><span class="sarr">&rsaquo;</span><div class="step active"><span class="step-n">3</span>ATA Chapter &amp; Release Authority</div></div>
+  <div class="sec-top"><div><div class="eyebrow">ATA Component Repair &mdash; Malaysia</div><h1 id="ata-title">Component Repair Directory</h1><p class="page-sub">Filter by ATA chapter and release authority &middot; Data: CAAM AMO Registry May 2026</p></div><button class="back-btn" onclick="nav('mtype')">&larr; Maint. Type</button></div>
   <div class="auth-banner">
     <div class="auth-lbl">Release Authority:</div>
     <button class="auth-btn on" onclick="filterAuth('all',this,'ata')">All</button>
-    <button class="auth-btn" onclick="filterAuth('caam',this,'ata')">🇲🇾 CAAM CRS</button>
-    <button class="auth-btn" onclick="filterAuth('easa',this,'ata')">🇪🇺 EASA Form 1</button>
-    <button class="auth-btn" onclick="filterAuth('faa',this,'ata')">🇺🇸 FAA 8130-3</button>
+    <button class="auth-btn" onclick="filterAuth('caam',this,'ata')">&#127474;&#127486; CAAM CRS</button>
+    <button class="auth-btn" onclick="filterAuth('easa',this,'ata')">&#127466;&#127482; EASA Form 1</button>
+    <button class="auth-btn" onclick="filterAuth('faa',this,'ata')">&#127482;&#127480; FAA 8130-3</button>
     <span class="auth-note">EASA/FAA required for lessor return-to-service or export</span>
   </div>
   <div class="fbar">
@@ -994,549 +30,189 @@ h3{font-size:13px;color:#003380;margin:10px 0 4px}
     <button class="fb" onclick="filterATA('rotor',this)">62-67 Rotor</button>
     <button class="fb" onclick="filterATA('eng',this)">71-80 Engine</button>
   </div>
-  <div class="cw">
-    <div class="two-col">
-    <div>
-      <div class="ata-sec" data-ata="ecs">
-        <div class="ata-hdr"><span class="ata-n">ATA 21</span><span class="ata-nm">Air Conditioning &amp; Pressurisation (C1)</span><span class="ata-cnt">3 shops</span></div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">APACS (Asia Pacific Aircraft Component Services)</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam, Selangor — AMO/2017/13 · SIAEC + SR Technics JV · 90,000 sqft</div>
-          <div class="caps"><span class="cap">C1 Air Cond &amp; Press · A320 Fam · A330 · B737</span><span class="cap">Pneumatic Valves</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">Hamilton Sundstrand / Collins Aerospace Malaysia</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Klang, Selangor — AMO/2016/17 · 160,000 sqft · Collins OEM</div>
-          <div class="caps"><span class="cap">C1 Air Cond &amp; Press · Air Cycle Machines · ECS Valves</span><span class="cap">C7 Engine &amp; APU · C9 Fuel · C17 Pneumatic · C18 Protection</span></div>
-          <div class="co-note">$16M expansion (2022). Collins Dispatch℠ for Malaysia Airlines B737-8. RTX/Collins OEM-authorised.</div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">MAB Engineering Services Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Sepang, Selangor — AMO/2023/01</div>
-          <div class="caps"><span class="cap">C1 Air Cond &amp; Press (in-house fleet support)</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-      </div>
+  <div class="cw"><div class="two-col"><div>
 
-      <div class="ata-sec" data-ata="comms">
-        <div class="ata-hdr"><span class="ata-n">ATA 23</span><span class="ata-nm">Communications (C3)</span><span class="ata-cnt">5 shops</span></div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">APACS</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam, Selangor</div>
-          <div class="caps"><span class="cap">C3 Comms &amp; Nav · ATA 23-10 HF · ATA 23-40/50 Interphone</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">Scandinavian Avionics (M) Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Subang, Selangor — AMO/2017/14</div>
-          <div class="caps"><span class="cap">C3 — Communications &amp; Navigation</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">Honeywell Aerospace Avionics Malaysia Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Prai, Penang — AMO/2017/34</div>
-          <div class="caps"><span class="cap">C2 Auto Flight · C3 Comms &amp; Nav · C8 Flight Controls · C13 Indicating/Recording</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-      </div>
-
-      <div class="ata-sec" data-ata="elec">
-        <div class="ata-hdr"><span class="ata-n">ATA 24</span><span class="ata-nm">Electrical Power (C5)</span><span class="ata-cnt">24 shops</span></div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">APACS</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam, Selangor</div>
-          <div class="caps"><span class="cap">C5 Electrical Power &amp; Lights · A320 / A330 / B737</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-        <div class="co" data-reg="caam easa">
-          <div class="co-top"><div class="co-nm">AIROD Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Subang, Selangor — AMO/2016/19</div>
-          <div class="caps"><span class="cap">C5 Electrical Power &amp; Lights · C14 Landing Gear · Glass Cockpit upgrades</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">APR Aerospace · BHIC Aeroservices · Global Component Asia · SR Aviation</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Ayer Keroh Melaka / Subang / Subang / Subang</div>
-          <div class="caps"><span class="cap">C5 — Electrical Power &amp; Lights</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-      </div>
-
-      <div class="ata-sec" data-ata="interior">
-        <div class="ata-hdr"><span class="ata-n">ATA 25</span><span class="ata-nm">Equipment / Furnishings (C6)</span><span class="ata-cnt">19 shops</span></div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">APACS</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam, Selangor</div>
-          <div class="caps"><span class="cap">C6 Equipment · Cabin equipment / galley / cargo · A320 / A330 / B737</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">Interiors Aeroservices · Pecca Aviation · HRD Aero · Cosmo Aviation · Rise Aero · BT Airworks · Zigmar · Deftech · Avia Technique</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Various locations</div>
-          <div class="caps"><span class="cap">C6 — Equipment / Cabin interior repairs</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-      </div>
-
-      <div class="ata-sec" data-ata="fc">
-        <div class="ata-hdr"><span class="ata-n">ATA 27</span><span class="ata-nm">Flight Controls (C8)</span><span class="ata-cnt">8 shops</span></div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">APACS</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam, Selangor</div>
-          <div class="caps"><span class="cap">C8 Flight Controls · Actuators · Power Drive Units · B737/B757/B767/B777</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">Skyways Technics Asia Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Subang, Selangor — AMO/2019/07</div>
-          <div class="caps"><span class="cap">C4 Doors · C6 Equipment · C7 Engine-APU · C8 Flight Controls · C18 Protection · C20 Structural</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-      </div>
-
-      <div class="ata-sec" data-ata="fuel">
-        <div class="ata-hdr"><span class="ata-n">ATA 28</span><span class="ata-nm">Fuel System (C9)</span><span class="ata-cnt">3 shops</span></div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">APACS</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam, Selangor</div>
-          <div class="caps"><span class="cap">C9 Fuel System · A320 / A330 / B737</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">Eaton Aerospace Component Services Asia Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam, Selangor — AMO/2025/05</div>
-          <div class="caps"><span class="cap">C9 — Fuel System</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">Hamilton Sundstrand / Collins Aerospace Malaysia</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Klang, Selangor — AMO/2016/17</div>
-          <div class="caps"><span class="cap">C9 Fuel System · Fuel metering units</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-      </div>
-
-      <div class="ata-sec" data-ata="hyd">
-        <div class="ata-hdr"><span class="ata-n">ATA 29</span><span class="ata-nm">Hydraulics (C12)</span><span class="ata-cnt">1 shop</span></div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">APACS — Only CAAM-approved hydraulic shop in Malaysia</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam, Selangor</div>
-          <div class="caps"><span class="cap">C12 Hydraulic Power · A320 / A330 / B737</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-      </div>
-
+    <div class="ata-sec" data-ata="ecs">
+      <div class="ata-hdr"><span class="ata-n">ATA 21</span><span class="ata-nm">Air Conditioning &amp; Pressurisation (C1)</span><span class="ata-cnt">3 shops</span></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">APACS (Asia Pacific Aircraft Component Services)</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam, Selangor &mdash; AMO/2017/13 &middot; SIAEC + SR Technics JV &middot; 90,000 sqft</div><div class="caps"><span class="cap">C1 Air Cond &amp; Press &middot; Pneumatic Valves &middot; A320/A330/B737</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">Hamilton Sundstrand / Collins Aerospace Malaysia</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Klang, Selangor &mdash; AMO/2016/17 &middot; Collins OEM &middot; 160,000 sqft</div><div class="caps"><span class="cap">C1 ECS &middot; Air Cycle Machines &middot; Heat Exchangers &middot; ECS Valves &middot; C7 Engine &amp; APU &middot; C9 Fuel &middot; C17 Pneumatic &middot; C16 Propellers (ATR)</span></div><div class="co-note">$16M expansion (2022). Collins Dispatch&#8480; for MAS B737-8. RTX/Collins OEM-authorised.</div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">MAB Engineering Services Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Sepang, Selangor &mdash; AMO/2023/01</div><div class="caps"><span class="cap">C1 Air Cond &amp; Press (in-house fleet support)</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
     </div>
-    <div>
-      <div class="ata-sec" data-ata="ldg">
-        <div class="ata-hdr"><span class="ata-n">ATA 32</span><span class="ata-nm">Landing Gear (C14)</span><span class="ata-cnt">13 shops</span></div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">APACS</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam, Selangor</div>
-          <div class="caps"><span class="cap">C14 Landing Gear · A320 / A330 / B737 / B747 / B767 / B777</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">Safran Landing Systems Malaysia Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Negeri Sembilan — AMO/2018/01 · Safran OEM</div>
-          <div class="caps"><span class="cap">C14 — Landing Gear (OEM overhaul)</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">TP Aerospace Malaysia Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Subang, Selangor — AMO/2019/01</div>
-          <div class="caps"><span class="cap">C14 Landing Gear · NDT: EC / LP / MP / UT</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">Aerotrends Wheels and Brakes Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Subang, Selangor — AMO/2018/05</div>
-          <div class="caps"><span class="cap">C14 Landing Gear (Wheels &amp; Brakes) · NDT</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">Aerodynamic Engineering Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Subang, Selangor — AMO/2025/01</div>
-          <div class="caps"><span class="cap">C14 Landing Gear</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-      </div>
 
-      <div class="ata-sec" data-ata="nav">
-        <div class="ata-hdr"><span class="ata-n">ATA 34</span><span class="ata-nm">Navigation / Avionics (C3, C13)</span><span class="ata-cnt">5 shops</span></div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">APACS — C3 Comms &amp; Nav</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam, Selangor</div>
-          <div class="caps"><span class="cap">C3 Comms &amp; Nav · 2025: First ADIRU repair in Asia Pacific</span><span class="cap">A320 / A330 / A340 / B737</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">Honeywell Aerospace Avionics Malaysia Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Prai, Penang — AMO/2017/34</div>
-          <div class="caps"><span class="cap">C2 Auto Flight · C3 Comms &amp; Nav · C8 Flight Controls · C13 Indicating/Recording Systems</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-      </div>
-
-      <div class="ata-sec" data-ata="pneu">
-        <div class="ata-hdr"><span class="ata-n">ATA 36</span><span class="ata-nm">Pneumatic (C17)</span><span class="ata-cnt">2 shops</span></div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">APACS · Hamilton Sundstrand / Collins</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam / Klang, Selangor</div>
-          <div class="caps"><span class="cap">C17 Pneumatic &amp; Vacuum</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-      </div>
-
-      <div class="ata-sec" data-ata="str">
-        <div class="ata-hdr"><span class="ata-n">ATA 51–57</span><span class="ata-nm">Airframe Structures (C20)</span><span class="ata-cnt">7 shops</span></div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">APACS — ATA 52 Doors / ATA 53 Fuselage</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam, Selangor</div>
-          <div class="caps"><span class="cap">C20 Structural · ATA 52-30 Cargo Doors (A320/A330)</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-        <div class="co" data-reg="caam easa">
-          <div class="co-top"><div class="co-nm">Skyways Technics (Malaysia) — ATA 52/53/54/57</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam — AMO/2026/02 + AMO/2019/07 · EASA Part 145 (Hungary &amp; Malaysia)</div>
-          <div class="caps"><span class="cap">ATA 52 Doors — NLG Aft Door, Cargo Doors</span><span class="cap">ATA 53 Fuselage — Floor Panels, Panel Assemblies</span><span class="cap">ATA 54 Nacelles/Pylons</span><span class="cap">ATA 57 Wings — Inboard/Outboard Flap Fairings (A320 family)</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span></div></div>
-        </div>
-        <div class="co" data-reg="caam easa">
-          <div class="co-top"><div class="co-nm">AIROD Aerospace Technology</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Subang, Selangor — AMO/2016/29</div>
-          <div class="caps"><span class="cap">C20 Structural · Center Wing Box replacement (B737) · SRM repairs · Full NDT (5 methods)</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">G7 Aerospace Sdn Bhd / Epic Aero Sdn Bhd</div><div class="bgs"><span class="bg bc">NDT / Structural</span></div></div>
-          <div class="co-loc">Melaka / Shah Alam</div>
-          <div class="caps"><span class="cap">C20 Structural · NDT: EC / MP / UT / LP / Radiography</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">Aeroclear (Asia) Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam, Selangor — AMO/2025/03</div>
-          <div class="caps"><span class="cap">C19 — Windows (aircraft windshields &amp; windows)</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-      </div>
-
-      <div class="ata-sec" data-ata="prop">
-        <div class="ata-hdr"><span class="ata-n">ATA 61</span><span class="ata-nm">Propellers (C16)</span><span class="ata-cnt">4 shops</span></div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">Hamilton Sundstrand / Collins Aerospace Malaysia</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Klang, Selangor — AMO/2016/17 · OEM authorised for ATR propellers</div>
-          <div class="caps"><span class="cap">C16 Propellers · ATR 568F propeller system · PW127 governor</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">APS Asia Pacific Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam, Selangor — AMO/2025/02</div>
-          <div class="caps"><span class="cap">C16 Propellers · C18 Protection/Ice/Rain/Fire · NDT: LP / MP / UT</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">C&amp;A Aviation Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Johor Bahru, Johor — AMO/2019/05</div>
-          <div class="caps"><span class="cap">C16 Propellers · B2 Piston (Lycoming / Continental) · C5 Electrical · C7 Engine</span><span class="cap">NDT: LP / MP / EC</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-      </div>
-
-      <div class="ata-sec" data-ata="rotor">
-        <div class="ata-hdr"><span class="ata-n">ATA 62–67</span><span class="ata-nm">Rotor &amp; Drive Systems (C10/C11)</span><span class="ata-cnt">5 shops</span></div>
-        <div class="co" data-reg="caam easa">
-          <div class="co-top"><div class="co-nm">Airbus Helicopters Malaysia Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Subang, Selangor — OEM Authorised</div>
-          <div class="caps"><span class="cap">ATA 62 Main Rotor Blades &amp; Head · ATA 63 MR Drive · ATA 64 Tail Rotor · ATA 67 Rotor Flt Controls</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">Leonardo Malaysia Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Subang, Selangor — AMO/2016/40 · Leonardo OEM</div>
-          <div class="caps"><span class="cap">C10 Helicopter Rotors · C11 Helicopter Transmission · AW139/AW189/A109</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">HAS International Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Miri, Sarawak — AMO/2016/16</div>
-          <div class="caps"><span class="cap">C10 Helicopter Rotors (EC175B)</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-      </div>
-
-      <div class="ata-sec" data-ata="eng">
-        <div class="ata-hdr"><span class="ata-n">ATA 71–80</span><span class="ata-nm">Powerplant / Engine (B1/B2/B3)</span><span class="ata-cnt">10 B1 shops · 3 B2 shops · 1 B3 shop</span></div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">GE Engine Services Malaysia Sdn Bhd ★</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div>
-          <div class="co-loc">Subang, Selangor — AMO/2016/23 · GE / CFM OEM</div>
-          <div class="caps">
-            <span class="cap">B1 Turbine: CFM56-5B (A320 CEO)</span>
-            <span class="cap">B1 Turbine: CFM56-7B (B737 NG)</span>
-            <span class="cap">B1 Turbine: LEAP-1A (A320 NEO)</span>
-            <span class="cap">B1 Turbine: LEAP-1B (B737 MAX)</span>
-            <span class="cap">C7 Engine &amp; APU · C18 Protection · NDT: LP/MP/EC/UT</span>
-          </div>
-          <div class="co-note">Only CAAM-approved full engine shop for LEAP-1A and LEAP-1B in Malaysia.</div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">MAB Engineering Services — B1 + B3 APU</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div>
-          <div class="co-loc">Sepang, Selangor — AMO/2023/01 · Only B3 APU approval in Malaysia</div>
-          <div class="caps">
-            <span class="cap">B1: CFM56-7B · LEAP-1B · PW100 series · PW4000 series · RR Trent XWB · RR Trent 7000</span>
-            <span class="cap">B3 APU: Honeywell GTCP 131 · Honeywell GTCP 331 · Honeywell HGT 1700</span>
-          </div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">Global Turbine Asia Sdn Bhd</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div>
-          <div class="co-loc">Subang, Selangor — AMO/2017/39 · Safran Helicopter Engines OEM</div>
-          <div class="caps">
-            <span class="cap">B1 Turbine: Safran Arriel 1 Series (H125/AS350)</span>
-            <span class="cap">B1 Turbine: Safran Arriel 2 Series (H145/AS365)</span>
-            <span class="cap">B1 Turbine: Safran Arrius 1 Series (EC120/AS355)</span>
-            <span class="cap">B1 Turbine: Safran Arrius 2 Series (EC135/Bell 505)</span>
-            <span class="cap">B1 Turbine: Safran Makila 2 Series (AS332/EC225)</span>
-            <span class="cap">C7 Engine &amp; APU</span>
-          </div>
-          <div class="co-note">Safran OEM-authorised. Primary turboshaft engine MRO for all Airbus helicopter types in Malaysia.</div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">ATS Turbine Service Sdn Bhd</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div>
-          <div class="co-loc">Subang, Selangor — AMO/2023/02</div>
-          <div class="caps"><span class="cap">B1 Turbine: P&amp;WC PT6A series (turboprop / multi-application)</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">Real Turbine Engine Consultant Enterprise Sdn Bhd</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div>
-          <div class="co-loc">Johor Bahru, Johor — AMO/2024/03</div>
-          <div class="caps"><span class="cap">B1 Turbine: P&amp;WC PT6A series engines</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">APACS — Engine Components (C7)</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div>
-          <div class="co-loc">Shah Alam, Selangor — AMO/2017/13</div>
-          <div class="caps">
-            <span class="cap">C7 Engine &amp; APU components</span>
-            <span class="cap">ATA 73 Engine Fuel (A320/A330/B737)</span>
-            <span class="cap">ATA 74 Ignition (CFM56/A320/B737)</span>
-            <span class="cap">ATA 75 Compressor Bleed (PW4000/B747/B777)</span>
-            <span class="cap">ATA 79 Engine Oil (CFM56/A320/A330)</span>
-          </div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-        <div class="co" data-reg="caam easa faa">
-          <div class="co-top"><div class="co-nm">ExecuJet MRO Services Malaysia — Bizjet Engines</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div>
-          <div class="co-loc">Subang, Selangor — Honeywell Authorised SC</div>
-          <div class="caps">
-            <span class="cap">Honeywell AS907 (Challenger 300)</span>
-            <span class="cap">GE CF-34 (Challenger 604/605)</span>
-            <span class="cap">RR BR700 (Global/BD-700)</span>
-            <span class="cap">P&amp;WC PW307 (Falcon 7X)</span>
-            <span class="cap">Honeywell APU (all types)</span>
-          </div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">GKN Engine Systems Component Repair Sdn Bhd</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div>
-          <div class="co-loc">Iskandar Puteri, Johor — AMO/2020/05</div>
-          <div class="caps"><span class="cap">C7 Engine &amp; APU components · NDT: LP / EC / UT / Radiography</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-        <div class="co" data-reg="caam">
-          <div class="co-top"><div class="co-nm">C&amp;A Aviation Sdn Bhd · B2 Piston</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div>
-          <div class="co-loc">Johor Bahru, Johor — AMO/2019/05</div>
-          <div class="caps"><span class="cap">B2 Piston: Lycoming Engines · Continental Engines</span></div>
-          <div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div>
-        </div>
-      </div>
+    <div class="ata-sec" data-ata="comms">
+      <div class="ata-hdr"><span class="ata-n">ATA 23</span><span class="ata-nm">Communications (C3)</span><span class="ata-cnt">5 shops</span></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">APACS</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam, Selangor</div><div class="caps"><span class="cap">C3 Comms &amp; Nav &middot; ATA 23-10 HF &middot; ATA 23-40/50 Interphone &middot; A320/A330/A340/B737</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">Scandinavian Avionics (M) Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Subang, Selangor &mdash; AMO/2017/14</div><div class="caps"><span class="cap">C3 Communications &amp; Navigation</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">Honeywell Aerospace Avionics Malaysia Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Prai, Penang &mdash; AMO/2017/34</div><div class="caps"><span class="cap">C2 Auto Flight &middot; C3 Comms &amp; Nav &middot; C8 Flight Controls &middot; C13 Indicating/Recording Systems</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
     </div>
+
+    <div class="ata-sec" data-ata="elec">
+      <div class="ata-hdr"><span class="ata-n">ATA 24</span><span class="ata-nm">Electrical Power (C5)</span><span class="ata-cnt">24 shops &mdash; most common C-rating</span></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">APACS</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam, Selangor</div><div class="caps"><span class="cap">C5 Electrical Power &amp; Lights &middot; A320/A330/B737</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+      <div class="co" data-reg="caam easa"><div class="co-top"><div class="co-nm">AIROD Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Subang, Selangor</div><div class="caps"><span class="cap">C5 Electrical &middot; C14 Landing Gear &middot; Glass Cockpit / FMS upgrades</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">APR Aerospace &middot; BHIC Aeroservices &middot; Global Component Asia &middot; SR Aviation &middot; and others (19 additional C5 holders)</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Various locations across Peninsular Malaysia</div><div class="caps"><span class="cap">C5 Electrical Power &amp; Lights</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
     </div>
-  </div>
+
+    <div class="ata-sec" data-ata="interior">
+      <div class="ata-hdr"><span class="ata-n">ATA 25</span><span class="ata-nm">Equipment / Furnishings (C6)</span><span class="ata-cnt">19 shops</span></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">APACS</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam, Selangor</div><div class="caps"><span class="cap">C6 Equipment &middot; Flight Compartment &middot; Galley &middot; Cargo Compartment &middot; A320/A330/B737</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">Interiors Aeroservices &middot; Pecca Aviation &middot; HRD Aero &middot; Cosmo Aviation &middot; Rise Aero &middot; BT Airworks &middot; Zigmar &middot; Deftech &middot; Avia Technique</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam / Melaka / Subang / Sepang area</div><div class="caps"><span class="cap">C6 Equipment / Cabin interior repairs</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+    </div>
+
+    <div class="ata-sec" data-ata="fc">
+      <div class="ata-hdr"><span class="ata-n">ATA 27</span><span class="ata-nm">Flight Controls (C8)</span><span class="ata-cnt">8 shops</span></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">APACS</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam, Selangor</div><div class="caps"><span class="cap">C8 Flight Controls &middot; Actuators &middot; Power Drive Units &middot; B737/B757/B767/B777</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">Skyways Technics Asia Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Subang, Selangor &mdash; AMO/2019/07</div><div class="caps"><span class="cap">C4 Doors &middot; C6 Equipment &middot; C7 Engine-APU &middot; C8 Flight Controls &middot; C18 Protection &middot; C20 Structural</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+    </div>
+
+    <div class="ata-sec" data-ata="fuel">
+      <div class="ata-hdr"><span class="ata-n">ATA 28</span><span class="ata-nm">Fuel System (C9)</span><span class="ata-cnt">3 shops</span></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">APACS &middot; Hamilton Sundstrand/Collins &middot; Eaton Aerospace (AMO/2025/05)</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam / Klang, Selangor</div><div class="caps"><span class="cap">C9 Fuel System &middot; Fuel metering units &middot; A320/A330/B737</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+    </div>
+
+    <div class="ata-sec" data-ata="hyd">
+      <div class="ata-hdr"><span class="ata-n">ATA 29</span><span class="ata-nm">Hydraulics (C12)</span><span class="ata-cnt">1 shop &mdash; APACS only</span></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">APACS &mdash; Only CAAM-approved hydraulic component shop in Malaysia</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam, Selangor &mdash; AMO/2017/13</div><div class="caps"><span class="cap">C12 Hydraulic Power &middot; A320/A330/B737</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+    </div>
+
+  </div><div>
+
+    <div class="ata-sec" data-ata="ldg">
+      <div class="ata-hdr"><span class="ata-n">ATA 32</span><span class="ata-nm">Landing Gear (C14)</span><span class="ata-cnt">13 shops</span></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">APACS</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam, Selangor</div><div class="caps"><span class="cap">C14 Landing Gear &middot; A320/A330/B737/B747/B767/B777</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">Safran Landing Systems Malaysia Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Negeri Sembilan &mdash; AMO/2018/01 &middot; Safran OEM</div><div class="caps"><span class="cap">C14 Landing Gear (OEM full overhaul)</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">TP Aerospace Malaysia Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Subang, Selangor &mdash; AMO/2019/01</div><div class="caps"><span class="cap">C14 Landing Gear &middot; NDT: EC/LP/MP/UT</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">Aerotrends Wheels &amp; Brakes &middot; Aerodynamic Engineering</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Subang, Selangor &mdash; AMO/2018/05 &middot; AMO/2025/01</div><div class="caps"><span class="cap">C14 Landing Gear (Wheels &amp; Brakes) &middot; NDT</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+    </div>
+
+    <div class="ata-sec" data-ata="nav">
+      <div class="ata-hdr"><span class="ata-n">ATA 34</span><span class="ata-nm">Navigation / Avionics (C3/C13)</span><span class="ata-cnt">5 shops</span></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">APACS &mdash; 2025: First ADIRU repair in Asia Pacific</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam, Selangor</div><div class="caps"><span class="cap">C3 Comms &amp; Nav &middot; ADIRU (first in Asia Pacific, 2025) &middot; A320/A330/A340/B737</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">Honeywell Aerospace Avionics Malaysia</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Prai, Penang &mdash; AMO/2017/34</div><div class="caps"><span class="cap">C2 Auto Flight &middot; C3 Comms &amp; Nav &middot; C8 Flight Controls &middot; C13 Indicating/Recording</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+    </div>
+
+    <div class="ata-sec" data-ata="pneu">
+      <div class="ata-hdr"><span class="ata-n">ATA 36</span><span class="ata-nm">Pneumatic (C17)</span><span class="ata-cnt">2 shops</span></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">APACS &middot; Hamilton Sundstrand/Collins</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam / Klang, Selangor</div><div class="caps"><span class="cap">C17 Pneumatic &amp; Vacuum</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+    </div>
+
+    <div class="ata-sec" data-ata="str">
+      <div class="ata-hdr"><span class="ata-n">ATA 51&ndash;57</span><span class="ata-nm">Airframe Structures (C20)</span><span class="ata-cnt">7 shops</span></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">APACS &mdash; ATA 52 Doors / ATA 53 Fuselage</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam, Selangor</div><div class="caps"><span class="cap">C20 Structural &middot; ATA 52-30 Cargo Doors (A320/A330) &middot; ATA 52-50 Fixed Inner Doors</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+      <div class="co" data-reg="caam easa"><div class="co-top"><div class="co-nm">Skyways Technics (Malaysia) &mdash; ATA 52/53/54/57</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam &mdash; AMO/2026/02 + AMO/2019/07 &middot; EASA Part 145 Hungary &amp; Malaysia</div><div class="caps"><span class="cap">ATA 52 Doors &middot; ATA 53 Fuselage panels &middot; ATA 54 Nacelles/Pylons &middot; ATA 57 Wing fairings (A320 family all part numbers)</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span></div></div></div>
+      <div class="co" data-reg="caam easa"><div class="co-top"><div class="co-nm">AIROD Aerospace Technology</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Subang, Selangor</div><div class="caps"><span class="cap">C20 Structural &middot; CWB replacement (B737) &middot; SRM repairs &middot; Full NDT 5 methods</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">G7 Aerospace &middot; Epic Aero &middot; Aeroclear (Asia)</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Melaka / Shah Alam</div><div class="caps"><span class="cap">C20 Structural &middot; NDT: EC/MP/UT/LP/Radiography &middot; C19 Windows (Aeroclear only)</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+    </div>
+
+    <div class="ata-sec" data-ata="prop">
+      <div class="ata-hdr"><span class="ata-n">ATA 61</span><span class="ata-nm">Propellers (C16)</span><span class="ata-cnt">4 shops</span></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">Hamilton Sundstrand / Collins Aerospace Malaysia &mdash; ATR propeller OEM</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Klang, Selangor &mdash; AMO/2016/17</div><div class="caps"><span class="cap">C16 Propellers &middot; ATR 568F propeller system &middot; PW127 governor</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">APS Asia Pacific Sdn Bhd &middot; C&amp;A Aviation Sdn Bhd</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam (AMO/2025/02) &middot; Johor Bahru (AMO/2019/05)</div><div class="caps"><span class="cap">C16 Propellers &middot; C18 Protection/Ice/Rain/Fire &middot; B2 Piston: Lycoming/Continental [C&amp;A] &middot; NDT: LP/MP/UT/EC</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+    </div>
+
+    <div class="ata-sec" data-ata="rotor">
+      <div class="ata-hdr"><span class="ata-n">ATA 62&ndash;67</span><span class="ata-nm">Rotor &amp; Drive Systems (C10/C11)</span><span class="ata-cnt">5 shops</span></div>
+      <div class="co" data-reg="caam easa"><div class="co-top"><div class="co-nm">Airbus Helicopters Malaysia Sdn Bhd &mdash; OEM</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Subang, Selangor</div><div class="caps"><span class="cap">ATA 62 Main Rotor &middot; ATA 63 MR Drive &middot; ATA 64 Tail Rotor &middot; ATA 65 TR Drive &middot; ATA 67 Rotor Flt Ctrl</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">Leonardo Malaysia &middot; HAS International &middot; Hammock Helicopter</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Subang / Miri / Subang</div><div class="caps"><span class="cap">C10 Helicopter Rotors &middot; C11 Helicopter Transmission &middot; AW139/AW189 [Leonardo] &middot; EC175B [HAS]</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+    </div>
+
+    <div class="ata-sec" data-ata="eng">
+      <div class="ata-hdr"><span class="ata-n">ATA 71&ndash;80</span><span class="ata-nm">Powerplant / Engine (B1/B2/B3)</span><span class="ata-cnt">10 B1 &middot; 3 B2 &middot; 1 B3</span></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">GE Engine Services Malaysia Sdn Bhd &#11088;</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div><div class="co-loc">Subang, Selangor &mdash; AMO/2016/23 &middot; GE / CFM OEM</div><div class="caps"><span class="cap">B1: CFM56-5B (A320 CEO)</span><span class="cap">B1: CFM56-7B (B737 NG)</span><span class="cap">B1: CFM LEAP-1A (A320 NEO)</span><span class="cap">B1: CFM LEAP-1B (B737 MAX)</span><span class="cap">C7 Engine &amp; APU &middot; C18 Protection &middot; NDT: LP/MP/EC/UT</span></div><div class="co-note">Only full CAAM-approved LEAP-1A and LEAP-1B engine shop in Malaysia.</div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">MAB Engineering Services &mdash; B1 + B3 APU (only B3 in Malaysia)</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div><div class="co-loc">Sepang, Selangor &mdash; AMO/2023/01</div><div class="caps"><span class="cap">B1: CFM56-7B &middot; LEAP-1B &middot; PW100 series &middot; PW4000 series &middot; RR Trent XWB &middot; RR Trent 7000</span><span class="cap">B3 APU: Honeywell GTCP 131 &middot; GTCP 331 &middot; HGT 1700</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">Global Turbine Asia Sdn Bhd &mdash; Safran Helicopter Engines OEM</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div><div class="co-loc">Subang, Selangor &mdash; AMO/2017/39</div><div class="caps"><span class="cap">B1: Safran Arriel 1 series (H125/AS350)</span><span class="cap">B1: Safran Arriel 2 series (H145/AS365)</span><span class="cap">B1: Safran Arrius 1 series (EC120/AS355)</span><span class="cap">B1: Safran Arrius 2 series (EC135/Bell 505)</span><span class="cap">B1: Safran Makila 2 series (AS332/EC225)</span></div><div class="co-note">Safran OEM-authorised. Primary turboshaft engine MRO for all Airbus helicopter types in Malaysia.</div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">ATS Turbine Service &middot; Real Turbine Engine Consultant &middot; KarbonMRO (B1)</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div><div class="co-loc">Subang (AMO/2023/02) &middot; Johor Bahru (AMO/2024/03) &middot; Shah Alam (AMO/2024/01)</div><div class="caps"><span class="cap">B1 Turbine: P&amp;WC PT6A series (all three shops)</span><span class="cap">B1: CFM56-5B / CFM56-7B [KarbonMRO additionally]</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">APACS &mdash; Engine Components (C7)</div><div class="bgs"><span class="bg bc">Comp. MRO</span></div></div><div class="co-loc">Shah Alam, Selangor &mdash; AMO/2017/13</div><div class="caps"><span class="cap">C7 Engine &amp; APU components</span><span class="cap">ATA 73 Fuel (A320/A330/B737)</span><span class="cap">ATA 74 Ignition (CFM56/A320/B737)</span><span class="cap">ATA 75 Compressor Bleed (PW4000/B747/B777)</span><span class="cap">ATA 79 Oil System (CFM56/A320/A330)</span><span class="cap">ATA 80 Engine Cranking (A320/A330)</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+      <div class="co" data-reg="caam easa faa"><div class="co-top"><div class="co-nm">ExecuJet MRO Services Malaysia &mdash; Bizjet Engines</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div><div class="co-loc">Subang, Selangor &mdash; Honeywell Authorised SC</div><div class="caps"><span class="cap">Honeywell AS907 (Challenger 300)</span><span class="cap">GE CF-34 (Challenger 604/605)</span><span class="cap">RR BR700 (Global/BD-700)</span><span class="cap">P&amp;WC PW307 (Falcon 7X)</span><span class="cap">P&amp;WC PW306A (Gulfstream 200)</span><span class="cap">Honeywell APU (all types)</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span><span class="at at-e">EASA Form 1</span><span class="at at-f">FAA 8130-3</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">GKN Engine Systems Component Repair Sdn Bhd &middot; Airfoil Services</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div><div class="co-loc">Iskandar Puteri, Johor (AMO/2020/05) &middot; Petaling Jaya (AMO/2017/10)</div><div class="caps"><span class="cap">C7 Engine &amp; APU components &middot; NDT: LP/EC/UT/Radiography &middot; Advanced turbine component repair</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+      <div class="co" data-reg="caam"><div class="co-top"><div class="co-nm">C&amp;A Aviation Sdn Bhd &middot; B2 Piston Engine</div><div class="bgs"><span class="bg bc">Engine MRO</span></div></div><div class="co-loc">Johor Bahru, Johor &mdash; AMO/2019/05</div><div class="caps"><span class="cap">B2 Piston: Lycoming engines &middot; Continental engines</span></div><div class="co-auth"><div class="co-al">Releases under:</div><div class="atags"><span class="at at-c">CAAM CRS</span></div></div></div>
+    </div>
+
+  </div></div></div>
 </div>
 
-<!-- ══ ECOSYSTEM ══ -->
+<!-- ECOSYSTEM -->
 <div id="view-eco" class="view">
-  <div class="sec-top">
-    <div><div class="eyebrow">Ecosystem</div><h1>Manufacturers &amp; OEM Supply Chain</h1><p class="page-sub">Aerostructure manufacturers, precision parts, OEM-approved suppliers</p></div>
-    <button class="back-btn" onclick="nav('landing')">← Home</button>
-  </div>
+  <div class="sec-top"><div><div class="eyebrow">Ecosystem</div><h1>Manufacturers &amp; OEM Supply Chain</h1><p class="page-sub">Aerostructure manufacturers, precision parts, OEM-approved suppliers</p></div><button class="back-btn" onclick="nav('landing')">&larr; Home</button></div>
   <div class="eco-grid">
-    <div class="eco-card"><div class="eco-tag">Tier 2 · Composite Aerostructures</div>
-      <div class="eco-nm">CTRM Holdings (Composites Technology Research Malaysia)</div>
-      <div class="eco-loc">📍 Batu Berendam, Malacca + Subang MIAC (Spirit facility, 2025)</div>
-      <div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span><span class="bg be">EASA</span><span class="bg bf">NADCAP</span></div>
-      <div class="eco-body">DRB-HICOM / DEFTECH. Acquired Spirit AeroSystems Subang (~$95M, 2025). 400,000 sqft. OEM to Airbus and Boeing.</div>
-      <div class="eco-progs"><span class="ep">A320neo ailerons/spoilers</span><span class="ep">A350 XWB</span><span class="ep">A380</span><span class="ep">A400M</span><span class="ep">B737 NG</span><span class="ep">B787</span></div>
-    </div>
-    <div class="eco-card"><div class="eco-tag">Tier 2 · Precision Metallic</div>
-      <div class="eco-nm">Zenix Aerospace (formerly UPECA)</div>
-      <div class="eco-loc">📍 Shah Alam (2 plants) + Subang, Selangor</div>
-      <div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span><span class="bg be">EASA</span><span class="bg bf">NADCAP</span></div>
-      <div class="eco-body">Formerly Senior plc / UPECA. Independent as Zenix Aerospace 2025. Precision CNC metallic aerostructures for A320neo and civil OEMs.</div>
-      <div class="eco-progs"><span class="ep">A320neo metallic parts</span><span class="ep">Build-to-print</span><span class="ep">CNC machining</span></div>
-    </div>
-    <div class="eco-card"><div class="eco-tag">Engine Components · Tier 1</div>
-      <div class="eco-nm">UMW Aerospace</div>
-      <div class="eco-loc">📍 Shah Alam, Selangor</div>
-      <div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span></div>
-      <div class="eco-body">UMW Group. Manufactures Rolls-Royce Trent fan cases under offset programme. Tier 1 OEM supplier.</div>
-      <div class="eco-progs"><span class="ep">RR Trent fan cases</span><span class="ep">Engine components</span></div>
-    </div>
-    <div class="eco-card"><div class="eco-tag">Tier 2 · Precision Manufacturing</div>
-      <div class="eco-nm">SAM Malaysia (Singapore Aerospace Manufacturing)</div>
-      <div class="eco-loc">📍 Shah Alam / Selangor</div>
-      <div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span><span class="bg be">EASA</span></div>
-      <div class="eco-body">SAM Pte Ltd (Singapore) subsidiary. Precision metallic components for Airbus and Boeing global supply chains.</div>
-      <div class="eco-progs"><span class="ep">Sheet metal</span><span class="ep">CNC machining</span><span class="ep">Airbus &amp; Boeing supply chains</span></div>
-    </div>
-    <div class="eco-card"><div class="eco-tag">Tier 1 · Systems &amp; Component MRO</div>
-      <div class="eco-nm">Collins Aerospace Malaysia (RTX)</div>
-      <div class="eco-loc">📍 Subang Aerotech Park 160,000 sqft + Klang</div>
-      <div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span><span class="bg be">EASA</span><span class="bg bf">FAA</span></div>
-      <div class="eco-body">$16M expansion 2022. ECS, ACM, heat exchangers, engine starters, ATR propellers. Collins Dispatch℠ for MAS B737-8. 9 authority approvals.</div>
-      <div class="eco-progs"><span class="ep">ATA 21 ECS</span><span class="ep">ATA 61 Propellers</span><span class="ep">ATA 27 Actuation</span></div>
-    </div>
-    <div class="eco-card"><div class="eco-tag">Multi-System Component MRO</div>
-      <div class="eco-nm">APACS (Asia Pacific Aircraft Component Services)</div>
-      <div class="eco-loc">📍 Shah Alam · 90,000 sqft · SIAEC + SR Technics JV</div>
-      <div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span><span class="bg be">EASA</span><span class="bg bf">FAA</span></div>
-      <div class="eco-body">C1/C3/C4/C5/C6/C7/C8/C9/C12/C14/C17/C18 — broadest C-rating scope + only C12 Hydraulic in Malaysia. 2025: First ADIRU in Asia Pacific. 9 authority approvals.</div>
-      <div class="eco-progs"><span class="ep">A320/A330/B737/B747/B767/B777</span><span class="ep">CFM56 · PW4000</span><span class="ep">9 authority approvals</span></div>
-    </div>
-    <div class="eco-card"><div class="eco-tag">Engine MRO · GE / CFM OEM</div>
-      <div class="eco-nm">GE Engine Services Malaysia Sdn Bhd</div>
-      <div class="eco-loc">📍 Subang, Selangor — AMO/2016/23</div>
-      <div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span><span class="bg be">EASA</span><span class="bg bf">FAA</span></div>
-      <div class="eco-body">Full GE/CFM engine shop. CONFIRMED capability: CFM56-5B (A320 CEO), CFM56-7B (B737 NG), LEAP-1A (A320 NEO), LEAP-1B (B737 MAX). Only full LEAP shop in Malaysia.</div>
-      <div class="eco-progs"><span class="ep">CFM56-5B</span><span class="ep">CFM56-7B</span><span class="ep">LEAP-1A</span><span class="ep">LEAP-1B</span></div>
-    </div>
-    <div class="eco-card"><div class="eco-tag">Safran Engine MRO · OEM</div>
-      <div class="eco-nm">Global Turbine Asia Sdn Bhd</div>
-      <div class="eco-loc">📍 Subang, Selangor — Safran Helicopter Engines OEM</div>
-      <div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span></div>
-      <div class="eco-body">Safran OEM authorised. Full turboshaft engine overhaul for Airbus helicopter fleet — Arriel 1/2, Arrius 1/2, Makila 2.</div>
-      <div class="eco-progs"><span class="ep">Arriel 1 &amp; 2 (H125/AS365)</span><span class="ep">Arrius 1 &amp; 2 (EC120/EC135)</span><span class="ep">Makila 2 (H215/H225)</span></div>
-    </div>
+    <div class="eco-card"><div class="eco-tag">Tier 2 &middot; Composite Aerostructures</div><div class="eco-nm">CTRM Holdings (Composites Technology Research Malaysia)</div><div class="eco-loc">&#128205; Batu Berendam, Malacca + Subang MIAC (Spirit facility, 2025)</div><div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span><span class="bg be">EASA</span><span class="bg bf">NADCAP</span></div><div class="eco-body">DRB-HICOM / DEFTECH. Acquired Spirit AeroSystems Subang (~$95M, 2025). 400,000 sqft. OEM to Airbus and Boeing.</div><div class="eco-progs"><span class="ep">A320neo ailerons/spoilers</span><span class="ep">A350 XWB</span><span class="ep">A380</span><span class="ep">A400M</span><span class="ep">B737 NG</span><span class="ep">B787</span></div></div>
+    <div class="eco-card"><div class="eco-tag">Tier 2 &middot; Precision Metallic</div><div class="eco-nm">Zenix Aerospace (formerly UPECA / Senior plc)</div><div class="eco-loc">&#128205; Shah Alam (2 plants) + Subang, Selangor</div><div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span><span class="bg be">EASA</span><span class="bg bf">NADCAP</span></div><div class="eco-body">Independent as Zenix Aerospace 2025. Precision CNC metallic aerostructures for A320neo and civil OEMs.</div><div class="eco-progs"><span class="ep">A320neo metallic parts</span><span class="ep">Build-to-print CNC</span></div></div>
+    <div class="eco-card"><div class="eco-tag">Engine Components &middot; Tier 1</div><div class="eco-nm">UMW Aerospace</div><div class="eco-loc">&#128205; Shah Alam, Selangor</div><div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span></div><div class="eco-body">UMW Group. Manufactures Rolls-Royce Trent fan cases under offset programme. Tier 1 OEM supplier.</div><div class="eco-progs"><span class="ep">RR Trent fan cases</span><span class="ep">Engine components</span></div></div>
+    <div class="eco-card"><div class="eco-tag">Tier 2 &middot; Precision Manufacturing</div><div class="eco-nm">SAM Malaysia (Singapore Aerospace Manufacturing)</div><div class="eco-loc">&#128205; Shah Alam / Selangor</div><div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span><span class="bg be">EASA</span></div><div class="eco-body">SAM Pte Ltd (Singapore) subsidiary. Precision metallic components for Airbus and Boeing global supply chains.</div><div class="eco-progs"><span class="ep">Sheet metal</span><span class="ep">CNC machining</span><span class="ep">Airbus &amp; Boeing supply chains</span></div></div>
+    <div class="eco-card"><div class="eco-tag">Tier 1 &middot; Systems &amp; Component MRO</div><div class="eco-nm">Collins Aerospace Malaysia (RTX)</div><div class="eco-loc">&#128205; Subang Aerotech Park 160,000 sqft + Klang</div><div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span><span class="bg be">EASA</span><span class="bg bf">FAA</span></div><div class="eco-body">$16M expansion 2022. ECS, ACM, heat exchangers, engine starters, ATR propellers, actuation. Collins Dispatch&#8480; for MAS B737-8. 9 authority approvals.</div><div class="eco-progs"><span class="ep">ATA 21 ECS</span><span class="ep">ATA 61 Propellers</span><span class="ep">ATA 27 Actuation</span><span class="ep">ATA 28 Fuel</span></div></div>
+    <div class="eco-card"><div class="eco-tag">Multi-System Component MRO</div><div class="eco-nm">APACS (Asia Pacific Aircraft Component Services)</div><div class="eco-loc">&#128205; Shah Alam &middot; 90,000 sqft &middot; SIAEC + SR Technics JV</div><div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span><span class="bg be">EASA</span><span class="bg bf">FAA</span></div><div class="eco-body">C1/C3/C4/C5/C6/C7/C8/C9/C12/C14/C17/C18 &mdash; widest C-rating scope. Only C12 Hydraulic in Malaysia. 2025: First ADIRU in Asia Pacific. 9 authority approvals.</div><div class="eco-progs"><span class="ep">A320/A330/B737/B747/B767/B777</span><span class="ep">9 authority approvals</span><span class="ep">Only C12 Hydraulic in Malaysia</span></div></div>
+    <div class="eco-card"><div class="eco-tag">Engine MRO &middot; GE / CFM OEM</div><div class="eco-nm">GE Engine Services Malaysia Sdn Bhd</div><div class="eco-loc">&#128205; Subang, Selangor &mdash; AMO/2016/23</div><div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span><span class="bg be">EASA</span><span class="bg bf">FAA</span></div><div class="eco-body">Full GE/CFM engine shop. CONFIRMED: CFM56-5B (A320 CEO), CFM56-7B (B737 NG), LEAP-1A (A320 NEO), LEAP-1B (B737 MAX). Only full LEAP shop in Malaysia.</div><div class="eco-progs"><span class="ep">CFM56-5B</span><span class="ep">CFM56-7B</span><span class="ep">LEAP-1A</span><span class="ep">LEAP-1B</span></div></div>
+    <div class="eco-card"><div class="eco-tag">Safran Engine MRO &middot; OEM</div><div class="eco-nm">Global Turbine Asia Sdn Bhd</div><div class="eco-loc">&#128205; Subang, Selangor &mdash; Safran Helicopter Engines OEM</div><div class="bgs" style="margin-bottom:6px"><span class="bg bc2">CAAM</span></div><div class="eco-body">Safran OEM-authorised. Full turboshaft engine overhaul for all Airbus helicopter types &mdash; Arriel 1/2, Arrius 1/2, Makila 2.</div><div class="eco-progs"><span class="ep">Arriel 1 &amp; 2 (H125/AS365)</span><span class="ep">Arrius 1 &amp; 2 (EC120/EC135)</span><span class="ep">Makila 2 (H215/H225)</span></div></div>
   </div>
 </div>
 
-<!-- ══ AIRPORTS ══ -->
+<!-- AIRPORTS -->
 <div id="view-airports" class="view">
-  <div class="sec-top">
-    <div><div class="eyebrow">Airport Services</div><h1>Airport Services Directory</h1><p class="page-sub">MRO, hangar, fuelling and ground handling at key Malaysian airports</p></div>
-    <button class="back-btn" onclick="nav('landing')">← Home</button>
-  </div>
+  <div class="sec-top"><div><div class="eyebrow">Airport Services</div><h1>Airport Services Directory</h1><p class="page-sub">MRO, hangar, fuelling and ground handling at key Malaysian airports</p></div><button class="back-btn" onclick="nav('landing')">&larr; Home</button></div>
   <div class="apt-grid">
-    <div class="apt-card"><div class="apt-iata">KUL</div><div class="apt-nm">Kuala Lumpur International (WMKK) · Sepang</div>
-      <div class="sv"><div class="dot on"></div>A320 / A330 / B737 Line &amp; Base MRO (SAE, ADE, MAE)</div>
-      <div class="sv"><div class="dot on"></div>A350 / B747 / B777 Line MRO (MAB Engineering)</div>
-      <div class="sv"><div class="dot on"></div>Pos Aviation · SafeAir · MJETS line maintenance</div>
-      <div class="sv"><div class="dot on"></div>Painting (SAE eco bay) · Jet fuel</div>
-    </div>
-    <div class="apt-card"><div class="apt-iata">SZB</div><div class="apt-nm">Sultan Abdul Aziz Shah · Subang (WMSA)</div>
-      <div class="sv"><div class="dot on"></div>Subang Aerotech Park (60 acres)</div>
-      <div class="sv"><div class="dot on"></div>A320 + B737 + ATR + Widebody Line &amp; Base MRO</div>
-      <div class="sv"><div class="dot on"></div>Business Jet MRO — ExecuJet (7 type approvals)</div>
-      <div class="sv"><div class="dot on"></div>Helicopter MRO — Airbus, Hammock, Leonardo, Mycopter</div>
-      <div class="sv"><div class="dot on"></div>GE Engine Services (CFM56 / LEAP)</div>
-      <div class="sv"><div class="dot on"></div>APACS · Collins · Global Turbine · TP Aerospace component shops</div>
-    </div>
-    <div class="apt-card"><div class="apt-iata">PEN</div><div class="apt-nm">Penang International (WMKP)</div>
-      <div class="sv"><div class="dot on"></div>Line maintenance (narrowbody)</div>
-      <div class="sv"><div class="dot on"></div>Honeywell Avionics (Prai)</div>
-      <div class="sv"><div class="dot off"></div>Heavy base MRO (limited)</div>
-    </div>
-    <div class="apt-card"><div class="apt-iata">BKI</div><div class="apt-nm">Kota Kinabalu Intl · Sabah (WBKK)</div>
-      <div class="sv"><div class="dot on"></div>Line maintenance (A320 / B737 / ATR)</div>
-      <div class="sv"><div class="dot on"></div>Layang Layang Aerospace — broadest GA + helicopter MRO in Sabah</div>
-      <div class="sv"><div class="dot on"></div>Helicopter ops — O&amp;G · Sabah Air Aviation</div>
-    </div>
-    <div class="apt-card"><div class="apt-iata">KCH</div><div class="apt-nm">Kuching International · Sarawak (WBGG)</div>
-      <div class="sv"><div class="dot on"></div>Line maintenance (A320 / ATR 72)</div>
-      <div class="sv"><div class="dot on"></div>Hornbill Skyways — B300 / EC135 / EC175 / Bell 206</div>
-      <div class="sv"><div class="dot on"></div>O&amp;G helicopter ops</div>
-    </div>
-    <div class="apt-card"><div class="apt-iata">MYY</div><div class="apt-nm">Miri Airport · Sarawak (WBGR)</div>
-      <div class="sv"><div class="dot on"></div>O&amp;G offshore helicopter hub</div>
-      <div class="sv"><div class="dot on"></div>HAS International — EC175B (L/B)</div>
-      <div class="sv"><div class="dot on"></div>ATR / DHC line maintenance</div>
-    </div>
-    <div class="apt-card"><div class="apt-iata">JHB</div><div class="apt-nm">Senai International · Johor (WMKJ)</div>
-      <div class="sv"><div class="dot on"></div>Line maintenance</div>
-      <div class="sv"><div class="dot on"></div>GKN Engine Systems (Iskandar Puteri)</div>
-      <div class="sv"><div class="dot on"></div>C&amp;A Aviation (piston engine MRO)</div>
-    </div>
-    <div class="apt-card"><div class="apt-iata">MKZ</div><div class="apt-nm">Malacca International + Batu Berendam</div>
-      <div class="sv"><div class="dot on"></div>CTRM manufacturing campus</div>
-      <div class="sv"><div class="dot on"></div>IATA + Malaysian Flying Academy MRO</div>
-      <div class="sv"><div class="dot on"></div>Deftech Aviation (C6/C8/C20)</div>
-    </div>
-    <div class="apt-card"><div class="apt-iata">LGK</div><div class="apt-nm">Langkawi International (WMKL)</div>
-      <div class="sv"><div class="dot on"></div>Line maintenance · Jet fuel</div>
-      <div class="sv"><div class="dot on"></div>Sin-Kung Airways — Cessna / Diamond / Piaggio</div>
-      <div class="sv"><div class="dot on"></div>LIMA Airshow venue (biannual)</div>
-      <div class="sv"><div class="dot off"></div>Base maintenance (none)</div>
-    </div>
+    <div class="apt-card"><div class="apt-iata">KUL</div><div class="apt-nm">Kuala Lumpur International (WMKK) &middot; Sepang</div><div class="sv"><div class="dot on"></div>A320/A330 Line &amp; Base MRO (SAE, ADE, MAB Engineering)</div><div class="sv"><div class="dot on"></div>A350 / B747 / B777 Line MRO (MAB Engineering, Dviation, Pos Aviation)</div><div class="sv"><div class="dot on"></div>SafeAir &middot; Pos Aviation &middot; MJETS line maintenance</div><div class="sv"><div class="dot on"></div>Painting (SAE eco bay) &middot; Multiple jet fuel suppliers</div></div>
+    <div class="apt-card"><div class="apt-iata">SZB</div><div class="apt-nm">Sultan Abdul Aziz Shah &middot; Subang (WMSA)</div><div class="sv"><div class="dot on"></div>Subang Aerotech Park (60 acres)</div><div class="sv"><div class="dot on"></div>A320 + B737 + ATR + Widebody Line &amp; Base MRO</div><div class="sv"><div class="dot on"></div>Bizjet MRO &mdash; ExecuJet (7 type approvals, L/B)</div><div class="sv"><div class="dot on"></div>Helicopter MRO &mdash; Airbus, Hammock, Leonardo, Galaxy</div><div class="sv"><div class="dot on"></div>GE Engine Services (CFM56/LEAP &mdash; full shop)</div><div class="sv"><div class="dot on"></div>APACS &middot; Collins &middot; Global Turbine &middot; TP Aerospace component shops</div></div>
+    <div class="apt-card"><div class="apt-iata">PEN</div><div class="apt-nm">Penang International (WMKP)</div><div class="sv"><div class="dot on"></div>Line maintenance (narrowbody)</div><div class="sv"><div class="dot on"></div>Honeywell Avionics (Prai, Penang)</div><div class="sv"><div class="dot off"></div>Heavy base MRO (limited)</div></div>
+    <div class="apt-card"><div class="apt-iata">BKI</div><div class="apt-nm">Kota Kinabalu Intl &middot; Sabah (WBKK)</div><div class="sv"><div class="dot on"></div>Line maintenance (A320 / B737 / ATR)</div><div class="sv"><div class="dot on"></div>Layang Layang Aerospace &mdash; widest GA + helicopter scope in Sabah</div><div class="sv"><div class="dot on"></div>Sabah Air Aviation &middot; O&amp;G helicopter ops</div></div>
+    <div class="apt-card"><div class="apt-iata">KCH</div><div class="apt-nm">Kuching International &middot; Sarawak (WBGG)</div><div class="sv"><div class="dot on"></div>Line maintenance (A320 / ATR 72)</div><div class="sv"><div class="dot on"></div>Hornbill Skyways &mdash; B300 / EC135 / EC175 / Bell 206 (L/B)</div><div class="sv"><div class="dot on"></div>O&amp;G helicopter ops</div></div>
+    <div class="apt-card"><div class="apt-iata">MYY</div><div class="apt-nm">Miri Airport &middot; Sarawak (WBGR)</div><div class="sv"><div class="dot on"></div>O&amp;G offshore helicopter hub</div><div class="sv"><div class="dot on"></div>HAS International &mdash; EC175B PT6C-67E (L/B)</div><div class="sv"><div class="dot on"></div>ATR / DHC line maintenance</div></div>
+    <div class="apt-card"><div class="apt-iata">JHB</div><div class="apt-nm">Senai International &middot; Johor (WMKJ)</div><div class="sv"><div class="dot on"></div>Line maintenance (narrowbody)</div><div class="sv"><div class="dot on"></div>GKN Engine Systems (Iskandar Puteri)</div><div class="sv"><div class="dot on"></div>Mados's Holdings &mdash; B737 / Gulfstream / S-76</div></div>
+    <div class="apt-card"><div class="apt-iata">MKZ</div><div class="apt-nm">Malacca International + Batu Berendam</div><div class="sv"><div class="dot on"></div>CTRM manufacturing campus</div><div class="sv"><div class="dot on"></div>IATA + Malaysian Flying Academy MRO</div><div class="sv"><div class="dot on"></div>Deftech Aviation (C6/C8/C20)</div></div>
+    <div class="apt-card"><div class="apt-iata">LGK</div><div class="apt-nm">Langkawi International (WMKL)</div><div class="sv"><div class="dot on"></div>Line maintenance &middot; Jet fuel</div><div class="sv"><div class="dot on"></div>Sin-Kung Airways &mdash; Cessna / Diamond / Piaggio (L/B)</div><div class="sv"><div class="dot on"></div>LIMA Airshow venue (biannual)</div><div class="sv"><div class="dot off"></div>Base maintenance (none)</div></div>
   </div>
-  <div class="pfoot"><span>Airport data — verify with MAHB &amp; CAAM</span><span>Malaysia Aerospace Bluebook 2026</span></div>
+  <div class="pfoot"><span>Airport data &mdash; verify with MAHB &amp; CAAM</span><span>Malaysia Aerospace Bluebook 2026</span></div>
 </div>
 
-<!-- ══ JS ══ -->
+<!-- JS -->
 <script>
-var curAC = "";
-var ACD = {
-  a320ceo:{t:"Airbus A320 CEO",s:"CFM56-5B / IAE V2500-A5 — 12 Line, 6 Base (13 total AMOs)",af:"a320"},
-  a320neo:{t:"Airbus A320 NEO",s:"CFM LEAP-1A (7 AMOs) / PW1100G-JM (5 AMOs) / IAE V2500 — Line &amp; Base",af:"a320"},
-  b737cl:{t:"Boeing 737 Classic (-300/400/500)",s:"CFM56 series — 8 Line, 1 Base (Asia AeroTechnic)",af:"b737"},
-  b737ng:{t:"Boeing 737 NG (-600/700/800/900)",s:"CFM56-7B — 12 Line, 3 Base",af:"b737"},
-  b737max:{t:"Boeing 737 MAX (-7/8/9)",s:"CFM LEAP-1B — 5 Line, 1 Base (MAB Engineering)",af:"b737"},
-  b747:{t:"Boeing 747-400",s:"P&amp;W PW4000 — 2 AMOs: MAB Engineering (L/B) · Dviation Technics (L)",af:"a330"},
-  a330:{t:"Airbus A330",s:"GE CF6 / P&amp;W PW4000 / RR Trent 700 / RR Trent 7000 — 7 Line, 3 Base",af:"a330"},
-  a350:{t:"Airbus A350",s:"RR Trent XWB — 3 AMOs: MAB Engineering (L/B) · Dviation (L) · Pos Aviation (L)",af:"a330"},
-  b767:{t:"Boeing B767 (-200/300/400)",s:"GE CF6 — 1 AMO: Raya Airways (Line &amp; Base)",af:"a330"},
-  b777:{t:"Boeing B777 (-200/300)",s:"GE GE90 / RR RB211 / RR Trent 800 — 3 AMOs: MAB (L/B) · Dviation (L) · SafeAir (L)",af:"a330"},
-  b787:{t:"Boeing B787 (-8/9/10)",s:"GE GEnx / RR Trent 1000 — 1 AMO: Dviation Technics (Line only)",af:"a330"},
-  atr42:{t:"ATR 42 (-400/500/600)",s:"P&amp;W Canada PW120 / PW127 — 5 Line, 3 Base",af:"atr"},
-  atr72:{t:"ATR 72 (-212A/500/600)",s:"P&amp;W Canada PW120 / PW127M — 5 Line, 3 Base",af:"atr"},
-  beech:{t:"Beechcraft B200/B300 King Air",s:"P&amp;WC PT6A series — 6 AMOs, all Line &amp; Base (Peninsular + East Malaysia)",af:"atr"},
-  erj190:{t:"Embraer ERJ-190",s:"P&amp;W PW1900G — 1 AMO: SafeAir Technical (Line only)",af:"atr"},
-  challenger:{t:"Bombardier Challenger 300/604/605",s:"Honeywell AS907 / GE CF-34 / RR BR700 — ExecuJet (L/B)",af:"bizjet"},
-  global:{t:"Bombardier Global / BD-700",s:"RR BR700 series — ExecuJet (L/B) · Berjaya Air (L)",af:"bizjet"},
-  falcon7x:{t:"Dassault Falcon 7X",s:"P&amp;WC PW307 engines — ExecuJet MRO (L/B) · Airod Aerospace Tech (L/B)",af:"bizjet"},
-  falcon2000:{t:"Dassault Falcon 2000",s:"CFE 738-1-1B turbofan — ExecuJet MRO (L/B)",af:"bizjet"},
-  gulfstream:{t:"Gulfstream GIV / GV-SP / G-VI",s:"RR Tay / RR BR700-710 / RR BR700-725 — ExecuJet (L/B) · Mados's Holdings (L)",af:"bizjet"},
-  hondajet:{t:"Honda Aircraft HA-420 HondaJet",s:"GE Honda HF120 — 2 AMOs: KarbonMRO (L/B) · Dviation Technics (L)",af:"bizjet"},
-  piaggio:{t:"Piaggio P180 Avanti / Avanti II",s:"P&amp;WC PT6A series — 2 AMOs: Asia Aero Engineering (L/B) · Sin-Kung Airways (L/B)",af:"ga"},
-  cessna:{t:"Cessna 150/172/182/206/208B",s:"Continental / Lycoming / P&amp;WC PT6A — 7 AMOs, all Line &amp; Base",af:"ga"},
-  piper:{t:"Piper PA-28 / PA-34 / PA-44",s:"Lycoming / Teledyne Continental — 6 AMOs, all Line &amp; Base",af:"ga"},
-  diamond:{t:"Diamond DA40 / DA42 / DA62",s:"Lycoming / Austro E4 / Technify TAE 125 — 5 AMOs, all Line &amp; Base",af:"ga"},
-  cirrus:{t:"Cirrus SR20 / SR22 / SR22T",s:"Teledyne Continental — 1 AMO: Admal (Line &amp; Base)",af:"ga"},
-  h125:{t:"Airbus H125 / AS350 / AS355",s:"Safran Arriel 1/2 / Arrius 1 — 5 AMOs, all Line &amp; Base",af:"heli"},
-  ec135:{t:"Airbus EC135 (all variants)",s:"Safran Arrius 2B2 / P&amp;WC PW206 series — 3 AMOs (Hammock / Hornbill / Layang Layang), all L/B",af:"heli"},
-  h160:{t:"Airbus H160 / EC175",s:"Safran Arrano 1 (H160) / P&amp;WC PT6C-67E (EC175) — 4 AMOs, all Line &amp; Base",af:"heli"},
-  h225:{t:"Airbus H215/H225 / AS332L2 / EC225 LP",s:"Safran Makila 1A2/2A/2A1 — 3 AMOs (MHS / EJA / Hammock), all Line &amp; Base",af:"heli"},
-  aw139:{t:"Leonardo AW139 / AW189 / AW169 / A109 / A119",s:"P&amp;WC PT6C / PT6B / GE CT7-2E1 / PW206 / PW210A — 6 AMOs, all Line &amp; Base",af:"heli"},
-  bell:{t:"Bell 206 / 407 / 429 / 505",s:"RR 250 series / P&amp;WC PW207 / Safran Arrius 2R — 3–5 AMOs, all Line &amp; Base",af:"heli"},
-  s76:{t:"Sikorsky S-76B",s:"P&amp;WC PT6B series — 1 AMO: Mados's Holdings (Line &amp; Base)",af:"heli"},
-  robinson:{t:"Robinson R22 / R44 / R66",s:"Lycoming O-540/IO-540 / RR 250-C300 — 3 AMOs (Galaxy / Hammock / Layang Layang), all L/B",af:"heli"}
+var curAC="";
+var ACD={
+  a320ceo:{t:"Airbus A320 CEO",s:"CFM56-5B / IAE V2500-A5 &mdash; 12 Line, 6 Base (13 total AMOs)",af:"a320"},
+  a320neo:{t:"Airbus A320 NEO",s:"CFM LEAP-1A (7 AMOs) / PW1100G-JM (5 AMOs) / IAE V2500",af:"a320"},
+  b737cl:{t:"Boeing 737 Classic (-300/400/500)",s:"CFM56 series &mdash; 8 Line, 1 Base (Asia AeroTechnic)",af:"b737"},
+  b737ng:{t:"Boeing 737 NG (-600/700/800/900)",s:"CFM56-7B &mdash; 12 Line, 3 Base",af:"b737"},
+  b737max:{t:"Boeing 737 MAX (-7/8/9)",s:"CFM LEAP-1B &mdash; 5 Line, 1 Base (MAB Engineering)",af:"b737"},
+  b747:{t:"Boeing 747-400",s:"P&amp;W PW4000 &mdash; 2 AMOs: MAB Engineering (L/B) &middot; Dviation Technics (L)",af:"a330"},
+  a330:{t:"Airbus A330",s:"GE CF6 / P&amp;W PW4000 / RR Trent 700 / RR Trent 7000 &mdash; 7 Line, 3 Base",af:"a330"},
+  a350:{t:"Airbus A350",s:"RR Trent XWB &mdash; 3 AMOs: MAB Engineering (L/B) &middot; Dviation (L) &middot; Pos Aviation (L)",af:"a330"},
+  b767:{t:"Boeing B767 (-200/300/400)",s:"GE CF6 &mdash; 1 AMO: Raya Airways (Line &amp; Base)",af:"a330"},
+  b777:{t:"Boeing B777 (-200/300)",s:"GE GE90 / RR RB211 / RR Trent 800 &mdash; 3 AMOs: MAB (L/B) &middot; Dviation (L) &middot; SafeAir (L)",af:"a330"},
+  b787:{t:"Boeing B787 (-8/9/10)",s:"GE GEnx / RR Trent 1000 &mdash; 1 AMO: Dviation Technics (Line only)",af:"a330"},
+  atr42:{t:"ATR 42 (-400/500/600)",s:"P&amp;WC PW120 / PW127 &mdash; 5 Line, 3 Base",af:"atr"},
+  atr72:{t:"ATR 72 (-212A/500/600)",s:"P&amp;WC PW120 / PW127M &mdash; 5 Line, 3 Base",af:"atr"},
+  beech:{t:"Beechcraft B200/B300 King Air",s:"P&amp;WC PT6A series &mdash; 6 AMOs, all Line &amp; Base",af:"atr"},
+  erj190:{t:"Embraer ERJ-190",s:"P&amp;W PW1900G &mdash; 1 AMO: SafeAir Technical (Line only)",af:"atr"},
+  challenger:{t:"Bombardier Challenger 300/604/605",s:"Honeywell AS907 / GE CF-34 / RR BR700 &mdash; ExecuJet (L/B)",af:"bizjet"},
+  global:{t:"Bombardier Global / BD-700",s:"RR BR700 series &mdash; ExecuJet (L/B) &middot; Berjaya Air (L)",af:"bizjet"},
+  falcon7x:{t:"Dassault Falcon 7X",s:"P&amp;WC PW307 engines &mdash; ExecuJet (L/B) &middot; AIROD (L/B)",af:"bizjet"},
+  falcon2000:{t:"Dassault Falcon 2000",s:"CFE 738-1-1B turbofan &mdash; ExecuJet (L/B)",af:"bizjet"},
+  gulfstream:{t:"Gulfstream GIV / GV-SP / G-VI",s:"RR Tay / RR BR700-710 / RR BR700-725 &mdash; ExecuJet (L/B) &middot; Mados's (L)",af:"bizjet"},
+  hondajet:{t:"Honda Aircraft HA-420 HondaJet",s:"GE Honda HF120 &mdash; 2 AMOs: KarbonMRO (L/B) &middot; Dviation Technics (L)",af:"bizjet"},
+  piaggio:{t:"Piaggio P180 Avanti / Avanti II",s:"P&amp;WC PT6A series &mdash; 2 AMOs: Asia Aero Engineering (L/B) &middot; Sin-Kung Airways (L/B)",af:"ga"},
+  cessna:{t:"Cessna 150/172/182/206/208B",s:"Continental / Lycoming / P&amp;WC PT6A &mdash; 7 AMOs, all Line &amp; Base",af:"ga"},
+  piper:{t:"Piper PA-28 / PA-34 / PA-44",s:"Lycoming / Teledyne Continental &mdash; 6 AMOs, all Line &amp; Base",af:"ga"},
+  diamond:{t:"Diamond DA40 / DA42 / DA62",s:"Lycoming / Austro E4 / Technify TAE 125 &mdash; 5 AMOs, all Line &amp; Base",af:"ga"},
+  cirrus:{t:"Cirrus SR20 / SR22 / SR22T",s:"Teledyne Continental &mdash; 1 AMO: Admal (Line &amp; Base)",af:"ga"},
+  h125:{t:"Airbus H125 / AS350 / AS355",s:"Safran Arriel 1/2 / Arrius 1 &mdash; 5 AMOs, all Line &amp; Base",af:"heli"},
+  ec135:{t:"Airbus EC120 / EC135 / EC155",s:"Safran Arrius 2B2 / Arriel 2C2 / PW206 &mdash; 3 AMOs (Hammock / Hornbill / Layang Layang)",af:"heli"},
+  h160:{t:"Airbus H160 / EC175",s:"Safran Arrano 1 (H160) / P&amp;WC PT6C-67E (EC175) &mdash; 4 AMOs, all Line &amp; Base",af:"heli"},
+  h225:{t:"Airbus H215/H225 / AS332 / EC225",s:"Safran Makila 1A2/2A/2A1 &mdash; 3 AMOs: MHS / Hammock / Airbus Helicopters",af:"heli"},
+  aw139:{t:"Leonardo AW139 / AW189 / AW169 / A109 / A119",s:"P&amp;WC PT6C / PT6B / GE CT7-2E1 / PW206 / PW210A &mdash; 6 AMOs, all Line &amp; Base",af:"heli"},
+  bell:{t:"Bell 206 / 407 / 429 / 505",s:"RR 250 series / P&amp;WC PW207 / Safran Arrius 2R &mdash; 3&ndash;5 AMOs, all Line &amp; Base",af:"heli"},
+  s76:{t:"Sikorsky S-76B",s:"P&amp;WC PT6B series &mdash; 1 AMO: Mados's Holdings (Line &amp; Base)",af:"heli"},
+  robinson:{t:"Robinson R22 / R44 / R66",s:"Lycoming O-540/IO-540 / RR 250-C300 &mdash; 3 AMOs: Galaxy / Hammock / Layang Layang",af:"heli"}
 };
 
-function selectAC(type){
-  curAC=type;
+function selectAC(t){
+  curAC=t;
   document.querySelectorAll(".ac-card").forEach(function(c){c.classList.remove("selected");});
-  var c=document.getElementById("card-"+type); if(c) c.classList.add("selected");
-  var d=ACD[type]||{t:type,s:"",af:"all"};
+  var c=document.getElementById("card-"+t);if(c)c.classList.add("selected");
+  var d=ACD[t]||{t:t,s:"",af:"all"};
   document.getElementById("mt-ey").textContent=d.t;
-  document.getElementById("mt-title").textContent="Select Maintenance Category — "+d.t;
-  document.getElementById("mt-sub").textContent=d.s;
-  document.getElementById("af-title").textContent="Airframe MRO · "+d.t+" · Malaysia";
-  document.getElementById("ata-title").textContent="Component Repair · "+d.t;
+  document.getElementById("mt-title").innerHTML="Select Maintenance Category &mdash; "+d.t;
+  document.getElementById("mt-sub").innerHTML=d.s;
+  document.getElementById("af-title").innerHTML="Airframe MRO &middot; "+d.t+" &middot; Malaysia";
+  document.getElementById("ata-title").innerHTML="Component Repair &middot; "+d.t;
   document.getElementById("tb-mt").style.display="";
   nav("mtype");
 }
@@ -1547,9 +223,9 @@ function goMtype(dest){
     var af=d?d.af:"all";
     _acAf=af;
     document.querySelectorAll(".fb[id^='af']").forEach(function(b){b.classList.remove("on");});
-    var btn=document.getElementById("af"+af); if(btn)btn.classList.add("on"); else document.getElementById("afall").classList.add("on");
+    var btn=document.getElementById("af"+af);if(btn)btn.classList.add("on");else document.getElementById("afall").classList.add("on");
     applyAf();
-  } else {
+  }else{
     nav("ata");
     setTimeout(function(){filterATA("all",null);},50);
   }
@@ -1592,12 +268,6 @@ function filterATA(k,btn){
 }
 </script>
 </body>
-</html>"""
-
-with open('/mnt/user-data/outputs/index.html', 'w', encoding='utf-8') as f:
-    f.write(html)
-sz = len(html)
-print(f"Written: {sz:,} chars ({sz//1024} KB)")
-PYEOF
-python3 /home/claude/build_html.py
-Output
+</html>""")
+f.close()
+print("Part 3 done")
