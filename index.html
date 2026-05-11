@@ -358,6 +358,344 @@ function selectEngine(acId, engId, engName) {
   list.innerHTML = html;
   nav('mro');
 }
+<script>
+var _db = {
+  aircrafts: {
+    a320ceo: {
+      name: "Airbus A320 CEO",
+      engines: [
+        { id: "a320ceo-cfm56", name: "CFM56-5B" },
+        { id: "a320ceo-iae", name: "IAE V2500" }
+      ]
+    },
+    a320neo: {
+      name: "Airbus A320 NEO",
+      engines: [
+        { id: "a320neo-leap", name: "CFM LEAP-1A" },
+        { id: "a320neo-pw1100g", name: "PW1100G-JM" }
+      ]
+    },
+    b737cl: {
+      name: "Boeing 737 Classic",
+      engines: [
+        { id: "b737cl-cfm56", name: "CFM56-3" }
+      ]
+    },
+    b737ng: {
+      name: "Boeing 737 NG",
+      engines: [
+        { id: "b737ng-cfm56", name: "CFM56-7B" }
+      ]
+    },
+    b737max: {
+      name: "Boeing 737 MAX",
+      engines: [
+        { id: "b737max-leap", name: "CFM LEAP-1B" }
+      ]
+    },
+    a330: {
+      name: "Airbus A330",
+      engines: [
+        { id: "a330-trent700", name: "RR Trent 700" },
+        { id: "a330-cf6", name: "GE CF6" },
+        { id: "a330-pw4000", name: "PW4000" }
+      ]
+    },
+    a350: {
+      name: "Airbus A350",
+      engines: [
+        { id: "a350-trentxwb", name: "RR Trent XWB" }
+      ]
+    },
+    b747: {
+      name: "Boeing 747-400",
+      engines: [
+        { id: "b747-pw4000", name: "PW4000" }
+      ]
+    },
+    b767: {
+      name: "Boeing 767",
+      engines: [
+        { id: "b767-cf6", name: "GE CF6" }
+      ]
+    },
+    b777: {
+      name: "Boeing 777",
+      engines: [
+        { id: "b777-ge90", name: "GE GE90" },
+        { id: "b777-rb211", name: "RR RB211" },
+        { id: "b777-trent800", name: "RR Trent 800" }
+      ]
+    },
+    b787: {
+      name: "Boeing 787",
+      engines: [
+        { id: "b787-genx", name: "GE GEnx" },
+        { id: "b787-trent1000", name: "RR Trent 1000" }
+      ]
+    },
+    atr42: {
+      name: "ATR 42",
+      engines: [
+        { id: "atr42-pw120", name: "PW120" },
+        { id: "atr42-pw127", name: "PW127" }
+      ]
+    },
+    atr72: {
+      name: "ATR 72",
+      engines: [
+        { id: "atr72-pw120", name: "PW120" },
+        { id: "atr72-pw127m", name: "PW127M" }
+      ]
+    },
+    beech: {
+      name: "Beechcraft B200/B300",
+      engines: [
+        { id: "beech-pt6a", name: "P&WC PT6A" }
+      ]
+    },
+    challenger: {
+      name: "Challenger 300/604/605",
+      engines: [
+        { id: "challenger-as907", name: "Honeywell AS907" },
+        { id: "challenger-cf34", name: "GE CF34" },
+        { id: "challenger-br700", name: "RR BR700" }
+      ]
+    },
+    global: {
+      name: "Global / BD-700",
+      engines: [
+        { id: "global-br700", name: "RR BR700" }
+      ]
+    },
+    falcon7x: {
+      name: "Falcon 7X",
+      engines: [
+        { id: "falcon7x-pw307", name: "PW307A" }
+      ]
+    },
+    falcon2000: {
+      name: "Falcon 2000",
+      engines: [
+        { id: "falcon2000-cfe738", name: "CFE 738-1-1B" }
+      ]
+    },
+    gulfstream: {
+      name: "Gulfstream GIV/GV/GVI",
+      engines: [
+        { id: "gulfstream-tay", name: "RR Tay" },
+        { id: "gulfstream-pw306a", name: "PW306A" },
+        { id: "gulfstream-br700", name: "RR BR700" }
+      ]
+    },
+    hondajet: {
+      name: "HondaJet HA-420",
+      engines: [
+        { id: "hondajet-hf120", name: "GE Honda HF120" }
+      ]
+    },
+    cessna: {
+      name: "Cessna 150/172/182/208",
+      engines: [
+        { id: "cessna-lyc", name: "Lycoming" },
+        { id: "cessna-cont", name: "Continental" },
+        { id: "cessna-pt6a", name: "P&WC PT6A" }
+      ]
+    },
+    piper: {
+      name: "Piper PA-28/34/44",
+      engines: [
+        { id: "piper-lyc", name: "Lycoming" },
+        { id: "piper-cont", name: "Continental" }
+      ]
+    },
+    diamond: {
+      name: "Diamond DA40/DA42/DA62",
+      engines: [
+        { id: "diamond-austro", name: "Austro E4" },
+        { id: "diamond-tae125", name: "Technify TAE 125" }
+      ]
+    },
+    cirrus: {
+      name: "Cirrus SR20/SR22",
+      engines: [
+        { id: "cirrus-cont", name: "Continental" }
+      ]
+    },
+    piaggio: {
+      name: "Piaggio P180 Avanti",
+      engines: [
+        { id: "piaggio-pt6a", name: "P&WC PT6A" }
+      ]
+    },
+    // 直升机简化处理，保留系列引擎 ID
+    h125: {
+      name: "H125 / AS350 / AS355",
+      engines: [
+        { id: "h125-arriel", name: "Arriel 1/2" },
+        { id: "h125-rr250", name: "RR250" },
+        { id: "h125-arrius", name: "Arrius 1" }
+      ]
+    },
+    ec135: {
+      name: "EC120 / EC135 / EC155",
+      engines: [
+        { id: "ec135-arrius", name: "Arrius 2B2/2F" },
+        { id: "ec135-pw206", name: "PW206" },
+        { id: "ec135-arriel2c2", name: "Arriel 2C2" }
+      ]
+    },
+    h160: {
+      name: "H160 / EC175",
+      engines: [
+        { id: "h160-pt6c", name: "PT6C-67E" },
+        { id: "h160-arrano", name: "Arrano 1" }
+      ]
+    },
+    h225: {
+      name: "H215 / H225 / AS332 / EC225",
+      engines: [
+        { id: "h225-makila", name: "Makila 1A2/2A" }
+      ]
+    },
+    aw139: {
+      name: "AW139 / AW189 / A109",
+      engines: [
+        { id: "aw139-pt6c", name: "PT6C" },
+        { id: "aw139-ct7", name: "CT7-2E1" },
+        { id: "aw139-pw206", name: "PW206" }
+      ]
+    },
+    bell: {
+      name: "Bell 206/407/429/505",
+      engines: [
+        { id: "bell-rr250", name: "RR250" },
+        { id: "bell-pw207", name: "PW207" },
+        { id: "bell-arrius2r", name: "Arrius 2R" }
+      ]
+    },
+    s76: {
+      name: "Sikorsky S-76B",
+      engines: [
+        { id: "s76-pt6b", name: "PT6B" }
+      ]
+    },
+    robinson: {
+      name: "Robinson R22 / R44 / R66",
+      engines: [
+        { id: "robinson-lyc", name: "Lycoming O-540/IO-540" },
+        { id: "robinson-rr250", name: "RR250-C300" }
+      ]
+    }
+  },
+  vendors: [
+    // ====== 机体维修 + 发动机车间（已核对） ======
+    // 窄体/宽体/涡桨/公务机
+    { id:"sae", name:"Sepang Aircraft Engineering (SAE)", loc:"Sepang, KLIA", tags:["Line","Base"], caps:["a320ceo-cfm56","a320ceo-iae","a320neo-leap","a320neo-pw1100g","a330-trent700"] },
+    { id:"airod", name:"AIROD Aerospace Technology", loc:"Subang", tags:["Line","Base"], caps:["a320ceo-cfm56","a320ceo-iae","b737cl-cfm56","b737ng-cfm56","b737max-leap","atr42-pw120","atr42-pw127","atr72-pw120","atr72-pw127m","falcon7x-pw307"] },
+    { id:"aat", name:"Asia AeroTechnic (AAT)", loc:"Subang", tags:["Line","Base"], caps:["a320ceo-cfm56","b737cl-cfm56","b737ng-cfm56","atr42-pw120","atr42-pw127","atr72-pw120","atr72-pw127m"] },
+    { id:"ade", name:"Asia Digital Engineering (ADE)", loc:"Sepang, KLIA", tags:["Line","Base"], caps:["a320ceo-cfm56","a320ceo-iae","a320neo-leap","a320neo-pw1100g","a330-trent700","b737ng-cfm56"] },
+    { id:"mabeng", name:"MAB Engineering Services (Malaysia Airlines)", loc:"Sepang", tags:["Line","Base"], caps:["a320ceo-cfm56","a320ceo-iae","a320neo-leap","a320neo-pw1100g","b737cl-cfm56","b737ng-cfm56","b737max-leap","a330-trent700","a330-pw4000","a350-trentxwb","b747-pw4000","b777-ge90","b777-trent800","atr42-pw120","atr42-pw127","atr72-pw120","atr72-pw127m"] },
+    { id:"karbon", name:"KarbonMRO Services", loc:"Shah Alam", tags:["Line","Base"], caps:["a320ceo-cfm56","a320ceo-iae","b737ng-cfm56","hondajet-hf120"] },
+    { id:"dviation", name:"Dviation Technics", loc:"Shah Alam", tags:["Line"], caps:["a320ceo-cfm56","a320ceo-iae","a320neo-leap","a320neo-pw1100g","b737cl-cfm56","b737ng-cfm56","b737max-leap","a330-cf6","a330-trent700","a330-pw4000","a350-trentxwb","b747-pw4000","b777-ge90","b777-rb211","b787-genx","b787-trent1000","hondajet-hf120"] },
+    { id:"raya", name:"Raya Airways", loc:"Subang", tags:["Line","Base"], caps:["a320ceo-cfm56","a320ceo-iae","b737cl-cfm56","b767-cf6","a330-cf6"] },
+    { id:"malindo", name:"Malindo Airways / Batik Air Malaysia", loc:"Petaling Jaya", tags:["Line"], caps:["b737ng-cfm56","b737max-leap","atr42-pw120","atr42-pw127","atr72-pw120","atr72-pw127m","a330-trent700"] },
+    { id:"pos", name:"Pos Aviation Engineering", loc:"Sepang", tags:["Line"], caps:["a320ceo-cfm56","a320ceo-iae","a320neo-leap","a330-cf6","a330-trent700","a330-pw4000","a350-trentxwb","b737cl-cfm56","b737ng-cfm56","b737max-leap"] },
+    { id:"safeair", name:"SafeAir Technical", loc:"Sepang", tags:["Line"], caps:["a320ceo-cfm56","a320ceo-iae","a320neo-leap","a320neo-pw1100g","a330-cf6","a330-trent700","a330-pw4000","b737cl-cfm56","b737ng-cfm56","b737max-leap","b777-rb211","b777-ge90"] },
+    { id:"mados", name:"Mados's Holdings", loc:"Johor", tags:["Line"], caps:["b737ng-cfm56","gulfstream-br700","s76-pt6b"] },
+    { id:"mjets", name:"MJETS Air", loc:"Sepang", tags:["Line"], caps:["b737cl-cfm56","b737ng-cfm56"] },
+    { id:"worldcargo", name:"World Cargo Airline", loc:"Sepang", tags:["Line"], caps:["b737cl-cfm56","b737ng-cfm56"] },
+    { id:"maz", name:"Maz Gerbang", loc:"Nilai", tags:["Line"], caps:["b737cl-cfm56","b737ng-cfm56","a320ceo-cfm56"] },
+    { id:"berjaya", name:"Berjaya Air", loc:"Subang", tags:["Line"], caps:["atr42-pw120","atr42-pw127","atr72-pw120","atr72-pw127m","global-br700"] },
+    { id:"execujet", name:"ExecuJet MRO Services Malaysia", loc:"Subang", tags:["Line","Base"], caps:["challenger-as907","challenger-cf34","challenger-br700","global-br700","gulfstream-tay","gulfstream-pw306a","falcon7x-pw307","falcon2000-cfe738"] },
+    { id:"jetpremier", name:"Jet Premier One (M)", loc:"Subang", tags:["Line"], caps:["a320ceo-cfm56"] },
+    { id:"skywaysmaint", name:"Skyways Technics Aircraft Maintenance", loc:"Shah Alam", tags:["Line","Base"], caps:["atr42-pw120","atr42-pw127","atr72-pw120","atr72-pw127m"] },
+
+    // 通航与直升机
+    { id:"admal", name:"Admal Sdn Bhd", loc:"Subang", tags:["Line","Base"], caps:["cessna-lyc","cessna-cont","cessna-pt6a","cirrus-cont","piper-lyc","piper-cont","beech-pt6a"] },
+    { id:"galaxy", name:"Galaxy Aerospace (M)", loc:"Shah Alam", tags:["Line","Base"], caps:["aw139-pt6c","aw139-ct7","robinson-lyc","robinson-rr250","bell-pw207","bell-rr250","h125-arriel","ec135-arrius","h160-pt6c","beech-pt6a","cessna-lyc","cessna-pt6a"] },
+    { id:"layang", name:"Layang Layang Aerospace", loc:"Kota Kinabalu", tags:["Line","Base"], caps:["beech-pt6a","cessna-lyc","piper-lyc","piper-cont","diamond-austro","bell-rr250","h125-arriel","h125-rr250","ec135-pw206","robinson-lyc","robinson-rr250","aw139-pt6c"] },
+    { id:"hammock", name:"Hammock Helicopter", loc:"Subang", tags:["Line","Base"], caps:["ec135-arrius","ec135-pw206","h125-arriel","h225-makila","bell-rr250","bell-pw207","robinson-rr250"] },
+    { id:"hornbill", name:"Hornbill Skyways", loc:"Kuching", tags:["Line","Base"], caps:["beech-pt6a","ec135-pw206","ec135-arriel2c2","h160-pt6c","bell-rr250"] },
+    { id:"leonardo_my", name:"Leonardo Malaysia", loc:"Subang", tags:["Line","Base"], caps:["aw139-pt6c","aw139-ct7","aw139-pw206"] },
+    { id:"airbush", name:"Airbus Helicopters Malaysia", loc:"Subang", tags:["Line","Base"], caps:["h125-arriel","ec135-arrius","h160-pt6c","h225-makila"] },
+    { id:"eja", name:"EJA Sdn Bhd", loc:"Ipoh", tags:["Line","Base"], caps:["cessna-lyc","cessna-cont","piper-lyc","piper-cont","h160-arrano","h125-arriel","h225-makila"] },
+    { id:"iata", name:"International Aero Training Academy (IATA)", loc:"Melaka", tags:["Line","Base"], caps:["diamond-austro","diamond-tae125","piper-lyc"] },
+    { id:"mfa", name:"Malaysian Flying Academy (MFA)", loc:"Melaka", tags:["Line","Base"], caps:["piper-lyc"] },
+    { id:"fras", name:"Kelab Penerbangan FRAS Johor", loc:"Senai", tags:["Line","Base"], caps:["piper-lyc","cessna-lyc"] },
+    { id:"sinkung", name:"Sin-Kung Airways", loc:"Langkawi", tags:["Line","Base"], caps:["cessna-pt6a","piaggio-pt6a","diamond-austro","diamond-tae125"] },
+    { id:"atas", name:"ATAS Aero Engineering", loc:"Senai", tags:["Line","Base"], caps:["cessna-lyc","diamond-austro","bell-arrius2r"] },
+    { id:"asiaaeroeng", name:"Asia Aero Engineering", loc:"Shah Alam", tags:["Line","Base"], caps:["piaggio-pt6a"] },
+    { id:"subangmro", name:"Subang MRO", loc:"Subang", tags:["Line","Base"], caps:["beech-pt6a"] },
+    { id:"aerotree", name:"Aerotree Defence & Services", loc:"Kuala Lumpur", tags:["Line","Base"], caps:["beech-pt6a"] },
+    { id:"sabah", name:"Sabah Air Aviation", loc:"Kota Kinabalu", tags:["Line","Base"], caps:["beech-pt6a","bell-rr250","aw139-pw206"] },
+
+    // ====== 纯发动机车间 (B1/B2/B3) ======
+    { id:"geeng", name:"GE Engine Services Malaysia", loc:"Subang", tags:["Engine"], caps:["engine-cfm56-5b","engine-cfm56-7b","engine-leap-1a","engine-leap-1b"] },
+    { id:"globalturbine", name:"Global Turbine Asia", loc:"Subang", tags:["Engine"], caps:["engine-arriel","engine-arrius","engine-makila"] },
+    { id:"ats", name:"ATS Turbine Service", loc:"Subang", tags:["Engine"], caps:["engine-pt6a"] },
+    { id:"realturbine", name:"Real Turbine Engine Consultant", loc:"Johor Bahru", tags:["Engine"], caps:["engine-pt6a"] }
+  ]
+};
+
+// ================ 交互逻辑 ================
+function nav(viewId) {
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
+  document.getElementById('view-' + viewId).classList.add('active');
+  var navIds = ['landing','airframe','ata','eco','airports'];
+  document.querySelectorAll('.tb-btn').forEach(function(b,i){
+    b.classList.remove('active');
+    if (navIds[i] === viewId) b.classList.add('active');
+  });
+  window.scrollTo(0,0);
+}
+
+function selectAC(acId) {
+  var ac = _db.aircrafts[acId];
+  if (!ac) { alert("Data coming soon for this aircraft type."); return; }
+  document.getElementById('engine-title').innerText = ac.name + ' — Select Engine Variant';
+  var list = document.getElementById('engine-list');
+  list.innerHTML = ac.engines.map(function(e){
+    return '<div class="ac-card" onclick="selectEngine(\'' + acId + '\',\'' + e.id + '\',\'' + e.name + '\')"><div class="ac-phb">🔧</div><div class="ac-body"><div class="ac-name">' + e.name + '</div><div class="ac-desc">Tap to view AMOs</div></div></div>';
+  }).join('');
+  nav('engine');
+}
+
+function selectEngine(acId, engId, engName) {
+  var airResults = _db.vendors.filter(function(v){
+    return v.caps.indexOf(engId) > -1;
+  });
+  
+  var bareEngineId = engId.split('-').slice(-1)[0];
+  var engineTag = 'engine-' + bareEngineId;
+  var engResults = _db.vendors.filter(function(v){
+    return v.tags.indexOf('Engine') > -1 && v.caps.indexOf(engineTag) > -1;
+  });
+  
+  document.getElementById('mro-title').innerText = engName + ' — Approved MROs';
+  var list = document.getElementById('mro-list');
+  var html = '<div style="margin-bottom:12px;font-size:11px;color:#6680aa;">Showing both airframe-capable AMOs and dedicated engine shops.</div>';
+  
+  if (airResults.length === 0 && engResults.length === 0) {
+    html += '<p>No approved organisation found for this variant.</p>';
+  } else {
+    if (airResults.length > 0) {
+      html += '<h3>🛠️ Airframe Maintenance</h3>';
+      html += airResults.map(function(v){
+        var lb = (v.tags.indexOf('Line')>-1?'Line':'') + (v.tags.indexOf('Base')>-1?((v.tags.indexOf('Line')>-1?' / ':'') + 'Base'):'');
+        return '<div class="co"><div class="co-top"><div class="co-nm">' + v.name + '</div><span class="cap-lb">' + lb + '</span></div><div class="co-loc">📍 ' + v.loc + '</div></div>';
+      }).join('');
+    }
+    if (engResults.length > 0) {
+      html += '<h3>🔧 Engine Shop Only</h3>';
+      html += engResults.map(function(v){
+        return '<div class="co"><div class="co-top"><div class="co-nm">' + v.name + '</div><span class="cap-lb">Engine</span></div><div class="co-loc">📍 ' + v.loc + '</div></div>';
+      }).join('');
+    }
+  }
+  list.innerHTML = html;
+  nav('mro');
+}
 </script>
 
   
