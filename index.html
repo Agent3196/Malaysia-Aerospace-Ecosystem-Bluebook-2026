@@ -65,10 +65,6 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
   <span class="tb-sub">CAAM AMO Registry · MRO Directory</span>
   <nav class="tb-nav">
     <button class="tb-btn active" onclick="nav('landing')">Home</button>
-    <button class="tb-btn" onclick="nav('airframe')">Airframe MRO</button>
-    <button class="tb-btn" onclick="nav('ata')">ATA Components</button>
-    <button class="tb-btn" onclick="nav('eco')">Ecosystem</button>
-    <button class="tb-btn" onclick="nav('airports')">Airports</button>
   </nav>
 </div>
 
@@ -474,7 +470,7 @@ var _db = {
 function nav(viewId) {
   document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
   document.getElementById('view-' + viewId).classList.add('active');
-  var navIds = ['landing','airframe','ata','eco','airports'];
+  var navIds = ['landing','engine','mro'];
   document.querySelectorAll('.tb-btn').forEach(function(b,i){
     b.classList.remove('active');
     if (navIds[i] === viewId) b.classList.add('active');
@@ -482,8 +478,7 @@ function nav(viewId) {
   window.scrollTo(0,0);
 }
 
-  <script>
-// 接上一段，完整的 selectAC 和 selectEngine 函数
+// selectAC 和 selectEngine 函数
 function selectAC(acId) {
   var ac = _db.aircrafts[acId];
   if (!ac) { alert("Data coming soon for this aircraft type."); return; }
@@ -529,5 +524,3 @@ function selectEngine(acId, engId, engName, engineShopId) {
   nav('mro');
 }
 </script>
-
-  
