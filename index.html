@@ -31,8 +31,12 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
 .ac-card{border:1px solid #99aabb;border-radius:3px;cursor:pointer;overflow:hidden;transition:all .15s}
 .ac-card:hover{border-color:#003380;background:#f0f4ff}
 .ac-card.selected{border:2px solid #003380;background:#e8f0ff}
-.ac-ph{width:100%;height:75px;object-fit:cover;display:block;border-bottom:1px solid #dde4ee}
-.ac-phb{width:100%;height:75px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:24px;border-bottom:1px solid #dde4ee}
+.ac-thumb{position:relative;height:75px;border-bottom:1px solid #dde4ee;overflow:hidden;background:#eef2ff}
+.ac-phb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px;color:#99aabb;transition:opacity .2s;pointer-events:none}
+.ac-phb.shimmer{background:linear-gradient(90deg,#eef2ff 25%,#dde8ff 50%,#eef2ff 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.ac-ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .35s;display:block}
+.ac-ph.img-ok{opacity:1}
 .ac-body{padding:6px 8px}
 .ac-type{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:#6680aa;margin-bottom:1px}
 .ac-name{font-size:12px;font-weight:bold;color:#003380;margin-bottom:1px}
@@ -89,73 +93,73 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
   <div class="cat-lbl">Commercial — Narrowbody Jet (A1, above 5,700 kg)</div>
   <div class="ac-grid">
     <div class="ac-card" onclick="selectAC('a320ceo')">
-      <img class="ac-ph" src="images/AirbusA320-200.jpg" alt="A320 CEO" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div>
+      <div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/AirbusA320-200.jpg" alt="A320 CEO" loading="lazy" decoding="async"></div>
       <div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A320 CEO</div><div class="ac-desc">CFM56-5B / IAE V2500 · 12L 6B</div></div>
     </div>
     <div class="ac-card" onclick="selectAC('a320neo')">
-      <img class="ac-ph" src="images/A320neo.jpg" alt="A320 NEO" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div>
+      <div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/A320neo.jpg" alt="A320 NEO" loading="lazy" decoding="async"></div>
       <div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A320 NEO</div><div class="ac-desc">LEAP-1A / PW1100G-JM · 7L</div></div>
     </div>
     <div class="ac-card" onclick="selectAC('b737cl')">
-      <img class="ac-ph" src="images/737NG.jpeg" alt="B737 Classic" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div>
+      <div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/737NG.jpeg" alt="B737 Classic" loading="lazy" decoding="async"></div>
       <div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B737 Classic</div><div class="ac-desc">CFM56-3 · 8L 1B</div></div>
     </div>
     <div class="ac-card" onclick="selectAC('b737ng')">
-      <img class="ac-ph" src="images/737NG.jpeg" alt="B737 NG" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div>
+      <div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/737NG.jpeg" alt="B737 NG" loading="lazy" decoding="async"></div>
       <div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B737 NG</div><div class="ac-desc">CFM56-7B · 12L 3B</div></div>
     </div>
     <div class="ac-card" onclick="selectAC('b737max')">
-      <img class="ac-ph" src="images/B737max.jpeg" alt="B737 MAX" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div>
+      <div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/B737max.jpeg" alt="B737 MAX" loading="lazy" decoding="async"></div>
       <div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B737 MAX</div><div class="ac-desc">LEAP-1B · 5L 1B</div></div>
     </div>
   </div>
 
   <div class="cat-lbl">Commercial — Widebody (A1)</div>
   <div class="ac-grid-6">
-    <div class="ac-card" onclick="selectAC('a330')"><img class="ac-ph" src="images/A330.jpg" alt="A330" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div><div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A330</div><div class="ac-desc">CF6/PW4000/Trent 700/7000 · 7L 3B</div></div></div>
-    <div class="ac-card" onclick="selectAC('a350')"><img class="ac-ph" src="images/A350.png" alt="A350" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div><div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A350</div><div class="ac-desc">RR Trent XWB · 3L 1B</div></div></div>
-    <div class="ac-card" onclick="selectAC('b747')"><img class="ac-ph" src="images/B747.jpg" alt="B747-400" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B747-400</div><div class="ac-desc">P&amp;W PW4000 · 2L 1B</div></div></div>
-    <div class="ac-card" onclick="selectAC('b767')"><img class="ac-ph" src="images/B767.jpg" alt="B767" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B767</div><div class="ac-desc">GE CF6 · 1 AMO Raya</div></div></div>
-    <div class="ac-card" onclick="selectAC('b777')"><img class="ac-ph" src="images/B777.jpeg" alt="B777" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B777</div><div class="ac-desc">GE90/RR Trent 800 · 3L 1B</div></div></div>
-    <div class="ac-card" onclick="selectAC('b787')"><img class="ac-ph" src="images/B787.png" alt="B787" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B787</div><div class="ac-desc">GEnx/Trent 1000 · 1L Dviation</div></div></div>
+    <div class="ac-card" onclick="selectAC('a330')"><div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/A330.jpg" alt="A330" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A330</div><div class="ac-desc">CF6/PW4000/Trent 700/7000 · 7L 3B</div></div></div>
+    <div class="ac-card" onclick="selectAC('a350')"><div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/A350.png" alt="A350" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A350</div><div class="ac-desc">RR Trent XWB · 3L 1B</div></div></div>
+    <div class="ac-card" onclick="selectAC('b747')"><div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/B747.jpg" alt="B747-400" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B747-400</div><div class="ac-desc">P&amp;W PW4000 · 2L 1B</div></div></div>
+    <div class="ac-card" onclick="selectAC('b767')"><div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/B767.jpg" alt="B767" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B767</div><div class="ac-desc">GE CF6 · 1 AMO Raya</div></div></div>
+    <div class="ac-card" onclick="selectAC('b777')"><div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/B777.jpeg" alt="B777" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B777</div><div class="ac-desc">GE90/RR Trent 800 · 3L 1B</div></div></div>
+    <div class="ac-card" onclick="selectAC('b787')"><div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/B787.png" alt="B787" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B787</div><div class="ac-desc">GEnx/Trent 1000 · 1L Dviation</div></div></div>
   </div>
   
   <div class="cat-lbl">Regional — Turboprop (A1 &amp; A2)</div>
   <div class="ac-grid">
-    <div class="ac-card" onclick="selectAC('atr42')"><img class="ac-ph" src="images/ATR 42.png" alt="ATR 42" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🛩</div><div class="ac-body"><div class="ac-type">ATR</div><div class="ac-name">ATR 42</div><div class="ac-desc">P&amp;WC PW120/127 · 5L 3B</div></div></div>
-    <div class="ac-card" onclick="selectAC('atr72')"><img class="ac-ph" src="images/ATR-75.jpg" alt="ATR 72" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🛩</div><div class="ac-body"><div class="ac-type">ATR</div><div class="ac-name">ATR 72</div><div class="ac-desc">P&amp;WC PW120/127M · 5L 3B</div></div></div>
-    <div class="ac-card" onclick="selectAC('beech')"><img class="ac-ph" src="images/bEECHCRAFT B200.jpg" alt="Beechcraft" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🛩</div><div class="ac-body"><div class="ac-type">Textron</div><div class="ac-name">Beechcraft B200/B300</div><div class="ac-desc">P&amp;WC PT6A · 6 AMOs L/B</div></div></div>
+    <div class="ac-card" onclick="selectAC('atr42')"><div class="ac-thumb"><div class="ac-phb shimmer">🛩</div><img class="ac-ph" src="images/ATR 42.png" alt="ATR 42" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">ATR</div><div class="ac-name">ATR 42</div><div class="ac-desc">P&amp;WC PW120/127 · 5L 3B</div></div></div>
+    <div class="ac-card" onclick="selectAC('atr72')"><div class="ac-thumb"><div class="ac-phb shimmer">🛩</div><img class="ac-ph" src="images/ATR-75.jpg" alt="ATR 72" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">ATR</div><div class="ac-name">ATR 72</div><div class="ac-desc">P&amp;WC PW120/127M · 5L 3B</div></div></div>
+    <div class="ac-card" onclick="selectAC('beech')"><div class="ac-thumb"><div class="ac-phb shimmer">🛩</div><img class="ac-ph" src="images/bEECHCRAFT B200.jpg" alt="Beechcraft" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Textron</div><div class="ac-name">Beechcraft B200/B300</div><div class="ac-desc">P&amp;WC PT6A · 6 AMOs L/B</div></div></div>
   </div>
 
   <div class="cat-lbl">Business Aviation (A1 &amp; A2)</div>
   <div class="ac-grid-6">
-    <div class="ac-card" onclick="selectAC('challenger')"><img class="ac-ph" src="images/Bombardier Challenger.jpg" alt="Challenger" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🛫</div><div class="ac-body"><div class="ac-type">Bombardier</div><div class="ac-name">Challenger 300/604/605</div><div class="ac-desc">AS907/CF-34/BR700 · ExecuJet L/B</div></div></div>
-    <div class="ac-card" onclick="selectAC('global')"><img class="ac-ph" src="images/Global.jpg" alt="Global" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🛫</div><div class="ac-body"><div class="ac-type">Bombardier</div><div class="ac-name">Global / BD-700</div><div class="ac-desc">RR BR700 · ExecuJet L/B · Berjaya L</div></div></div>
-    <div class="ac-card" onclick="selectAC('falcon7x')"><img class="ac-ph" src="images/Falcon 8X.jpg" alt="Falcon 7X" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🛫</div><div class="ac-body"><div class="ac-type">Dassault</div><div class="ac-name">Falcon 7X</div><div class="ac-desc">P&amp;WC PW307 · ExecuJet L/B</div></div></div>
-    <div class="ac-card" onclick="selectAC('falcon2000')"><img class="ac-ph" src="images/Falcon 2000.jpg" alt="Falcon 2000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🛫</div><div class="ac-body"><div class="ac-type">Dassault</div><div class="ac-name">Falcon 2000</div><div class="ac-desc">CFE 738-1-1B · ExecuJet L/B</div></div></div>
-    <div class="ac-card" onclick="selectAC('gulfstream')"><img class="ac-ph" src="images/G550.jpg" alt="Gulfstream" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🛫</div><div class="ac-body"><div class="ac-type">Gulfstream</div><div class="ac-name">GIV / GV-SP / G-VI</div><div class="ac-desc">RR Tay/BR700 · 2 AMOs</div></div></div>
-    <div class="ac-card" onclick="selectAC('hondajet')"><img class="ac-ph" src="images/Honda Jet.png" alt="HondaJet" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🛫</div><div class="ac-body"><div class="ac-type">Honda Aircraft</div><div class="ac-name">HA-420 HondaJet</div><div class="ac-desc">GE Honda HF120 · 2 AMOs</div></div></div>
+    <div class="ac-card" onclick="selectAC('challenger')"><div class="ac-thumb"><div class="ac-phb shimmer">🛫</div><img class="ac-ph" src="images/Bombardier Challenger.jpg" alt="Challenger" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Bombardier</div><div class="ac-name">Challenger 300/604/605</div><div class="ac-desc">AS907/CF-34/BR700 · ExecuJet L/B</div></div></div>
+    <div class="ac-card" onclick="selectAC('global')"><div class="ac-thumb"><div class="ac-phb shimmer">🛫</div><img class="ac-ph" src="images/Global.jpg" alt="Global" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Bombardier</div><div class="ac-name">Global / BD-700</div><div class="ac-desc">RR BR700 · ExecuJet L/B · Berjaya L</div></div></div>
+    <div class="ac-card" onclick="selectAC('falcon7x')"><div class="ac-thumb"><div class="ac-phb shimmer">🛫</div><img class="ac-ph" src="images/Falcon 8X.jpg" alt="Falcon 7X" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Dassault</div><div class="ac-name">Falcon 7X</div><div class="ac-desc">P&amp;WC PW307 · ExecuJet L/B</div></div></div>
+    <div class="ac-card" onclick="selectAC('falcon2000')"><div class="ac-thumb"><div class="ac-phb shimmer">🛫</div><img class="ac-ph" src="images/Falcon 2000.jpg" alt="Falcon 2000" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Dassault</div><div class="ac-name">Falcon 2000</div><div class="ac-desc">CFE 738-1-1B · ExecuJet L/B</div></div></div>
+    <div class="ac-card" onclick="selectAC('gulfstream')"><div class="ac-thumb"><div class="ac-phb shimmer">🛫</div><img class="ac-ph" src="images/G550.jpg" alt="Gulfstream" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Gulfstream</div><div class="ac-name">GIV / GV-SP / G-VI</div><div class="ac-desc">RR Tay/BR700 · 2 AMOs</div></div></div>
+    <div class="ac-card" onclick="selectAC('hondajet')"><div class="ac-thumb"><div class="ac-phb shimmer">🛫</div><img class="ac-ph" src="images/Honda Jet.png" alt="HondaJet" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Honda Aircraft</div><div class="ac-name">HA-420 HondaJet</div><div class="ac-desc">GE Honda HF120 · 2 AMOs</div></div></div>
   </div>
 
   <div class="cat-lbl">General Aviation / Flight Training (A2, below 5,700 kg)</div>
   <div class="ac-grid">
-    <div class="ac-card" onclick="selectAC('cessna')"><img class="ac-ph" src="images/Cessna 150.jpg" alt="Cessna" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div><div class="ac-body"><div class="ac-type">Textron / Cessna</div><div class="ac-name">Cessna 150/172/182/208</div><div class="ac-desc">Continental/Lycoming/PT6A · 7 AMOs</div></div></div>
-    <div class="ac-card" onclick="selectAC('piper')"><img class="ac-ph" src="images/PA-28.jpg" alt="Piper PA-28" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div><div class="ac-body"><div class="ac-type">Piper</div><div class="ac-name">PA-28 / PA-34 / PA-44</div><div class="ac-desc">Lycoming/Continental · 6 AMOs L/B</div></div></div>
-    <div class="ac-card" onclick="selectAC('diamond')"><img class="ac-ph" src="images/DA40.jpeg" alt="Diamond" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div><div class="ac-body"><div class="ac-type">Diamond</div><div class="ac-name">DA40 / DA42 / DA62</div><div class="ac-desc">Lycoming/Austro E4/TAE 125 · 5 AMOs</div></div></div>
-    <div class="ac-card" onclick="selectAC('cirrus')"><img class="ac-ph" src="images/SR20.jpg" alt="Cirrus SR20" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div><div class="ac-body"><div class="ac-type">Cirrus</div><div class="ac-name">SR20 / SR22 / SR22T</div><div class="ac-desc">Teledyne Continental · Admal L/B</div></div></div>
-    <div class="ac-card" onclick="selectAC('piaggio')"><img class="ac-ph" src="images/P180 advanti.webp" alt="Piaggio P180" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">✈</div><div class="ac-body"><div class="ac-type">Piaggio</div><div class="ac-name">P180 Avanti</div><div class="ac-desc">P&amp;WC PT6A · 2 AMOs L/B</div></div></div>
+    <div class="ac-card" onclick="selectAC('cessna')"><div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/Cessna 150.jpg" alt="Cessna" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Textron / Cessna</div><div class="ac-name">Cessna 150/172/182/208</div><div class="ac-desc">Continental/Lycoming/PT6A · 7 AMOs</div></div></div>
+    <div class="ac-card" onclick="selectAC('piper')"><div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/PA-28.jpg" alt="Piper PA-28" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Piper</div><div class="ac-name">PA-28 / PA-34 / PA-44</div><div class="ac-desc">Lycoming/Continental · 6 AMOs L/B</div></div></div>
+    <div class="ac-card" onclick="selectAC('diamond')"><div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/DA40.jpeg" alt="Diamond" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Diamond</div><div class="ac-name">DA40 / DA42 / DA62</div><div class="ac-desc">Lycoming/Austro E4/TAE 125 · 5 AMOs</div></div></div>
+    <div class="ac-card" onclick="selectAC('cirrus')"><div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/SR20.jpg" alt="Cirrus SR20" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Cirrus</div><div class="ac-name">SR20 / SR22 / SR22T</div><div class="ac-desc">Teledyne Continental · Admal L/B</div></div></div>
+    <div class="ac-card" onclick="selectAC('piaggio')"><div class="ac-thumb"><div class="ac-phb shimmer">✈</div><img class="ac-ph" src="images/P180 advanti.webp" alt="Piaggio P180" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Piaggio</div><div class="ac-name">P180 Avanti</div><div class="ac-desc">P&amp;WC PT6A · 2 AMOs L/B</div></div></div>
   </div>
 
   <div class="cat-lbl">Rotary Wing — Helicopter (A3) · All types Line/Base unless noted</div>
   <div class="ac-grid">
-    <div class="ac-card" onclick="selectAC('h125')"><img class="ac-ph" src="images/h125.jpg" alt="H125" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🚁</div><div class="ac-body"><div class="ac-type">Airbus Helicopters</div><div class="ac-name">H125 / AS350 / AS355</div><div class="ac-desc">Arriel 1/2 / Arrius 1 · 5 AMOs</div></div></div>
-    <div class="ac-card" onclick="selectAC('ec135')"><img class="ac-ph" src="images/h145.jpg" alt="EC135" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🚁</div><div class="ac-body"><div class="ac-type">Airbus Helicopters</div><div class="ac-name">EC120 / EC135 / EC155</div><div class="ac-desc">Arrius 2B2 / PW206 · 3 AMOs</div></div></div>
-    <div class="ac-card" onclick="selectAC('h160')"><img class="ac-ph" src="images/h160.jpg" alt="H160/EC175" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🚁</div><div class="ac-body"><div class="ac-type">Airbus Helicopters</div><div class="ac-name">H160 / EC175</div><div class="ac-desc">Safran Arrano / PT6C-67E · 4 AMOs</div></div></div>
-    <div class="ac-card" onclick="selectAC('h225')"><img class="ac-ph" src="images/H215.jpg" alt="H215/H225" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🚁</div><div class="ac-body"><div class="ac-type">Airbus Helicopters</div><div class="ac-name">H215 / H225 / AS332 / EC225</div><div class="ac-desc">Makila 1A2/2A · 3 AMOs</div></div></div>
-    <div class="ac-card" onclick="selectAC('aw139')"><img class="ac-ph" src="images/AW139.jpg" alt="AW139" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🚁</div><div class="ac-body"><div class="ac-type">Leonardo</div><div class="ac-name">AW139 / AW189 / AW169 / A109</div><div class="ac-desc">PT6C / CT7 / PW206 · 6 AMOs</div></div></div>
-    <div class="ac-card" onclick="selectAC('bell')"><img class="ac-ph" src="images/Bell 206.jpg" alt="Bell 206" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🚁</div><div class="ac-body"><div class="ac-type">Bell Textron</div><div class="ac-name">Bell 206 / 407 / 429 / 505</div><div class="ac-desc">RR 250 / PW207 / Arrius 2R · 5 AMOs</div></div></div>
-    <div class="ac-card" onclick="selectAC('s76')"><img class="ac-ph" src="images/S76.jpg" alt="S-76" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🚁</div><div class="ac-body"><div class="ac-type">Sikorsky</div><div class="ac-name">S-76B</div><div class="ac-desc">P&amp;WC PT6B · 1 AMO Mados's L/B</div></div></div>
-    <div class="ac-card" onclick="selectAC('robinson')"><img class="ac-ph" src="images/R44.jpg" alt="Robinson R44" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ac-phb" style="display:none">🚁</div><div class="ac-body"><div class="ac-type">Robinson</div><div class="ac-name">R22 / R44 / R66</div><div class="ac-desc">Lycoming / RR 250 · 3 AMOs L/B</div></div></div>
+    <div class="ac-card" onclick="selectAC('h125')"><div class="ac-thumb"><div class="ac-phb shimmer">🚁</div><img class="ac-ph" src="images/h125.jpg" alt="H125" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Airbus Helicopters</div><div class="ac-name">H125 / AS350 / AS355</div><div class="ac-desc">Arriel 1/2 / Arrius 1 · 5 AMOs</div></div></div>
+    <div class="ac-card" onclick="selectAC('ec135')"><div class="ac-thumb"><div class="ac-phb shimmer">🚁</div><img class="ac-ph" src="images/h145.jpg" alt="EC135" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Airbus Helicopters</div><div class="ac-name">EC120 / EC135 / EC155</div><div class="ac-desc">Arrius 2B2 / PW206 · 3 AMOs</div></div></div>
+    <div class="ac-card" onclick="selectAC('h160')"><div class="ac-thumb"><div class="ac-phb shimmer">🚁</div><img class="ac-ph" src="images/h160.jpg" alt="H160/EC175" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Airbus Helicopters</div><div class="ac-name">H160 / EC175</div><div class="ac-desc">Safran Arrano / PT6C-67E · 4 AMOs</div></div></div>
+    <div class="ac-card" onclick="selectAC('h225')"><div class="ac-thumb"><div class="ac-phb shimmer">🚁</div><img class="ac-ph" src="images/H215.jpg" alt="H215/H225" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Airbus Helicopters</div><div class="ac-name">H215 / H225 / AS332 / EC225</div><div class="ac-desc">Makila 1A2/2A · 3 AMOs</div></div></div>
+    <div class="ac-card" onclick="selectAC('aw139')"><div class="ac-thumb"><div class="ac-phb shimmer">🚁</div><img class="ac-ph" src="images/AW139.jpg" alt="AW139" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Leonardo</div><div class="ac-name">AW139 / AW189 / AW169 / A109</div><div class="ac-desc">PT6C / CT7 / PW206 · 6 AMOs</div></div></div>
+    <div class="ac-card" onclick="selectAC('bell')"><div class="ac-thumb"><div class="ac-phb shimmer">🚁</div><img class="ac-ph" src="images/Bell 206.jpg" alt="Bell 206" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Bell Textron</div><div class="ac-name">Bell 206 / 407 / 429 / 505</div><div class="ac-desc">RR 250 / PW207 / Arrius 2R · 5 AMOs</div></div></div>
+    <div class="ac-card" onclick="selectAC('s76')"><div class="ac-thumb"><div class="ac-phb shimmer">🚁</div><img class="ac-ph" src="images/S76.jpg" alt="S-76" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Sikorsky</div><div class="ac-name">S-76B</div><div class="ac-desc">P&amp;WC PT6B · 1 AMO Mados's L/B</div></div></div>
+    <div class="ac-card" onclick="selectAC('robinson')"><div class="ac-thumb"><div class="ac-phb shimmer">🚁</div><img class="ac-ph" src="images/R44.jpg" alt="Robinson R44" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Robinson</div><div class="ac-name">R22 / R44 / R66</div><div class="ac-desc">Lycoming / RR 250 · 3 AMOs L/B</div></div></div>
 
 </div>
   <div style="text-align:center;font-size:11px;color:#6680aa;margin:16px 0 8px">— or browse by section —</div>
@@ -523,4 +527,31 @@ function selectEngine(acId, engId, engName, engineShopId) {
   list.innerHTML = html;
   nav('mro');
 }
+
+// ── Image lazy-load & skeleton handler ──
+(function(){
+  function initImgs(){
+    document.querySelectorAll('.ac-ph').forEach(function(img){
+      var thumb = img.parentElement;
+      var phb   = thumb ? thumb.querySelector('.ac-phb') : null;
+      function onLoad(){
+        img.classList.add('img-ok');
+        if(phb){ phb.classList.remove('shimmer'); phb.style.opacity='0'; }
+      }
+      function onErr(){
+        img.style.display='none';
+        if(phb){ phb.classList.remove('shimmer'); }
+      }
+      if(img.complete && img.naturalWidth > 0){ onLoad(); }
+      else if(img.complete){ onErr(); }
+      else{
+        img.addEventListener('load', onLoad);
+        img.addEventListener('error', onErr);
+      }
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', initImgs);
+  } else { initImgs(); }
+})();
 </script>
