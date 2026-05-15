@@ -505,9 +505,19 @@ function selectAC(acId) {
   document.getElementById('engine-title').textContent = ac.name;
   var list = document.getElementById('engine-list');
   list.innerHTML = ac.engines.map(function(e){
-    return '<div class="ac-card" onclick="selectEngine(\\''+acId+'\\',\\''+e.id+'\\',\\''+e.name+'\\',\\'+(e.engineShopId||'')+'\\')"><div class="ac-thumb" style="height:60px;background:#eef2ff;border:none"><div class="ac-phb" style="position:relative;font-size:28px;height:60px">⚙️</div></div><div class="ac-body"><div class="ac-name">'+e.name+'</div><div class="ac-desc">Tap to continue</div></div></div>';
-  }).join('');
-  nav('engine');
+return '<div class="ac-card" onclick="selectEngine(\'' 
+  + acId + '\',\'' 
+  + e.id + '\',\'' 
+  + e.name + '\',\'' 
+  + (e.engineShopId || '') + '\')">' +
+  '<div class="ac-thumb" style="height:60px;background:#eef2ff;border:none">' +
+    '<div class="ac-phb" style="position:relative;font-size:28px;height:60px">⚙️</div>' +
+  '</div>' +
+  '<div class="ac-body">' +
+    '<div class="ac-name">' + e.name + '</div>' +
+    '<div class="ac-desc">Tap to continue</div>' +
+  '</div>' +
+'</div>';
 }
 
 // ════════════════════════════════════════════════════════════
@@ -607,8 +617,7 @@ function showCompList() {
   var html = _db.compVendors.map(function(v){
     var matched = v.caps.filter(itemMatchesSelection);
     var authStr = (v.auth||[]).map(function(a){return '<span class="tag-auth">'+a+'</span>';}).join(' ');
-    return '<div class="co clickable" onclick="showCompDetail(\\''+v.id+'\\')"><div class="co-top"><div class="co-nm">'+v.name+'</div><span class="tag tag-lb">'+matched.length+' PN matched</span></div><div class="co-loc">'+v.loc+'</div>'+(v.note?'<div class="co-note">'+v.note+'</div>':'')+'<div style="margin-top:5px;display:flex;gap:4px;flex-wrap:wrap">'+authStr+'</div><div style="margin-top:6px;font-size:11px;color:#003380">→ Click to view ATA chapters &amp; part numbers</div></div>';
-  }).join('');
+    return '<div class="co clickable" onclick="showCompDetail(\''+v.id+'\')"><div class="co-top"><div class="co-nm">'+v.name+'</div><span class="tag tag-lb">'+matched.length+' PN matched</span></div><div class="co-loc">'+v.loc+'</div>'+(v.note?'<div class="co-note">'+v.note+'</div>':'')+'<div style="margin-top:5px;display:flex;gap:4px;flex-wrap:wrap">'+authStr+'</div><div style="margin-top:6px;font-size:11px;color:#003380">→ Click to view ATA chapters &amp; part numbers</div></div>';
   document.getElementById('complist-list').innerHTML = html;
   nav('complist');
 }
@@ -630,9 +639,9 @@ function showCompDetail(shopId) {
   // Build ATA list
   var atas = {};
   matched.forEach(function(item){ atas[item.ata] = (atas[item.ata]||0)+1; });
-  var ataHtml = '<div class="ata-item active" data-ata="all" onclick="filterATA(\\'all\\')">All<span>'+matched.length+' parts</span></div>';
+  var ataHtml = '<div class="ata-item active" data-ata="all" onclick="filterATA(\'all\')">All<span>'+matched.length+' parts</span></div>';
   Object.keys(atas).sort().forEach(function(a){
-    ataHtml += '<div class="ata-item" data-ata="'+a+'" onclick="filterATA(\\''+a+'\\')">ATA '+a+'<span>'+atas[a]+' parts</span></div>';
+    ataHtml += '<div class="ata-item" data-ata="'+a+'" onclick="filterATA(\''+a+'\')">ATA '+a+'<span>'+atas[a]+' parts</span></div>';
   });
   document.getElementById('ata-col-list').innerHTML = ataHtml;
   renderPN(matched);
