@@ -116,14 +116,89 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
   <span class="tb-div">|</span>
   <span class="tb-sub">CAAM AMO Registry · MRO Directory</span>
   <div class="tb-nav">
-    <button class="tb-btn active" onclick="nav('landing')">Home</button>
+    <button class="tb-btn active" onclick="nav('authority')">Home</button>
   </div>
 </div>
 
 <!-- ══════════════════════════════════
+     STEP 0 — SELECT AUTHORITY
+════════════════════════════════════ -->
+<div id="view-authority" class="view active">
+<div class="pw">
+  <div style="text-align:center;padding:28px 0 20px">
+    <h1 style="font-size:20px">MALAYSIA AEROSPACE ECOSYSTEM BLUEBOOK 2026</h1>
+    <p style="font-size:12px;color:#444;max-width:580px;margin:8px auto 0">Select the Authority that issued the Certificate of Airworthiness for your aircraft. This determines which MROs can legally sign the Certificate of Release to Service (CRS) for your aircraft.</p>
+  </div>
+  <div style="text-align:center;font-size:12px;color:#003380;font-weight:bold;margin-bottom:16px">Step 0 &mdash; Select Registration Authority</div>
+
+  <div class="cat-lbl">Available Now</div>
+  <div class="g5">
+    <div class="ac-card" onclick="nav('landing')" style="border:2px solid #003380">
+      <div class="ac-thumb" style="background:#003380;height:80px">
+        <div class="ac-phb" style="color:#fff;font-size:32px;position:relative">&#127474;&#127486;</div>
+      </div>
+      <div class="ac-body">
+        <div class="ac-type" style="color:#003380;font-weight:bold">9M &middot; Malaysia</div>
+        <div class="ac-name">CAAM</div>
+        <div class="ac-desc">Civil Aviation Authority of Malaysia &middot; Full directory available</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-lbl" style="margin-top:20px">Coming Soon &mdash; Data being compiled</div>
+  <div class="g5">
+    <div class="ac-card" onclick="nav('soon')" style="opacity:.55;cursor:not-allowed">
+      <div class="ac-thumb" style="background:#f0f4ff;height:80px">
+        <div class="ac-phb" style="font-size:32px;position:relative">&#127480;&#127468;</div>
+      </div>
+      <div class="ac-body">
+        <div class="ac-type">9V &middot; Singapore</div>
+        <div class="ac-name">CAAS</div>
+        <div class="ac-desc">Civil Aviation Authority of Singapore</div>
+      </div>
+    </div>
+    <div class="ac-card" onclick="nav('soon')" style="opacity:.55;cursor:not-allowed">
+      <div class="ac-thumb" style="background:#f0f4ff;height:80px">
+        <div class="ac-phb" style="font-size:32px;position:relative">&#127466;&#127482;</div>
+      </div>
+      <div class="ac-body">
+        <div class="ac-type">Various &middot; Europe</div>
+        <div class="ac-name">EASA</div>
+        <div class="ac-desc">European Union Aviation Safety Agency</div>
+      </div>
+    </div>
+    <div class="ac-card" onclick="nav('soon')" style="opacity:.55;cursor:not-allowed">
+      <div class="ac-thumb" style="background:#f0f4ff;height:80px">
+        <div class="ac-phb" style="font-size:32px;position:relative">&#127482;&#127480;</div>
+      </div>
+      <div class="ac-body">
+        <div class="ac-type">N- &middot; USA</div>
+        <div class="ac-name">FAA</div>
+        <div class="ac-desc">Federal Aviation Administration</div>
+      </div>
+    </div>
+    <div class="ac-card" onclick="nav('soon')" style="opacity:.55;cursor:not-allowed">
+      <div class="ac-thumb" style="background:#f0f4ff;height:80px">
+        <div class="ac-phb" style="font-size:32px;position:relative">&#127464;&#127475;</div>
+      </div>
+      <div class="ac-body">
+        <div class="ac-type">B- &middot; China</div>
+        <div class="ac-name">CAAC</div>
+        <div class="ac-desc">Civil Aviation Administration of China</div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:28px;font-size:10px;color:#99aabb;text-transform:uppercase;letter-spacing:.05em">
+    CAAM AMO Registry May 2026 &middot; Created by Kar Kee Chin &middot; Verify with Authority before operational decisions
+  </div>
+</div>
+</div>
+
+
+<!-- ══════════════════════════════════
      STEP 1 — LANDING
 ════════════════════════════════════ -->
-<div id="view-landing" class="view active">
+<div id="view-landing" class="view">
 <div class="pw">
   <div style="text-align:center;padding:22px 0 14px">
     <h1 style="font-size:20px">MALAYSIA AEROSPACE ECOSYSTEM BLUEBOOK 2026</h1>
@@ -200,6 +275,7 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
 ════════════════════════════════════ -->
 <div id="view-engine" class="view">
   <div class="stepbar">
+    <div class="step done" onclick="nav('authority')"><span class="step-n">0</span>Authority</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div>
     <span class="sarr">&#8250;</span>
     <div class="step active"><span class="step-n">2</span>Engine / Variant</div>
@@ -219,6 +295,7 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
 ════════════════════════════════════ -->
 <div id="view-mtype" class="view">
   <div class="stepbar">
+    <div class="step done" onclick="nav('authority')"><span class="step-n">0</span>Authority</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div>
     <span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('engine')"><span class="step-n">2</span>Engine</div>
@@ -252,6 +329,7 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
 ════════════════════════════════════ -->
 <div id="view-lb" class="view">
   <div class="stepbar">
+    <div class="step done" onclick="nav('authority')"><span class="step-n">0</span>Authority</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('engine')"><span class="step-n">2</span>Engine</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('mtype')"><span class="step-n">3</span>Airframe</div><span class="sarr">&#8250;</span>
@@ -307,6 +385,7 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
 ════════════════════════════════════ -->
 <div id="view-mro" class="view">
   <div class="stepbar">
+    <div class="step done" onclick="nav('authority')"><span class="step-n">0</span>Authority</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('engine')"><span class="step-n">2</span>Engine</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('mtype')"><span class="step-n">3</span>Airframe</div><span class="sarr">&#8250;</span>
@@ -327,6 +406,7 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
 ════════════════════════════════════ -->
 <div id="view-engshop" class="view">
   <div class="stepbar">
+    <div class="step done" onclick="nav('authority')"><span class="step-n">0</span>Authority</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('engine')"><span class="step-n">2</span>Engine</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('mtype')"><span class="step-n">3</span>Engine Shop</div><span class="sarr">&#8250;</span>
@@ -346,6 +426,7 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
 ════════════════════════════════════ -->
 <div id="view-complist" class="view">
   <div class="stepbar">
+    <div class="step done" onclick="nav('authority')"><span class="step-n">0</span>Authority</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('engine')"><span class="step-n">2</span>Engine</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('mtype')"><span class="step-n">3</span>Component</div><span class="sarr">&#8250;</span>
@@ -365,6 +446,7 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
 ════════════════════════════════════ -->
 <div id="view-compdetail" class="view">
   <div class="stepbar">
+    <div class="step done" onclick="nav('authority')"><span class="step-n">0</span>Authority</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('engine')"><span class="step-n">2</span>Engine</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('mtype')"><span class="step-n">3</span>Component</div><span class="sarr">&#8250;</span>
@@ -541,7 +623,7 @@ function itemMatches(item){
 function nav(id){
   document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
   document.getElementById('view-'+id).classList.add('active');
-  document.querySelector('.tb-btn').classList.toggle('active', id === 'landing');
+  document.querySelector('.tb-btn').classList.toggle('active', id === 'authority');
   window.scrollTo(0,0);
 }
 
@@ -735,5 +817,18 @@ function renderPN(items){
   document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
 })();
 </script>
+
+<!-- ══════════════════════════════════
+     COMING SOON
+════════════════════════════════════ -->
+<div id="view-soon" class="view">
+<div class="pw" style="text-align:center;padding:60px 20px">
+  <div style="font-size:48px;margin-bottom:16px">&#128295;</div>
+  <h2 style="font-size:18px;color:#003380;margin-bottom:8px">Data being compiled</h2>
+  <p style="font-size:12px;color:#6680aa;max-width:420px;margin:0 auto 24px">MRO capability data for this Authority is currently being sourced and verified. Please check back soon.</p>
+  <button class="back-btn" onclick="nav('authority')" style="padding:8px 20px;font-size:13px">&#8592; Select another Authority</button>
+</div>
+</div>
+
 </body>
 </html>
