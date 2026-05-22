@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>MALAYSIA AEROSPACE ECOSYSTEM BLUEBOOK 2026</title>
+<title>Malaysia Aerospace Ecosystem Bluebook 2026</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;font-size:14px;line-height:1.6}
@@ -25,12 +25,10 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
 .sarr{color:#99aabb;margin:0 2px}
 .pw{max-width:1120px;margin:0 auto;padding:18px 20px}
 .cat-lbl{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#6680aa;padding-bottom:3px;border-bottom:1px solid #dde4ee;margin-bottom:8px;margin-top:14px}
-/* grids */
 .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:2px}
 .g6{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:2px}
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:2px}
-.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:2px;max-width:660px}
-/* aircraft cards */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:660px}
 .ac-card{border:1px solid #99aabb;border-radius:3px;cursor:pointer;overflow:hidden;transition:all .15s}
 .ac-card:hover{border-color:#003380;background:#f0f4ff}
 .ac-thumb{position:relative;height:75px;border-bottom:1px solid #dde4ee;overflow:hidden;background:#eef2ff}
@@ -43,28 +41,24 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
 .ac-type{font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:#6680aa;margin-bottom:1px}
 .ac-name{font-size:12px;font-weight:bold;color:#003380;margin-bottom:1px}
 .ac-desc{font-size:10px;color:#555;line-height:1.3}
-/* eng cards (no image) */
 .eng-card{border:1px solid #99aabb;border-radius:3px;cursor:pointer;overflow:hidden;transition:all .15s;padding:14px 12px}
 .eng-card:hover{border-color:#003380;background:#f0f4ff}
 .eng-icon{font-size:26px;margin-bottom:6px}
-/* mtype big cards */
 .mtype-card{border:2px solid #99aabb;border-radius:6px;cursor:pointer;overflow:hidden;transition:border-color .15s}
 .mtype-card:hover{border-color:#003380;background:#f8faff}
 .mtype-thumb{height:110px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:48px;border-bottom:1px solid #dde4ee}
 .mtype-body{padding:14px}
 .mtype-ttl{font-size:15px;font-weight:bold;color:#003380;margin-bottom:4px}
 .mtype-desc{font-size:11px;color:#555;line-height:1.45}
-/* lb cards */
 .lb-card{border:2px solid #99aabb;border-radius:6px;cursor:pointer;overflow:hidden;transition:border-color .15s}
 .lb-card:hover{border-color:#003380;background:#f8faff}
 .lb-thumb{height:130px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #dde4ee}
-.lb-bg-line{background:linear-gradient(150deg,#e4effc 0%,#c2d8f4 100%)}
-.lb-bg-base{background:linear-gradient(150deg,#fdf3e4 0%,#f0dfc0 100%)}
+.lb-bg-line{background:linear-gradient(150deg,#e4effc,#c2d8f4)}
+.lb-bg-base{background:linear-gradient(150deg,#fdf3e4,#f0dfc0)}
 .lb-body{padding:16px}
 .lb-ttl{font-size:16px;font-weight:bold;color:#003380;margin-bottom:3px}
 .lb-sub{font-size:11px;color:#6680aa;margin-bottom:7px}
 .lb-pts{font-size:11px;color:#444;line-height:1.7}
-/* result cards */
 .co{border:1px solid #99aabb;border-radius:4px;padding:10px 12px;margin-bottom:8px}
 .co.link{cursor:pointer}
 .co:hover{border-color:#003380;background:#f8faff}
@@ -79,8 +73,8 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
 .tag-b{background:#eefff5;border-color:#006633;color:#004422}
 .tag-eng{background:#f0eeff;border-color:#5533bb;color:#3311aa}
 .tag-auth{font-size:10px;padding:1px 5px;border-radius:2px;background:#e8f0ff;border:1px solid #003380;color:#003380}
-.tag-pn{font-size:10px;padding:1px 5px;border-radius:2px;background:#fff8ee;border:1px solid #884400;color:#662200}
-/* component detail */
+.tag-easa{font-size:10px;padding:1px 5px;border-radius:2px;background:#eeeeff;border:1px solid #4455aa;color:#3344aa}
+.tag-pn{font-size:10px;padding:2px 7px;border-radius:3px;background:#fff8ee;border:1px solid #884400;color:#662200}
 .comp-wrap{border:1px solid #99aabb;border-radius:4px;overflow:hidden;margin-top:12px;display:grid;grid-template-columns:170px 1fr}
 .ata-col{border-right:1px solid #99aabb;background:#f8faff}
 .ata-col-hdr{padding:7px 10px;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#6680aa;border-bottom:1px solid #dde4ee;font-weight:bold}
@@ -90,130 +84,99 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
 .ata-row small{display:block;font-size:10px;opacity:.7}
 .pn-col{overflow-x:auto}
 .pn-hdr{display:grid;grid-template-columns:52px 1fr 155px 110px;background:#f0f4ff;border-bottom:1px solid #99aabb;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#6680aa;font-weight:bold}
-.pn-hdr > div, .pn-row > div{padding:7px 10px}
+.pn-hdr>div,.pn-row>div{padding:7px 10px}
 .pn-row{display:grid;grid-template-columns:52px 1fr 155px 110px;border-bottom:1px solid #eef2f8;font-size:11px;color:#333}
-.pn-row:last-child{border-bottom:none}
 .pn-row:hover{background:#f8faff}
 .pn-all{display:inline-block;font-size:10px;padding:1px 5px;border-radius:2px;background:#e8fff0;border:1px solid #006633;color:#004422}
 .pn-na{display:inline-block;font-size:10px;padding:1px 5px;border-radius:2px;background:#f5f5f5;border:1px solid #ccc;color:#777}
 .pn-empty{padding:20px;font-size:12px;color:#99aabb;font-style:italic}
-/* misc */
 .back-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .back-btn{background:none;border:1px solid #003380;padding:4px 12px;font-family:"Times New Roman",serif;font-size:11px;color:#003380;cursor:pointer;border-radius:2px}
 .back-btn:hover{background:#003380;color:#fff}
 .ctx-lbl{font-size:12px;color:#6680aa}
 .pfoot{border-top:2px solid #003380;padding:8px 20px;display:flex;justify-content:space-between;font-size:10px;color:#6680aa;text-transform:uppercase;letter-spacing:.04em}
-/* responsive */
-@media(max-width:1000px){.g5{grid-template-columns:repeat(4,1fr)}.g6{grid-template-columns:repeat(4,1fr)}}
+.auth-badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:2px;margin-bottom:8px;letter-spacing:.06em}
+.badge-caam{background:#003380;color:#fff}
+.badge-easa{background:#003366;color:#fff}
+@media(max-width:1000px){.g5{grid-template-columns:repeat(4,1fr)}.g6{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:1fr 1fr}}
 @media(max-width:720px){.g5{grid-template-columns:repeat(3,1fr)}.g6{grid-template-columns:repeat(3,1fr)}.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}.comp-wrap{grid-template-columns:1fr}.ata-col{border-right:none;border-bottom:1px solid #99aabb}}
 @media(max-width:480px){.g5{grid-template-columns:repeat(2,1fr)}.g6{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
-
 <div id="topbar">
   <span class="tb-logo">Malaysia Aerospace Bluebook 2026</span>
   <span class="tb-div">|</span>
-  <span class="tb-sub">CAAM AMO Registry · MRO Directory</span>
-  <div class="tb-nav">
-    <button class="tb-btn active" onclick="nav('authority')">Home</button>
-  </div>
+  <span class="tb-sub">CAAM &amp; EASA AMO Directory</span>
+  <div class="tb-nav"><button class="tb-btn active" onclick="nav('authority')">Home</button></div>
 </div>
 
-<!-- ══════════════════════════════════
-     STEP 0 — SELECT AUTHORITY
-════════════════════════════════════ -->
+<!-- ═══ STEP 0: SELECT AUTHORITY ═══ -->
 <div id="view-authority" class="view active">
 <div class="pw">
   <div style="text-align:center;padding:28px 0 20px">
     <h1 style="font-size:20px">MALAYSIA AEROSPACE ECOSYSTEM BLUEBOOK 2026</h1>
-    <p style="font-size:12px;color:#444;max-width:580px;margin:8px auto 0">Select the Authority that issued the Certificate of Airworthiness for your aircraft. This determines which MROs can legally sign the Certificate of Release to Service (CRS) for your aircraft.</p>
+    <p style="font-size:12px;color:#444;max-width:580px;margin:8px auto 0">Select the Authority that issued the Certificate of Airworthiness for your aircraft. This determines which MROs can legally sign the Certificate of Release to Service.</p>
   </div>
   <div style="text-align:center;font-size:12px;color:#003380;font-weight:bold;margin-bottom:16px">Step 0 &mdash; Select Registration Authority</div>
 
   <div class="cat-lbl">Available Now</div>
   <div class="g5">
-    <div class="ac-card" onclick="nav('landing')" style="border:2px solid #003380">
+    <div class="ac-card" onclick="selectAuthority('caam')" style="border:2px solid #003380">
       <div class="ac-thumb" style="background:#003380;height:80px">
         <div class="ac-phb" style="color:#fff;font-size:32px;position:relative">&#127474;&#127486;</div>
       </div>
       <div class="ac-body">
         <div class="ac-type" style="color:#003380;font-weight:bold">9M &middot; Malaysia</div>
         <div class="ac-name">CAAM</div>
-        <div class="ac-desc">Civil Aviation Authority of Malaysia &middot; Full directory available</div>
+        <div class="ac-desc">Civil Aviation Authority of Malaysia &middot; Full directory</div>
       </div>
     </div>
-  </div>
-
-  <div class="cat-lbl" style="margin-top:20px">Coming Soon &mdash; Data being compiled</div>
-  <div class="g5">
-    <div class="ac-card" onclick="nav('soon')" style="opacity:.55;cursor:not-allowed">
-      <div class="ac-thumb" style="background:#f0f4ff;height:80px">
-        <div class="ac-phb" style="font-size:32px;position:relative">&#127480;&#127468;</div>
+    <div class="ac-card" onclick="selectAuthority('easa')" style="border:2px solid #334499">
+      <div class="ac-thumb" style="background:#334499;height:80px">
+        <div class="ac-phb" style="color:#fff;font-size:32px;position:relative">&#127466;&#127482;</div>
       </div>
       <div class="ac-body">
-        <div class="ac-type">9V &middot; Singapore</div>
-        <div class="ac-name">CAAS</div>
-        <div class="ac-desc">Civil Aviation Authority of Singapore</div>
-      </div>
-    </div>
-    <div class="ac-card" onclick="nav('soon')" style="opacity:.55;cursor:not-allowed">
-      <div class="ac-thumb" style="background:#f0f4ff;height:80px">
-        <div class="ac-phb" style="font-size:32px;position:relative">&#127466;&#127482;</div>
-      </div>
-      <div class="ac-body">
-        <div class="ac-type">Various &middot; Europe</div>
+        <div class="ac-type" style="color:#334499;font-weight:bold">Various &middot; Europe</div>
         <div class="ac-name">EASA</div>
-        <div class="ac-desc">European Union Aviation Safety Agency</div>
-      </div>
-    </div>
-    <div class="ac-card" onclick="nav('soon')" style="opacity:.55;cursor:not-allowed">
-      <div class="ac-thumb" style="background:#f0f4ff;height:80px">
-        <div class="ac-phb" style="font-size:32px;position:relative">&#127482;&#127480;</div>
-      </div>
-      <div class="ac-body">
-        <div class="ac-type">N- &middot; USA</div>
-        <div class="ac-name">FAA</div>
-        <div class="ac-desc">Federal Aviation Administration</div>
-      </div>
-    </div>
-    <div class="ac-card" onclick="nav('soon')" style="opacity:.55;cursor:not-allowed">
-      <div class="ac-thumb" style="background:#f0f4ff;height:80px">
-        <div class="ac-phb" style="font-size:32px;position:relative">&#127464;&#127475;</div>
-      </div>
-      <div class="ac-body">
-        <div class="ac-type">B- &middot; China</div>
-        <div class="ac-name">CAAC</div>
-        <div class="ac-desc">Civil Aviation Administration of China</div>
+        <div class="ac-desc">European Union Aviation Safety Agency &middot; 6 MROs</div>
       </div>
     </div>
   </div>
-  <div style="text-align:center;margin-top:28px;font-size:10px;color:#99aabb;text-transform:uppercase;letter-spacing:.05em">
-    CAAM AMO Registry May 2026 &middot; Created by Kar Kee Chin &middot; Verify with Authority before operational decisions
+
+  <div class="cat-lbl" style="margin-top:20px">Coming Soon</div>
+  <div class="g5">
+    <div class="ac-card" onclick="nav('soon')" style="opacity:.5;cursor:not-allowed">
+      <div class="ac-thumb" style="background:#f0f4ff;height:80px"><div class="ac-phb" style="font-size:32px;position:relative">&#127480;&#127468;</div></div>
+      <div class="ac-body"><div class="ac-type">9V &middot; Singapore</div><div class="ac-name">CAAS</div><div class="ac-desc">Civil Aviation Authority of Singapore</div></div>
+    </div>
+    <div class="ac-card" onclick="nav('soon')" style="opacity:.5;cursor:not-allowed">
+      <div class="ac-thumb" style="background:#f0f4ff;height:80px"><div class="ac-phb" style="font-size:32px;position:relative">&#127482;&#127480;</div></div>
+      <div class="ac-body"><div class="ac-type">N- &middot; USA</div><div class="ac-name">FAA</div><div class="ac-desc">Federal Aviation Administration</div></div>
+    </div>
+    <div class="ac-card" onclick="nav('soon')" style="opacity:.5;cursor:not-allowed">
+      <div class="ac-thumb" style="background:#f0f4ff;height:80px"><div class="ac-phb" style="font-size:32px;position:relative">&#127464;&#127475;</div></div>
+      <div class="ac-body"><div class="ac-type">B- &middot; China</div><div class="ac-name">CAAC</div><div class="ac-desc">Civil Aviation Administration of China</div></div>
+    </div>
   </div>
+  <div style="text-align:center;margin-top:28px;font-size:10px;color:#99aabb;text-transform:uppercase;letter-spacing:.05em">CAAM AMO Registry May 2026 &middot; EASA EASAIR &middot; Created by Kar Kee Chin</div>
 </div>
 </div>
 
-
-<!-- ══════════════════════════════════
-     STEP 1 — LANDING
-════════════════════════════════════ -->
+<!-- ═══ STEP 1 CAAM: AIRCRAFT TYPE ═══ -->
 <div id="view-landing" class="view">
 <div class="pw">
-  <div style="text-align:center;padding:22px 0 14px">
-    <h1 style="font-size:20px">MALAYSIA AEROSPACE ECOSYSTEM BLUEBOOK 2026</h1>
-    <p style="font-size:12px;color:#444;max-width:580px;margin:6px auto 0">Interactive MRO directory built from the CAAM AMO Registry (May 2026). 79 CAAM Part 145 approved organisations for 9M-registered aircraft.</p>
-    <div style="font-size:10px;color:#6680aa;margin-top:5px;text-transform:uppercase;letter-spacing:.05em">CAAM AMO Registry May 2026 &middot; 79 AMOs &middot; Created by Kar Kee Chin</div>
-  </div>
-  <div style="display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-bottom:14px;font-size:12px;color:#003380">
-    <span><b>79</b> AMOs</span><span><b>13</b> A320 AMOs</span><span><b>12</b> B737 AMOs</span><span><b>28</b> Helicopter AMOs</span>
+  <div style="text-align:center;padding:18px 0 12px">
+    <span class="auth-badge badge-caam">CAAM &mdash; 9M Malaysia</span>
+    <h1 style="font-size:18px">CAAM Part 145 Approved MROs</h1>
+    <p style="font-size:11px;color:#6680aa;max-width:520px;margin:5px auto 0">79 CAAM approved organisations for 9M-registered aircraft.</p>
   </div>
   <div style="text-align:center;font-size:12px;color:#003380;font-weight:bold;margin-bottom:8px">Step 1 &mdash; Select Aircraft Type</div>
 
-  <div class="cat-lbl">Commercial &mdash; Narrowbody Jet (A1)</div>
+  <div class="cat-lbl">Commercial &mdash; Narrowbody (A1)</div>
   <div class="g5">
     <div class="ac-card" data-ac="a320ceo" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9992;</div><img class="ac-ph" src="images/AirbusA320-200.jpg" alt="A320 CEO" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A320 CEO</div><div class="ac-desc">CFM56-5B / IAE V2500 &middot; 12L 6B</div></div></div>
-    <div class="ac-card" data-ac="a320neo" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9992;</div><img class="ac-ph" src="images/A320neo.jpg" alt="A320 NEO" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A320 NEO</div><div class="ac-desc">LEAP-1A / PW1100G &middot; 7L</div></div></div>
+    <div class="ac-card" data-ac="a320neo" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9992;</div><img class="ac-ph" src="images/A320neo.jpg" alt="A320 NEO" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A320 NEO</div><div class="ac-desc">LEAP-1A / PW1100G</div></div></div>
     <div class="ac-card" data-ac="b737cl" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9992;</div><img class="ac-ph" src="images/737NG.jpeg" alt="B737 Classic" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B737 Classic</div><div class="ac-desc">CFM56-3 &middot; 8L 1B</div></div></div>
     <div class="ac-card" data-ac="b737ng" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9992;</div><img class="ac-ph" src="images/737NG.jpeg" alt="B737 NG" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B737 NG</div><div class="ac-desc">CFM56-7B &middot; 12L 3B</div></div></div>
     <div class="ac-card" data-ac="b737max" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9992;</div><img class="ac-ph" src="images/B737max.jpeg" alt="B737 MAX" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Boeing</div><div class="ac-name">B737 MAX</div><div class="ac-desc">LEAP-1B &middot; 5L 1B</div></div></div>
@@ -242,7 +205,7 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
     <div class="ac-card" data-ac="global" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9194;</div><img class="ac-ph" src="images/Global.jpg" alt="Global" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Bombardier</div><div class="ac-name">Global / BD-700</div><div class="ac-desc">RR BR700</div></div></div>
     <div class="ac-card" data-ac="falcon7x" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9194;</div><img class="ac-ph" src="images/Falcon 8X.jpg" alt="Falcon 7X" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Dassault</div><div class="ac-name">Falcon 7X</div><div class="ac-desc">PW307</div></div></div>
     <div class="ac-card" data-ac="falcon2000" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9194;</div><img class="ac-ph" src="images/Falcon 2000.jpg" alt="Falcon 2000" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Dassault</div><div class="ac-name">Falcon 2000</div><div class="ac-desc">CFE 738-1-1B</div></div></div>
-    <div class="ac-card" data-ac="gulfstream" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9194;</div><img class="ac-ph" src="images/G550.jpg" alt="Gulfstream" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Gulfstream</div><div class="ac-name">GIV / GV-SP / G-VI</div><div class="ac-desc">RR Tay / BR700</div></div></div>
+    <div class="ac-card" data-ac="gulfstream" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9194;</div><img class="ac-ph" src="images/G550.jpg" alt="Gulfstream" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Gulfstream</div><div class="ac-name">GIV / GV-SP / G-VI</div><div class="ac-desc">RR Tay/BR700</div></div></div>
     <div class="ac-card" data-ac="hondajet" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9194;</div><img class="ac-ph" src="images/Honda Jet.png" alt="HondaJet" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Honda Aircraft</div><div class="ac-name">HA-420 HondaJet</div><div class="ac-desc">HF120 &middot; 2 AMOs</div></div></div>
   </div>
 
@@ -263,58 +226,83 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
     <div class="ac-card" data-ac="h225" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#128641;</div><img class="ac-ph" src="images/H215.jpg" alt="H225" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Airbus Helicopters</div><div class="ac-name">H215/H225/AS332/EC225</div><div class="ac-desc">Makila 1A2/2A</div></div></div>
     <div class="ac-card" data-ac="aw139" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#128641;</div><img class="ac-ph" src="images/AW139.jpg" alt="AW139" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Leonardo</div><div class="ac-name">AW139 / AW189 / A109</div><div class="ac-desc">PT6C / CT7</div></div></div>
     <div class="ac-card" data-ac="bell" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#128641;</div><img class="ac-ph" src="images/Bell 206.jpg" alt="Bell" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Bell Textron</div><div class="ac-name">Bell 206/407/429/505</div><div class="ac-desc">RR 250 / PW207</div></div></div>
-    <div class="ac-card" data-ac="s76" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#128641;</div><img class="ac-ph" src="images/S76.jpg" alt="S-76" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Sikorsky</div><div class="ac-name">S-76B</div><div class="ac-desc">PT6B &middot; Mados's L/B</div></div></div>
+    <div class="ac-card" data-ac="s76" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#128641;</div><img class="ac-ph" src="images/S76.jpg" alt="S-76" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Sikorsky</div><div class="ac-name">S-76B</div><div class="ac-desc">PT6B &middot; Mados's</div></div></div>
     <div class="ac-card" data-ac="robinson" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#128641;</div><img class="ac-ph" src="images/R44.jpg" alt="Robinson" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Robinson</div><div class="ac-name">R22 / R44 / R66</div><div class="ac-desc">Lycoming / RR 250</div></div></div>
   </div>
 </div>
-<div class="pfoot"><span>Malaysia Aerospace Ecosystem Bluebook 2026 &middot; CAAM AMO Registry May 2026</span><span>Verify with CAAM before operational decisions</span></div>
+<div class="pfoot"><span>CAAM AMO Registry May 2026 &middot; 79 Approved Organisations</span><span>Verify with CAAM before operational decisions</span></div>
 </div>
 
-<!-- ══════════════════════════════════
-     STEP 2 — ENGINE / VARIANT
-════════════════════════════════════ -->
+<!-- ═══ STEP 1 EASA: AIRCRAFT TYPE ═══ -->
+<div id="view-landing-easa" class="view">
+<div class="pw">
+  <div style="text-align:center;padding:18px 0 12px">
+    <span class="auth-badge badge-easa">EASA Part 145 &mdash; Malaysia</span>
+    <h1 style="font-size:18px">EASA-Approved MROs in Malaysia</h1>
+    <p style="font-size:11px;color:#6680aa;max-width:520px;margin:5px auto 0">Only aircraft types with at least one EASA Form 1 approved MRO located in Malaysia are shown.</p>
+  </div>
+  <div style="text-align:center;font-size:12px;color:#003380;font-weight:bold;margin-bottom:8px">Step 1 &mdash; Select Aircraft Type (EASA approved)</div>
+
+  <div class="cat-lbl">Commercial &mdash; Airbus (A1)</div>
+  <div class="g5">
+    <div class="ac-card" data-ac="a320fam" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9992;</div><img class="ac-ph" src="images/AirbusA320-200.jpg" alt="A320 Family" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A318/A319/A320/A321</div><div class="ac-desc">CFM56 / IAE / LEAP-1A / PW1100G &middot; SAE &middot; AIROD &middot; ADE</div></div></div>
+    <div class="ac-card" data-ac="a330e" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9992;</div><img class="ac-ph" src="images/A330.jpg" alt="A330" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A330</div><div class="ac-desc">Trent 700 / CF6 / PW4000 &middot; SAE(L) &middot; ADE(L/B)</div></div></div>
+    <div class="ac-card" data-ac="a350e" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9992;</div><img class="ac-ph" src="images/A350.png" alt="A350" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Airbus</div><div class="ac-name">A350</div><div class="ac-desc">RR Trent XWB &middot; MAB (Line only)</div></div></div>
+  </div>
+
+  <div class="cat-lbl">Business Aviation (A1)</div>
+  <div class="g5">
+    <div class="ac-card" data-ac="falcon7xe" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9194;</div><img class="ac-ph" src="images/Falcon 8X.jpg" alt="Falcon 7X" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Dassault</div><div class="ac-name">Falcon 7X</div><div class="ac-desc">P&amp;WC PW307A &middot; ExecuJet L/B</div></div></div>
+    <div class="ac-card" data-ac="falcon6xe" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9194;</div><img class="ac-ph" src="images/Falcon 8X.jpg" alt="Falcon 6X" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Dassault</div><div class="ac-name">Falcon 6X</div><div class="ac-desc">P&amp;WC PW812D &middot; ExecuJet (L)</div></div></div>
+    <div class="ac-card" data-ac="falcon2000exe" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9194;</div><img class="ac-ph" src="images/Falcon 2000.jpg" alt="Falcon 2000EX" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Dassault</div><div class="ac-name">Falcon 2000EX EASy</div><div class="ac-desc">P&amp;WC PW308C &middot; ExecuJet (L)</div></div></div>
+    <div class="ac-card" data-ac="cl604e" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9194;</div><img class="ac-ph" src="images/Bombardier Challenger.jpg" alt="CL604" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Bombardier</div><div class="ac-name">Challenger 604</div><div class="ac-desc">GE CF34-3B &middot; ExecuJet (L)</div></div></div>
+    <div class="ac-card" data-ac="globale" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#9194;</div><img class="ac-ph" src="images/Global.jpg" alt="BD-700" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Bombardier</div><div class="ac-name">BD-700 / Global</div><div class="ac-desc">RR BR700 &middot; ExecuJet (L)</div></div></div>
+  </div>
+
+  <div class="cat-lbl">Helicopter (A3) &mdash; Leonardo Malaysia &middot; All Line &amp; Base</div>
+  <div class="g5">
+    <div class="ac-card" data-ac="aw139e" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#128641;</div><img class="ac-ph" src="images/AW139.jpg" alt="AW139" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Leonardo</div><div class="ac-name">AB139 / AW139</div><div class="ac-desc">P&amp;WC PT6C &middot; L/B</div></div></div>
+    <div class="ac-card" data-ac="aw189e" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#128641;</div><img class="ac-ph" src="images/AW139.jpg" alt="AW189" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Leonardo</div><div class="ac-name">AW189</div><div class="ac-desc">GE CT7-2E1 &middot; L/B</div></div></div>
+    <div class="ac-card" data-ac="aw169e" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#128641;</div><img class="ac-ph" src="images/AW139.jpg" alt="AW169" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Leonardo</div><div class="ac-name">AW169</div><div class="ac-desc">P&amp;WC PW210A &middot; L/B</div></div></div>
+    <div class="ac-card" data-ac="a109e" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#128641;</div><img class="ac-ph" src="images/AW139.jpg" alt="A109" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Leonardo</div><div class="ac-name">Agusta A109 Series</div><div class="ac-desc">P&amp;WC PW206C &middot; L/B</div></div></div>
+    <div class="ac-card" data-ac="aw119e" onclick="selectAC(this)"><div class="ac-thumb"><div class="ac-phb shimmer">&#128641;</div><img class="ac-ph" src="images/AW139.jpg" alt="AW119" loading="lazy" decoding="async"></div><div class="ac-body"><div class="ac-type">Leonardo</div><div class="ac-name">A119 / AW119 MkII</div><div class="ac-desc">P&amp;WC PT6B &middot; L/B</div></div></div>
+  </div>
+</div>
+<div class="pfoot"><span>Source: EASA EASAIR &middot; Verified May 2026</span><span>Verify with EASA before operational decisions</span></div>
+</div>
+
+<!-- ═══ STEP 2: ENGINE / VARIANT ═══ -->
 <div id="view-engine" class="view">
   <div class="stepbar">
     <div class="step done" onclick="nav('authority')"><span class="step-n">0</span>Authority</div><span class="sarr">&#8250;</span>
-    <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div>
-    <span class="sarr">&#8250;</span>
+    <div class="step done" onclick="navStep1()"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
     <div class="step active"><span class="step-n">2</span>Engine / Variant</div>
   </div>
   <div class="pw">
-    <div class="back-row">
-      <button class="back-btn" onclick="nav('landing')">&#8592; Back</button>
-      <span class="ctx-lbl" id="eng-ctx"></span>
-    </div>
+    <div class="back-row"><button class="back-btn" onclick="navStep1()">&#8592; Back</button><span class="ctx-lbl" id="eng-ctx"></span></div>
     <p style="font-size:11px;color:#6680aa;margin-bottom:14px">Select the engine variant fitted to this aircraft.</p>
     <div class="g5" id="eng-list"></div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     STEP 3 — MAINTENANCE TYPE
-════════════════════════════════════ -->
+<!-- ═══ STEP 3: MAINTENANCE TYPE ═══ -->
 <div id="view-mtype" class="view">
   <div class="stepbar">
     <div class="step done" onclick="nav('authority')"><span class="step-n">0</span>Authority</div><span class="sarr">&#8250;</span>
-    <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div>
-    <span class="sarr">&#8250;</span>
-    <div class="step done" onclick="nav('engine')"><span class="step-n">2</span>Engine</div>
-    <span class="sarr">&#8250;</span>
+    <div class="step done" onclick="navStep1()"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
+    <div class="step done" onclick="nav('engine')"><span class="step-n">2</span>Engine</div><span class="sarr">&#8250;</span>
     <div class="step active"><span class="step-n">3</span>Maintenance Type</div>
   </div>
   <div class="pw">
-    <div class="back-row">
-      <button class="back-btn" onclick="nav('engine')">&#8592; Back</button>
-      <span class="ctx-lbl" id="mtype-ctx"></span>
-    </div>
-    <div class="g3">
+    <div class="back-row"><button class="back-btn" onclick="nav('engine')">&#8592; Back</button><span class="ctx-lbl" id="mtype-ctx"></span></div>
+    <div class="g3" style="margin-top:4px">
       <div class="mtype-card" data-mt="airframe" onclick="selectMtype(this)">
         <div class="mtype-thumb">&#127981;</div>
         <div class="mtype-body"><div class="mtype-ttl">Airframe Maintenance</div><div class="mtype-desc">Line checks, A/C/D-checks, structural repairs and cabin refurbishment. Select Line or Base next.</div></div>
       </div>
       <div class="mtype-card" data-mt="engine" onclick="selectMtype(this)">
         <div class="mtype-thumb">&#9881;&#65039;</div>
-        <div class="mtype-body"><div class="mtype-ttl">Engine Shop</div><div class="mtype-desc">Dedicated engine overhaul facilities approved for this engine type. OEM-authorised shops listed.</div></div>
+        <div class="mtype-body"><div class="mtype-ttl">Engine Shop</div><div class="mtype-desc">Dedicated engine overhaul facilities approved for this engine type.</div></div>
       </div>
       <div class="mtype-card" data-mt="component" onclick="selectMtype(this)">
         <div class="mtype-thumb">&#128297;</div>
@@ -324,23 +312,18 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     STEP 4 — LINE / BASE SELECT
-════════════════════════════════════ -->
+<!-- ═══ STEP 4: LINE / BASE ═══ -->
 <div id="view-lb" class="view">
   <div class="stepbar">
     <div class="step done" onclick="nav('authority')"><span class="step-n">0</span>Authority</div><span class="sarr">&#8250;</span>
-    <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
+    <div class="step done" onclick="navStep1()"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('engine')"><span class="step-n">2</span>Engine</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('mtype')"><span class="step-n">3</span>Airframe</div><span class="sarr">&#8250;</span>
     <div class="step active"><span class="step-n">4</span>Maintenance Level</div>
   </div>
   <div class="pw">
-    <div class="back-row">
-      <button class="back-btn" onclick="nav('mtype')">&#8592; Back</button>
-      <span class="ctx-lbl" id="lb-ctx"></span>
-    </div>
-    <div class="g2">
+    <div class="back-row"><button class="back-btn" onclick="nav('mtype')">&#8592; Back</button><span class="ctx-lbl" id="lb-ctx"></span></div>
+    <div class="g2" style="margin-top:4px">
       <div class="lb-card" data-lb="Line" onclick="selectLB(this)">
         <div class="lb-thumb lb-bg-line">
           <svg width="130" height="110" viewBox="0 0 130 110" fill="none">
@@ -380,84 +363,64 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     STEP 5a — AIRFRAME MRO RESULTS
-════════════════════════════════════ -->
+<!-- ═══ STEP 5a: AIRFRAME MRO RESULTS ═══ -->
 <div id="view-mro" class="view">
   <div class="stepbar">
     <div class="step done" onclick="nav('authority')"><span class="step-n">0</span>Authority</div><span class="sarr">&#8250;</span>
-    <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
+    <div class="step done" onclick="navStep1()"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('engine')"><span class="step-n">2</span>Engine</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('mtype')"><span class="step-n">3</span>Airframe</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('lb')"><span class="step-n">4</span>Level</div><span class="sarr">&#8250;</span>
     <div class="step active"><span class="step-n">5</span>Approved MROs</div>
   </div>
   <div class="pw">
-    <div class="back-row">
-      <button class="back-btn" onclick="nav('lb')">&#8592; Back</button>
-      <span class="ctx-lbl" id="mro-ctx"></span>
-    </div>
+    <div class="back-row"><button class="back-btn" onclick="nav('lb')">&#8592; Back</button><span class="ctx-lbl" id="mro-ctx"></span></div>
     <div id="mro-list"></div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     STEP 5b — ENGINE SHOP RESULTS
-════════════════════════════════════ -->
+<!-- ═══ STEP 5b: ENGINE SHOP ═══ -->
 <div id="view-engshop" class="view">
   <div class="stepbar">
     <div class="step done" onclick="nav('authority')"><span class="step-n">0</span>Authority</div><span class="sarr">&#8250;</span>
-    <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
+    <div class="step done" onclick="navStep1()"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('engine')"><span class="step-n">2</span>Engine</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('mtype')"><span class="step-n">3</span>Engine Shop</div><span class="sarr">&#8250;</span>
     <div class="step active"><span class="step-n">4</span>Approved Shops</div>
   </div>
   <div class="pw">
-    <div class="back-row">
-      <button class="back-btn" onclick="nav('mtype')">&#8592; Back</button>
-      <span class="ctx-lbl" id="engshop-ctx"></span>
-    </div>
+    <div class="back-row"><button class="back-btn" onclick="nav('mtype')">&#8592; Back</button><span class="ctx-lbl" id="engshop-ctx"></span></div>
     <div id="engshop-list"></div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     STEP 5c — COMPONENT SHOP LIST
-════════════════════════════════════ -->
+<!-- ═══ STEP 5c: COMPONENT SHOP LIST ═══ -->
 <div id="view-complist" class="view">
   <div class="stepbar">
     <div class="step done" onclick="nav('authority')"><span class="step-n">0</span>Authority</div><span class="sarr">&#8250;</span>
-    <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
+    <div class="step done" onclick="navStep1()"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('engine')"><span class="step-n">2</span>Engine</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('mtype')"><span class="step-n">3</span>Component</div><span class="sarr">&#8250;</span>
     <div class="step active"><span class="step-n">4</span>Component Shops</div>
   </div>
   <div class="pw">
-    <div class="back-row">
-      <button class="back-btn" onclick="nav('mtype')">&#8592; Back</button>
-      <span class="ctx-lbl" id="complist-ctx"></span>
-    </div>
+    <div class="back-row"><button class="back-btn" onclick="nav('mtype')">&#8592; Back</button><span class="ctx-lbl" id="complist-ctx"></span></div>
     <div id="complist-list"></div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     STEP 6c — COMPONENT DETAIL
-════════════════════════════════════ -->
+<!-- ═══ STEP 6c: COMPONENT DETAIL ═══ -->
 <div id="view-compdetail" class="view">
   <div class="stepbar">
     <div class="step done" onclick="nav('authority')"><span class="step-n">0</span>Authority</div><span class="sarr">&#8250;</span>
-    <div class="step done" onclick="nav('landing')"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
+    <div class="step done" onclick="navStep1()"><span class="step-n">1</span>Aircraft</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('engine')"><span class="step-n">2</span>Engine</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('mtype')"><span class="step-n">3</span>Component</div><span class="sarr">&#8250;</span>
     <div class="step done" onclick="nav('complist')"><span class="step-n">4</span>Shop</div><span class="sarr">&#8250;</span>
     <div class="step active"><span class="step-n">5</span>ATA / PN Detail</div>
   </div>
   <div class="pw">
-    <div class="back-row">
-      <button class="back-btn" onclick="nav('complist')">&#8592; Back</button>
-      <span class="ctx-lbl" id="compdetail-ctx"></span>
-    </div>
+    <div class="back-row"><button class="back-btn" onclick="nav('complist')">&#8592; Back</button><span class="ctx-lbl" id="compdetail-ctx"></span></div>
     <div style="font-size:11px;color:#6680aa;margin-bottom:6px" id="compdetail-note"></div>
     <div class="comp-wrap">
       <div class="ata-col">
@@ -472,64 +435,150 @@ body{font-family:"Times New Roman",Times,serif;background:#fff;color:#003380;fon
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════
-     JAVASCRIPT
-══════════════════════════════════════════════════════════ -->
+<!-- ═══ COMING SOON ═══ -->
+<div id="view-soon" class="view">
+  <div class="pw" style="text-align:center;padding:60px 20px">
+    <div style="font-size:48px;margin-bottom:16px">&#128295;</div>
+    <h2 style="font-size:18px;color:#003380;margin-bottom:8px">Data being compiled</h2>
+    <p style="font-size:12px;color:#6680aa;max-width:420px;margin:0 auto 24px">MRO capability data for this Authority is currently being sourced and verified. Please check back soon.</p>
+    <button class="back-btn" onclick="nav('authority')" style="padding:8px 20px;font-size:13px">&#8592; Select another Authority</button>
+  </div>
+</div>
 <script>
-/* ── STATE ─────────────────────────────────────────────── */
+/* ════════════════════════════════════════════
+   STATE
+════════════════════════════════════════════ */
+var _auth   = 'caam';
+var _curAta = 'all';
 var S = { acId:'', acName:'', acFam:'', engId:'', engName:'', engShopId:'', shopId:'' };
 
-/* ── AIRCRAFT FAMILY MAP (matches component data ac[] values) ── */
+/* ════════════════════════════════════════════
+   AC FAMILY MAP  (for component PN matching)
+   DB_AC key → value used in DB_C caps[].ac[]
+════════════════════════════════════════════ */
 var AC_FAM = {
-  a320ceo:'A320', a320neo:'A320',
+  a320ceo:'A320', a320neo:'A320', a320fam:'A320',
   b737cl:'B737CL', b737ng:'B737NG', b737max:'B737MAX',
-  a330:'A330', a350:'A350', b747:'B747', b767:'B767', b777:'B777', b787:'B787',
+  a330:'A330', a330e:'A330',
+  a350:'A350', a350e:'A350',
+  b747:'B747', b767:'B767', b777:'B777', b787:'B787',
   atr42:'ATR42', atr72:'ATR72', beech:'BEECH',
-  challenger:'CL300', global:'GLOBAL', falcon7x:'F7X', falcon2000:'F2000',
+  challenger:'CL300', global:'GLOBAL',
+  falcon7x:'F7X', falcon7xe:'F7X',
+  falcon2000:'F2000', falcon2000exe:'F2000EX',
+  falcon6xe:'F6X', cl604e:'CL604', globale:'GLOBAL',
   gulfstream:'GULF', hondajet:'HA420',
-  cessna:'CESSNA', piper:'PIPER', diamond:'DIAMOND', cirrus:'CIRRUS', piaggio:'P180',
+  cessna:'CESSNA', piper:'PIPER', diamond:'DIAMOND',
+  cirrus:'CIRRUS', piaggio:'P180',
   h125:'AS350', ec135:'EC135', h160:'EC175', h225:'AS332',
-  aw139:'AW139', bell:'BELL', s76:'S76', robinson:'R44'
+  aw139:'AW139', aw139e:'AW139',
+  aw189e:'AW189', aw169e:'AW169',
+  a109e:'A109', aw119e:'AW119',
+  bell:'BELL', s76:'S76', robinson:'R44'
 };
 
-/* ── AIRCRAFT DB ────────────────────────────────────────── */
+/* ════════════════════════════════════════════
+   CAAM — AIRCRAFT DB
+════════════════════════════════════════════ */
 var DB_AC = {
-  a320ceo:{name:'Airbus A320 CEO',engines:[{id:'a320ceo-cfm56',name:'CFM56-5B',shopId:'engine-cfm56-5b'},{id:'a320ceo-iae',name:'IAE V2500'}]},
-  a320neo:{name:'Airbus A320 NEO',engines:[{id:'a320neo-leap',name:'CFM LEAP-1A',shopId:'engine-leap-1a'},{id:'a320neo-pw1100g',name:'PW1100G-JM'}]},
-  b737cl:{name:'Boeing 737 Classic',engines:[{id:'b737cl-cfm56',name:'CFM56-3'}]},
-  b737ng:{name:'Boeing 737 NG',engines:[{id:'b737ng-cfm56',name:'CFM56-7B',shopId:'engine-cfm56-7b'}]},
-  b737max:{name:'Boeing 737 MAX',engines:[{id:'b737max-leap',name:'CFM LEAP-1B',shopId:'engine-leap-1b'}]},
-  a330:{name:'Airbus A330',engines:[{id:'a330-trent700',name:'RR Trent 700'},{id:'a330-cf6',name:'GE CF6'},{id:'a330-pw4000',name:'P&W PW4000'}]},
-  a350:{name:'Airbus A350',engines:[{id:'a350-trentxwb',name:'RR Trent XWB'}]},
-  b747:{name:'Boeing 747-400',engines:[{id:'b747-pw4000',name:'P&W PW4000'}]},
-  b767:{name:'Boeing 767',engines:[{id:'b767-cf6',name:'GE CF6'}]},
-  b777:{name:'Boeing 777',engines:[{id:'b777-ge90',name:'GE GE90'},{id:'b777-rb211',name:'RR RB211'},{id:'b777-trent800',name:'RR Trent 800'}]},
-  b787:{name:'Boeing 787',engines:[{id:'b787-genx',name:'GE GEnx'},{id:'b787-trent1000',name:'RR Trent 1000'}]},
-  atr42:{name:'ATR 42',engines:[{id:'atr42-pw120',name:'PW120'},{id:'atr42-pw127',name:'PW127'}]},
-  atr72:{name:'ATR 72',engines:[{id:'atr72-pw120',name:'PW120'},{id:'atr72-pw127m',name:'PW127M'}]},
-  beech:{name:'Beechcraft B200/B300',engines:[{id:'beech-pt6a',name:'P&WC PT6A',shopId:'engine-pt6a'}]},
-  challenger:{name:'Challenger 300/604/605',engines:[{id:'challenger-as907',name:'Honeywell AS907'},{id:'challenger-cf34',name:'GE CF34'},{id:'challenger-br700',name:'RR BR700'}]},
-  global:{name:'Global / BD-700',engines:[{id:'global-br700',name:'RR BR700'}]},
-  falcon7x:{name:'Falcon 7X',engines:[{id:'falcon7x-pw307',name:'P&WC PW307A'}]},
-  falcon2000:{name:'Falcon 2000',engines:[{id:'falcon2000-cfe738',name:'CFE 738-1-1B'}]},
-  gulfstream:{name:'Gulfstream GIV/GV/GVI',engines:[{id:'gulfstream-tay',name:'RR Tay'},{id:'gulfstream-pw306a',name:'PW306A'},{id:'gulfstream-br700',name:'RR BR700'}]},
-  hondajet:{name:'HondaJet HA-420',engines:[{id:'hondajet-hf120',name:'GE Honda HF120'}]},
-  cessna:{name:'Cessna 150/172/182/208',engines:[{id:'cessna-lyc',name:'Lycoming'},{id:'cessna-cont',name:'Continental'},{id:'cessna-pt6a',name:'P&WC PT6A',shopId:'engine-pt6a'}]},
-  piper:{name:'Piper PA-28/34/44',engines:[{id:'piper-lyc',name:'Lycoming'},{id:'piper-cont',name:'Continental'}]},
-  diamond:{name:'Diamond DA40/DA42/DA62',engines:[{id:'diamond-austro',name:'Austro E4'},{id:'diamond-tae125',name:'Technify TAE 125'}]},
-  cirrus:{name:'Cirrus SR20/SR22',engines:[{id:'cirrus-cont',name:'Continental'}]},
-  piaggio:{name:'Piaggio P180 Avanti',engines:[{id:'piaggio-pt6a',name:'P&WC PT6A',shopId:'engine-pt6a'}]},
-  h125:{name:'H125 / AS350 / AS355',engines:[{id:'h125-arriel',name:'Safran Arriel 1/2',shopId:'engine-arriel'},{id:'h125-rr250',name:'RR 250'},{id:'h125-arrius',name:'Safran Arrius 1',shopId:'engine-arrius'}]},
-  ec135:{name:'EC120 / EC135 / EC155',engines:[{id:'ec135-arrius',name:'Safran Arrius 2B2/2F',shopId:'engine-arrius'},{id:'ec135-pw206',name:'P&WC PW206'},{id:'ec135-arriel2c2',name:'Safran Arriel 2C2',shopId:'engine-arriel'}]},
-  h160:{name:'H160 / EC175',engines:[{id:'h160-pt6c',name:'P&WC PT6C-67E'},{id:'h160-arrano',name:'Safran Arrano 1'}]},
-  h225:{name:'H215 / H225 / AS332 / EC225',engines:[{id:'h225-makila',name:'Safran Makila 1A2/2A',shopId:'engine-makila'}]},
-  aw139:{name:'AW139 / AW189 / A109',engines:[{id:'aw139-pt6c',name:'P&WC PT6C'},{id:'aw139-ct7',name:'GE CT7-2E1'},{id:'aw139-pw206',name:'P&WC PW206'}]},
-  bell:{name:'Bell 206/407/429/505',engines:[{id:'bell-rr250',name:'RR 250'},{id:'bell-pw207',name:'P&WC PW207'},{id:'bell-arrius2r',name:'Safran Arrius 2R',shopId:'engine-arrius'}]},
-  s76:{name:'Sikorsky S-76B',engines:[{id:'s76-pt6b',name:'P&WC PT6B'}]},
-  robinson:{name:'Robinson R22/R44/R66',engines:[{id:'robinson-lyc',name:'Lycoming O-540'},{id:'robinson-rr250',name:'RR 250-C300'}]}
+  a320ceo:{name:'Airbus A320 CEO',engines:[
+    {id:'a320ceo-cfm56',name:'CFM56-5B',shopId:'engine-cfm56-5b'},
+    {id:'a320ceo-iae',name:'IAE V2500'}]},
+  a320neo:{name:'Airbus A320 NEO',engines:[
+    {id:'a320neo-leap',name:'CFM LEAP-1A',shopId:'engine-leap-1a'},
+    {id:'a320neo-pw1100g',name:'PW1100G-JM'}]},
+  b737cl:{name:'Boeing 737 Classic',engines:[
+    {id:'b737cl-cfm56',name:'CFM56-3'}]},
+  b737ng:{name:'Boeing 737 NG',engines:[
+    {id:'b737ng-cfm56',name:'CFM56-7B',shopId:'engine-cfm56-7b'}]},
+  b737max:{name:'Boeing 737 MAX',engines:[
+    {id:'b737max-leap',name:'CFM LEAP-1B',shopId:'engine-leap-1b'}]},
+  a330:{name:'Airbus A330',engines:[
+    {id:'a330-trent700',name:'RR Trent 700'},
+    {id:'a330-cf6',name:'GE CF6'},
+    {id:'a330-pw4000',name:'P&W PW4000'}]},
+  a350:{name:'Airbus A350',engines:[
+    {id:'a350-trentxwb',name:'RR Trent XWB'}]},
+  b747:{name:'Boeing 747-400',engines:[
+    {id:'b747-pw4000',name:'P&W PW4000'}]},
+  b767:{name:'Boeing 767',engines:[
+    {id:'b767-cf6',name:'GE CF6'}]},
+  b777:{name:'Boeing 777',engines:[
+    {id:'b777-ge90',name:'GE GE90'},
+    {id:'b777-rb211',name:'RR RB211'},
+    {id:'b777-trent800',name:'RR Trent 800'}]},
+  b787:{name:'Boeing 787',engines:[
+    {id:'b787-genx',name:'GE GEnx'},
+    {id:'b787-trent1000',name:'RR Trent 1000'}]},
+  atr42:{name:'ATR 42',engines:[
+    {id:'atr42-pw120',name:'PW120'},
+    {id:'atr42-pw127',name:'PW127'}]},
+  atr72:{name:'ATR 72',engines:[
+    {id:'atr72-pw120',name:'PW120'},
+    {id:'atr72-pw127m',name:'PW127M'}]},
+  beech:{name:'Beechcraft B200/B300',engines:[
+    {id:'beech-pt6a',name:'P&WC PT6A',shopId:'engine-pt6a'}]},
+  challenger:{name:'Challenger 300/604/605',engines:[
+    {id:'challenger-as907',name:'Honeywell AS907'},
+    {id:'challenger-cf34',name:'GE CF34'},
+    {id:'challenger-br700',name:'RR BR700'}]},
+  global:{name:'Global / BD-700',engines:[
+    {id:'global-br700',name:'RR BR700'}]},
+  falcon7x:{name:'Dassault Falcon 7X',engines:[
+    {id:'falcon7x-pw307',name:'P&WC PW307A'}]},
+  falcon2000:{name:'Dassault Falcon 2000',engines:[
+    {id:'falcon2000-cfe738',name:'CFE 738-1-1B'}]},
+  gulfstream:{name:'Gulfstream GIV/GV/GVI',engines:[
+    {id:'gulfstream-tay',name:'RR Tay'},
+    {id:'gulfstream-pw306a',name:'PW306A'},
+    {id:'gulfstream-br700',name:'RR BR700'}]},
+  hondajet:{name:'HondaJet HA-420',engines:[
+    {id:'hondajet-hf120',name:'GE Honda HF120'}]},
+  cessna:{name:'Cessna 150/172/182/208',engines:[
+    {id:'cessna-lyc',name:'Lycoming'},
+    {id:'cessna-cont',name:'Continental'},
+    {id:'cessna-pt6a',name:'P&WC PT6A',shopId:'engine-pt6a'}]},
+  piper:{name:'Piper PA-28/34/44',engines:[
+    {id:'piper-lyc',name:'Lycoming'},
+    {id:'piper-cont',name:'Continental'}]},
+  diamond:{name:'Diamond DA40/DA42/DA62',engines:[
+    {id:'diamond-austro',name:'Austro E4'},
+    {id:'diamond-tae125',name:'Technify TAE 125'}]},
+  cirrus:{name:'Cirrus SR20/SR22',engines:[
+    {id:'cirrus-cont',name:'Continental'}]},
+  piaggio:{name:'Piaggio P180 Avanti',engines:[
+    {id:'piaggio-pt6a',name:'P&WC PT6A',shopId:'engine-pt6a'}]},
+  h125:{name:'H125 / AS350 / AS355',engines:[
+    {id:'h125-arriel',name:'Safran Arriel 1/2',shopId:'engine-arriel'},
+    {id:'h125-rr250',name:'RR 250'},
+    {id:'h125-arrius',name:'Safran Arrius 1',shopId:'engine-arrius'}]},
+  ec135:{name:'EC120 / EC135 / EC155',engines:[
+    {id:'ec135-arrius',name:'Safran Arrius 2B2/2F',shopId:'engine-arrius'},
+    {id:'ec135-pw206',name:'P&WC PW206'},
+    {id:'ec135-arriel2c2',name:'Safran Arriel 2C2',shopId:'engine-arriel'}]},
+  h160:{name:'H160 / EC175',engines:[
+    {id:'h160-pt6c',name:'P&WC PT6C-67E'},
+    {id:'h160-arrano',name:'Safran Arrano 1'}]},
+  h225:{name:'H215/H225/AS332/EC225',engines:[
+    {id:'h225-makila',name:'Safran Makila 1A2/2A',shopId:'engine-makila'}]},
+  aw139:{name:'AW139 / AW189 / A109',engines:[
+    {id:'aw139-pt6c',name:'P&WC PT6C'},
+    {id:'aw139-ct7',name:'GE CT7-2E1'},
+    {id:'aw139-pw206',name:'P&WC PW206'}]},
+  bell:{name:'Bell 206/407/429/505',engines:[
+    {id:'bell-rr250',name:'RR 250'},
+    {id:'bell-pw207',name:'P&WC PW207'},
+    {id:'bell-arrius2r',name:'Safran Arrius 2R',shopId:'engine-arrius'}]},
+  s76:{name:'Sikorsky S-76B',engines:[
+    {id:'s76-pt6b',name:'P&WC PT6B'}]},
+  robinson:{name:'Robinson R22/R44/R66',engines:[
+    {id:'robinson-lyc',name:'Lycoming O-540'},
+    {id:'robinson-rr250',name:'RR 250-C300'}]}
 };
 
-/* ── AIRFRAME VENDOR DB ─────────────────────────────────── */
+/* ════════════════════════════════════════════
+   CAAM — VENDOR DB
+════════════════════════════════════════════ */
 var DB_V = [
   {id:'sae',n:'Sepang Aircraft Engineering (SAE)',loc:'Sepang, KLIA',auth:['CAAM CRS','EASA Form 1','FAA 8130-3'],tags:['Line','Base'],caps:['a320ceo-cfm56','a320ceo-iae','a320neo-leap','a320neo-pw1100g','a330-trent700']},
   {id:'airod',n:'AIROD Aerospace Technology',loc:'Subang',auth:['CAAM CRS','EASA Form 1'],tags:['Line','Base'],caps:['a320ceo-cfm56','a320ceo-iae','b737cl-cfm56','b737ng-cfm56','b737max-leap','atr42-pw120','atr42-pw127','atr72-pw120','atr72-pw127m','falcon7x-pw307']},
@@ -555,10 +604,10 @@ var DB_V = [
   {id:'layang',n:'Layang Layang Aerospace',loc:'Kota Kinabalu',auth:['CAAM CRS'],tags:['Line','Base'],caps:['beech-pt6a','cessna-lyc','piper-lyc','piper-cont','diamond-austro','bell-rr250','h125-arriel','h125-rr250','ec135-pw206','robinson-lyc','robinson-rr250','aw139-pt6c']},
   {id:'hammock',n:'Hammock Helicopter',loc:'Subang',auth:['CAAM CRS'],tags:['Line','Base'],caps:['ec135-arrius','ec135-pw206','h125-arriel','h225-makila','bell-rr250','bell-pw207','robinson-rr250']},
   {id:'hornbill',n:'Hornbill Skyways',loc:'Kuching',auth:['CAAM CRS'],tags:['Line','Base'],caps:['beech-pt6a','ec135-pw206','ec135-arriel2c2','h160-pt6c','bell-rr250']},
-  {id:'leonardomy',n:'Leonardo Malaysia',loc:'Subang',auth:['CAAM CRS'],tags:['Line','Base'],caps:['aw139-pt6c','aw139-ct7','aw139-pw206']},
+  {id:'leonardomy',n:'Leonardo Malaysia',loc:'Subang',auth:['CAAM CRS','EASA Form 1'],tags:['Line','Base'],caps:['aw139-pt6c','aw139-ct7','aw139-pw206']},
   {id:'airbush',n:'Airbus Helicopters Malaysia',loc:'Subang',auth:['CAAM CRS','EASA Form 1'],tags:['Line','Base'],caps:['h125-arriel','ec135-arrius','h160-pt6c','h225-makila']},
   {id:'eja',n:'EJA Sdn Bhd',loc:'Ipoh',auth:['CAAM CRS'],tags:['Line','Base'],caps:['cessna-lyc','cessna-cont','piper-lyc','piper-cont','h160-arrano','h125-arriel','h225-makila']},
-  {id:'iata',n:'Int\'l Aero Training Academy',loc:'Melaka',auth:['CAAM CRS'],tags:['Line','Base'],caps:['diamond-austro','diamond-tae125','piper-lyc']},
+  {id:'iata',n:"Int'l Aero Training Academy",loc:'Melaka',auth:['CAAM CRS'],tags:['Line','Base'],caps:['diamond-austro','diamond-tae125','piper-lyc']},
   {id:'mfa',n:'Malaysian Flying Academy',loc:'Melaka',auth:['CAAM CRS'],tags:['Line','Base'],caps:['piper-lyc']},
   {id:'sinkung',n:'Sin-Kung Airways',loc:'Langkawi',auth:['CAAM CRS'],tags:['Line','Base'],caps:['cessna-pt6a','piaggio-pt6a','diamond-austro','diamond-tae125']},
   {id:'atas',n:'ATAS Aero Engineering',loc:'Senai',auth:['CAAM CRS'],tags:['Line','Base'],caps:['cessna-lyc','diamond-austro','bell-arrius2r']},
@@ -566,81 +615,164 @@ var DB_V = [
   {id:'subangmro',n:'Subang MRO',loc:'Subang',auth:['CAAM CRS'],tags:['Line','Base'],caps:['beech-pt6a']},
   {id:'aerotree',n:'Aerotree Defence & Services',loc:'Kuala Lumpur',auth:['CAAM CRS'],tags:['Line','Base'],caps:['beech-pt6a']},
   {id:'sabah',n:'Sabah Air Aviation',loc:'Kota Kinabalu',auth:['CAAM CRS'],tags:['Line','Base'],caps:['beech-pt6a','bell-rr250','aw139-pw206']},
-  /* engine shops */
   {id:'geeng',n:'GE Engine Services Malaysia',loc:'Subang',auth:['CAAM CRS','EASA Form 1','FAA 8130-3'],tags:['Engine'],caps:['engine-cfm56-5b','engine-cfm56-7b','engine-leap-1a','engine-leap-1b']},
   {id:'globalturbine',n:'Global Turbine Asia',loc:'Subang',auth:['CAAM CRS'],tags:['Engine'],caps:['engine-arriel','engine-arrius','engine-makila']},
   {id:'ats',n:'ATS Turbine Service',loc:'Subang',auth:['CAAM CRS'],tags:['Engine'],caps:['engine-pt6a']},
   {id:'realturbine',n:'Real Turbine Engine Consultant',loc:'Johor Bahru',auth:['CAAM CRS'],tags:['Engine'],caps:['engine-pt6a']}
 ];
 
-/* ── COMPONENT SHOP DB ──────────────────────────────────── */
+/* ════════════════════════════════════════════
+   CAAM — COMPONENT DB
+════════════════════════════════════════════ */
 var DB_C = [
-  {
-    id:'apacs',
-    n:'APACS (Asia Pacific Aircraft Component Services)',
-    loc:'Shah Alam, Selangor',
-    auth:['CAAM CRS','EASA Form 1','FAA 8130-3'],
-    note:'SIAEC + SR Technics JV · 90,000 sqft · First ADIRU in Asia Pacific (2025)',
-    caps:[
-      {ata:'75',desc:'Solenoid Valve',mpn:'04P23-1',ac:['B747','A330'],eng:'PW4000'},
-      {ata:'75',desc:'Pneumatic Relay Valve',mpn:'07P95-8',ac:['A330','B747'],eng:'Trent 700 / PW4000'},
-      {ata:'80',desc:'Starter Air Valve',mpn:'1001000-4',ac:['A330'],eng:'Trent 700 / PW4000'},
-      {ata:'79',desc:'Heat Exchanger',mpn:'11-841193-2',ac:['B737NG','A320'],eng:'CFM56-7B / 5B'},
-      {ata:'21',desc:'Recirculation Fan',mpn:'VD3909-00',ac:['A320','A330'],eng:'All'},
-      {ata:'23',desc:'Audio Control Panel',mpn:'10-62090-64',ac:['B737CL','B737NG'],eng:'N/A'}
-    ]
-  },
-  {
-    id:'collins',
-    n:'Collins Aerospace Malaysia (Hamilton Sundstrand)',
-    loc:'Klang, Selangor',
-    auth:['CAAM CRS','EASA Form 1','FAA 8130-3'],
-    note:'RTX/Collins OEM · 160,000 sqft · $16M expansion 2022 · ATR propeller SC',
-    caps:[]
-  }
+  {id:'apacs',n:'APACS (Asia Pacific Aircraft Component Services)',loc:'Shah Alam',auth:['CAAM CRS','EASA Form 1','FAA 8130-3'],note:'SIAEC + SR Technics JV · 90,000 sqft · C1/C3-C9/C12/C14/C17/C18 + D1',caps:[
+    {ata:'75',desc:'Solenoid Valve',mpn:'04P23-1',ac:['B747','A330'],eng:'PW4000'},
+    {ata:'75',desc:'Pneumatic Relay Valve',mpn:'07P95-8',ac:['A330','B747'],eng:'Trent 700 / PW4000'},
+    {ata:'80',desc:'Starter Air Valve',mpn:'1001000-4',ac:['A330'],eng:'Trent 700 / PW4000'},
+    {ata:'79',desc:'Heat Exchanger',mpn:'11-841193-2',ac:['B737NG','A320'],eng:'CFM56-7B / 5B'},
+    {ata:'21',desc:'Recirculation Fan',mpn:'VD3909-00',ac:['A320','A330'],eng:'All'},
+    {ata:'23',desc:'Audio Control Panel',mpn:'10-62090-64',ac:['B737CL','B737NG'],eng:'N/A'}
+  ]},
+  {id:'collins',n:'Collins Aerospace Malaysia (Hamilton Sundstrand)',loc:'Klang',auth:['CAAM CRS','EASA Form 1','FAA 8130-3'],note:'C01 C07 C09 C17 C18 · ATR propeller OEM · $16M expansion 2022',caps:[]}
 ];
 
-/* ── HELPERS ────────────────────────────────────────────── */
-function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+/* ════════════════════════════════════════════
+   EASA — AIRCRAFT DB
+════════════════════════════════════════════ */
+var DB_AC_EASA = {
+  a320fam:{name:'Airbus A318/A319/A320/A321',engines:[
+    {id:'a320ceo-cfm56',name:'CFM56-5B',shopId:'engine-cfm56-5b'},
+    {id:'a320ceo-iae',name:'IAE V2500'},
+    {id:'a320neo-leap',name:'CFM LEAP-1A',shopId:'engine-leap-1a'},
+    {id:'a320neo-pw1100g',name:'PW1100G-JM'}]},
+  a330e:{name:'Airbus A330',note:'SAE: Line only · ADE: Line & Base',engines:[
+    {id:'a330-trent700',name:'RR Trent 700'},
+    {id:'a330-cf6',name:'GE CF6'},
+    {id:'a330-pw4000',name:'P&W PW4000'}]},
+  a350e:{name:'Airbus A350',note:'Line only — MAB Engineering',engines:[
+    {id:'a350-trentxwb',name:'RR Trent XWB'}]},
+  falcon7xe:{name:'Dassault Falcon 7X',engines:[
+    {id:'falcon7x-pw307',name:'P&WC PW307A'}]},
+  falcon6xe:{name:'Dassault Falcon 6X',note:'Line only',engines:[
+    {id:'falcon6x-pw812d',name:'P&WC PW812D'}]},
+  falcon2000exe:{name:'Dassault Falcon 2000EX EASy',note:'Line only',engines:[
+    {id:'falcon2000ex-pw308',name:'P&WC PW308C'}]},
+  cl604e:{name:'Bombardier Challenger 604',note:'Line only',engines:[
+    {id:'cl604-cf34',name:'GE CF34-3B'}]},
+  globale:{name:'Bombardier BD-700 / Global',note:'Line only',engines:[
+    {id:'global-br700',name:'RR BR700'}]},
+  aw139e:{name:'Agusta AB139 / AW139',engines:[
+    {id:'aw139-pt6c',name:'P&WC PT6C'}]},
+  aw189e:{name:'AW189',engines:[
+    {id:'aw189-ct7',name:'GE CT7-2E1'}]},
+  aw169e:{name:'AW169',engines:[
+    {id:'aw169-pw210',name:'P&WC PW210A'}]},
+  a109e:{name:'Agusta A109 Series',engines:[
+    {id:'a109-pw206',name:'P&WC PW206C'}]},
+  aw119e:{name:'Agusta A119 / AW119 MkII',engines:[
+    {id:'aw119-pt6b',name:'P&WC PT6B'}]}
+};
 
-function authTags(arr){
-  return (arr||[]).map(function(a){ return '<span class="tag-auth">'+esc(a)+'</span>'; }).join(' ');
+/* ════════════════════════════════════════════
+   EASA — VENDOR DB
+════════════════════════════════════════════ */
+var DB_V_EASA = [
+  {id:'sae',n:'Sepang Aircraft Engineering (SAE)',loc:'Sepang, KLIA',easa:'EASA.145.0588',auth:['EASA Form 1'],tags:['Line','Base'],
+   note:'A320 family: Line & Base · A330: Line only under EASA scope',
+   caps:['a320ceo-cfm56','a320ceo-iae','a320neo-leap','a320neo-pw1100g','a330-trent700','a330-cf6','a330-pw4000']},
+  {id:'airod',n:'AIROD Aerospace Technology',loc:'Subang',easa:'EASA.145.0620',auth:['EASA Form 1'],tags:['Line','Base'],
+   caps:['a320ceo-cfm56','a320ceo-iae','a320neo-leap','a320neo-pw1100g']},
+  {id:'ade',n:'Asia Digital Engineering (ADE)',loc:'Sepang, KLIA',easa:'EASA.145.0967',auth:['EASA Form 1'],tags:['Line','Base'],
+   caps:['a320ceo-cfm56','a320ceo-iae','a320neo-leap','a320neo-pw1100g','a330-trent700','a330-cf6','a330-pw4000']},
+  {id:'mabeng',n:'MAB Engineering Services',loc:'Sepang',easa:'EASA.145.0100',auth:['EASA Form 1'],tags:['Line'],
+   caps:['a350-trentxwb']},
+  {id:'execujet',n:'ExecuJet MRO Services Malaysia',loc:'Subang',easa:'EASA.145.0589',auth:['EASA Form 1'],tags:['Line','Base'],
+   note:'Falcon 7X: Line & Base · All others: Line only under EASA scope',
+   caps:['falcon7x-pw307','falcon6x-pw812d','falcon2000ex-pw308','cl604-cf34','global-br700']},
+  {id:'leonardomy',n:'Leonardo Malaysia',loc:'Subang',easa:'EASA.145.0838',auth:['EASA Form 1'],tags:['Line','Base'],
+   caps:['aw139-pt6c','aw189-ct7','aw169-pw210','a109-pw206','aw119-pt6b']},
+  {id:'geeng',n:'GE Engine Services Malaysia',loc:'Subang',easa:'EASA.145.0066',auth:['EASA Form 1'],tags:['Engine'],
+   caps:['engine-cfm56-5b','engine-cfm56-7b','engine-leap-1a','engine-leap-1b']}
+];
+
+/* ════════════════════════════════════════════
+   EASA — COMPONENT DB
+════════════════════════════════════════════ */
+var DB_C_EASA = [
+  {id:'apacs',n:'APACS',loc:'Shah Alam',easa:'EASA.145.0972',auth:['EASA Form 1'],note:'C01/C03-C09/C12/C14/C17/C18 + D1',caps:[]},
+  {id:'hamiltonmy',n:'Hamilton Sundstrand Malaysia',loc:'Klang',easa:'EASA.145.0313',auth:['EASA Form 1'],note:'C01 C07 C09 C17 C18',caps:[]},
+  {id:'honeywellavm',n:'Honeywell Aerospace Avionics Malaysia',loc:'Prai, Penang',easa:'EASA.145.0535',auth:['EASA Form 1'],note:'C02 C03 C13 — Avionics',caps:[]},
+  {id:'parkerhannifin',n:'Parker Hannifin (Malaysia)',loc:'Malaysia',easa:'EASA.145.0308',auth:['EASA Form 1'],note:'C07 — Engine Components',caps:[]},
+  {id:'airfoilsvc',n:'Airfoil Services Sdn Bhd',loc:'Kota Damansara',easa:'EASA.145.0018',auth:['EASA Form 1'],note:'C07 — Engine Components',caps:[]},
+  {id:'gknjb',n:'GKN Engine Systems Component Repair',loc:'Iskandar Puteri, Johor',easa:'EASA.145.0913',auth:['EASA Form 1'],note:'C07 — Engine Components',caps:[]},
+  {id:'hrdaero',n:'HRD Aero Systems',loc:'Malaysia',easa:'EASA.145.0732',auth:['EASA Form 1'],note:'C06 C18 — Interior & Protection',caps:[]},
+  {id:'aviatechasia',n:'Avia Technique Asia',loc:'Malaysia',easa:'EASA.145.0851',auth:['EASA Form 1'],note:'C06 C15 C18 — Interior, Oxygen, Protection',caps:[]},
+  {id:'globalcompasia',n:'Global Component Asia',loc:'Malaysia',easa:'EASA.145.1045',auth:['EASA Form 1'],note:'C05 — Equipment / Furnishings',caps:[]}
+];
+
+/* ════════════════════════════════════════════
+   DB ROUTING
+════════════════════════════════════════════ */
+function getAC() { return _auth === 'easa' ? DB_AC_EASA : DB_AC; }
+function getV()  { return _auth === 'easa' ? DB_V_EASA  : DB_V;  }
+function getC()  { return _auth === 'easa' ? DB_C_EASA  : DB_C;  }
+
+/* ════════════════════════════════════════════
+   HELPERS
+════════════════════════════════════════════ */
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
-
-/* Match a component item against current AC + engine selection */
-function itemMatches(item){
+function authTags(arr) {
+  return (arr||[]).map(function(a){
+    var cls = a.indexOf('EASA')>-1 ? 'tag-easa' : 'tag-auth';
+    return '<span class="'+cls+'">'+esc(a)+'</span>';
+  }).join(' ');
+}
+function itemMatches(item) {
   var acOk = item.ac.indexOf(S.acFam) > -1;
-  if(!acOk) return false;
+  if (!acOk) return false;
   var eng = item.eng;
-  if(eng === 'All' || eng === 'N/A') return true;
+  if (eng === 'All' || eng === 'N/A') return true;
   var parts = eng.split('/').map(function(p){ return p.trim(); });
   return parts.some(function(p){
     return S.engName.indexOf(p) > -1 || p.indexOf(S.engName.split(' ').pop()) > -1;
   });
 }
 
-/* ── NAV ────────────────────────────────────────────────── */
-function nav(id){
+/* ════════════════════════════════════════════
+   NAVIGATION
+════════════════════════════════════════════ */
+function nav(id) {
   document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
-  document.getElementById('view-'+id).classList.add('active');
+  var el = document.getElementById('view-' + id);
+  if (el) el.classList.add('active');
   document.querySelector('.tb-btn').classList.toggle('active', id === 'authority');
   window.scrollTo(0,0);
 }
+function navStep1() {
+  nav(_auth === 'easa' ? 'landing-easa' : 'landing');
+}
+function selectAuthority(auth) {
+  _auth = auth;
+  navStep1();
+}
 
-/* ── STEP 2: SELECT AIRCRAFT ────────────────────────────── */
-function selectAC(el){
+/* ════════════════════════════════════════════
+   STEP 2: SELECT AIRCRAFT
+════════════════════════════════════════════ */
+function selectAC(el) {
   var acId = el.dataset.ac;
-  var ac   = DB_AC[acId];
-  if(!ac){ alert('Data coming soon.'); return; }
-  S.acId  = acId;
+  var ac   = getAC()[acId];
+  if (!ac) { alert('Data coming soon.'); return; }
+  S.acId   = acId;
   S.acName = ac.name;
   S.acFam  = AC_FAM[acId] || acId.toUpperCase();
-  document.getElementById('eng-ctx').textContent = ac.name;
-  /* build engine cards — use data-idx, NO string params in onclick */
+  document.getElementById('eng-ctx').textContent = ac.name + (ac.note ? ' \u2014 ' + ac.note : '');
   var html = ac.engines.map(function(e, i){
-    return '<div class="eng-card" data-idx="'+i+'" onclick="handleEngClick(this)">'
+    return '<div class="eng-card" data-idx="' + i + '" onclick="handleEngClick(this)">'
       + '<div class="eng-icon">&#9881;&#65039;</div>'
-      + '<div class="ac-name">'+esc(e.name)+'</div>'
+      + '<div class="ac-name">' + esc(e.name) + '</div>'
       + '<div class="ac-desc" style="margin-top:3px">Tap to continue</div>'
       + '</div>';
   }).join('');
@@ -648,161 +780,161 @@ function selectAC(el){
   nav('engine');
 }
 
-/* ── STEP 2 HANDLER: ENGINE CARD CLICK ─────────────────── */
-function handleEngClick(el){
+/* ════════════════════════════════════════════
+   STEP 2 HANDLER
+════════════════════════════════════════════ */
+function handleEngClick(el) {
   var idx = parseInt(el.dataset.idx, 10);
-  var ac  = DB_AC[S.acId];
-  var e   = ac.engines[idx];
+  var e   = getAC()[S.acId].engines[idx];
   S.engId     = e.id;
   S.engName   = e.name;
   S.engShopId = e.shopId || '';
-  var ctx = S.acName + ' \u00b7 ' + e.name;
-  document.getElementById('mtype-ctx').textContent = ctx;
+  document.getElementById('mtype-ctx').textContent = S.acName + ' \u00b7 ' + e.name;
   nav('mtype');
 }
 
-/* ── STEP 3: MAINTENANCE TYPE ───────────────────────────── */
-function selectMtype(el){
+/* ════════════════════════════════════════════
+   STEP 3: MAINTENANCE TYPE
+════════════════════════════════════════════ */
+function selectMtype(el) {
   var mt = el.dataset.mt;
-  if(mt === 'airframe'){
+  if (mt === 'airframe') {
     document.getElementById('lb-ctx').textContent = S.acName + ' \u00b7 ' + S.engName;
     nav('lb');
-  } else if(mt === 'engine'){
+  } else if (mt === 'engine') {
     showEngShop();
   } else {
     showCompList();
   }
 }
 
-/* ── STEP 4: LINE / BASE ────────────────────────────────── */
-function selectLB(el){
+/* ════════════════════════════════════════════
+   STEP 4: LINE / BASE
+════════════════════════════════════════════ */
+function selectLB(el) {
   var lb = el.dataset.lb;
-  var results = DB_V.filter(function(v){
+  var results = getV().filter(function(v){
     return v.caps.indexOf(S.engId) > -1 && v.tags.indexOf(lb) > -1;
   });
   document.getElementById('mro-ctx').textContent =
     S.engName + ' \u2014 ' + lb + ' Maintenance (' + results.length + ' AMO' + (results.length !== 1 ? 's' : '') + ')';
   var html = results.length ? results.map(function(v){
-    var hasB = v.tags.indexOf('Base') > -1, hasL = v.tags.indexOf('Line') > -1;
+    var hasL = v.tags.indexOf('Line') > -1, hasB = v.tags.indexOf('Base') > -1;
     var lbl  = hasL && hasB ? 'L/B' : hasL ? 'L' : 'B';
     var cls  = lbl === 'L/B' ? 'tag-lb' : lbl === 'L' ? 'tag-l' : 'tag-b';
+    var ref  = v.easa ? '<span class="tag-easa">' + esc(v.easa) + '</span>' : '';
     return '<div class="co">'
-      + '<div class="co-top"><div class="co-nm">'+esc(v.n)+'</div><span class="tag '+cls+'">'+lbl+'</span></div>'
-      + '<div class="co-loc">'+esc(v.loc)+'</div>'
-      + '<div style="margin-top:5px;display:flex;gap:4px;flex-wrap:wrap">'+authTags(v.auth)+'</div>'
-      + '</div>';
+      + '<div class="co-top"><div class="co-nm">' + esc(v.n) + '</div>'
+      + '<span class="tag ' + cls + '">' + lbl + '</span></div>'
+      + '<div class="co-loc">' + esc(v.loc) + '</div>'
+      + (v.note ? '<div class="co-note">&#9432; ' + esc(v.note) + '</div>' : '')
+      + '<div style="margin-top:5px;display:flex;gap:4px;flex-wrap:wrap">'
+      + authTags(v.auth) + ' ' + ref + '</div></div>';
   }).join('')
-  : '<p style="color:#99aabb;padding:20px 0;font-size:13px">No approved MRO found for this combination.</p>';
+  : '<p style="color:#99aabb;padding:20px 0;font-size:13px">No approved MRO found for this selection.</p>';
   document.getElementById('mro-list').innerHTML = html;
   nav('mro');
 }
 
-/* ── STEP 5b: ENGINE SHOP ───────────────────────────────── */
-function showEngShop(){
-  var shops = DB_V.filter(function(v){
+/* ════════════════════════════════════════════
+   STEP 5b: ENGINE SHOP
+════════════════════════════════════════════ */
+function showEngShop() {
+  var shops = getV().filter(function(v){
     return v.tags.indexOf('Engine') > -1 && S.engShopId && v.caps.indexOf(S.engShopId) > -1;
   });
-  document.getElementById('engshop-ctx').textContent =
-    S.engName + ' \u2014 Engine Shops (' + shops.length + ')';
+  document.getElementById('engshop-ctx').textContent = S.engName + ' \u2014 Engine Shops (' + shops.length + ')';
   var html = shops.length ? shops.map(function(v){
+    var ref = v.easa ? '<span class="tag-easa">' + esc(v.easa) + '</span>' : '';
     return '<div class="co">'
-      + '<div class="co-top"><div class="co-nm">'+esc(v.n)+'</div><span class="tag tag-eng">Engine Shop</span></div>'
-      + '<div class="co-loc">'+esc(v.loc)+'</div>'
-      + '<div style="margin-top:5px;display:flex;gap:4px;flex-wrap:wrap">'+authTags(v.auth)+'</div>'
-      + '</div>';
+      + '<div class="co-top"><div class="co-nm">' + esc(v.n) + '</div>'
+      + '<span class="tag tag-eng">Engine Shop</span></div>'
+      + '<div class="co-loc">' + esc(v.loc) + '</div>'
+      + '<div style="margin-top:5px;display:flex;gap:4px;flex-wrap:wrap">'
+      + authTags(v.auth) + ' ' + ref + '</div></div>';
   }).join('')
-  : '<p style="color:#99aabb;padding:20px 0;font-size:13px">No dedicated engine shop found. Check OEM service network.</p>';
+  : '<p style="color:#99aabb;padding:20px 0;font-size:13px">No dedicated engine shop found for this variant. Check OEM service network.</p>';
   document.getElementById('engshop-list').innerHTML = html;
   nav('engshop');
 }
 
-/* ── STEP 5c: COMPONENT SHOP LIST ──────────────────────── */
-function showCompList(){
-  document.getElementById('complist-ctx').textContent =
-    S.acName + ' \u00b7 ' + S.engName + ' \u2014 Component Shops';
-  var html = DB_C.map(function(v){
+/* ════════════════════════════════════════════
+   STEP 5c: COMPONENT SHOP LIST
+════════════════════════════════════════════ */
+function showCompList() {
+  document.getElementById('complist-ctx').textContent = S.acName + ' \u00b7 ' + S.engName;
+  var html = getC().map(function(v){
     var matched = v.caps.filter(itemMatches);
-    return '<div class="co link" data-shopid="'+v.id+'" onclick="handleShopClick(this)">'
-      + '<div class="co-top"><div class="co-nm">'+esc(v.n)+'</div>'
-      + '<span class="tag tag-pn">'+matched.length+' PN matched</span></div>'
-      + '<div class="co-loc">'+esc(v.loc)+'</div>'
-      + (v.note ? '<div class="co-note">'+esc(v.note)+'</div>' : '')
-      + '<div style="margin-top:5px;display:flex;gap:4px;flex-wrap:wrap">'+authTags(v.auth)+'</div>'
+    var ref = v.easa ? '<span class="tag-easa">' + esc(v.easa) + '</span>' : '';
+    return '<div class="co link" data-shopid="' + v.id + '" onclick="handleShopClick(this)">'
+      + '<div class="co-top"><div class="co-nm">' + esc(v.n) + '</div>'
+      + '<span class="tag tag-pn">' + matched.length + ' PN matched</span></div>'
+      + '<div class="co-loc">' + esc(v.loc) + '</div>'
+      + (v.note ? '<div class="co-note">' + esc(v.note) + '</div>' : '')
+      + '<div style="margin-top:5px;display:flex;gap:4px;flex-wrap:wrap">'
+      + authTags(v.auth) + ' ' + ref + '</div>'
       + '<div style="margin-top:6px;font-size:11px;color:#003380">\u2192 Click to view ATA chapters &amp; part numbers</div>'
       + '</div>';
   }).join('');
   document.getElementById('complist-list').innerHTML = html;
   nav('complist');
 }
+function handleShopClick(el) { showCompDetail(el.dataset.shopid); }
 
-/* ── STEP 5c HANDLER: SHOP CLICK ───────────────────────── */
-function handleShopClick(el){
-  showCompDetail(el.dataset.shopid);
-}
-
-/* ── STEP 6c: COMPONENT DETAIL ─────────────────────────── */
-var _curAta = 'all';
-
-function showCompDetail(shopId){
+/* ════════════════════════════════════════════
+   STEP 6c: COMPONENT DETAIL
+════════════════════════════════════════════ */
+function showCompDetail(shopId) {
   S.shopId = shopId;
   _curAta  = 'all';
+  var db   = getC();
   var shop = null;
-  for(var i = 0; i < DB_C.length; i++){ if(DB_C[i].id === shopId){ shop = DB_C[i]; break; } }
-  if(!shop) return;
-
+  for (var i = 0; i < db.length; i++) { if (db[i].id === shopId) { shop = db[i]; break; } }
+  if (!shop) return;
   document.getElementById('compdetail-ctx').textContent = shop.n;
   document.getElementById('compdetail-note').textContent =
     'Filtered for: ' + S.acName + ' (' + S.acFam + ') \u00b7 ' + S.engName
     + ' \u2014 "All" = engine-independent \u00b7 "N/A" = no engine requirement';
-
   var matched = shop.caps.filter(itemMatches);
-
-  /* build ATA sidebar */
   var atas = {};
   matched.forEach(function(item){ atas[item.ata] = (atas[item.ata] || 0) + 1; });
-  var ataHtml = '<div class="ata-row on" data-ata="all" onclick="handleATAClick(this)">All<small>'+matched.length+' parts</small></div>';
+  var ataHtml = '<div class="ata-row on" data-ata="all" onclick="handleATAClick(this)">All<small>' + matched.length + ' parts</small></div>';
   Object.keys(atas).sort().forEach(function(a){
-    ataHtml += '<div class="ata-row" data-ata="'+esc(a)+'" onclick="handleATAClick(this)">ATA '+esc(a)+'<small>'+atas[a]+' parts</small></div>';
+    ataHtml += '<div class="ata-row" data-ata="' + esc(a) + '" onclick="handleATAClick(this)">ATA ' + esc(a) + '<small>' + atas[a] + ' parts</small></div>';
   });
   document.getElementById('ata-list').innerHTML = ataHtml;
   renderPN(matched);
   nav('compdetail');
 }
-
-/* ATA filter click */
-function handleATAClick(el){
+function handleATAClick(el) {
   _curAta = el.dataset.ata;
   document.querySelectorAll('.ata-row').forEach(function(r){ r.classList.toggle('on', r.dataset.ata === _curAta); });
+  var db   = getC();
   var shop = null;
-  for(var i = 0; i < DB_C.length; i++){ if(DB_C[i].id === S.shopId){ shop = DB_C[i]; break; } }
-  var matched = shop.caps.filter(itemMatches);
+  for (var i = 0; i < db.length; i++) { if (db[i].id === S.shopId) { shop = db[i]; break; } }
+  var matched  = shop.caps.filter(itemMatches);
   var filtered = _curAta === 'all' ? matched : matched.filter(function(item){ return item.ata === _curAta; });
   renderPN(filtered);
 }
-
-/* render PN rows */
-function renderPN(items){
-  if(!items.length){
+function renderPN(items) {
+  if (!items.length) {
     document.getElementById('pn-list').innerHTML = '<div class="pn-empty">No parts matched for this selection.</div>';
     return;
   }
-  var html = items.map(function(item){
+  document.getElementById('pn-list').innerHTML = items.map(function(item){
     var engCell = item.eng === 'All'
       ? '<span class="pn-all">All</span>'
       : item.eng === 'N/A'
         ? '<span class="pn-na">N/A</span>'
         : esc(item.eng);
-    return '<div class="pn-row">'
-      + '<div>'+esc(item.ata)+'</div>'
-      + '<div>'+esc(item.desc)+'</div>'
-      + '<div style="font-family:monospace">'+esc(item.mpn)+'</div>'
-      + '<div>'+engCell+'</div>'
-      + '</div>';
+    return '<div class="pn-row"><div>' + esc(item.ata) + '</div><div>' + esc(item.desc) + '</div>'
+      + '<div style="font-family:monospace">' + esc(item.mpn) + '</div><div>' + engCell + '</div></div>';
   }).join('');
-  document.getElementById('pn-list').innerHTML = html;
 }
 
-/* ── IMAGE LAZY-LOAD & SKELETON ─────────────────────────── */
+/* ════════════════════════════════════════════
+   IMAGE LAZY-LOAD & SKELETON
+════════════════════════════════════════════ */
 (function(){
   function init(){
     document.querySelectorAll('.ac-ph').forEach(function(img){
@@ -817,18 +949,5 @@ function renderPN(items){
   document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
 })();
 </script>
-
-<!-- ══════════════════════════════════
-     COMING SOON
-════════════════════════════════════ -->
-<div id="view-soon" class="view">
-<div class="pw" style="text-align:center;padding:60px 20px">
-  <div style="font-size:48px;margin-bottom:16px">&#128295;</div>
-  <h2 style="font-size:18px;color:#003380;margin-bottom:8px">Data being compiled</h2>
-  <p style="font-size:12px;color:#6680aa;max-width:420px;margin:0 auto 24px">MRO capability data for this Authority is currently being sourced and verified. Please check back soon.</p>
-  <button class="back-btn" onclick="nav('authority')" style="padding:8px 20px;font-size:13px">&#8592; Select another Authority</button>
-</div>
-</div>
-
 </body>
 </html>
